@@ -1,7 +1,7 @@
 using System;
 using Evolutionary.Framework;
 
-namespace Evolutionary
+namespace Evolutionary.Standard
 {
     public class RandomVectorGenoPhenoCombination : IGenoPhenoCombination
     {

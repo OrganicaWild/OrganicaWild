@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Evolutionary.Framework;
 
-namespace Evolutionary
+namespace Evolutionary.Standard
 {
     public class Nsga2Algorithm
     {
@@ -16,19 +16,24 @@ namespace Evolutionary
             {
                 foreach (var q in population)
                 {
-                    var pEvaluations = p.GetEvaluations();
-                    var qEvaluations = q.GetEvaluations();
-
-                    var pDominatesQ = true;
-                    for (int i = 0; i < Math.Min(pEvaluations.Length, qEvaluations.Length); i++)
+                    var firstBlock = true;
+                    var secondBlock = false;
+                    for (int o = 0; o < numberOfOptimizationTargets; o++)
                     {
-                        if (pEvaluations[i] > qEvaluations[i])
+                        var pTarget = p.GetOptimizationTarget(o);
+                        var qTarget = q.GetOptimizationTarget(o);
+                        if (pTarget > qTarget)
                         {
-                            pDominatesQ = false;
+                            firstBlock = false;
+                        }
+
+                        if (pTarget < qTarget)
+                        {
+                            secondBlock = true;
                         }
                     }
 
-                    if (pDominatesQ)
+                    if (firstBlock & secondBlock)
                     {
                         p.AddDominatedIndividual(q);
                         q.IncrementDominationCount();

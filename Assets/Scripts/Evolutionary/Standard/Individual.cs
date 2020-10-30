@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Evolutionary.Framework;
 using UnityEngine;
 
-namespace Evolutionary
+namespace Evolutionary.Standard
 {
     public class Individual : IIndividual<RandomVectorGenoPhenoCombination>, INsga2Individual
     {

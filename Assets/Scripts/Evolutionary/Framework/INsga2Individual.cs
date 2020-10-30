@@ -10,7 +10,6 @@ namespace Evolutionary.Framework
         void DecrementDominationCount();
         int GetDominationCount();
         double[] GetEvaluations();
-
         double GetOptimizationTarget(int index);
         void SetDistance(double distance);
         double GetDistance();
