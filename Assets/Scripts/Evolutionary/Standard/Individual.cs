@@ -39,6 +39,9 @@ namespace Evolutionary.Standard
             fitnessFunctions.Add(fitnessFunction);
         }
 
+        public int Rank { get; set; }
+        public double Crowding { get; set; }
+
         public void AddDominatedIndividual(INsga2Individual dominated)
         {
             dominatedIndividuals.Add(dominated);
@@ -83,6 +86,11 @@ namespace Evolutionary.Standard
         public double GetDistance()
         {
            return distance;
+        }
+
+        public INsga2Individual MakeOffspring(INsga2Individual parent2)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

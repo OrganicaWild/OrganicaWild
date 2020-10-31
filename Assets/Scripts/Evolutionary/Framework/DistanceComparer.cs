@@ -7,7 +7,7 @@ namespace Evolutionary.Framework
         public override int Compare(INsga2Individual x, INsga2Individual y)
         {
             if (x != null && y != null)
-                return (int) (x.GetDistance() - y.GetDistance());
+                return (int) (x.Crowding.CompareTo(y.Crowding));
             return 0;
         }
     }

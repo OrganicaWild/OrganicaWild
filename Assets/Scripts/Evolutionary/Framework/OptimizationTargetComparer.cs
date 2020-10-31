@@ -14,8 +14,8 @@ namespace Evolutionary.Framework
         public override int Compare(INsga2Individual x, INsga2Individual y)
         {
             if (x != null && y != null)
-                return (int) (x.GetOptimizationTarget(optimizationTarget) -
-                              y.GetOptimizationTarget(optimizationTarget));
+                return (x.GetOptimizationTarget(optimizationTarget).CompareTo(
+                              y.GetOptimizationTarget(optimizationTarget)));
             return 0;
         }
     }
