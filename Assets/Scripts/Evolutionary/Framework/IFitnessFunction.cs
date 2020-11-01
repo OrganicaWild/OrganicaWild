@@ -1,7 +1,8 @@
 namespace Evolutionary.Framework
 {
-    public interface IFitnessFunction<TPhenoType>
+    public interface IFitnessFunction<TGenoPhenoCombination>
+        where TGenoPhenoCombination : IGenoPhenoCombination
     {
-        double Apply(TPhenoType phenoType);
+        double DetermineFitness(TGenoPhenoCombination phenoType);
     }
 }

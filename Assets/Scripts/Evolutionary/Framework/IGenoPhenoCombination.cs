@@ -1,7 +1,9 @@
 namespace Evolutionary.Framework
 {
-    public class IGenoPhenoCombination
+    public interface IGenoPhenoCombination
     {
-        
+        void BuildPhenoType();
+        void Mutate();
+
     }
 }

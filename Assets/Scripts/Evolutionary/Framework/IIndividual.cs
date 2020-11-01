@@ -1,9 +1,8 @@
 namespace Evolutionary.Framework
 {
-    public interface IIndividual<TGenoPhenoCombination>
+    public interface IIndividual<TGenoPhenoCombination> where TGenoPhenoCombination : IGenoPhenoCombination
     {
-        void EvaluatePhenoType();
-
-        void AddFitnessFunction(IFitnessFunction<TGenoPhenoCombination> fitnessFunction);
+        TGenoPhenoCombination Representation { get; }
+       void EvaluateFitnessFunctions();
     }
 }
