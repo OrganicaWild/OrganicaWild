@@ -1,4 +1,4 @@
-namespace Evolutionary.Framework
+namespace Framework.Evolutionary
 {
     public interface IIndividual<TGenoPhenoCombination> where TGenoPhenoCombination : IGenoPhenoCombination
     {

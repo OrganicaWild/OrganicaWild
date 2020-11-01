@@ -2,7 +2,7 @@ using System;
 using Util;
 using Random = UnityEngine.Random;
 
-namespace Evolutionary.Framework.Standard
+namespace Framework.Evolutionary.Standard
 {
     public class StandardGenoPhenoCombination : IGenoPhenoCombination
     {

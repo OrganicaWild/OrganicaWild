@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Evolutionary.Framework.Standard.Nsga2;
-using Evolutionary.Nsga2;
+using Framework.Evolutionary.Standard.Nsga2;
 using Random = UnityEngine.Random;
 
-namespace Evolutionary.Framework.Standard
+namespace Framework.Evolutionary.Standard
 {
     public class StandardIndividual : IIndividual<StandardGenoPhenoCombination>, INsga2Individual
     {

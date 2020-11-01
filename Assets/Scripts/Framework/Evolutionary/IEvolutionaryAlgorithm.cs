@@ -1,6 +1,4 @@
-using Evolutionary.Nsga2;
-
-namespace Evolutionary.Framework
+namespace Framework.Evolutionary
 {
     public interface IEvolutionaryAlgorithm
     {

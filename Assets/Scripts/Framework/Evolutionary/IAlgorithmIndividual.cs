@@ -1,6 +1,6 @@
-using Evolutionary.Framework.Standard.Nsga2;
+using Framework.Evolutionary.Standard.Nsga2;
 
-namespace Evolutionary.Nsga2
+namespace Framework.Evolutionary
 {
     public interface IAlgorithmIndividual
     {

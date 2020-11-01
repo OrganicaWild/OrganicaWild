@@ -1,9 +1,8 @@
 using System.Linq;
-using Evolutionary.Framework.Standard.Nsga2;
-using Evolutionary.Nsga2;
+using Framework.Evolutionary.Standard.Nsga2;
 using UnityEngine;
 
-namespace Evolutionary.Framework.Standard
+namespace Framework.Evolutionary.Standard
 {
     public class StandardAlgorithmRunner : MonoBehaviour
     {
@@ -13,10 +12,9 @@ namespace Evolutionary.Framework.Standard
         public int width;
 
         public int mutationChance;
-
         public int generations;
 
-        private Nsga2Algorithm algorithm;
+        private IEvolutionaryAlgorithm algorithm;
         private IFitnessFunction<StandardGenoPhenoCombination>[] fitnessFunctions;
         private StandardIndividual[] population;
 
@@ -29,13 +27,12 @@ namespace Evolutionary.Framework.Standard
             fitnessFunctions[0] = f1;
             fitnessFunctions[1] = f2;
 
-            var population = new StandardIndividual[size];
+            population = new StandardIndividual[size];
             for (int i = 0; i < size; i++)
             {
                 population[i] = new StandardIndividual(height, width, mutationChance, fitnessFunctions);
             }
 
-            this.population = population;
             algorithm = new Nsga2Algorithm(population, fitnessFunctions.Length);
         }
 

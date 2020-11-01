@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Evolutionary.Framework.Standard
+namespace Framework.Evolutionary.Standard
 {
     public class EnemyDistanceFitnessFunction : IFitnessFunction<StandardGenoPhenoCombination>
     {

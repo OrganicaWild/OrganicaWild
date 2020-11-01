@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Evolutionary.Nsga2;
 
-namespace Evolutionary.Framework.Standard.Nsga2
+namespace Framework.Evolutionary.Standard.Nsga2
 {
     /// <summary>
     /// Interface that has to be implemented by an Individual so it can be used inside of the Nsga-2 Algorithm

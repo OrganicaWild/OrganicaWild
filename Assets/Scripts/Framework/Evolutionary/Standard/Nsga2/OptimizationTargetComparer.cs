@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Evolutionary.Nsga2;
 
-namespace Evolutionary.Framework.Standard.Nsga2
+namespace Framework.Evolutionary.Standard.Nsga2
 {
     public class OptimizationTargetComparer : Comparer<INsga2Individual>
     {

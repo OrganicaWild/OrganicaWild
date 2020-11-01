@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Evolutionary.Nsga2;
 using Random = System.Random;
 
-namespace Evolutionary.Framework.Standard.Nsga2
+namespace Framework.Evolutionary.Standard.Nsga2
 {
     public class Nsga2Algorithm : IEvolutionaryAlgorithm
     {

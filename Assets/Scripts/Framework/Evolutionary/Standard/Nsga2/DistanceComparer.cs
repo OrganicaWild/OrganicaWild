@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Evolutionary.Framework.Standard.Nsga2
+namespace Framework.Evolutionary.Standard.Nsga2
 {
    /// <summary>
    /// Comparer for INsga2Individuals to compare based on Crowding Distance.
