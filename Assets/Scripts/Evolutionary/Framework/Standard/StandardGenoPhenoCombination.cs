@@ -1,11 +1,8 @@
 using System;
-using Evolutionary.Framework;
-using UnityEngine;
-using UnityEngine.SocialPlatforms;
 using Util;
 using Random = UnityEngine.Random;
 
-namespace Evolutionary.Standard
+namespace Evolutionary.Framework.Standard
 {
     public class StandardGenoPhenoCombination : IGenoPhenoCombination
     {

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Evolutionary.Framework;
-using Evolutionary.Framework.Nsga2;
-using Evolutionary.Standard;
+using Evolutionary.Framework.Standard;
 using UnityEngine;
 
 public class MapBuilder : MonoBehaviour
@@ -19,7 +18,7 @@ public class MapBuilder : MonoBehaviour
         height = algorithm.height;
         width = algorithm.width;
 
-        algorithm.StartEvolution();
+        algorithm.ApplyEvolution();
         var population = algorithm.GetPopulation();
         
         DrawRepresentation(population.First());

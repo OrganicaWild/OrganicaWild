@@ -1,36 +1,34 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Evolutionary.Nsga2;
 using Random = System.Random;
 
-namespace Evolutionary.Framework.Nsga2
+namespace Evolutionary.Framework.Standard.Nsga2
 {
-    public class Nsga2Algorithm
+    public class Nsga2Algorithm : IEvolutionaryAlgorithm
     {
         private INsga2Individual[] population;
-        private int numberOfOptimizationTargets;
-
-        private int lambda;
+        private readonly int numberOfOptimizationTargets;
+        
         private int PopulationSize => population.Length;
         private int HalfPopulation => population.Length / 2;
 
-        public Nsga2Algorithm(INsga2Individual[] population, int numberOfOptimizationTargets, int lambda)
+        public Nsga2Algorithm(INsga2Individual[] population, int numberOfOptimizationTargets)
         {
             this.population = population;
             this.numberOfOptimizationTargets = numberOfOptimizationTargets;
-            this.lambda = lambda;
         }
 
-        public void NextGeneration(INsga2Individual[] currentPopulation)
+        public IAlgorithmIndividual[] NextGeneration(IAlgorithmIndividual[] currentPopulation)
         {
-            this.population = currentPopulation;
+            population = currentPopulation.Cast<INsga2Individual>().ToArray();
             foreach (var p in population)
             {
-                p.CleanUp();
+                p.PrepareForNextGeneration();
             }
             
             var fronts = NonDominatedSorting();
-            var crowdedFronts = fronts.Select(front => CrowdingDistanceSortFront(front)).ToList();
+            var crowdedFronts = fronts.Select(CrowdingDistanceSortFront).ToList();
 
             var newPopulation = crowdedFronts.SelectMany(x => x).ToArray();
 
@@ -62,6 +60,8 @@ namespace Evolutionary.Framework.Nsga2
                     population[i] = parent1.MakeOffspring(parent2);
                 }
             }
+
+            return population;
         }
 
         private List<List<INsga2Individual>> NonDominatedSorting()
@@ -90,7 +90,7 @@ namespace Evolutionary.Framework.Nsga2
                     if (firstBlock & secondBlock)
                     {
                         p.AddDominatedIndividual(q);
-                        q.IncrementDominationCount();
+                        q.DominationCount++;
                     }
                 }
             }
@@ -105,7 +105,7 @@ namespace Evolutionary.Framework.Nsga2
             {
                 foreach (var p in pop)
                 {
-                    if (p.GetDominationCount() <= 0)
+                    if (p.DominationCount <= 0)
                     {
                         currentFront.Add(p);
                         p.Rank = frontCounter;
@@ -122,7 +122,7 @@ namespace Evolutionary.Framework.Nsga2
                 {
                     foreach (var q in p.GetDominated())
                     {
-                        q.DecrementDominationCount();
+                        q.DominationCount--;
                     }
                 }
 
@@ -160,6 +160,5 @@ namespace Evolutionary.Framework.Nsga2
             return front;
         }
 
-        public INsga2Individual[] Population => population;
     }
 }

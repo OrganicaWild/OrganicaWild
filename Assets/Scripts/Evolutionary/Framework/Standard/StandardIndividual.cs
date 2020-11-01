@@ -1,20 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Evolutionary.Framework;
-using Evolutionary.Framework.Nsga2;
-using UnityEngine;
+using Evolutionary.Framework.Standard.Nsga2;
+using Evolutionary.Nsga2;
 using Random = UnityEngine.Random;
 
-namespace Evolutionary.Standard
+namespace Evolutionary.Framework.Standard
 {
     public class StandardIndividual : IIndividual<StandardGenoPhenoCombination>, INsga2Individual
     {
         public int Rank { get; set; }
         public double Crowding { get; set; }
+        public int DominationCount { get; set; }
 
         private readonly List<INsga2Individual> dominatedIndividuals = new List<INsga2Individual>();
-
-        private int dominatedCount = 0;
 
         private readonly IFitnessFunction<StandardGenoPhenoCombination>[] fitnessFunctions;
         public StandardGenoPhenoCombination Representation { get; }
@@ -64,21 +62,6 @@ namespace Evolutionary.Standard
             return dominatedIndividuals;
         }
 
-        public void IncrementDominationCount()
-        {
-            dominatedCount++;
-        }
-
-        public void DecrementDominationCount()
-        {
-            dominatedCount--;
-        }
-
-        public int GetDominationCount()
-        {
-            return dominatedCount;
-        }
-
         public double GetOptimizationTarget(int index)
         {
             return fitnessValues[index];
@@ -87,7 +70,7 @@ namespace Evolutionary.Standard
         public INsga2Individual MakeOffspring(INsga2Individual parent2)
         {
             if (!(parent2 is StandardIndividual other))
-                throw new ArgumentException("second parent must be of same type as first parent");
+                throw new ArgumentException("second parent must be of same type as first parent!");
             
             var newGenes = new double[Representation.Data.Length];
             for (int i = 0; i < Representation.Data.Length; i++)
@@ -105,10 +88,11 @@ namespace Evolutionary.Standard
 
         }
 
-        public void CleanUp()
+        public void PrepareForNextGeneration()
         {
             Rank = 0;
             Crowding = 0;
+            DominationCount = 0;
         }
     }
 }

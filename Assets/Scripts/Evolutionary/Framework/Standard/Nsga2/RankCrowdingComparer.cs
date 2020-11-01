@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Evolutionary.Nsga2;
 
-namespace Evolutionary.Framework.Nsga2
+namespace Evolutionary.Framework.Standard.Nsga2
 {
     public class RankCrowdingComparer : Comparer<INsga2Individual>
     {

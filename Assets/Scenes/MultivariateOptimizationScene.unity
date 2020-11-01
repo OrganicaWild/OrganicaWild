@@ -238,7 +238,7 @@ MonoBehaviour:
   height: 50
   width: 50
   mutationChance: 10
-  generations: 5
+  generations: 50
 --- !u!114 &1763792049
 MonoBehaviour:
   m_ObjectHideFlags: 0
