@@ -1,16 +1,12 @@
-﻿
-
-
-
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace Framework.Evolutionary.Standard
 {
-    public class StandardMapBuilder : MonoBehaviour
+    public class StandardMapBuilder2 : MonoBehaviour
     {
-        private int height;
-        private int width;
+        private int height = 100;
+        private int width = 100;
 
         public GameObject playerPrefab;
         public GameObject enemyPrefab;
@@ -18,9 +14,7 @@ namespace Framework.Evolutionary.Standard
 
         void Awake()
         {
-            var algorithm = GetComponent<StandardAlgorithmRunner>();
-            height = algorithm.height;
-            width = algorithm.width;
+            var algorithm = GetComponent<StandardAlgorithmRunner2>();
 
             algorithm.ApplyEvolution();
             var population = algorithm.GetPopulation();
@@ -28,9 +22,9 @@ namespace Framework.Evolutionary.Standard
             DrawRepresentation(population.First());
         }
 
-        public void DrawRepresentation(IIndividual<StandardGenoPhenoCombination> individual)
+        public void DrawRepresentation(IIndividual<StandardGenoPhenotypeCombination2> individual)
         {
-            var map = individual.Representation.Map;
+            var map = individual.Representation.map;
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
