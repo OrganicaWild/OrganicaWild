@@ -2,8 +2,8 @@ namespace Framework.Evolutionary
 {
     public interface IEvolutionaryAlgorithm
     {
-        IAlgorithmIndividual[] NextGeneration();
+        IEvolutionaryAlgorithmIndividual[] NextGeneration();
 
-        IAlgorithmIndividual[] RunForGenerations(int generations);
+        IEvolutionaryAlgorithmIndividual[] RunForGenerations(int generations);
     }
 }

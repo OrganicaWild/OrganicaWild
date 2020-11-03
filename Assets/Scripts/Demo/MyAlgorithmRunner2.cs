@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using Framework.Evolutionary;
 using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 
 namespace Demo
 {
-    public class MyAlgorithmRunner : MonoBehaviour
+    public class MyAlgorithmRunner2 : MonoBehaviour
     {
-        public int height;
-        public int width;
-        public int mutationChance;
         public int generations;
+        public int sizeOfPopulation;
+
         public GameObject playerPrefab;
         public GameObject enemyPrefab;
         public GameObject floorPrefab;
@@ -18,36 +18,39 @@ namespace Demo
         private void Awake()
         {
             var fitnessFunctions =
-                new AbstractNsga2FitnessFunction<MyIndividual>[2]
+                new IFitnessFunction[]
                 {
-                    new DistanceToBorderFitnessFunction(),
-                    new EnemyDistanceFitnessFunction()
+                    new StandardFitnessFunction2StartInRing(),
+                    new StandardFitnessFunction2EndInRing(),
+                    new StandardFitnessFunction2StartAndEndAreOpposite()
                 };
 
-            var myIndividualArray = new MyIndividual[50];
-            for (int index = 0; index < 50; ++index)
+            var myIndividualArray = new StandardIndividual2[sizeOfPopulation];
+            for (int index = 0; index < sizeOfPopulation; ++index)
                 myIndividualArray[index] =
-                    new MyIndividual(height, width, mutationChance, fitnessFunctions);
+                    new StandardIndividual2(new Vector2(Random.value, Random.value),
+                        new Vector2(Random.value, Random.value), fitnessFunctions);
 
             var algorithm = new Nsga2Algorithm(myIndividualArray,
                 fitnessFunctions.Length);
-            var endPopulation = algorithm.RunForGenerations(generations).Cast<MyIndividual>().ToArray();
+
+            var endPopulation = algorithm.RunForGenerations(generations).Cast<StandardIndividual2>().ToArray();
 
             DrawRepresentation(endPopulation.First());
         }
 
-        public void DrawRepresentation(MyIndividual individual)
+        public void DrawRepresentation(StandardIndividual2 individual)
         {
-            var map = individual.Map;
-            for (var index1 = 0; index1 < height; ++index1)
+            var map = individual.map;
+            for (var index1 = 0; index1 < map.GetLength(0); ++index1)
             {
-                for (var index2 = 0; index2 < width; ++index2)
+                for (var index2 = 0; index2 < map.GetLength(1); ++index2)
                 {
                     if (map[index1, index2] == 0)
                     {
                         var localScale = floorPrefab.transform.localScale;
                         Instantiate(floorPrefab,
-                            new Vector3( index2 * localScale.x, 0.0f, index1 * localScale.y),
+                            new Vector3(index2 * localScale.x, 0.0f, index1 * localScale.y),
                             Quaternion.identity);
                     }
 
@@ -63,8 +66,8 @@ namespace Demo
                     if (map[index1, index2] == 2)
                     {
                         var localScale = floorPrefab.transform.localScale;
-                        var position = new Vector3( index2 * localScale.x, 0.0f,
-                             index1 * localScale.y);
+                        var position = new Vector3(index2 * localScale.x, 0.0f,
+                            index1 * localScale.y);
                         Instantiate(floorPrefab, position, Quaternion.identity);
                         Instantiate(enemyPrefab, position + Vector3.up, Quaternion.identity);
                     }

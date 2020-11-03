@@ -213,7 +213,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1763792050}
-  - component: {fileID: 1763792049}
   - component: {fileID: 1763792048}
   m_Layer: 0
   m_Name: Generator
@@ -231,26 +230,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763792047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d7e87c3e066433f9191c1a97462144e, type: 3}
+  m_Script: {fileID: 11500000, guid: 30461367cd084a8eb7e9c7f2c76c085a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 50
   height: 50
   width: 50
   mutationChance: 10
-  generations: 500
---- !u!114 &1763792049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763792047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49bd28bc6f53d1646bcde8943d6a096b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  generations: 50
   playerPrefab: {fileID: 2888007072387642614, guid: 14359fff313f6c741ac9f15687628b97,
     type: 3}
   enemyPrefab: {fileID: 964821723860175425, guid: 38a810ff75c5ee349bef117b53b5191e,

@@ -5,7 +5,7 @@ namespace Framework.Evolutionary.Nsga2
     /// <summary>
     /// Interface that has to be implemented by an Individual so it can be used inside of the Nsga-2 Algorithm
     /// </summary>
-    public interface INsga2Individual : IAlgorithmIndividual
+    public interface INsga2Individual : IEvolutionaryAlgorithmIndividual
     {
         /// <summary>
         /// rank of the individual.

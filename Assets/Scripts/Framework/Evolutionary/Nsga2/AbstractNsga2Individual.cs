@@ -12,11 +12,11 @@ namespace Framework.Evolutionary.Nsga2
 
         private IList<INsga2Individual> dominatedIndividuals = new List<INsga2Individual>();
 
-        public readonly AbstractNsga2FitnessFunction<MyIndividual>[] FitnessFunctions;
+        public readonly IFitnessFunction[] FitnessFunctions;
 
         private readonly double[] fitnessResults;
 
-        protected AbstractNsga2Individual(AbstractNsga2FitnessFunction<MyIndividual>[] fitnessFunctions)
+        protected AbstractNsga2Individual(IFitnessFunction[] fitnessFunctions)
         {
             if (fitnessFunctions is null)
                 throw new ArgumentNullException($"{nameof(fitnessFunctions)} is null.");

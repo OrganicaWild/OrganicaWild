@@ -6,7 +6,7 @@ namespace Framework.Evolutionary.Nsga2
 {
     public class Nsga2Algorithm : IEvolutionaryAlgorithm
     {
-        private INsga2Individual[] population;
+        private readonly INsga2Individual[] population;
         private readonly int numberOfOptimizationTargets;
         
         private int PopulationSize => population.Length;
@@ -18,7 +18,7 @@ namespace Framework.Evolutionary.Nsga2
             this.numberOfOptimizationTargets = numberOfOptimizationTargets;
         }
 
-        public IAlgorithmIndividual[] NextGeneration()
+        public IEvolutionaryAlgorithmIndividual[] NextGeneration()
         {
             foreach (var p in population)
             {
@@ -63,7 +63,7 @@ namespace Framework.Evolutionary.Nsga2
             return population;
         }
 
-        public IAlgorithmIndividual[] RunForGenerations(int generations)
+        public IEvolutionaryAlgorithmIndividual[] RunForGenerations(int generations)
         {
             for (int i = 0; i < generations; i++)
             {

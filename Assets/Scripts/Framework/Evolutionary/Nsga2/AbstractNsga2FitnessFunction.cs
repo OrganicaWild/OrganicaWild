@@ -4,7 +4,7 @@ namespace Framework.Evolutionary.Nsga2
     {
         protected abstract double DetermineFitness(TNsga2Individual individual);
 
-        public double DetermineFitness(IAlgorithmIndividual individual)
+        public double DetermineFitness(IEvolutionaryAlgorithmIndividual individual)
         {
             return DetermineFitness(individual is TNsga2Individual ? (TNsga2Individual) individual : default);
         }

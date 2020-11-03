@@ -1,4 +1,5 @@
 using System;
+using Framework.Evolutionary;
 using Framework.Evolutionary.Nsga2;
 using Util;
 using Random = UnityEngine.Random;
@@ -45,7 +46,7 @@ namespace Demo
         }
 
         private MyIndividual(int height, int width, int mutationPercentage, double[] genes,
-            AbstractNsga2FitnessFunction<MyIndividual>[] fitnessFunctions) : base(fitnessFunctions)
+            IFitnessFunction[] fitnessFunctions) : base(fitnessFunctions)
         {
             data = genes;
             this.height = height;

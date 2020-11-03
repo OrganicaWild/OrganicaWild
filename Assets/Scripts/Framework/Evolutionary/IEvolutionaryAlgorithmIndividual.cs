@@ -2,7 +2,7 @@ using Framework.Evolutionary.Nsga2;
 
 namespace Framework.Evolutionary
 {
-    public interface IAlgorithmIndividual
+    public interface IEvolutionaryAlgorithmIndividual
     {
         /// <summary>
         /// Evaluates the Fitness of one Individual.
