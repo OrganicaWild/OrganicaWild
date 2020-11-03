@@ -8,14 +8,26 @@ namespace Framework.Evolutionary.Nsga2
     {
         private readonly INsga2Individual[] population;
         private readonly int numberOfOptimizationTargets;
-        
+
         private int PopulationSize => population.Length;
         private int HalfPopulation => population.Length / 2;
 
-        public Nsga2Algorithm(INsga2Individual[] initialPopulation, int numberOfOptimizationTargets)
+        public Nsga2Algorithm(INsga2Individual[] initialPopulation)
         {
             population = initialPopulation;
-            this.numberOfOptimizationTargets = numberOfOptimizationTargets;
+
+            var numberOfFitnessFunctions = initialPopulation[0].GetNumberOfFitnessFunctions();
+            for (var index = 1; index < initialPopulation.Length; index++)
+            {
+                var p = initialPopulation[index];
+                if (numberOfFitnessFunctions != p.GetNumberOfFitnessFunctions())
+                {
+                    throw new FitnessFunctionNumberMismatchException(
+                        $"{initialPopulation}s contained Individuals do not share the same number of fitness functions.");
+                }
+            }
+
+            numberOfOptimizationTargets = numberOfFitnessFunctions;
         }
 
         public IEvolutionaryAlgorithmIndividual[] NextGeneration()
@@ -25,7 +37,7 @@ namespace Framework.Evolutionary.Nsga2
                 p.PrepareForNextGeneration();
                 p.EvaluateFitness();
             }
-            
+
             var fronts = NonDominatedSorting();
             var crowdedFronts = fronts.Select(CrowdingDistanceSortFront).ToList();
 
@@ -168,6 +180,5 @@ namespace Framework.Evolutionary.Nsga2
             front.Sort(new DistanceComparer());
             return front;
         }
-
     }
 }

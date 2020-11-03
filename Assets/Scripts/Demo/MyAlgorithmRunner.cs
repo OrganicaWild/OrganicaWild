@@ -29,8 +29,7 @@ namespace Demo
                 myIndividualArray[index] =
                     new MyIndividual(height, width, mutationChance, fitnessFunctions);
 
-            var algorithm = new Nsga2Algorithm(myIndividualArray,
-                fitnessFunctions.Length);
+            var algorithm = new Nsga2Algorithm(myIndividualArray);
             var endPopulation = algorithm.RunForGenerations(generations).Cast<MyIndividual>().ToArray();
 
             DrawRepresentation(endPopulation.First());

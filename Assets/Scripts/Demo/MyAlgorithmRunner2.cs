@@ -31,8 +31,7 @@ namespace Demo
                     new StandardIndividual2(new Vector2(Random.value, Random.value),
                         new Vector2(Random.value, Random.value), fitnessFunctions);
 
-            var algorithm = new Nsga2Algorithm(myIndividualArray,
-                fitnessFunctions.Length);
+            var algorithm = new Nsga2Algorithm(myIndividualArray);
 
             var endPopulation = algorithm.RunForGenerations(generations).Cast<StandardIndividual2>().ToArray();
 

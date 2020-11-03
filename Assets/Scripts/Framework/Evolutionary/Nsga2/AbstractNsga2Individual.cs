@@ -34,6 +34,11 @@ namespace Framework.Evolutionary.Nsga2
             }
         }
 
+        public int GetNumberOfFitnessFunctions()
+        {
+            return FitnessFunctions.Length;
+        }
+
         public double GetOptimizationTarget(int index)
         {
             if (index >= FitnessFunctions.Length || index < 0)

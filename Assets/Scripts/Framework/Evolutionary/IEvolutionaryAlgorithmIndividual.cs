@@ -9,6 +9,8 @@ namespace Framework.Evolutionary
         /// After this operation the GetOptimizationTarget(int index) call must return a value, when called with a valid index.
         /// </summary>
         void EvaluateFitness();
+
+        int GetNumberOfFitnessFunctions();
         
         /// <summary>
         /// Return a certain fitness value of this Individual.
