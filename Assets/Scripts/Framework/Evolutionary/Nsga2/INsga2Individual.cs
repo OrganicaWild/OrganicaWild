@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Framework.Evolutionary.Standard.Nsga2
+namespace Framework.Evolutionary.Nsga2
 {
     /// <summary>
     /// Interface that has to be implemented by an Individual so it can be used inside of the Nsga-2 Algorithm
@@ -37,6 +37,6 @@ namespace Framework.Evolutionary.Standard.Nsga2
         /// Gets all the other individuals which are being dominated by this individual.
         /// </summary>
         /// <returns>List of all dominated individuals</returns>
-        List<INsga2Individual> GetDominated();
+        IList<INsga2Individual> GetDominated();
     }
 }

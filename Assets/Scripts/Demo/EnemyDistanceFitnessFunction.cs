@@ -1,13 +1,15 @@
+using Framework.Evolutionary;
+using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 
-namespace Framework.Evolutionary.Standard
+namespace Demo
 {
-    public class EnemyDistanceFitnessFunction : IFitnessFunction<StandardGenoPhenoCombination>
+    public class EnemyDistanceFitnessFunction : AbstractNsga2FitnessFunction<MyIndividual>
     {
-        public double DetermineFitness(StandardGenoPhenoCombination phenoType)
+        protected override double DetermineFitness(MyIndividual individual)
         {
             var averageDistance = new Vector2(0, 0);
-            var positions = phenoType.MappedPositions;
+            var positions = individual.MappedPositions;
             for (int i = 0; i < positions.Length-1; i++)
             {
                 averageDistance += new Vector2(positions[i], positions[i++]);

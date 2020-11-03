@@ -1,12 +1,18 @@
 ﻿using System.Linq;
+using Framework.Evolutionary;
+using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 
-namespace Framework.Evolutionary.Standard
+namespace Demo
 {
-    public class StandardMapBuilder : MonoBehaviour
+    public class MyAlgorithmRunner : MonoBehaviour
     {
-        private int height;
-        private int width;
+
+        public int height;
+        public int width;
+        public int mutationChance;
+
+        public int generations;
 
         public GameObject playerPrefab;
         public GameObject enemyPrefab;
@@ -14,19 +20,29 @@ namespace Framework.Evolutionary.Standard
     
         void Awake()
         {
-            var algorithm = GetComponent<StandardAlgorithmRunner>();
-            height = algorithm.height;
-            width = algorithm.width;
+            
+            var f1 = new DistanceToBorderFitnessFunction();
+            var f2 = new EnemyDistanceFitnessFunction();
 
-            algorithm.ApplyEvolution();
-            var population = algorithm.GetPopulation();
-        
+            var fitnessFunctions = new AbstractNsga2FitnessFunction<MyIndividual>[2];
+            fitnessFunctions[0] = f1;
+            fitnessFunctions[1] = f2;
+
+            var population = new MyIndividual[50];
+            for (int i = 0; i < 50; i++)
+            {
+                population[i] = new MyIndividual(height, width, mutationChance, fitnessFunctions);
+            }
+
+            var algorithm = new Nsga2Algorithm(population, fitnessFunctions.Length);
+            population = algorithm.RunForGenerations(generations).Cast<MyIndividual>().ToArray();
+            
             DrawRepresentation(population.First());
         }
 
-        public void DrawRepresentation(IIndividual<StandardGenoPhenoCombination> individual)
+        public void DrawRepresentation(MyIndividual individual)
         {
-            var map = individual.Representation.Map;
+            var map = individual.Map;
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)

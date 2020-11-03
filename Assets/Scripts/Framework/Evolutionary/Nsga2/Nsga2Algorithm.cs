@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Random = System.Random;
 
-namespace Framework.Evolutionary.Standard.Nsga2
+namespace Framework.Evolutionary.Nsga2
 {
     public class Nsga2Algorithm : IEvolutionaryAlgorithm
     {
@@ -12,18 +12,18 @@ namespace Framework.Evolutionary.Standard.Nsga2
         private int PopulationSize => population.Length;
         private int HalfPopulation => population.Length / 2;
 
-        public Nsga2Algorithm(INsga2Individual[] population, int numberOfOptimizationTargets)
+        public Nsga2Algorithm(INsga2Individual[] initialPopulation, int numberOfOptimizationTargets)
         {
-            this.population = population;
+            population = initialPopulation;
             this.numberOfOptimizationTargets = numberOfOptimizationTargets;
         }
 
-        public IAlgorithmIndividual[] NextGeneration(IAlgorithmIndividual[] currentPopulation)
+        public IAlgorithmIndividual[] NextGeneration()
         {
-            population = currentPopulation.Cast<INsga2Individual>().ToArray();
             foreach (var p in population)
             {
                 p.PrepareForNextGeneration();
+                p.EvaluateFitness();
             }
             
             var fronts = NonDominatedSorting();
@@ -58,6 +58,16 @@ namespace Framework.Evolutionary.Standard.Nsga2
 
                     population[i] = parent1.MakeOffspring(parent2);
                 }
+            }
+
+            return population;
+        }
+
+        public IAlgorithmIndividual[] RunForGenerations(int generations)
+        {
+            for (int i = 0; i < generations; i++)
+            {
+                NextGeneration();
             }
 
             return population;

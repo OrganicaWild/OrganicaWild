@@ -1,9 +1,15 @@
-using Framework.Evolutionary.Standard.Nsga2;
+using Framework.Evolutionary.Nsga2;
 
 namespace Framework.Evolutionary
 {
     public interface IAlgorithmIndividual
     {
+        /// <summary>
+        /// Evaluates the Fitness of one Individual.
+        /// After this operation the GetOptimizationTarget(int index) call must return a value, when called with a valid index.
+        /// </summary>
+        void EvaluateFitness();
+        
         /// <summary>
         /// Return a certain fitness value of this Individual.
         /// For the Algorithm these are known as optimization targets.
