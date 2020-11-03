@@ -4,14 +4,33 @@ using Random = System.Random;
 
 namespace Framework.Evolutionary.Nsga2
 {
+    /// <summary>
+    /// NSGA-2 Algorithm implementation for multi-variate optimization.
+    ///
+    /// For more information on this algorithm visit:
+    /// https://ieeexplore.ieee.org/document/996017
+    /// </summary>
     public class Nsga2Algorithm : IEvolutionaryAlgorithm
     {
+        /// <summary>
+        /// Population for the algorithm to work with. The individual objects in the array are reassigned during execution of the algorithm.
+        /// </summary>
         private readonly INsga2Individual[] population;
+
+        /// <summary>
+        /// Number of Optimization Dimensions the Algorithm optimizes for.
+        /// In the context here. Every optimization target maps to a value of one fitness function of the Individuals. 
+        /// </summary>
         private readonly int numberOfOptimizationTargets;
 
-        private int PopulationSize => population.Length;
-        private int HalfPopulation => population.Length / 2;
 
+        /// <summary>
+        /// Create an NSGA-2 instance with the initial population of individuals.
+        /// The Individuals must implement the INsga2Individual interface, that they can be used with the NSGA-2 Algorithm.
+        /// To reduce bookkeeping and for easier use it is recommended to use the AbstractNsga2Individual as a base for your own INsga2Individual implementations.
+        /// </summary>
+        /// <param name="initialPopulation">Array of instances of a single concrete implementation of the INsga2Individual interface</param>
+        /// <exception cref="FitnessFunctionNumberMismatchException"></exception>
         public Nsga2Algorithm(INsga2Individual[] initialPopulation)
         {
             population = initialPopulation;
@@ -30,6 +49,10 @@ namespace Framework.Evolutionary.Nsga2
             numberOfOptimizationTargets = numberOfFitnessFunctions;
         }
 
+        /// <summary>
+        /// Advance one generation in the optimization process.
+        /// </summary>
+        /// <returns>population after the generation. Can be casted back to the original type you passed the constructor.</returns>
         public IEvolutionaryAlgorithmIndividual[] NextGeneration()
         {
             foreach (var p in population)
@@ -46,23 +69,25 @@ namespace Framework.Evolutionary.Nsga2
             var random = new Random();
             var comparer = new RankCrowdingComparer();
 
-            for (int i = 0; i < PopulationSize; i++)
+            var halfPopulation = population.Length / 2;
+
+            for (int i = 0; i < population.Length; i++)
             {
-                if (i <= HalfPopulation)
+                if (i <= halfPopulation)
                 {
                     population[i] = newPopulation[i];
                 }
                 else
                 {
-                    var first = random.Next(HalfPopulation - 1);
-                    var second = random.Next(HalfPopulation - 1);
+                    var first = random.Next(halfPopulation - 1);
+                    var second = random.Next(halfPopulation - 1);
 
                     var parent1 = comparer.Compare(newPopulation[first], newPopulation[second]) >= 0
                         ? newPopulation[first]
                         : newPopulation[second];
 
-                    var first2 = random.Next(HalfPopulation - 1);
-                    var second2 = random.Next(HalfPopulation - 1);
+                    var first2 = random.Next(halfPopulation - 1);
+                    var second2 = random.Next(halfPopulation - 1);
 
                     var parent2 = comparer.Compare(newPopulation[first2], newPopulation[second2]) >= 0
                         ? newPopulation[first2]
@@ -75,6 +100,11 @@ namespace Framework.Evolutionary.Nsga2
             return population;
         }
 
+        /// <summary>
+        /// Advance a certain number of generations
+        /// </summary>
+        /// <param name="generations">Number indicating how many generations to advance</param>
+        /// <returns>Population after advance that many generations</returns>
         public IEvolutionaryAlgorithmIndividual[] RunForGenerations(int generations)
         {
             for (int i = 0; i < generations; i++)
@@ -85,6 +115,10 @@ namespace Framework.Evolutionary.Nsga2
             return population;
         }
 
+        /// <summary>
+        /// Sort the population with non-dominated sorting.
+        /// </summary>
+        /// <returns>Population sorted into fronts. Front 0 is the pareto front.</returns>
         private List<List<INsga2Individual>> NonDominatedSorting()
         {
             foreach (var p in population)
@@ -155,6 +189,11 @@ namespace Framework.Evolutionary.Nsga2
             return fronts;
         }
 
+        /// <summary>
+        /// Sort a front by crowding distance
+        /// </summary>
+        /// <param name="front">Front to be sorted</param>
+        /// <returns>Sorted Front</returns>
         private List<INsga2Individual> CrowdingDistanceSortFront(List<INsga2Individual> front)
         {
             for (var o = 0; o < numberOfOptimizationTargets; o++)

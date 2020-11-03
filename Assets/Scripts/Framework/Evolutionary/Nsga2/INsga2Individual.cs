@@ -4,6 +4,9 @@ namespace Framework.Evolutionary.Nsga2
 {
     /// <summary>
     /// Interface that has to be implemented by an Individual so it can be used inside of the Nsga-2 Algorithm
+    ///
+    /// For further explanation on certain values like Rank, Crowing Distance, Front and Domination Count see this paper:
+    /// https://ieeexplore.ieee.org/document/996017
     /// </summary>
     public interface INsga2Individual : IEvolutionaryAlgorithmIndividual
     {
@@ -38,5 +41,7 @@ namespace Framework.Evolutionary.Nsga2
         /// </summary>
         /// <returns>List of all dominated individuals</returns>
         IList<INsga2Individual> GetDominated();
+        
+        
     }
 }
