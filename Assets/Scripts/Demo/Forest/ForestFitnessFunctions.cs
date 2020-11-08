@@ -11,7 +11,7 @@ namespace Demo.Forest
             var value = 0d;
             foreach (var roundForest in individual.RoundForestAreas)
             {
-                value += Math.Abs(0.2 - roundForest.HoleFactor);
+                value += Math.Abs(0.8 - roundForest.HoleFactor);
             }
 
             return -value;

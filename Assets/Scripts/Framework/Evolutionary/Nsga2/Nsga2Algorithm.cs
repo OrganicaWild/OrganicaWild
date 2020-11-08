@@ -162,8 +162,8 @@ namespace Framework.Evolutionary.Nsga2
                 {
                     if (p.DominationCount <= 0)
                     {
-                        currentFront.Add(p);
                         p.Rank = frontCounter;
+                        currentFront.Add(p);
                         //pop.Remove(p);
                     }
                 }
