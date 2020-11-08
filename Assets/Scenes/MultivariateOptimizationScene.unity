@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183113227}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 25, y: 30, z: -10}
+  m_LocalPosition: {x: 25, y: 45, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -236,9 +236,9 @@ MonoBehaviour:
   areaLength: 20
   sideLength: 50
   seed: 0
-  roundForestRadius: 10
-  numberRoundForests: 3
-  numberLongForests: 20
+  roundForestRadius: 20
+  numberRoundForests: 2
+  numberLongForests: 30
   sizeOfPopulation: 20
   generations: 50
   mutationPercentage: 10

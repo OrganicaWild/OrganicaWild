@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Demo.Forest;
 using Framework.Evolutionary;
 using Framework.Evolutionary.Nsga2;
 using UnityEngine;
@@ -35,10 +36,13 @@ namespace Demo
                 seed = Environment.TickCount;
             }
 
-            var random = new System.Random(seed);
+            var random = new Random(seed);
 
-            var fitnessFunctions = new IFitnessFunction[1];
-            fitnessFunctions[0] = new RoundnessFitnessFunction();
+            var fitnessFunctions = new IFitnessFunction[4];
+            fitnessFunctions[0] = new ForestFilledFitnessFunction();
+            fitnessFunctions[1] = new SizeForestFitnessFunction();
+            fitnessFunctions[2] = new FreeSpaceAroundStartAndEndFitnessFunction(roundForestRadius);
+            fitnessFunctions[3] = new DistanceBetweenStartAndEndFitnessFunction();
 
             var population = new ForestIndividual[sizeOfPopulation];
             for (int i = 0; i < sizeOfPopulation; i++)
@@ -53,12 +57,14 @@ namespace Demo
             var grandchildren = algorithm.RunForGenerations(generations);
 
             DrawRepresentation((grandchildren.First() as ForestIndividual).Map);
+
+            // DrawRepresentation(population[0].Map);
         }
 
         public void DrawRepresentation(int[,] map)
         {
             var r = new Random();
-            
+
             for (var index1 = 0; index1 < map.GetLength(0); ++index1)
             {
                 for (var index2 = 0; index2 < map.GetLength(1); ++index2)
@@ -77,7 +83,8 @@ namespace Demo
                         var position = new Vector3(index2 * localScale.x, 0.0f,
                             index1 * localScale.y);
                         Instantiate(floorPrefab, position, Quaternion.identity);
-                        Instantiate(playerPrefab, position + Vector3.up, Quaternion.identity);
+                        Instantiate(playerPrefab, playerPrefab.transform.position + position + Vector3.up,
+                            Quaternion.identity);
                     }
 
                     if (map[index1, index2] == 2)
@@ -86,7 +93,8 @@ namespace Demo
                         var position = new Vector3(index2 * localScale.x, 0.0f,
                             index1 * localScale.y);
                         Instantiate(floorPrefab, position, Quaternion.identity);
-                        Instantiate(enemyPrefab, position + Vector3.up, Quaternion.identity);
+                        Instantiate(enemyPrefab, enemyPrefab.transform.position + position + Vector3.up,
+                            Quaternion.identity);
                     }
 
                     if (map[index1, index2] == 3)
