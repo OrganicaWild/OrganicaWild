@@ -197,12 +197,73 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183113227}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 25, y: 30, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+--- !u!1 &1688901248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1688901250}
+  - component: {fileID: 1688901249}
+  m_Layer: 0
+  m_Name: WallGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1688901249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688901248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241de6193f25dba40a2638d6f1f82fde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaLength: 20
+  sideLength: 50
+  seed: 0
+  roundForestRadius: 10
+  numberRoundForests: 3
+  numberLongForests: 20
+  sizeOfPopulation: 20
+  generations: 50
+  mutationPercentage: 10
+  floorPrefab: {fileID: 4284913072249543423, guid: 0b587e4d577471c48b60b845ea3ec9df,
+    type: 3}
+  playerPrefab: {fileID: 2888007072387642614, guid: 14359fff313f6c741ac9f15687628b97,
+    type: 3}
+  enemyPrefab: {fileID: 964821723860175425, guid: 38a810ff75c5ee349bef117b53b5191e,
+    type: 3}
+  treePrefabs:
+  - {fileID: 2228662142306374336, guid: ee67401f91c2f5a4fb77edcb08eade23, type: 3}
+  - {fileID: 5335881068245736737, guid: ebdacffa7b1033c4fa7fc87e4ae3c0ec, type: 3}
+--- !u!4 &1688901250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688901248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.941651, y: -12.092229, z: 16.298801}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1763792047
 GameObject:
@@ -273,7 +334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2049032855
 MonoBehaviour:
   m_ObjectHideFlags: 0
