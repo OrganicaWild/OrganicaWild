@@ -19,9 +19,20 @@ namespace Framework.Evolutionary.Nsga2
         /// </returns>
         public override int Compare(INsga2Individual x, INsga2Individual y)
         {
-            if (ReferenceEquals(x, y)) return 0;
-            if (ReferenceEquals(null, y)) return 1;
-            if (ReferenceEquals(null, x)) return -1;
+            if (ReferenceEquals(x, y))
+            {
+                return 0;
+            }
+
+            if (ReferenceEquals(null, y))
+            {
+                return 1;
+            }
+
+            if (ReferenceEquals(null, x))
+            {
+                return -1;
+            }
             
             if (x.Rank.CompareTo(y.Rank) != 0)
             {

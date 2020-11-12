@@ -17,9 +17,9 @@ namespace Demo
          * 1 = player
          * 2 = enemy
          */
-        public int[,] Map;
+        public int[,] map;
 
-        public int[] MappedPositions;
+        public int[] mappedPositions;
 
         /**
          * 1 player position x and y
@@ -57,25 +57,25 @@ namespace Demo
 
         private void BuildMap()
         {
-            Map = new int[height, width];
-            MappedPositions = new int[SizeOfData];
+            map = new int[height, width];
+            mappedPositions = new int[SizeOfData];
 
-            var playerX = (int) (data[0] * width);
-            var playerY = (int) (data[1] * height);
-            Map[playerY, playerX] = 1;
-            MappedPositions[0] = playerX;
-            MappedPositions[1] = playerY;
+            int playerX = (int) (data[0] * width);
+            int playerY = (int) (data[1] * height);
+            map[playerY, playerX] = 1;
+            mappedPositions[0] = playerX;
+            mappedPositions[1] = playerY;
 
-            var enemyIndex = 2;
+            int enemyIndex = 2;
             for (int i = 0; i < 2; i++)
             {
-                var enemyX = (int) (data[enemyIndex] * width);
-                MappedPositions[enemyIndex] = enemyX;
+                int enemyX = (int) (data[enemyIndex] * width);
+                mappedPositions[enemyIndex] = enemyX;
                 enemyIndex++;
 
-                var enemyY = (int) (data[enemyIndex] * height);
-                MappedPositions[enemyIndex] = enemyY;
-                Map[enemyY, enemyX] = 2;
+                int enemyY = (int) (data[enemyIndex] * height);
+                mappedPositions[enemyIndex] = enemyY;
+                map[enemyY, enemyX] = 2;
             }
         }
 
@@ -84,17 +84,17 @@ namespace Demo
             if (!(parent2 is MyIndividual other))
                 throw new ArgumentException("second parent must be of same type as first parent!");
 
-            var newGenes = new double[data.Length];
+            double[] newGenes = new double[data.Length];
             for (int i = 0; i < data.Length; i++)
             {
-                var thisGene = data[i];
-                var otherGene = other.data[i];
+                double thisGene = data[i];
+                double otherGene = other.data[i];
 
-                var newGene = Random.Range(0, 1) < 0.5 ? thisGene : otherGene;
+                double newGene = Random.Range(0, 1) < 0.5 ? thisGene : otherGene;
                 newGenes[i] = newGene;
             }
 
-            var child = new MyIndividual(height, width, mutationPercentage, newGenes, FitnessFunctions);
+            MyIndividual child = new MyIndividual(height, width, mutationPercentage, newGenes, FitnessFunctions);
             child.Mutate();
 
             return child;
@@ -106,7 +106,7 @@ namespace Demo
             {
                 if (Random.Range(0, 100) < mutationPercentage)
                 {
-                    var random = RandomUtil.GenerateGaussian(0, 0.5);
+                    double random = RandomUtil.GenerateGaussian(0, 0.5);
                     data[i] += random;
                     if (data[i] < 0)
                     {

@@ -35,10 +35,10 @@ namespace Framework.Evolutionary.Nsga2
         {
             population = initialPopulation;
 
-            var numberOfFitnessFunctions = initialPopulation[0].GetNumberOfFitnessFunctions();
-            for (var index = 1; index < initialPopulation.Length; index++)
+            int numberOfFitnessFunctions = initialPopulation[0].GetNumberOfFitnessFunctions();
+            for (int index = 1; index < initialPopulation.Length; index++)
             {
-                var p = initialPopulation[index];
+                INsga2Individual p = initialPopulation[index];
                 if (numberOfFitnessFunctions != p.GetNumberOfFitnessFunctions())
                 {
                     throw new FitnessFunctionNumberMismatchException(
@@ -55,21 +55,21 @@ namespace Framework.Evolutionary.Nsga2
         /// <returns>population after the generation. Can be casted back to the original type you passed the constructor.</returns>
         public IEvolutionaryAlgorithmIndividual[] NextGeneration()
         {
-            foreach (var p in population)
+            foreach (INsga2Individual p in population)
             {
                 p.PrepareForNextGeneration();
                 p.EvaluateFitness();
             }
 
-            var fronts = NonDominatedSorting();
-            var crowdedFronts = fronts.Select(CrowdingDistanceSortFront).ToList();
+            List<List<INsga2Individual>> fronts = NonDominatedSorting();
+            List<List<INsga2Individual>> crowdedFronts = fronts.Select(CrowdingDistanceSortFront).ToList();
 
-            var newPopulation = crowdedFronts.SelectMany(x => x).ToArray();
+            INsga2Individual[] newPopulation = crowdedFronts.SelectMany(x => x).ToArray();
 
-            var random = new Random();
-            var comparer = new RankCrowdingComparer();
+            Random random = new Random();
+            RankCrowdingComparer comparer = new RankCrowdingComparer();
 
-            var halfPopulation = population.Length / 2;
+            int halfPopulation = population.Length / 2;
 
             for (int i = 0; i < population.Length; i++)
             {
@@ -79,17 +79,17 @@ namespace Framework.Evolutionary.Nsga2
                 }
                 else
                 {
-                    var first = random.Next(halfPopulation - 1);
-                    var second = random.Next(halfPopulation - 1);
+                    int first = random.Next(halfPopulation - 1);
+                    int second = random.Next(halfPopulation - 1);
 
-                    var parent1 = comparer.Compare(newPopulation[first], newPopulation[second]) >= 0
+                    INsga2Individual parent1 = comparer.Compare(newPopulation[first], newPopulation[second]) >= 0
                         ? newPopulation[first]
                         : newPopulation[second];
 
-                    var first2 = random.Next(halfPopulation - 1);
-                    var second2 = random.Next(halfPopulation - 1);
+                    int first2 = random.Next(halfPopulation - 1);
+                    int second2 = random.Next(halfPopulation - 1);
 
-                    var parent2 = comparer.Compare(newPopulation[first2], newPopulation[second2]) >= 0
+                    INsga2Individual parent2 = comparer.Compare(newPopulation[first2], newPopulation[second2]) >= 0
                         ? newPopulation[first2]
                         : newPopulation[second2];
 
@@ -121,16 +121,16 @@ namespace Framework.Evolutionary.Nsga2
         /// <returns>Population sorted into fronts. Front 0 is the pareto front.</returns>
         private List<List<INsga2Individual>> NonDominatedSorting()
         {
-            foreach (var p in population)
+            foreach (INsga2Individual p in population)
             {
-                foreach (var q in population)
+                foreach (INsga2Individual q in population)
                 {
-                    var firstBlock = true;
-                    var secondBlock = false;
+                    bool firstBlock = true;
+                    bool secondBlock = false;
                     for (int o = 0; o < numberOfOptimizationTargets; o++)
                     {
-                        var pTarget = p.GetOptimizationTarget(o);
-                        var qTarget = q.GetOptimizationTarget(o);
+                        double pTarget = p.GetOptimizationTarget(o);
+                        double qTarget = q.GetOptimizationTarget(o);
                         if (pTarget > qTarget)
                         {
                             firstBlock = false;
@@ -151,31 +151,30 @@ namespace Framework.Evolutionary.Nsga2
             }
 
             //copy of pop to manipulate
-            var pop = population.ToList();
-            var fronts = new List<List<INsga2Individual>>();
-            var currentFront = new List<INsga2Individual>();
-            var frontCounter = 0;
+            List<INsga2Individual> pop = population.ToList();
+            List<List<INsga2Individual>> fronts = new List<List<INsga2Individual>>();
+            List<INsga2Individual> currentFront = new List<INsga2Individual>();
+            int frontCounter = 0;
 
             while (pop.Count != 0)
             {
-                foreach (var p in pop)
+                foreach (INsga2Individual p in pop)
                 {
                     if (p.DominationCount <= 0)
                     {
                         p.Rank = frontCounter;
                         currentFront.Add(p);
-                        //pop.Remove(p);
                     }
                 }
 
-                foreach (var p in currentFront)
+                foreach (INsga2Individual p in currentFront)
                 {
                     pop.Remove(p);
                 }
 
-                foreach (var p in currentFront)
+                foreach (INsga2Individual p in currentFront)
                 {
-                    foreach (var q in p.GetDominated())
+                    foreach (INsga2Individual q in p.GetDominated())
                     {
                         q.DominationCount--;
                     }
@@ -203,14 +202,14 @@ namespace Framework.Evolutionary.Nsga2
                 front[0].Crowding = double.PositiveInfinity;
                 front[front.Count - 1].Crowding = double.PositiveInfinity;
 
-                var pMax = front[0].GetOptimizationTarget(o);
-                var pMin = front[front.Count - 1].GetOptimizationTarget(o);
+                double pMax = front[0].GetOptimizationTarget(o);
+                double pMin = front[front.Count - 1].GetOptimizationTarget(o);
 
-                for (var index = 1; index < front.Count - 1; index++)
+                for (int index = 1; index < front.Count - 1; index++)
                 {
-                    var p = front[index];
-                    var pMinus = front[index - 1].GetOptimizationTarget(o);
-                    var pPlus = front[index + 1].GetOptimizationTarget(o);
+                    INsga2Individual p = front[index];
+                    double pMinus = front[index - 1].GetOptimizationTarget(o);
+                    double pPlus = front[index + 1].GetOptimizationTarget(o);
 
                     p.Crowding += (pPlus - pMinus) / (pMax - pMin);
                 }

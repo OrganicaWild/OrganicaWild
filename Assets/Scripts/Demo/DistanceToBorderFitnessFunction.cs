@@ -8,8 +8,8 @@ namespace Demo
     {
         protected override double DetermineFitness(MyIndividual individual)
         {
-            var positions = individual.MappedPositions;
-            var playerPosition = new Vector2(positions[0], positions[1]);
+            int[] positions = individual.mappedPositions;
+            Vector2 playerPosition = new Vector2(positions[0], positions[1]);
 
             return playerPosition.magnitude;
         }

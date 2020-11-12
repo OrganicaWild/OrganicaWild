@@ -31,16 +31,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="restructre">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/diffuse.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/diffuse.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/normal_specular.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/normal_specular.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/shadow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/shadow.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/translucency_gloss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tree_Textures/translucency_gloss.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/riderModule.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/Nsga2/RankCrowdingComparer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/StandardAlgorithmRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/StandardMapBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IGenoPhenoCombination.cs" />
@@ -72,10 +74,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardMapBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IFitnessFunctionBase.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/INsga2FitnessFunction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IAlgorithmIndividual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/StandardGenoPhenotypeCombination2.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/StandardAlgorithmRunner2.cs" />
@@ -86,14 +85,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/StandardFitnessFunction2.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/DistanceToBorderFitnessFunction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardFitnessFunction2.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/FitnessFunctionMismatch.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/FitnessFunctionMismatchException.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/AbstractNsga2FitnessFunction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/INsga2Individual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/AbstractNsga2Individual.cs" />
@@ -106,10 +99,20 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/RoundnessFitnessFunction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestIndividual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestFilledFitnessFunction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestFitnessFunctions.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IEvolutionaryAlgorithmIndividual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestBuilder.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" />
       </list>
     </option>
   </component>
@@ -170,7 +173,7 @@
       <workItem from="1604681526908" duration="3991000" />
       <workItem from="1604851673389" duration="15544000" />
       <workItem from="1604919117822" duration="3332000" />
-      <workItem from="1605171268135" duration="785000" />
+      <workItem from="1605171268135" duration="2171000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -277,10 +280,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1222" y="389" key="RiderGenerateDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1604870774916" />
-    <state x="2122" y="207" width="998" height="981" key="SettingsEditor" timestamp="1605172049746">
+    <state x="2122" y="207" width="998" height="981" key="SettingsEditor" timestamp="1605177681120">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2122" y="207" width="998" height="981" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1605172049746" />
+    <state x="2122" y="207" width="998" height="981" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1605177681120" />
     <state x="230" y="353" width="1803" height="954" key="VCS.FileHistoryDialog" timestamp="1604432399338">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
