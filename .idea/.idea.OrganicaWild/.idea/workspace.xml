@@ -31,19 +31,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="restructre">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,12 +56,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/StandardAlgorithmRunner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/StandardMapBuilder.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IGenoPhenoCombination.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/DistanceToBorderFitnessFunction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/StandardGenoPhenoCombination.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IIndividual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/EnemyDistanceFitnessFunction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardAlgorithmRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardGenoPhenoCombination.cs" />
@@ -113,6 +101,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Node.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GramarRule.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
       </list>
     </option>
   </component>
@@ -135,7 +129,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="settings.editor.selected.configurable" value="RiderNuGetOptionsPageId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -174,6 +168,7 @@
       <workItem from="1604851673389" duration="15544000" />
       <workItem from="1604919117822" duration="3332000" />
       <workItem from="1605171268135" duration="2171000" />
+      <workItem from="1605864247167" duration="4855000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -208,6 +203,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="restructre" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605864731544">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400@0.0.3440.1400" timestamp="1605864731544" />
     <state width="459" height="464" key="DebuggerActiveHint" timestamp="1604872908148">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -276,14 +275,14 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="2037" height="373" key="GridCell.Tab.3.right/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
-    <state x="1222" y="389" key="RiderGenerateDialog" timestamp="1604870774916">
+    <state x="1222" y="389" key="RiderGenerateDialog" timestamp="1605866911858">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1222" y="389" key="RiderGenerateDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1604870774916" />
-    <state x="2122" y="207" width="998" height="981" key="SettingsEditor" timestamp="1605177681120">
+    <state x="1222" y="389" key="RiderGenerateDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1605866911858" />
+    <state x="2122" y="207" width="998" height="981" key="SettingsEditor" timestamp="1605864771884">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2122" y="207" width="998" height="981" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1605177681120" />
+    <state x="2122" y="207" width="998" height="981" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1605864771884" />
     <state x="230" y="353" width="1803" height="954" key="VCS.FileHistoryDialog" timestamp="1604432399338">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -296,9 +295,9 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2204" y="508" key="save.file.as.template.dialog/0.0.3440.1400@0.0.3440.1400" timestamp="1604239921165" />
-    <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1604870213693">
+    <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1605864557049">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1604870213693" />
+    <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1605864557049" />
   </component>
 </project>

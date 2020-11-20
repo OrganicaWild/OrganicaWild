@@ -6,18 +6,20 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Demo" t="Include">
-            <e p="DistanceToBorderFitnessFunction.cs" t="Include" />
-            <e p="EnemyDistanceFitnessFunction.cs" t="Include" />
-            <e p="Forest" t="Include">
-              <e p="ForestBuilder.cs" t="Include" />
-              <e p="ForestFitnessFunctions.cs" t="Include" />
-              <e p="ForestIndividual.cs" t="Include" />
+            <e p="Evolutionary" t="Include">
+              <e p="DistanceToBorderFitnessFunction.cs" t="Include" />
+              <e p="EnemyDistanceFitnessFunction.cs" t="Include" />
+              <e p="Forest" t="Include">
+                <e p="ForestBuilder.cs" t="Include" />
+                <e p="ForestFitnessFunctions.cs" t="Include" />
+                <e p="ForestIndividual.cs" t="Include" />
+              </e>
+              <e p="MyAlgorithmRunner.cs" t="Include" />
+              <e p="MyAlgorithmRunner2.cs" t="Include" />
+              <e p="MyIndividual.cs" t="Include" />
+              <e p="StandardFitnessFunction2.cs" t="Include" />
+              <e p="StandardIndividual2.cs" t="Include" />
             </e>
-            <e p="MyAlgorithmRunner.cs" t="Include" />
-            <e p="MyAlgorithmRunner2.cs" t="Include" />
-            <e p="MyIndividual.cs" t="Include" />
-            <e p="StandardFitnessFunction2.cs" t="Include" />
-            <e p="StandardIndividual2.cs" t="Include" />
           </e>
           <e p="Framework" t="Include">
             <e p="Evolutionary" t="Include">
@@ -34,6 +36,11 @@
                 <e p="OptimizationTargetComparer.cs" t="Include" />
                 <e p="RankCrowdingComparer.cs" t="Include" />
               </e>
+            </e>
+            <e p="GraphGrammar" t="Include">
+              <e p="GrammarRule.cs" t="Include" />
+              <e p="Graph.cs" t="Include" />
+              <e p="Vertex.cs" t="Include" />
             </e>
             <e p="Util" t="Include">
               <e p="RandomUtil.cs" t="Include" />
