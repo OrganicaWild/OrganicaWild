@@ -21,6 +21,7 @@
               <e p="StandardIndividual2.cs" t="Include" />
             </e>
             <e p="GraphGrammar" t="Include">
+              <e p="DrawableVertex.cs" t="Include" />
               <e p="GraphGrammar1.cs" t="Include" />
             </e>
           </e>

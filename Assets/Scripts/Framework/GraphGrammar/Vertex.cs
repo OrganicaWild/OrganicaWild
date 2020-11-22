@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Framework.GraphGrammar
 {
@@ -8,7 +9,7 @@ namespace Framework.GraphGrammar
     {
         public IList<Vertex> ForwardNeighbours { get; }
         public IList<Vertex> IncomingNeighbours { get; }
-        public int Type { get; }
+        public int Type { get; set; }
         public bool Discovered { get; set; }
 
         public Vertex(int type)
