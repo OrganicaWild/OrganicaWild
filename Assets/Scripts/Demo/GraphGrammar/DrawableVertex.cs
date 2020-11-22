@@ -6,9 +6,9 @@ using Random = UnityEngine.Random;
 
 namespace Demo.GraphGrammar
 {
-    public class DrawableVertex : Vertex
+    public class DrawableVertex<TType> : Vertex<TType>
     {
-        public DrawableVertex(int type) : base(type)
+        public DrawableVertex(TType type) : base(type)
         {
         }
 
@@ -24,9 +24,9 @@ namespace Demo.GraphGrammar
 
             // Debug.DrawLine(parentPosition, thisPosition, Color.blue, 100000);
 
-            foreach (Vertex forwardNeighbour in ForwardNeighbours)
+            foreach (Vertex<TType> forwardNeighbour in ForwardNeighbours)
             {
-                DrawableVertex draw = forwardNeighbour as DrawableVertex;
+                DrawableVertex<TType> draw = forwardNeighbour as DrawableVertex<TType>;
                 if (draw != null)
                 {
                     draw.Paint(thisPosition, drawPositions);
@@ -38,11 +38,11 @@ namespace Demo.GraphGrammar
         
         public class ListElement
         {
-            public DrawableVertex t;
+            public DrawableVertex<TType> t;
             public Vector3 parent;
             public Vector3 tPosition;
 
-            public ListElement(DrawableVertex t, Vector3 parent, Vector3 tPosition)
+            public ListElement(DrawableVertex<TType> t, Vector3 parent, Vector3 tPosition)
             {
                 this.t = t;
                 this.parent = parent;

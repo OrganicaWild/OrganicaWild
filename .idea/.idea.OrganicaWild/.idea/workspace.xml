@@ -30,12 +30,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add working version">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DrawableVertex.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DrawableVertex.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add simple demo with visualization">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DrawableVertex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DrawableVertex.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/GraphGrammar1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/GraphGrammar1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +50,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/4a/76aa60a6/ArraySortHelper`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B926ACD-10D4-48DA-9AA3-641E61A8737F/51/bcabb118/MyAlgorithmRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/2a/0d72e35c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/37/64c83ab0/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/48/791df3b4/Array.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -101,10 +102,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Node.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GramarRule.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DrawableVertex.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/GraphGrammar1.cs" />
       </list>
     </option>
@@ -170,7 +171,7 @@
       <workItem from="1605171268135" duration="2171000" />
       <workItem from="1605864247167" duration="4900000" />
       <workItem from="1605974434193" duration="6408000" />
-      <workItem from="1606039960866" duration="9626000" />
+      <workItem from="1606039960866" duration="11937000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -193,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606043194133</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add simple demo with visualization">
+      <created>1606051561427</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606051561428</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +226,8 @@
     <MESSAGE value="restructre" />
     <MESSAGE value="add base graph and vertex class" />
     <MESSAGE value="add working version" />
-    <option name="LAST_COMMIT_MESSAGE" value="add working version" />
+    <MESSAGE value="add simple demo with visualization" />
+    <option name="LAST_COMMIT_MESSAGE" value="add simple demo with visualization" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605864731544">
@@ -309,10 +318,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1118" y="436" key="Vcs.Push.Dialog.v2/0.0.3440.1400@0.0.3440.1400" timestamp="1605874129777" />
-    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606044362207">
+    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606051742821">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606044362207" />
+    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606051742821" />
     <state x="2204" y="508" key="save.file.as.template.dialog" timestamp="1604239921165">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>

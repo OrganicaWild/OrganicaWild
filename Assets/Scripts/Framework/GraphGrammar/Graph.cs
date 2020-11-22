@@ -6,54 +6,54 @@ using Random = UnityEngine.Random;
 
 namespace Framework.GraphGrammar
 {
-    public class Graph
+    public class Graph<TType>
     {
-        private IList<Vertex> vertices;
-        public Vertex start { get; set; }
-        public Vertex end { get; set; }
+        private IList<Vertex<TType>> vertices;
+        public Vertex<TType> start { get; set; }
+        public Vertex<TType> end { get; set; }
 
         public Graph()
         {
-            vertices = new List<Vertex>();
+            vertices = new List<Vertex<TType>>();
         }
 
-        public void AddVertex(Vertex vertex)
+        public void AddVertex(Vertex<TType> vertex)
         {
             vertices.Add(vertex);
         }
 
-        public Vertex AddVertex(int type)
+        public Vertex<TType> AddVertex(TType type)
         {
-            Vertex vertex = new Vertex(type);
+            Vertex<TType> vertex = new Vertex<TType>(type);
             vertices.Add(vertex);
             return vertex;
         }
 
-        public void RemoveVertex(Vertex vertex)
+        public void RemoveVertex(Vertex<TType> vertex)
         {
             vertex.RemoveFromAllNeighbours();
             vertices.Remove(vertex);
         }
 
-        public IList<Vertex> Dfs()
+        public IList<Vertex<TType>> Dfs()
         {
-            foreach (Vertex vertex in vertices)
+            foreach (Vertex<TType> vertex in vertices)
             {
                 vertex.Discovered = false;
             }
 
-            IList<Vertex> traversalQ = new List<Vertex>();
-            Stack<Vertex> s = new Stack<Vertex>();
+            IList<Vertex<TType>> traversalQ = new List<Vertex<TType>>();
+            Stack<Vertex<TType>> s = new Stack<Vertex<TType>>();
             s.Push(start);
 
             while (s.Any())
             {
-                Vertex v = s.Pop();
+                Vertex<TType> v = s.Pop();
                 traversalQ.Add(v);
                 if (!v.Discovered)
                 {
                     v.Discovered = true;
-                    foreach (Vertex u in v.ForwardNeighbours)
+                    foreach (Vertex<TType> u in v.ForwardNeighbours)
                     {
                         s.Push(u);
                     }
@@ -63,20 +63,20 @@ namespace Framework.GraphGrammar
             return traversalQ;
         }
 
-        public bool Contains(Graph graph)
+        public bool Contains(Graph<TType> graph)
         {
-            IList<Vertex> thisDfs = Dfs();
-            IList<Vertex> otherDfs = Dfs();
+            IList<Vertex<TType>> thisDfs = Dfs();
+            IList<Vertex<TType>> otherDfs = Dfs();
 
             return Enumerable
                 .Range(0, thisDfs.Count - otherDfs.Count + 1)
                 .Any(n => thisDfs.Skip(n).Take(otherDfs.Count).SequenceEqual(otherDfs));
         }
 
-        public bool ReplaceSubGraph(GrammarRule rule)
+        public bool ReplaceSubGraph(GrammarRule<TType> rule)
         {
-            IList<Vertex> thisDfs = Dfs();
-            IList<Vertex> otherDfs = rule.LeftHandSide.Dfs();
+            IList<Vertex<TType>> thisDfs = Dfs();
+            IList<Vertex<TType>> otherDfs = rule.LeftHandSide.Dfs();
 
             //find all possible startPositions
             int[] starts = Enumerable
@@ -90,8 +90,8 @@ namespace Framework.GraphGrammar
 
             //chose start position
             int chosenIndex = Random.Range(0, starts.Count());
-            Vertex chosenStart = thisDfs[starts[chosenIndex]];
-            Vertex chosenEnd = thisDfs[starts[chosenIndex] + otherDfs.Count - 1];
+            Vertex<TType> chosenStart = thisDfs[starts[chosenIndex]];
+            Vertex<TType> chosenEnd = thisDfs[starts[chosenIndex] + otherDfs.Count - 1];
 
             //chosenStart.AddNextNeighbour(rule.RightHandSide.start);
             
