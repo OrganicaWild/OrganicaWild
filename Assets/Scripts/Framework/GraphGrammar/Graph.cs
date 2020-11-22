@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using Random = UnityEngine.Random;
 
 
 namespace Framework.GraphGrammar
 {
+    [Serializable]
     public class Graph<TType>
     {
+        
         private IList<Vertex<TType>> vertices;
         public Vertex<TType> start { get; set; }
         public Vertex<TType> end { get; set; }
@@ -15,6 +19,18 @@ namespace Framework.GraphGrammar
         public Graph()
         {
             vertices = new List<Vertex<TType>>();
+        }
+
+        private Graph<TType> Clone()
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, this);
+                ms.Position = 0;
+
+                return (Graph<TType>) formatter.Deserialize(ms);
+            }
         }
 
         public void AddVertex(Vertex<TType> vertex)
@@ -94,20 +110,21 @@ namespace Framework.GraphGrammar
             Vertex<TType> chosenEnd = thisDfs[starts[chosenIndex] + otherDfs.Count - 1];
 
             //chosenStart.AddNextNeighbour(rule.RightHandSide.start);
+            Graph<TType> rightHandSideCopy = rule.RightHandSide.Clone();
             
-            chosenStart.TransferIncomingEdges(rule.RightHandSide.start);
-            chosenEnd.TransferOutgoingEdges(rule.RightHandSide.end);
+            chosenStart.TransferIncomingEdges(rightHandSideCopy.start);
+            chosenEnd.TransferOutgoingEdges(rightHandSideCopy.end);
 
             //if we replace start, we gotta switch the start reference
             if (chosenStart == start) 
             {
-                start = rule.RightHandSide.start;
+                start = rightHandSideCopy.start;
             }
 
             //if we replace end, we gotta switch the end reference
             if (chosenEnd == end)
             {
-                end = rule.RightHandSide.end;
+                end = rightHandSideCopy.end;
             }
             
             return true;

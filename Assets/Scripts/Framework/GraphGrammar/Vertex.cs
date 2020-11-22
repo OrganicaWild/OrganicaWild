@@ -1,10 +1,10 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Framework.GraphGrammar
 {
+    [Serializable]
     public class Vertex<TType>
     {
         public IList<Vertex<TType>> ForwardNeighbours { get; }

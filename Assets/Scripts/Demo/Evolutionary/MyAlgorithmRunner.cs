@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Demo.Evolutionary;
 using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 
