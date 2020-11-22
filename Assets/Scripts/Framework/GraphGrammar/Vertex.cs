@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Framework.GraphGrammar
 {
@@ -8,6 +9,7 @@ namespace Framework.GraphGrammar
         public IList<Vertex> ForwardNeighbours { get; }
         public IList<Vertex> IncomingNeighbours { get; }
         public int Type { get; }
+        public bool Discovered { get; set; }
 
         public Vertex(int type)
         {
@@ -33,7 +35,7 @@ namespace Framework.GraphGrammar
             IncomingNeighbours.Add(neighbour);
             neighbour.ForwardNeighbours.Add(this);
         }
-        
+
         public void RemovePreviousNeighbour(Vertex neighbour)
         {
             IncomingNeighbours.Remove(neighbour);
@@ -53,9 +55,57 @@ namespace Framework.GraphGrammar
             }
         }
 
-        public bool Equals(Vertex vertex)
+        protected bool Equals(Vertex vertex)
         {
             return Type == vertex.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return Equals((Vertex) obj);
+        }
+
+        public override string ToString()
+        {
+            return $"Vertex: {Type}";
+        }
+
+        public override int GetHashCode()
+        {
+            return Type;
+        }
+
+        public void TransferIncomingEdges(Vertex same)
+        {
+            foreach (Vertex vertex in IncomingNeighbours.ToArray())
+            {
+                RemovePreviousNeighbour(vertex);
+                same.AddPreviousNeighbour(vertex);
+            }
+        }
+
+        public void TransferOutgoingEdges(Vertex same)
+        {
+            foreach (Vertex vertex in ForwardNeighbours.ToArray())
+            {
+                RemoveNextNeighbour(vertex);
+                same.AddNextNeighbour(vertex);
+            }
         }
     }
 }
