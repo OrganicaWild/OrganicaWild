@@ -85,8 +85,7 @@ namespace Framework.GraphGrammar
         {
             return $"Vertex: {Type}";
         }
-
-
+        
         public void TransferIncomingEdges(Vertex<TType> same)
         {
             foreach (Vertex<TType> vertex in IncomingNeighbours.ToArray())
@@ -102,6 +101,22 @@ namespace Framework.GraphGrammar
             {
                 RemoveNextNeighbour(vertex);
                 same.AddNextNeighbour(vertex);
+            }
+        }
+
+        public void RemoveIncomingEdges()
+        {
+            foreach (Vertex<TType> incomingNeighbour in IncomingNeighbours.ToArray())
+            {
+                RemovePreviousNeighbour(incomingNeighbour);
+            }
+        }
+
+        public void RemoveOutgoingEdges()
+        {
+            foreach (Vertex<TType> forwardNeighbour in ForwardNeighbours.ToArray())
+            {
+                RemoveNextNeighbour(forwardNeighbour);
             }
         }
     }

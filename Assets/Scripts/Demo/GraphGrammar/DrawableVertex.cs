@@ -9,8 +9,13 @@ namespace Demo.GraphGrammar
     [Serializable]
     public class DrawableVertex<TType> : Vertex<TType>
     {
+        private float x;
+        private float z;
+        
         public DrawableVertex(TType type) : base(type)
         {
+            x = Random.value;
+            z = (Random.value * 2) - 1;
         }
 
         public List<ListElement> Paint(Vector3 parentPosition,
@@ -24,10 +29,8 @@ namespace Demo.GraphGrammar
             }
             else
             {
-                float xRandom = Random.value;
-                float zRandom = (Random.value * 2) - 1;
-                thisPosition = parentPosition + new Vector3(xRandom, 0, zRandom).normalized +
-                               new Vector3(xRandom, 0, 0);
+                thisPosition = parentPosition + new Vector3(x, 0, z).normalized +
+                               new Vector3(x, 0, 0);
                 dictionary.Add(this, thisPosition);
                
             }

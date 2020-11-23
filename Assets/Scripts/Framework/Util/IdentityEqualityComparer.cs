@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace Framework.Util
 {
+    [Serializable]
     public sealed class IdentityEqualityComparer<T> : IEqualityComparer<T>
         where T : class
     {

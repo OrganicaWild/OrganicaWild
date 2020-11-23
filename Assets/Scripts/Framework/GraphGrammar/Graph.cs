@@ -9,19 +9,19 @@ using Random = UnityEngine.Random;
 namespace Framework.GraphGrammar
 {
     [Serializable]
-    public class Graph<TType>
+    public class Graph<TType> where TType : ITerminality
     {
         
         private IList<Vertex<TType>> vertices;
-        public Vertex<TType> start { get; set; }
-        public Vertex<TType> end { get; set; }
+        public Vertex<TType> Start { get; set; }
+        public Vertex<TType> End { get; set; }
 
         public Graph()
         {
             vertices = new List<Vertex<TType>>();
         }
 
-        private Graph<TType> Clone()
+        public Graph<TType> Clone()
         {
             using (var ms = new MemoryStream())
             {
@@ -53,14 +53,9 @@ namespace Framework.GraphGrammar
 
         public IList<Vertex<TType>> Dfs()
         {
-            foreach (Vertex<TType> vertex in vertices)
-            {
-                vertex.Discovered = false;
-            }
-
             IList<Vertex<TType>> traversalQ = new List<Vertex<TType>>();
             Stack<Vertex<TType>> s = new Stack<Vertex<TType>>();
-            s.Push(start);
+            s.Push(Start);
 
             while (s.Any())
             {
@@ -75,6 +70,11 @@ namespace Framework.GraphGrammar
                     }
                 }
             }
+            
+            foreach (Vertex<TType> vertex in vertices)
+            {
+                vertex.Discovered = false;
+            }
 
             return traversalQ;
         }
@@ -82,52 +82,13 @@ namespace Framework.GraphGrammar
         public bool Contains(Graph<TType> graph)
         {
             IList<Vertex<TType>> thisDfs = Dfs();
-            IList<Vertex<TType>> otherDfs = Dfs();
+            IList<Vertex<TType>> otherDfs = graph.Dfs();
 
             return Enumerable
                 .Range(0, thisDfs.Count - otherDfs.Count + 1)
                 .Any(n => thisDfs.Skip(n).Take(otherDfs.Count).SequenceEqual(otherDfs));
         }
 
-        public bool ReplaceSubGraph(GrammarRule<TType> rule)
-        {
-            IList<Vertex<TType>> thisDfs = Dfs();
-            IList<Vertex<TType>> otherDfs = rule.LeftHandSide.Dfs();
-
-            //find all possible startPositions
-            int[] starts = Enumerable
-                .Range(0, thisDfs.Count - otherDfs.Count + 1)
-                .Where(n => thisDfs.Skip(n).Take(otherDfs.Count).SequenceEqual(otherDfs)).ToArray();
-
-            if (!starts.Any())
-            {
-                return false;
-            }
-
-            //chose start position
-            int chosenIndex = Random.Range(0, starts.Count());
-            Vertex<TType> chosenStart = thisDfs[starts[chosenIndex]];
-            Vertex<TType> chosenEnd = thisDfs[starts[chosenIndex] + otherDfs.Count - 1];
-
-            //chosenStart.AddNextNeighbour(rule.RightHandSide.start);
-            Graph<TType> rightHandSideCopy = rule.RightHandSide.Clone();
-            
-            chosenStart.TransferIncomingEdges(rightHandSideCopy.start);
-            chosenEnd.TransferOutgoingEdges(rightHandSideCopy.end);
-
-            //if we replace start, we gotta switch the start reference
-            if (chosenStart == start) 
-            {
-                start = rightHandSideCopy.start;
-            }
-
-            //if we replace end, we gotta switch the end reference
-            if (chosenEnd == end)
-            {
-                end = rightHandSideCopy.end;
-            }
-            
-            return true;
-        }
+       
     }
 }

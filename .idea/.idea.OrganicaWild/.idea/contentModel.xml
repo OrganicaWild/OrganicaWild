@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\dev\OrganicaWild" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
@@ -21,7 +22,11 @@
               <e p="StandardIndividual2.cs" t="Include" />
             </e>
             <e p="GraphGrammar" t="Include">
+              <e p="DDorman.cs" t="Include" />
               <e p="DrawableVertex.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="GraphGrammar1Editor.cs" t="Include" />
+              </e>
               <e p="GraphGrammar1.cs" t="Include" />
             </e>
           </e>
@@ -44,6 +49,8 @@
             <e p="GraphGrammar" t="Include">
               <e p="GrammarRule.cs" t="Include" />
               <e p="Graph.cs" t="Include" />
+              <e p="GraphGrammar.cs" t="Include" />
+              <e p="ITerminality.cs" t="Include" />
               <e p="Vertex.cs" t="Include" />
             </e>
             <e p="Util" t="Include">
