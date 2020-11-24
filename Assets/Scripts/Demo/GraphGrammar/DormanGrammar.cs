@@ -19,14 +19,17 @@ namespace Demo.GraphGrammar
 
         private IEnumerable<DrawableVertex<DDorman>.ListElement> positions =
             new List<DrawableVertex<DDorman>.ListElement>();
-        
+
         private Dictionary<Vertex<DDorman>, Vector3> dictionary = new Dictionary<Vertex<DDorman>, Vector3>(
             new IdentityEqualityComparer<Vertex<DDorman>>());
 
         private void Awake()
         {
             MakeGrammar();
-            grammar.ApplyUntilNoNonTerminal();
+            var indexes = mother.ContainedAt(rules[0].LeftHandSide);
+            Debug.Log($"{string.Join(", ", indexes)} ");
+
+            // grammar.ApplyUntilNoNonTerminal();
         }
 
         public void MakeGrammar()
@@ -34,10 +37,36 @@ namespace Demo.GraphGrammar
             BuildRules();
 
             //mother graph
-            mother = CreateLinearGraph(new List<DDorman.DDormanType>() {DDorman.DDormanType.Start});
+            mother = CreateLinearGraph(new List<DDorman.DDormanType>()
+                {DDorman.DDormanType.Chain, DDorman.DDormanType.Gate, DDorman.DDormanType.Entrance});
 
             grammar = new GraphGrammar<DDorman>(rules, mother);
             
+            var left =new Graph<DDorman>();
+            var c = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            var c3 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            var c1 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            var c2 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            var g = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Gate));
+            var e = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Entrance));
+            c.AddNextNeighbour(c1);
+            c.AddNextNeighbour(c2);
+            c.AddNextNeighbour(c3);
+            c.AddNextNeighbour(g);
+            g.AddNextNeighbour(e);
+            c1.AddNextNeighbour(e);
+            c2.AddNextNeighbour(e);
+            left.AddVertex(c);
+            left.AddVertex(c1);
+            left.AddVertex(c2);
+            left.AddVertex(c3);
+            left.AddVertex(g);
+            left.AddVertex(e);
+            left.Start = c;
+            left.End = e;
+
+            mother = left;
+
             //apply rule
             // bool replaced = grammar.ApplyRule(0);
             // replaced = grammar.ApplyRule(1);
@@ -103,51 +132,51 @@ namespace Demo.GraphGrammar
         private void BuildRules()
         {
             //rule 00
-            CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.Start},
-                new List<DDorman.DDormanType>()
-                {
-                    DDorman.DDormanType.Entrance, DDorman.DDormanType.Chain, DDorman.DDormanType.Gate,
-                    DDorman.DDormanType.BossMini,
-                    DDorman.DDormanType.ItemQuest, DDorman.DDormanType.TestItem,
-                    DDorman.DDormanType.ChainFinal, DDorman.DDormanType.Goal
-                });
-
-            //rule non linear 00
-            Graph<DDorman> left01 = CreateLinearGraph(new List<DDorman.DDormanType>()
-                {DDorman.DDormanType.ChainFinal, DDorman.DDormanType.Goal});
-            Graph<DDorman> right01 = new Graph<DDorman>();
-            DrawableVertex<DDorman> c = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
-            DrawableVertex<DDorman> h0 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Hook));
-            DrawableVertex<DDorman> ga = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Gate));
-            DrawableVertex<DDorman> lf = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.LockFinal));
-            DrawableVertex<DDorman> bl = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.BossLevel));
-            DrawableVertex<DDorman> go = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Goal));
-            DrawableVertex<DDorman> t = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Test));
-            DrawableVertex<DDorman> kf = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.KeyFinal));
-            DrawableVertex<DDorman> h1 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Hook));
-            c.AddNextNeighbour(h0);
-            c.AddNextNeighbour(t);
-            c.AddNextNeighbour(ga);
-            ga.AddNextNeighbour(lf);
-            lf.AddNextNeighbour(bl);
-            bl.AddNextNeighbour(go);
-            t.AddNextNeighbour(kf);
-            kf.AddNextNeighbour(lf);
-            t.AddNextNeighbour(h1);
-            right01.AddVertex(c);
-            right01.AddVertex(h0);
-            right01.AddVertex(ga);
-            right01.AddVertex(lf);
-            right01.AddVertex(bl);
-            right01.AddVertex(go);
-            right01.AddVertex(t);
-            right01.AddVertex(kf);
-            right01.AddVertex(h1);
-            right01.Start = c;
-            right01.End = go;
-            GrammarRule<DDorman> rule = new GrammarRule<DDorman>(left01, right01);
-            rules.Add(rule);
+            // CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.Start},
+            //     new List<DDorman.DDormanType>()
+            //     {
+            //         DDorman.DDormanType.Entrance, DDorman.DDormanType.Chain, DDorman.DDormanType.Gate,
+            //         DDorman.DDormanType.BossMini,
+            //         DDorman.DDormanType.ItemQuest, DDorman.DDormanType.TestItem,
+            //         DDorman.DDormanType.ChainFinal, DDorman.DDormanType.Goal
+            //     });
             //
+            // //rule non linear 00
+            // Graph<DDorman> left01 = CreateLinearGraph(new List<DDorman.DDormanType>()
+            //     {DDorman.DDormanType.ChainFinal, DDorman.DDormanType.Goal});
+            // Graph<DDorman> right01 = new Graph<DDorman>();
+            // DrawableVertex<DDorman> c = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            // DrawableVertex<DDorman> h0 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Hook));
+            // DrawableVertex<DDorman> ga = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Gate));
+            // DrawableVertex<DDorman> lf = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.LockFinal));
+            // DrawableVertex<DDorman> bl = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.BossLevel));
+            // DrawableVertex<DDorman> go = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Goal));
+            // DrawableVertex<DDorman> t = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Test));
+            // DrawableVertex<DDorman> kf = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.KeyFinal));
+            // DrawableVertex<DDorman> h1 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Hook));
+            // c.AddNextNeighbour(h0);
+            // c.AddNextNeighbour(t);
+            // c.AddNextNeighbour(ga);
+            // ga.AddNextNeighbour(lf);
+            // lf.AddNextNeighbour(bl);
+            // bl.AddNextNeighbour(go);
+            // t.AddNextNeighbour(kf);
+            // kf.AddNextNeighbour(lf);
+            // t.AddNextNeighbour(h1);
+            // right01.AddVertex(c);
+            // right01.AddVertex(h0);
+            // right01.AddVertex(ga);
+            // right01.AddVertex(lf);
+            // right01.AddVertex(bl);
+            // right01.AddVertex(go);
+            // right01.AddVertex(t);
+            // right01.AddVertex(kf);
+            // right01.AddVertex(h1);
+            // right01.Start = c;
+            // right01.End = go;
+            // GrammarRule<DDorman> rule = new GrammarRule<DDorman>(left01, right01);
+            // rules.Add(rule);
+            // //
             //rule 01
             // CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.Chain, DDorman.DDormanType.Gate},
             //     new List<DDorman.DDormanType>()
@@ -213,13 +242,13 @@ namespace Demo.GraphGrammar
             //         {DDorman.DDormanType.Fork, DDorman.DDormanType.TestSecret, DDorman.DDormanType.KeyMultiPiece});
             //
             //rule 12
-            CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.Fork},
-                new List<DDorman.DDormanType>()
-                    {DDorman.DDormanType.Key, DDorman.DDormanType.Key});
-            
-            CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.LockMulti},
-                new List<DDorman.DDormanType>()
-                    {DDorman.DDormanType.Gate, DDorman.DDormanType.Gate});
+            // CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.Fork},
+            //     new List<DDorman.DDormanType>()
+            //         {DDorman.DDormanType.Key, DDorman.DDormanType.Key});
+            //
+            // CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.LockMulti},
+            //     new List<DDorman.DDormanType>()
+            //         {DDorman.DDormanType.Gate, DDorman.DDormanType.Gate});
             //
             // // //hook resolve 01
             // // CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.Hook}, new List<DDorman.DDormanType>()
@@ -235,10 +264,30 @@ namespace Demo.GraphGrammar
             // // CreateLinearRule(new List<DDorman.DDormanType>() {DDorman.DDormanType.Hook},
             // //     new List<DDorman.DDormanType>() {DDorman.DDormanType.TestSecret, DDorman.DDormanType.ItemBonus});
             //
-            
+
             //rule non-linear 01
-            Graph<DDorman> left = CreateLinearGraph(new List<DDorman.DDormanType>()
-                {DDorman.DDormanType.Chain, DDorman.DDormanType.Gate});
+            // Graph<DDorman> left = CreateLinearGraph(new List<DDorman.DDormanType>()
+            //     {DDorman.DDormanType.Chain, DDorman.DDormanType.Gate , DDorman.DDormanType.Entrance});
+            var left =new Graph<DDorman>();
+            var c = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            var c1 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            var c2 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            var g = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Gate));
+            var e = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Entrance));
+            c.AddNextNeighbour(c1);
+            c.AddNextNeighbour(c2);
+            c.AddNextNeighbour(g);
+            g.AddNextNeighbour(e);
+            c1.AddNextNeighbour(e);
+            c2.AddNextNeighbour(e);
+            left.AddVertex(c);
+            left.AddVertex(c1);
+            left.AddVertex(c2);
+            left.AddVertex(g);
+            left.AddVertex(e);
+            left.Start = c;
+            left.End = e;
+
             Graph<DDorman> right = new Graph<DDorman>();
             DrawableVertex<DDorman> f = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Fork));
             DrawableVertex<DDorman> km0 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.KeyMultiPiece));
@@ -260,7 +309,7 @@ namespace Demo.GraphGrammar
             right.End = lm;
             GrammarRule<DDorman> rule01 = new GrammarRule<DDorman>(left, right);
             rules.Add(rule01);
-            
+
             //
             // //rule non-linear 02
             // Graph<DDorman> left02 = CreateLinearGraph(new List<DDorman.DDormanType>()

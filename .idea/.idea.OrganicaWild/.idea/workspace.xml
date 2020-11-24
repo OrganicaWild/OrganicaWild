@@ -30,16 +30,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add editor">
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="safe point">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/MutableTuple.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/MutableTuple.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarDemo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarDemo.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/GraphGrammar1Editor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/GraphGrammar1Editor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/GraphGrammar1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/GraphGrammar1.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +58,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/MyIndividual.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/MyAlgorithmRunner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/StandardIndividual2.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/StandardFitnessFunction2.cs" />
@@ -108,9 +104,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/GraphGrammar1Editor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DrawableVertex.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/MutableTuple.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" />
       </list>
     </option>
@@ -178,7 +175,7 @@
       <workItem from="1605974434193" duration="6408000" />
       <workItem from="1606039960866" duration="22808000" />
       <workItem from="1606111691779" duration="26910000" />
-      <workItem from="1606205657648" duration="979000" />
+      <workItem from="1606205657648" duration="6992000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -229,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606129698878</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="safe point">
+      <created>1606208187891</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1606208187891</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,7 +262,8 @@
     <MESSAGE value="generify Vertex and Graph" />
     <MESSAGE value="visualize graphs" />
     <MESSAGE value="add editor" />
-    <option name="LAST_COMMIT_MESSAGE" value="add editor" />
+    <MESSAGE value="safe point" />
+    <option name="LAST_COMMIT_MESSAGE" value="safe point" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606126628057">
@@ -333,10 +338,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="2022" height="88" key="GridCell.Tab.3.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606158268373" />
-    <state x="1222" y="389" key="RiderGenerateDialog" timestamp="1606127005517">
+    <state x="1222" y="389" key="RiderGenerateDialog" timestamp="1606215380870">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1222" y="389" key="RiderGenerateDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1606127005517" />
+    <state x="1222" y="389" key="RiderGenerateDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1606215380870" />
     <state x="2122" y="207" width="998" height="981" key="SettingsEditor" timestamp="1605864771884">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -349,10 +354,10 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1118" y="436" key="Vcs.Push.Dialog.v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606053824570" />
-    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606150289487">
+    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606213350889">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606150289487" />
+    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606213350889" />
     <state x="2204" y="508" key="save.file.as.template.dialog" timestamp="1604239921165">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>

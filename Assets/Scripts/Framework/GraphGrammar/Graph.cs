@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using Framework.Util;
+using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
 
 
@@ -63,7 +65,7 @@ namespace Framework.GraphGrammar
                 if (!v.Discovered)
                 {
                     v.Discovered = true;
-                    foreach (Vertex<TType> u in  v.ForwardNeighbours)
+                    foreach (Vertex<TType> u in v.ForwardNeighbours)
                     {
                         s.Push(u);
                     }
@@ -80,12 +82,68 @@ namespace Framework.GraphGrammar
 
         public bool Contains(Graph<TType> graph)
         {
-            IList<Vertex<TType>> thisDfs = Dfs();
-            IList<Vertex<TType>> otherDfs = graph.Dfs();
+            List<MutableTuple<Vertex<TType>>> containedAt = ContainedAt(graph);
+            return containedAt.Count > 0;
+        }
 
-            return Enumerable
-                .Range(0, thisDfs.Count - otherDfs.Count + 1)
-                .Any(n => thisDfs.Skip(n).Take(otherDfs.Count).SequenceEqual(otherDfs));
+        public List<MutableTuple<Vertex<TType>>> ContainedAt(Graph<TType> graph)
+        {
+            var potentialPositions
+                = Vertices.Where(x => x.Equals(graph.Start))
+                    .Select(x => new MutableTuple<Vertex<TType>>(x, null)).ToList();
+
+            foreach (MutableTuple<Vertex<TType>> potentialPosition in potentialPositions.ToArray())
+            {
+                var pairs = new List<Tuple<Vertex<TType>, Vertex<TType>>>()
+                    {new Tuple<Vertex<TType>, Vertex<TType>>(graph.Start, potentialPosition.Item1)};
+
+                while (pairs.Any())
+                {
+                    var currentPair = pairs[0];
+                    pairs.Remove(currentPair);
+                    Vertex<TType> subGraphNode = currentPair.Item1;
+                    var graphNode = currentPair.Item2;
+
+                    if (graphNode.Equals(graph.End))
+                    {
+                        potentialPosition.Item2 = graphNode;
+                    }
+
+                    var allContainedNeighbours =
+                        subGraphNode.ForwardNeighbours.Where(subGraphNeighbour =>
+                            graphNode.ForwardNeighbours.Contains(subGraphNeighbour));
+
+                    var hasAllNeighbours = allContainedNeighbours.Count() ==
+                                           subGraphNode.ForwardNeighbours.Count;
+
+                    if (hasAllNeighbours)
+                    {
+                        var newPairs = subGraphNode.ForwardNeighbours.Select(x =>
+                            new Tuple<Vertex<TType>, Vertex<TType>>(x,
+                                graphNode.ForwardNeighbours.First(y => y.Equals(x))));
+                        pairs.AddRange(newPairs);
+                    }
+                    else
+                    {
+                        potentialPositions.Remove(potentialPosition);
+                        break;
+                    }
+                }
+            }
+            
+
+            return potentialPositions;
+            // foreach (Vertex<TType> vertex in Vertices)
+            // {
+            //     vertex.Discovered = false;
+            // }
+            //
+            // IList<Vertex<TType>> thisDfs = Dfs();
+            // IList<Vertex<TType>> otherDfs = graph.Dfs();
+            //
+            // return Enumerable
+            //     .Range(0, thisDfs.Count - otherDfs.Count + 1)
+            //     .Any(n => thisDfs.Skip(n).Take(otherDfs.Count).SequenceEqual(otherDfs));
         }
 
         public override string ToString()

@@ -5,11 +5,11 @@ using System.Linq;
 namespace Framework.GraphGrammar
 {
     [Serializable]
-    public class Vertex<TType>
+    public class Vertex<TType> : IEquatable<Vertex<TType>>
     {
         public IList<Vertex<TType>> ForwardNeighbours { get; }
         public IList<Vertex<TType>> IncomingNeighbours { get; }
-        public TType Type { get; set; }
+        public TType Type { get; }
         public bool Discovered { get; set; }
 
         public Vertex(TType type)
@@ -56,9 +56,9 @@ namespace Framework.GraphGrammar
             }
         }
 
-        protected bool Equals(Vertex<TType> vertex)
+        public bool Equals(Vertex<TType> vertex)
         {
-            return Type.Equals(vertex.Type);
+            return vertex != null && Type.Equals(vertex.Type);
         }
 
         public override bool Equals(object obj)
@@ -79,6 +79,11 @@ namespace Framework.GraphGrammar
             }
 
             return Equals((Vertex<TType>) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return EqualityComparer<TType>.Default.GetHashCode(Type);
         }
 
         public override string ToString()
