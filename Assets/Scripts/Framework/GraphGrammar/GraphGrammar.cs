@@ -31,7 +31,7 @@ namespace Framework.GraphGrammar
                 bool applied = ApplyRule(chosenRule);
                 Debug.Log(chosenRule);
             }
-            
+
             Debug.Log($"{string.Join(";", mother.Vertices)} Count: {mother.Vertices.Count}");
         }
 
@@ -45,66 +45,77 @@ namespace Framework.GraphGrammar
                 workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
             }
         }
-
-        private bool MotherHasNonTerminal()
-        {
-            IList<Vertex<TType>> traversal = mother.Dfs();
-            bool hasNonTerminal = traversal.Any(vertex => !vertex.Type.IsTerminal());
-            return hasNonTerminal;
-        }
-
+        
         private bool ApplyRule(GrammarRule<TType> rule)
         {
-            IList<Vertex<TType>> thisDfs = mother.Dfs();
-            IList<Vertex<TType>> otherDfs = rule.LeftHandSide.Dfs();
+            List<Graph<TType>> subGraphs = mother.ContainedSubGraph(rule.LeftHandSide);
 
-            //find all possible startPositions
-            int[] starts = Enumerable
-                .Range(0, thisDfs.Count - otherDfs.Count + 1)
-                .Where(n => thisDfs.Skip(n).Take(otherDfs.Count).SequenceEqual(otherDfs)).ToArray();
-
-            if (!starts.Any())
-            {
-                return false;
-            }
-
-            //chose start position
-            int chosenIndex = Random.Range(0, starts.Count());
-            Vertex<TType> chosenStart = thisDfs[starts[chosenIndex]];
-            Vertex<TType> chosenEnd = thisDfs[starts[chosenIndex] + otherDfs.Count - 1];
-
-            //chosenStart.AddNextNeighbour(rule.RightHandSide.start);
-            Graph<TType> rightHandSideCopy = rule.RightHandSide.Clone();
+            Graph<TType> rightHandSide = rule.RightHandSide.Clone();
             
-            chosenStart.TransferIncomingEdges(rightHandSideCopy.Start);
-            chosenEnd.TransferOutgoingEdges(rightHandSideCopy.End);
-
-            //if we replace start, we gotta switch the start reference
-            if (chosenStart == mother.Start)
+            if (subGraphs.Any())
             {
-                mother.Start = rightHandSideCopy.Start;
+                //chose random subgraph to replace
+                Graph<TType> subGraph = subGraphs[Random.Range(0, subGraphs.Count)];
+                
+                foreach (Vertex<TType> vertex in rightHandSide.Vertices)
+                {
+                    mother.AddVertex(vertex);
+                }
+
+                foreach (Vertex<TType> subGraphVertex in subGraph.Vertices)
+                {
+                    if (subGraphVertex != subGraph.End || subGraph.Start == subGraph.End)
+                    {
+                        //add edges to start
+                        IEnumerable<Vertex<TType>> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subGraph.Vertices);
+                        IEnumerable<Vertex<TType>> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subGraph.Vertices);
+                        foreach (Vertex<TType> danglingOutGoingEdge in danglingOutGoingEdges)
+                        {
+                            rightHandSide.Start.AddNextNeighbour(danglingOutGoingEdge);
+                        }
+                        foreach (Vertex<TType> danglingIncomingEdge in danglingIncomingEdges)
+                        {
+                            rightHandSide.Start.AddPreviousNeighbour(danglingIncomingEdge);
+                        }
+                    }
+                    else
+                    {
+                        //add edges to end
+                        IEnumerable<Vertex<TType>> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subGraph.Vertices);
+                        IEnumerable<Vertex<TType>> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subGraph.Vertices);
+                        foreach (Vertex<TType> danglingOutGoingEdge in danglingOutGoingEdges)
+                        {
+                            rightHandSide.End.AddNextNeighbour(danglingOutGoingEdge);
+                        }
+                        foreach (Vertex<TType> danglingIncomingEdge in danglingIncomingEdges)
+                        {
+                            rightHandSide.End.AddPreviousNeighbour(danglingIncomingEdge);
+                        }
+                        
+                    }
+                }
+
+                //change start if we replace start
+                if (subGraph.Start == mother.Start)
+                {
+                    mother.Start = rightHandSide.Start;
+                }
+
+                //change end if we replace end
+                if (subGraph.End == mother.End)
+                {
+                    mother.End = rightHandSide.End;
+                }
+
+                foreach (Vertex<TType> subGraphVertex in subGraph.Vertices)
+                {
+                    mother.RemoveVertex(subGraphVertex);
+                }
+
+                return true;
             }
-
-            //if we replace end, we gotta switch the end reference
-            if (chosenEnd == mother.End)
-            {
-                mother.End = rightHandSideCopy.End;
-            }
-
-            foreach (Vertex<TType> v in rule.LeftHandSide.Vertices)
-            {
-                mother.RemoveVertex(v);
-            }
-
-            foreach (Vertex<TType> v in rightHandSideCopy.Vertices)
-            {
-                mother.AddVertex(v);
-            }
-
-            mother.RemoveVertex(chosenStart);
-            mother.RemoveVertex(chosenEnd);
-
-            return true;
+            
+            return false;
         }
     }
 }

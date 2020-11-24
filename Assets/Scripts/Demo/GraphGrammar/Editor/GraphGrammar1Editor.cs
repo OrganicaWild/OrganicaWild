@@ -14,16 +14,16 @@ namespace Demo.GraphGrammar
             {
                 grammar.MakeGrammar();
             }
-            
+
             if (GUILayout.Button("One Rule"))
             {
                 grammar.RunOneRule();
             }
-            
+
             if (GUILayout.Button("Run Until Termination"))
             {
                 grammar.MakeGrammar();
-                grammar.grammar.ApplyUntilNoNonTerminal();
+                grammar.ApplyUntilFinished();
             }
         }
     }
