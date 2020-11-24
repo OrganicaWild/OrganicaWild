@@ -24,20 +24,19 @@ namespace Framework.GraphGrammar
 
         public void ApplyOneRule()
         {
-            var workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
+            GrammarRule<TType>[] workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
             if (workingRules.Any())
             {
                 GrammarRule<TType> chosenRule = workingRules[Random.Range(0, workingRules.Length)];
                 bool applied = ApplyRule(chosenRule);
-                Debug.Log(applied);
+                Debug.Log(chosenRule);
             }
+            
+            Debug.Log($"{string.Join(";", mother.Vertices)} Count: {mother.Vertices.Count}");
         }
 
         public void ApplyUntilNoNonTerminal()
         {
-            // ApplyRule(rules[0]);
-            // ApplyRule(rules[1]);
-            // ApplyRule(rules[14]);
             GrammarRule<TType>[] workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
             while (workingRules.Any())
             {
@@ -54,7 +53,7 @@ namespace Framework.GraphGrammar
             return hasNonTerminal;
         }
 
-        public bool ApplyRule(GrammarRule<TType> rule)
+        private bool ApplyRule(GrammarRule<TType> rule)
         {
             IList<Vertex<TType>> thisDfs = mother.Dfs();
             IList<Vertex<TType>> otherDfs = rule.LeftHandSide.Dfs();
@@ -76,16 +75,9 @@ namespace Framework.GraphGrammar
 
             //chosenStart.AddNextNeighbour(rule.RightHandSide.start);
             Graph<TType> rightHandSideCopy = rule.RightHandSide.Clone();
-
+            
             chosenStart.TransferIncomingEdges(rightHandSideCopy.Start);
             chosenEnd.TransferOutgoingEdges(rightHandSideCopy.End);
-
-            // //remove the rest of edges on each of these
-            // if (chosenEnd != chosenStart)
-            // {
-            //     chosenEnd.RemoveIncomingEdges();
-            //     chosenStart.RemoveOutgoingEdges();
-            // }
 
             //if we replace start, we gotta switch the start reference
             if (chosenStart == mother.Start)
@@ -99,7 +91,12 @@ namespace Framework.GraphGrammar
                 mother.End = rightHandSideCopy.End;
             }
 
-            foreach (Vertex<TType> v in rightHandSideCopy.Dfs())
+            foreach (Vertex<TType> v in rule.LeftHandSide.Vertices)
+            {
+                mother.RemoveVertex(v);
+            }
+
+            foreach (Vertex<TType> v in rightHandSideCopy.Vertices)
             {
                 mother.AddVertex(v);
             }

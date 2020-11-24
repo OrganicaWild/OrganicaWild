@@ -11,14 +11,13 @@ namespace Framework.GraphGrammar
     [Serializable]
     public class Graph<TType> where TType : ITerminality
     {
-        
-        private IList<Vertex<TType>> vertices;
+        public IList<Vertex<TType>> Vertices { get; }
         public Vertex<TType> Start { get; set; }
         public Vertex<TType> End { get; set; }
 
         public Graph()
         {
-            vertices = new List<Vertex<TType>>();
+            Vertices = new List<Vertex<TType>>();
         }
 
         public Graph<TType> Clone()
@@ -35,20 +34,20 @@ namespace Framework.GraphGrammar
 
         public void AddVertex(Vertex<TType> vertex)
         {
-            vertices.Add(vertex);
+            Vertices.Add(vertex);
         }
 
         public Vertex<TType> AddVertex(TType type)
         {
             Vertex<TType> vertex = new Vertex<TType>(type);
-            vertices.Add(vertex);
+            Vertices.Add(vertex);
             return vertex;
         }
 
         public void RemoveVertex(Vertex<TType> vertex)
         {
             vertex.RemoveFromAllNeighbours();
-            vertices.Remove(vertex);
+            Vertices.Remove(vertex);
         }
 
         public IList<Vertex<TType>> Dfs()
@@ -64,14 +63,14 @@ namespace Framework.GraphGrammar
                 if (!v.Discovered)
                 {
                     v.Discovered = true;
-                    foreach (Vertex<TType> u in v.ForwardNeighbours)
+                    foreach (Vertex<TType> u in  v.ForwardNeighbours)
                     {
                         s.Push(u);
                     }
                 }
             }
-            
-            foreach (Vertex<TType> vertex in vertices)
+
+            foreach (Vertex<TType> vertex in Vertices)
             {
                 vertex.Discovered = false;
             }
@@ -89,6 +88,9 @@ namespace Framework.GraphGrammar
                 .Any(n => thisDfs.Skip(n).Take(otherDfs.Count).SequenceEqual(otherDfs));
         }
 
-       
+        public override string ToString()
+        {
+            return $"({string.Join(", ", Vertices)})";
+        }
     }
 }

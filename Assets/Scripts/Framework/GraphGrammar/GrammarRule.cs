@@ -15,5 +15,10 @@ namespace Framework.GraphGrammar
             LeftHandSide = leftHandSide;
             RightHandSide = rightHandSide;
         }
+
+        public override string ToString()
+        {
+            return $"{LeftHandSide} -> {RightHandSide}";
+        }
     }
 }

@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Demo.GraphGrammar
 {
-    [CustomEditor(typeof(GraphGrammar1))]
+    [CustomEditor(typeof(DormanGrammar))]
     public class GraphGrammar1Editor : Editor
     {
         public override void OnInspectorGUI()
         {
-            GraphGrammar1 grammar = (GraphGrammar1) target;
+            DormanGrammar grammar = (DormanGrammar) target;
 
             if (GUILayout.Button("Reset Graph"))
             {
