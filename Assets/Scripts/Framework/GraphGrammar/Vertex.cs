@@ -83,7 +83,7 @@ namespace Framework.GraphGrammar
 
         public override int GetHashCode()
         {
-            return EqualityComparer<TType>.Default.GetHashCode(Type);
+            return base.GetHashCode();
         }
 
         public override string ToString()

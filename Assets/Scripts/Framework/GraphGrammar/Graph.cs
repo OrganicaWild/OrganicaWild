@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Framework.Util;
+using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
 
@@ -13,13 +14,13 @@ namespace Framework.GraphGrammar
     [Serializable]
     public class Graph<TType> where TType : ITerminality
     {
-        public IList<Vertex<TType>> Vertices { get; }
+        public ISet<Vertex<TType>> Vertices { get; set; }
         public Vertex<TType> Start { get; set; }
         public Vertex<TType> End { get; set; }
 
         public Graph()
         {
-            Vertices = new List<Vertex<TType>>();
+            Vertices = new HashSet<Vertex<TType>>();
         }
 
         public Graph<TType> Clone()
@@ -82,57 +83,94 @@ namespace Framework.GraphGrammar
 
         public bool Contains(Graph<TType> graph)
         {
-            List<MutableTuple<Vertex<TType>>> containedAt = ContainedAt(graph);
+            List<Graph<TType>> containedAt = ContainedSubGraph(graph);
             return containedAt.Count > 0;
         }
 
-        public List<MutableTuple<Vertex<TType>>> ContainedAt(Graph<TType> graph)
+        public List<Graph<TType>> ContainedSubGraph(Graph<TType> graph)
         {
             var potentialPositions
                 = Vertices.Where(x => x.Equals(graph.Start))
                     .Select(x => new MutableTuple<Vertex<TType>>(x, null)).ToList();
+            var potentialSubGraphs = new List<Graph<TType>>();
 
             foreach (MutableTuple<Vertex<TType>> potentialPosition in potentialPositions.ToArray())
             {
+
+                var subGraph = new Graph<TType>();
+                subGraph.Start = potentialPosition.Item1;
+                potentialSubGraphs.Add(subGraph);
                 var pairs = new List<Tuple<Vertex<TType>, Vertex<TType>>>()
                     {new Tuple<Vertex<TType>, Vertex<TType>>(graph.Start, potentialPosition.Item1)};
 
                 while (pairs.Any())
                 {
                     var currentPair = pairs[0];
+                    Debug.Log($"currentPair: {currentPair.Item1} {currentPair.Item2}");
                     pairs.Remove(currentPair);
                     Vertex<TType> subGraphNode = currentPair.Item1;
                     var graphNode = currentPair.Item2;
+                    
+                    subGraph.AddVertex(graphNode);
 
                     if (graphNode.Equals(graph.End))
                     {
                         potentialPosition.Item2 = graphNode;
+                        subGraph.End = graphNode;
                     }
 
-                    var allContainedNeighbours =
-                        subGraphNode.ForwardNeighbours.Where(subGraphNeighbour =>
-                            graphNode.ForwardNeighbours.Contains(subGraphNeighbour));
+                    List<Vertex<TType>> allContainedNeighbours = new List<Vertex<TType>>();
+                    List<Vertex<TType>> graphNeighbourCopy = graphNode.ForwardNeighbours
+                        .OrderBy(vertex => vertex.ForwardNeighbours.Count).ToList();
 
+                    foreach (Vertex<TType> subGraphNeighbour in subGraphNode.ForwardNeighbours.OrderBy(vertex =>
+                        vertex.ForwardNeighbours.Count))
+                    {
+                        if (graphNeighbourCopy.Contains(subGraphNeighbour))
+                        {
+                            var neighbour = graphNeighbourCopy.Find(v => v.Equals(subGraphNeighbour));
+                            graphNeighbourCopy.Remove(neighbour);
+                            allContainedNeighbours.Add(neighbour);
+                        }
+                    }
+
+                    Debug.Log($"At: {graphNode} has neighbours {string.Join("; ", allContainedNeighbours)}");
                     var hasAllNeighbours = allContainedNeighbours.Count() ==
                                            subGraphNode.ForwardNeighbours.Count;
-
+                    Debug.Log($"{hasAllNeighbours}");
+                    
                     if (hasAllNeighbours)
                     {
-                        var newPairs = subGraphNode.ForwardNeighbours.Select(x =>
-                            new Tuple<Vertex<TType>, Vertex<TType>>(x,
-                                graphNode.ForwardNeighbours.First(y => y.Equals(x))));
+                        var newPairs = new List<Tuple<Vertex<TType>, Vertex<TType>>>();
+                        List<Vertex<TType>> graphNeighbourCopy1 = graphNode.ForwardNeighbours
+                            .OrderBy(vertex => vertex.ForwardNeighbours.Count).ToList();
+
+                        foreach (Vertex<TType> subGraphNeighbour in subGraphNode.ForwardNeighbours.OrderBy(vertex =>
+                            vertex.ForwardNeighbours.Count))
+                        {
+                            if (graphNeighbourCopy1.Contains(subGraphNeighbour))
+                            {
+                                var neighbour = graphNeighbourCopy1.Find(v => v.Equals(subGraphNeighbour));
+                                graphNeighbourCopy1.Remove(neighbour);
+                                newPairs.Add(new Tuple<Vertex<TType>, Vertex<TType>>(subGraphNeighbour, neighbour));
+                            }
+                        }
+
                         pairs.AddRange(newPairs);
                     }
                     else
                     {
+                        Debug.Log($"but should have neighbours {string.Join(";", subGraphNode.ForwardNeighbours)}");
                         potentialPositions.Remove(potentialPosition);
+                        potentialSubGraphs.Remove(subGraph);
                         break;
                     }
                 }
             }
             
 
-            return potentialPositions;
+            return potentialSubGraphs;
+            // return potentialPositions;
             // foreach (Vertex<TType> vertex in Vertices)
             // {
             //     vertex.Discovered = false;

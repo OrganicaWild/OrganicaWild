@@ -26,8 +26,20 @@ namespace Demo.GraphGrammar
         private void Awake()
         {
             MakeGrammar();
-            var indexes = mother.ContainedAt(rules[0].LeftHandSide);
-            Debug.Log($"{string.Join(", ", indexes)} ");
+            var indexes = mother.ContainedSubGraph(rules[0].LeftHandSide);
+
+            foreach (Graph<DDorman> index in indexes)
+            {
+                Debug.Log($"Subgraph {string.Join("; ", index.Vertices)}, End: {index.End}");
+                // positions =
+                //     (index.Start as DrawableVertex<DDorman>).Paint(new Vector3(0, 0, 0),
+                //         new List<DrawableVertex<DDorman>.ListElement>(),
+                //         dictionary);
+            }
+            
+            //show in unity
+         
+            //Debug.Log($"{string.Join(", ", indexes)} ");
 
             // grammar.ApplyUntilNoNonTerminal();
         }
@@ -47,20 +59,20 @@ namespace Demo.GraphGrammar
             var c3 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
             var c1 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
             var c2 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
-            var g = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Gate));
+            //var g = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Gate));
             var e = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Entrance));
             c.AddNextNeighbour(c1);
             c.AddNextNeighbour(c2);
-            c.AddNextNeighbour(c3);
-            c.AddNextNeighbour(g);
-            g.AddNextNeighbour(e);
+            c2.AddNextNeighbour(c3);
+            // c.AddNextNeighbour(g);
+            // g.AddNextNeighbour(e);
             c1.AddNextNeighbour(e);
             c2.AddNextNeighbour(e);
             left.AddVertex(c);
             left.AddVertex(c1);
             left.AddVertex(c2);
             left.AddVertex(c3);
-            left.AddVertex(g);
+            //left.AddVertex(g);
             left.AddVertex(e);
             left.Start = c;
             left.End = e;
@@ -270,23 +282,27 @@ namespace Demo.GraphGrammar
             //     {DDorman.DDormanType.Chain, DDorman.DDormanType.Gate , DDorman.DDormanType.Entrance});
             var left =new Graph<DDorman>();
             var c = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
+            var c3 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
             var c1 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
             var c2 = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Chain));
-            var g = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Gate));
+            //var g = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Gate));
             var e = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Entrance));
             c.AddNextNeighbour(c1);
             c.AddNextNeighbour(c2);
-            c.AddNextNeighbour(g);
-            g.AddNextNeighbour(e);
+            c2.AddNextNeighbour(c3);
+            // c.AddNextNeighbour(g);
+            // g.AddNextNeighbour(e);
             c1.AddNextNeighbour(e);
             c2.AddNextNeighbour(e);
             left.AddVertex(c);
             left.AddVertex(c1);
             left.AddVertex(c2);
-            left.AddVertex(g);
+            left.AddVertex(c3);
+            //left.AddVertex(g);
             left.AddVertex(e);
             left.Start = c;
             left.End = e;
+
 
             Graph<DDorman> right = new Graph<DDorman>();
             DrawableVertex<DDorman> f = new DrawableVertex<DDorman>(new DDorman(DDorman.DDormanType.Fork));
