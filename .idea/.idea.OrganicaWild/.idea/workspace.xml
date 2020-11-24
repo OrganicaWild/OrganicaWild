@@ -30,12 +30,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="change containedAt to ContainedSubGraph">
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="rework ApplyRule to use the new ContainedSubGraph">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/GraphGrammar1Editor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/GraphGrammar1Editor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,10 +100,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/MutableTuple.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/GraphGrammar1Editor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" />
       </list>
     </option>
   </component>
@@ -173,7 +170,7 @@
       <workItem from="1605974434193" duration="6408000" />
       <workItem from="1606039960866" duration="22808000" />
       <workItem from="1606111691779" duration="26910000" />
-      <workItem from="1606205657648" duration="17403000" />
+      <workItem from="1606205657648" duration="20495000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -245,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606225551265</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="rework ApplyRule to use the new ContainedSubGraph">
+      <created>1606229143643</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1606229143643</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,7 +281,8 @@
     <MESSAGE value="safe point" />
     <MESSAGE value="reimplemented contains and add containedAt" />
     <MESSAGE value="change containedAt to ContainedSubGraph" />
-    <option name="LAST_COMMIT_MESSAGE" value="change containedAt to ContainedSubGraph" />
+    <MESSAGE value="rework ApplyRule to use the new ContainedSubGraph" />
+    <option name="LAST_COMMIT_MESSAGE" value="rework ApplyRule to use the new ContainedSubGraph" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606126628057">
@@ -380,24 +385,5 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1605864557049" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>
-          <line>27</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="27">
-            <startOffsets>
-              <option value="756" />
-            </startOffsets>
-            <endOffsets>
-              <option value="779" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
