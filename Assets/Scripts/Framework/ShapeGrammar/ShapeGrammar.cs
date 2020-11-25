@@ -57,11 +57,14 @@ namespace Framework.ShapeGrammar
 
             Dictionary<SpaceNode, SpaceNode> parents =
                 new Dictionary<SpaceNode, SpaceNode>(new IdentityEqualityComparer<SpaceNode>());
+            
+            Dictionary<SpaceNode, GameObject> parentsGameObject =
+                new Dictionary<SpaceNode, GameObject>(new IdentityEqualityComparer<SpaceNode>());
 
             positions.Add(root, -root.GetEntryHook());
             rotations.Add(root, Quaternion.identity);
-
-            GameObject parent = null;
+            parentsGameObject.Add(root, null);
+         
 
             while (q.Any())
             {
@@ -72,9 +75,9 @@ namespace Framework.ShapeGrammar
                 }
 
                 //draw actual tree
-                Vector3 localPosition = positions[v];
 
-
+                var parent = parentsGameObject[v];
+                GameObject worldPiece;
                 if (parent != null)
                 {
                     var a = v.GetEntryHook();
@@ -97,24 +100,24 @@ namespace Framework.ShapeGrammar
                     var rotatedA = localRotation * v.GetEntryHook();
                     Debug.DrawRay(Vector3.zero, rotatedA, Color.green, 1000);
 
-                    GameObject worldPiece =
+                    worldPiece =
                         Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity, parent.transform);
                     worldPiece.transform.localRotation = localRotation;
                     v.RotateHooks(localRotation);
 
                     worldPiece.transform.localPosition = v.GetHook() - v.GetEntryHook();
 
-                    parent = worldPiece;
+                 
                 }
                 else
                 {
-                    GameObject worldPiece = Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity);
+                    worldPiece = Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity);
                     // worldPiece.transform.localRotation = localRotation;
                     // v.RotateHooks(localRotation);
 
                     worldPiece.transform.localPosition = v.GetEntryHook() - v.GetEntryHook();
 
-                    parent = worldPiece;
+                   
                 }
 
                 visited.Add(v);
@@ -123,6 +126,7 @@ namespace Framework.ShapeGrammar
                 {
                     positions.Add(node, node.GetHook());
                     parents.Add(node, v);
+                    parentsGameObject.Add(node, worldPiece);
                     //rotations.Add(node, localRotation);
                     q.Enqueue(node);
                 }

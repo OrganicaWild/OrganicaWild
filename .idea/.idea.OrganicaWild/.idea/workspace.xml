@@ -30,22 +30,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add correct rules for dorman example">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableEdges.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add sphape grammar bas">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarDemo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarDemo.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +174,7 @@
       <workItem from="1606039960866" duration="22808000" />
       <workItem from="1606111691779" duration="26910000" />
       <workItem from="1606205657648" duration="27838000" />
-      <workItem from="1606287177617" duration="26203000" />
+      <workItem from="1606287177617" duration="28173000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -273,7 +260,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606243029793</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add sphape grammar bas">
+      <created>1606319256946</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1606319256946</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,7 +301,8 @@
     <MESSAGE value="change containedAt to ContainedSubGraph" />
     <MESSAGE value="rework ApplyRule to use the new ContainedSubGraph" />
     <MESSAGE value="add correct rules for dorman example" />
-    <option name="LAST_COMMIT_MESSAGE" value="add correct rules for dorman example" />
+    <MESSAGE value="add sphape grammar bas" />
+    <option name="LAST_COMMIT_MESSAGE" value="add sphape grammar bas" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606126628057">
