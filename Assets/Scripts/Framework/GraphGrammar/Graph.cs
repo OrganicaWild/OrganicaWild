@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using Demo.GraphGrammar;
 using Framework.Util;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -52,8 +53,6 @@ namespace Framework.GraphGrammar
             vertex.RemoveFromAllNeighbours();
             Vertices.Remove(vertex);
         }
-
-
 
         public bool Contains(Graph<TType> graph)
         {
@@ -140,6 +139,33 @@ namespace Framework.GraphGrammar
 
 
             return potentialSubGraphs;
+        }
+
+        public List<Vertex<TType>> Traverse()
+        {
+            List<Vertex<TType>> traversal = new List<Vertex<TType>>();
+            Queue<Vertex<TType>> q = new Queue<Vertex<TType>>();
+            HashSet<Vertex<TType>> prevEnqueued = new HashSet<Vertex<TType>>();
+            q.Enqueue(Start);
+            prevEnqueued.Add(Start);
+
+            while (q.Any())
+            {
+                Vertex<TType> v = q.Dequeue();
+
+                traversal.Add(v);
+
+                foreach (Vertex<TType> vForwardNeighbour in v.ForwardNeighbours)
+                {
+                    if (!prevEnqueued.Contains(vForwardNeighbour))
+                    {
+                        prevEnqueued.Add(vForwardNeighbour);
+                        q.Enqueue(vForwardNeighbour);
+                    }
+                }
+            }
+
+            return traversal;
         }
 
         public override string ToString()

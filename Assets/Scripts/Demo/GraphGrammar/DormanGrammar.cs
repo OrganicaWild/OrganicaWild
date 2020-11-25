@@ -23,11 +23,11 @@ namespace Demo.GraphGrammar
         private readonly Dictionary<Vertex<DDorman>, Vector3> dictionary = new Dictionary<Vertex<DDorman>, Vector3>(
             new IdentityEqualityComparer<Vertex<DDorman>>());
 
-        private void Awake()
-        {
-            MakeGrammar();
-            ApplyUntilFinished();
-        }
+        // private void Awake()
+        // {
+        //     MakeGrammar();
+        //     ApplyUntilFinished();
+        // }
 
         public void MakeGrammar()
         {

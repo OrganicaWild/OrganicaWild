@@ -53,6 +53,13 @@
               <e p="ITerminality.cs" t="Include" />
               <e p="Vertex.cs" t="Include" />
             </e>
+            <e p="ShapeGrammar" t="Include">
+              <e p="ScriptableEdges.cs" t="Include" />
+              <e p="ShapeGrammar.cs" t="Include" />
+              <e p="ShapeGrammarRuler.cs" t="Include" />
+              <e p="SpaceNode.cs" t="Include" />
+              <e p="SpaceTree.cs" t="Include" />
+            </e>
             <e p="Util" t="Include">
               <e p="IdentityEqualityComparer.cs" t="Include" />
               <e p="MutableTuple.cs" t="Include" />

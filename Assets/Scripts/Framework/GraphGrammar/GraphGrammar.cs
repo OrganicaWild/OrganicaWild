@@ -17,6 +17,11 @@ namespace Framework.GraphGrammar
             this.mother = mother;
         }
 
+        public Graph<TType> GetLevel()
+        {
+            return mother.Clone();
+        }
+
         public int RuleCount()
         {
             return rules.Count;
