@@ -73,23 +73,7 @@ namespace Framework.ShapeGrammar
                 GameObject worldPiece;
                 if (parent != null)
                 {
-                    Vector3 a = v.GetEntryHook();
-                    Vector3 b = -v.GetHook();
-
-                    // Debug.DrawRay(Vector3.zero, a, Color.red, 1000);
-                    // Debug.DrawRay(Vector3.zero, b, Color.blue, 1000);
-                    // Debug.Log($"{b}");
-
-                    Vector3 cross = Vector3.Cross(a, b);
-
-                    float sign = Mathf.Sign(cross.y);
-
-                    float dot = Vector3.Dot(a, b);
-                    float newrotation = sign * Mathf.Acos(dot);
-                    Quaternion localRotation = Quaternion.Euler(0, newrotation * 180 / Mathf.PI, 0);
-
-                    Vector3 rotatedA = localRotation * v.GetEntryHook();
-                    // Debug.DrawRay(Vector3.zero, rotatedA, Color.green, 1000);
+                    Quaternion localRotation = v.GetLocalRotation();
 
                     worldPiece =
                         Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity, parent.transform);
@@ -112,5 +96,7 @@ namespace Framework.ShapeGrammar
                 }
             }
         }
+
+       
     }
 }
