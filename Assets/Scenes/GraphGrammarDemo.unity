@@ -326,7 +326,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe6ff05780043a4aa5d4a16f55df85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertexRepresentation: {fileID: 0}
+  types:
+  - ok
+  - Start
+  - Entrance
+  - Chain
+  - Gate
+  - BossMini
+  - ItemQuest
+  - TestItem
+  - ChainFinal
+  - Goal
+  - Hook
+  - LockFinal
+  - BossLevel
+  - Test
+  - KeyFinal
+  - ChainLinear
+  - ItemBonus
+  - TestSecret
+  - Key
+  - Lock
+  - ChainParallel
+  - Fork
+  - KeyMultiPiece
+  - Nothing
+  - LockMulti
 --- !u!114 &1856144567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rules:
-  - {fileID: 695548299330847231, guid: 9cd6791396a10eb4d966be3601c0e783, type: 3}
+  - {fileID: 956872417569925560, guid: c62cb059506d86a4b9ac74df7144ef2d, type: 3}
+  - {fileID: 2476232437125609059, guid: ae5d06f43b3b8754d93b160d9a3c40ce, type: 3}
 --- !u!4 &1856144568
 Transform:
   m_ObjectHideFlags: 0

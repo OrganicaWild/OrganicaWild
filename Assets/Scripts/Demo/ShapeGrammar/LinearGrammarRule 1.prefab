@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095b4bfa9d6664445b73625d26c9f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: TestItem
   connection: {fileID: 11400000, guid: ef9a11772925b1f44a40c58a24dc4f6a, type: 2}
 --- !u!1 &3666660741515631176
 GameObject:

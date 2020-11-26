@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using Demo.GraphGrammar;
 using Framework.Util;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -13,18 +12,18 @@ using Random = UnityEngine.Random;
 namespace Framework.GraphGrammar
 {
     [Serializable]
-    public class Graph<TType>
+    public class Graph
     {
-        public ISet<Vertex<TType>> Vertices { get; set; }
-        public Vertex<TType> Start { get; set; }
-        public Vertex<TType> End { get; set; }
+        public ISet<Vertex> Vertices { get; set; }
+        public Vertex Start { get; set; }
+        public Vertex End { get; set; }
 
         public Graph()
         {
-            Vertices = new HashSet<Vertex<TType>>();
+            Vertices = new HashSet<Vertex>();
         }
 
-        public Graph<TType> Clone()
+        public Graph Clone()
         {
             using (MemoryStream ms = new MemoryStream())
             {
@@ -32,55 +31,55 @@ namespace Framework.GraphGrammar
                 formatter.Serialize(ms, this);
                 ms.Position = 0;
 
-                return (Graph<TType>) formatter.Deserialize(ms);
+                return (Graph) formatter.Deserialize(ms);
             }
         }
 
-        public void AddVertex(Vertex<TType> vertex)
+        public void AddVertex(Vertex vertex)
         {
             Vertices.Add(vertex);
         }
 
-        public Vertex<TType> AddVertex(TType type)
+        public Vertex AddVertex(string type)
         {
-            Vertex<TType> vertex = new Vertex<TType>(type);
+            Vertex vertex = new Vertex(type);
             Vertices.Add(vertex);
             return vertex;
         }
 
-        public void RemoveVertex(Vertex<TType> vertex)
+        public void RemoveVertex(Vertex vertex)
         {
             vertex.RemoveFromAllNeighbours();
             Vertices.Remove(vertex);
         }
 
-        public bool Contains(Graph<TType> graph)
+        public bool Contains(Graph graph)
         {
-            List<Graph<TType>> containedAt = ContainedSubGraph(graph);
+            List<Graph> containedAt = ContainedSubGraph(graph);
             return containedAt.Count > 0;
         }
 
-        public List<Graph<TType>> ContainedSubGraph(Graph<TType> graph)
+        public List<Graph> ContainedSubGraph(Graph graph)
         {
-            List<MutableTuple<Vertex<TType>>> potentialPositions
+            List<MutableTuple<Vertex>> potentialPositions
                 = Vertices.Where(x => x.Equals(graph.Start))
-                    .Select(x => new MutableTuple<Vertex<TType>>(x, null)).ToList();
-            List<Graph<TType>> potentialSubGraphs = new List<Graph<TType>>();
+                    .Select(x => new MutableTuple<Vertex>(x, null)).ToList();
+            List<Graph> potentialSubGraphs = new List<Graph>();
 
-            foreach (MutableTuple<Vertex<TType>> potentialPosition in potentialPositions.ToArray())
+            foreach (MutableTuple<Vertex> potentialPosition in potentialPositions.ToArray())
             {
-                Graph<TType> subGraph = new Graph<TType> {Start = potentialPosition.Item1};
+                Graph subGraph = new Graph {Start = potentialPosition.Item1};
                 potentialSubGraphs.Add(subGraph);
-                List<Tuple<Vertex<TType>, Vertex<TType>>> pairs = new List<Tuple<Vertex<TType>, Vertex<TType>>>()
-                    {new Tuple<Vertex<TType>, Vertex<TType>>(graph.Start, potentialPosition.Item1)};
+                List<Tuple<Vertex, Vertex>> pairs = new List<Tuple<Vertex, Vertex>>()
+                    {new Tuple<Vertex, Vertex>(graph.Start, potentialPosition.Item1)};
 
                 while (pairs.Any())
                 {
-                    Tuple<Vertex<TType>, Vertex<TType>> currentPair = pairs[0];
+                    Tuple<Vertex, Vertex> currentPair = pairs[0];
 
                     pairs.Remove(currentPair);
-                    Vertex<TType> subGraphNode = currentPair.Item1;
-                    Vertex<TType> graphNode = currentPair.Item2;
+                    Vertex subGraphNode = currentPair.Item1;
+                    Vertex graphNode = currentPair.Item2;
 
                     subGraph.AddVertex(graphNode);
 
@@ -90,16 +89,16 @@ namespace Framework.GraphGrammar
                         subGraph.End = graphNode;
                     }
 
-                    List<Vertex<TType>> allContainedNeighbours = new List<Vertex<TType>>();
-                    List<Vertex<TType>> graphNeighbourCopy = graphNode.ForwardNeighbours
+                    List<Vertex> allContainedNeighbours = new List<Vertex>();
+                    List<Vertex> graphNeighbourCopy = graphNode.ForwardNeighbours
                         .OrderBy(vertex => vertex.ForwardNeighbours.Count).ToList();
 
-                    foreach (Vertex<TType> subGraphNeighbour in subGraphNode.ForwardNeighbours.OrderBy(vertex =>
+                    foreach (Vertex subGraphNeighbour in subGraphNode.ForwardNeighbours.OrderBy(vertex =>
                         vertex.ForwardNeighbours.Count))
                     {
                         if (graphNeighbourCopy.Contains(subGraphNeighbour))
                         {
-                            Vertex<TType> neighbour = graphNeighbourCopy.Find(v => v.Equals(subGraphNeighbour));
+                            Vertex neighbour = graphNeighbourCopy.Find(v => v.Equals(subGraphNeighbour));
                             graphNeighbourCopy.Remove(neighbour);
                             allContainedNeighbours.Add(neighbour);
                         }
@@ -110,19 +109,19 @@ namespace Framework.GraphGrammar
 
                     if (hasAllNeighbours)
                     {
-                        List<Tuple<Vertex<TType>, Vertex<TType>>> newPairs =
-                            new List<Tuple<Vertex<TType>, Vertex<TType>>>();
-                        List<Vertex<TType>> graphNeighbourCopy1 = graphNode.ForwardNeighbours
+                        List<Tuple<Vertex, Vertex>> newPairs =
+                            new List<Tuple<Vertex, Vertex>>();
+                        List<Vertex> graphNeighbourCopy1 = graphNode.ForwardNeighbours
                             .OrderBy(vertex => vertex.ForwardNeighbours.Count).ToList();
 
-                        foreach (Vertex<TType> subGraphNeighbour in subGraphNode.ForwardNeighbours.OrderBy(vertex =>
+                        foreach (Vertex subGraphNeighbour in subGraphNode.ForwardNeighbours.OrderBy(vertex =>
                             vertex.ForwardNeighbours.Count))
                         {
                             if (graphNeighbourCopy1.Contains(subGraphNeighbour))
                             {
-                                Vertex<TType> neighbour = graphNeighbourCopy1.Find(v => v.Equals(subGraphNeighbour));
+                                Vertex neighbour = graphNeighbourCopy1.Find(v => v.Equals(subGraphNeighbour));
                                 graphNeighbourCopy1.Remove(neighbour);
-                                newPairs.Add(new Tuple<Vertex<TType>, Vertex<TType>>(subGraphNeighbour, neighbour));
+                                newPairs.Add(new Tuple<Vertex, Vertex>(subGraphNeighbour, neighbour));
                             }
                         }
 
@@ -141,21 +140,21 @@ namespace Framework.GraphGrammar
             return potentialSubGraphs;
         }
 
-        public List<Vertex<TType>> Traverse()
+        public List<Vertex> Traverse()
         {
-            List<Vertex<TType>> traversal = new List<Vertex<TType>>();
-            Queue<Vertex<TType>> q = new Queue<Vertex<TType>>();
-            HashSet<Vertex<TType>> prevEnqueued = new HashSet<Vertex<TType>>();
+            List<Vertex> traversal = new List<Vertex>();
+            Queue<Vertex> q = new Queue<Vertex>();
+            HashSet<Vertex> prevEnqueued = new HashSet<Vertex>();
             q.Enqueue(Start);
             prevEnqueued.Add(Start);
 
             while (q.Any())
             {
-                Vertex<TType> v = q.Dequeue();
+                Vertex v = q.Dequeue();
 
                 traversal.Add(v);
 
-                foreach (Vertex<TType> vForwardNeighbour in v.ForwardNeighbours)
+                foreach (Vertex vForwardNeighbour in v.ForwardNeighbours)
                 {
                     if (!prevEnqueued.Contains(vForwardNeighbour))
                     {

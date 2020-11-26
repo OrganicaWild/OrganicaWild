@@ -6,18 +6,18 @@ using Random = UnityEngine.Random;
 
 namespace Framework.GraphGrammar
 {
-    public class GraphGrammar<TType>
+    public class GraphGrammar
     {
-        private readonly IList<GrammarRule<TType>> rules;
-        private readonly Graph<TType> mother;
+        private readonly IList<GrammarRule> rules;
+        private readonly Graph mother;
 
-        public GraphGrammar(IList<GrammarRule<TType>> rules, Graph<TType> mother)
+        public GraphGrammar(IList<GrammarRule> rules, Graph mother)
         {
             this.rules = rules;
             this.mother = mother;
         }
 
-        public Graph<TType> GetLevel()
+        public Graph GetLevel()
         {
             return mother.Clone();
         }
@@ -29,10 +29,10 @@ namespace Framework.GraphGrammar
 
         public void ApplyOneRule()
         {
-            GrammarRule<TType>[] workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
+            GrammarRule[] workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
             if (workingRules.Any())
             {
-                GrammarRule<TType> chosenRule = workingRules[Random.Range(0, workingRules.Length)];
+                GrammarRule chosenRule = workingRules[Random.Range(0, workingRules.Length)];
                 bool applied = ApplyRule(chosenRule);
                 Debug.Log(chosenRule);
             }
@@ -42,43 +42,43 @@ namespace Framework.GraphGrammar
 
         public void ApplyUntilNoNonTerminal()
         {
-            GrammarRule<TType>[] workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
+            GrammarRule[] workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
             while (workingRules.Any())
             {
-                GrammarRule<TType> chosenRule = workingRules[Random.Range(0, workingRules.Count())];
+                GrammarRule chosenRule = workingRules[Random.Range(0, workingRules.Count())];
                 bool applied = ApplyRule(chosenRule);
                 workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
             }
         }
         
-        private bool ApplyRule(GrammarRule<TType> rule)
+        private bool ApplyRule(GrammarRule rule)
         {
-            List<Graph<TType>> subGraphs = mother.ContainedSubGraph(rule.LeftHandSide);
+            List<Graph> subGraphs = mother.ContainedSubGraph(rule.LeftHandSide);
 
-            Graph<TType> rightHandSide = rule.RightHandSide.Clone();
+            Graph rightHandSide = rule.RightHandSide.Clone();
             
             if (subGraphs.Any())
             {
                 //chose random subgraph to replace
-                Graph<TType> subGraph = subGraphs[Random.Range(0, subGraphs.Count)];
+                Graph subGraph = subGraphs[Random.Range(0, subGraphs.Count)];
                 
-                foreach (Vertex<TType> vertex in rightHandSide.Vertices)
+                foreach (Vertex vertex in rightHandSide.Vertices)
                 {
                     mother.AddVertex(vertex);
                 }
 
-                foreach (Vertex<TType> subGraphVertex in subGraph.Vertices)
+                foreach (Vertex subGraphVertex in subGraph.Vertices)
                 {
                     if (subGraphVertex != subGraph.End || subGraph.Start == subGraph.End)
                     {
                         //add edges to start
-                        IEnumerable<Vertex<TType>> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subGraph.Vertices);
-                        IEnumerable<Vertex<TType>> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subGraph.Vertices);
-                        foreach (Vertex<TType> danglingOutGoingEdge in danglingOutGoingEdges)
+                        IEnumerable<Vertex> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subGraph.Vertices);
+                        IEnumerable<Vertex> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subGraph.Vertices);
+                        foreach (Vertex danglingOutGoingEdge in danglingOutGoingEdges)
                         {
                             rightHandSide.Start.AddNextNeighbour(danglingOutGoingEdge);
                         }
-                        foreach (Vertex<TType> danglingIncomingEdge in danglingIncomingEdges)
+                        foreach (Vertex danglingIncomingEdge in danglingIncomingEdges)
                         {
                             rightHandSide.Start.AddPreviousNeighbour(danglingIncomingEdge);
                         }
@@ -86,13 +86,13 @@ namespace Framework.GraphGrammar
                     else
                     {
                         //add edges to end
-                        IEnumerable<Vertex<TType>> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subGraph.Vertices);
-                        IEnumerable<Vertex<TType>> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subGraph.Vertices);
-                        foreach (Vertex<TType> danglingOutGoingEdge in danglingOutGoingEdges)
+                        IEnumerable<Vertex> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subGraph.Vertices);
+                        IEnumerable<Vertex> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subGraph.Vertices);
+                        foreach (Vertex danglingOutGoingEdge in danglingOutGoingEdges)
                         {
                             rightHandSide.End.AddNextNeighbour(danglingOutGoingEdge);
                         }
-                        foreach (Vertex<TType> danglingIncomingEdge in danglingIncomingEdges)
+                        foreach (Vertex danglingIncomingEdge in danglingIncomingEdges)
                         {
                             rightHandSide.End.AddPreviousNeighbour(danglingIncomingEdge);
                         }
@@ -112,7 +112,7 @@ namespace Framework.GraphGrammar
                     mother.End = rightHandSide.End;
                 }
 
-                foreach (Vertex<TType> subGraphVertex in subGraph.Vertices)
+                foreach (Vertex subGraphVertex in subGraph.Vertices)
                 {
                     mother.RemoveVertex(subGraphVertex);
                 }

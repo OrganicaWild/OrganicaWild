@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Demo.GraphGrammar;
 using Framework.GraphGrammar;
 using Framework.Util;
 using UnityEngine;
@@ -12,16 +11,16 @@ namespace Framework.ShapeGrammar
     public class ShapeGrammar : MonoBehaviour
     {
         public GameObject[] rules;
-        private Graph<DDorman> levelGraph;
+        private Graph levelGraph;
         private SpaceTree tree;
   
         public void Awake()
         {
-            DormanGrammar graphGrammar = GetComponent<DormanGrammar>();
-            graphGrammar.MakeGrammar();
-            graphGrammar.ApplyUntilFinished();
+            GraphGrammarComponent graphGrammarComponent = GetComponent<GraphGrammarComponent>();
+            graphGrammarComponent.MakeGrammar();
+            graphGrammarComponent.ApplyUntilFinished();
 
-            levelGraph = graphGrammar.grammar.GetLevel();
+            levelGraph = graphGrammarComponent.grammar.GetLevel();
             BuildTree();
             DrawTree();
         }
@@ -29,12 +28,12 @@ namespace Framework.ShapeGrammar
         private void BuildTree()
         {
             tree = new SpaceTree();
-            List<Vertex<DDorman>> traversal = levelGraph.Traverse();
+            List<Vertex> traversal = levelGraph.Traverse();
             Debug.Log($"{string.Join(";", traversal)}");
 
             for (int index = 0; index < traversal.Count; index++)
             {
-                Vertex<DDorman> vertex = traversal[index];
+                Vertex vertex = traversal[index];
                 List<GameObject> rulesForThisType = rules.Where(rule =>
                 {
                     ShapeGrammarRuler c = rule.GetComponent<ShapeGrammarRuler>();

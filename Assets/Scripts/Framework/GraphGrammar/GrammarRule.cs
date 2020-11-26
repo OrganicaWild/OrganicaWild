@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace Framework.GraphGrammar
 {
-    public class GrammarRule<TType>
+    public class GrammarRule
     {
-        public Graph<TType> LeftHandSide { get; }
-        public Graph<TType> RightHandSide { get; }
+        public Graph LeftHandSide { get; }
+        public Graph RightHandSide { get; }
 
-        public GrammarRule(Graph<TType> leftHandSide, Graph<TType> rightHandSide)
+        public GrammarRule(Graph leftHandSide, Graph rightHandSide)
         {
 
             LeftHandSide = leftHandSide;

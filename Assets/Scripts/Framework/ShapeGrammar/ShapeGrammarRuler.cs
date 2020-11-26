@@ -1,11 +1,10 @@
-﻿using Demo.GraphGrammar;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Framework.ShapeGrammar
 {
     public class ShapeGrammarRuler : MonoBehaviour
     {
-        public DDorman type;
+        public string type;
         public ScriptableConnections connection;
 
         private void OnDrawGizmos()

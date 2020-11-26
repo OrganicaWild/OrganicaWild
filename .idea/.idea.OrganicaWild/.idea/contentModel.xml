@@ -21,14 +21,6 @@
               <e p="StandardFitnessFunction2.cs" t="Include" />
               <e p="StandardIndividual2.cs" t="Include" />
             </e>
-            <e p="GraphGrammar" t="Include">
-              <e p="DDorman.cs" t="Include" />
-              <e p="DormanGrammar.cs" t="Include" />
-              <e p="DrawableVertex.cs" t="Include" />
-              <e p="Editor" t="Include">
-                <e p="GraphGrammar1Editor.cs" t="Include" />
-              </e>
-            </e>
           </e>
           <e p="Framework" t="Include">
             <e p="Evolutionary" t="Include">
@@ -47,9 +39,14 @@
               </e>
             </e>
             <e p="GraphGrammar" t="Include">
+              <e p="DrawableVertex.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="GraphGrammarComponentEditor.cs" t="Include" />
+              </e>
               <e p="GrammarRule.cs" t="Include" />
               <e p="Graph.cs" t="Include" />
               <e p="GraphGrammar.cs" t="Include" />
+              <e p="GraphGrammarComponent.cs" t="Include" />
               <e p="Vertex.cs" t="Include" />
             </e>
             <e p="ShapeGrammar" t="Include">

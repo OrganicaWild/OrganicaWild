@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095b4bfa9d6664445b73625d26c9f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type:
-    Type: 6
+  type: Entrance
   connection: {fileID: 11400000, guid: 91cccc7b4d6767b458be3a38bb6367f7, type: 2}
 --- !u!1 &2787056784482659312
 GameObject:

@@ -5,39 +5,39 @@ using System.Linq;
 namespace Framework.GraphGrammar
 {
     [Serializable]
-    public class Vertex<TType> : IEquatable<Vertex<TType>>
+    public class Vertex : IEquatable<Vertex>
     {
-        public IList<Vertex<TType>> ForwardNeighbours { get; }
-        public IList<Vertex<TType>> IncomingNeighbours { get; }
-        public TType Type { get; }
+        public IList<Vertex> ForwardNeighbours { get; }
+        public IList<Vertex> IncomingNeighbours { get; }
+        public string Type { get; }
         public bool Discovered { get; set; }
 
-        public Vertex(TType type)
+        public Vertex(string type)
         {
             this.Type = type;
-            ForwardNeighbours = new List<Vertex<TType>>();
-            IncomingNeighbours = new List<Vertex<TType>>();
+            ForwardNeighbours = new List<Vertex>();
+            IncomingNeighbours = new List<Vertex>();
         }
 
-        public void AddNextNeighbour(Vertex<TType> neighbour)
+        public void AddNextNeighbour(Vertex neighbour)
         {
             ForwardNeighbours.Add(neighbour);
             neighbour.IncomingNeighbours.Add(this);
         }
 
-        public void RemoveNextNeighbour(Vertex<TType> neighbour)
+        public void RemoveNextNeighbour(Vertex neighbour)
         {
             ForwardNeighbours.Remove(neighbour);
             neighbour.IncomingNeighbours.Remove(this);
         }
 
-        public void AddPreviousNeighbour(Vertex<TType> neighbour)
+        public void AddPreviousNeighbour(Vertex neighbour)
         {
             IncomingNeighbours.Add(neighbour);
             neighbour.ForwardNeighbours.Add(this);
         }
 
-        public void RemovePreviousNeighbour(Vertex<TType> neighbour)
+        public void RemovePreviousNeighbour(Vertex neighbour)
         {
             IncomingNeighbours.Remove(neighbour);
             neighbour.ForwardNeighbours.Remove(this);
@@ -45,18 +45,18 @@ namespace Framework.GraphGrammar
 
         public void RemoveFromAllNeighbours()
         {
-            foreach (Vertex<TType> neighbour in ForwardNeighbours)
+            foreach (Vertex neighbour in ForwardNeighbours)
             {
                 neighbour.IncomingNeighbours.Remove(this);
             }
 
-            foreach (Vertex<TType> neighbour in IncomingNeighbours)
+            foreach (Vertex neighbour in IncomingNeighbours)
             {
                 neighbour.ForwardNeighbours.Remove(this);
             }
         }
 
-        public bool Equals(Vertex<TType> vertex)
+        public bool Equals(Vertex vertex)
         {
             return vertex != null && Type.Equals(vertex.Type);
         }
@@ -78,7 +78,7 @@ namespace Framework.GraphGrammar
                 return false;
             }
 
-            return Equals((Vertex<TType>) obj);
+            return Equals((Vertex) obj);
         }
 
         public override int GetHashCode()
@@ -91,27 +91,27 @@ namespace Framework.GraphGrammar
             return $"Vertex: {Type}";
         }
 
-        public void TransferIncomingEdges(Vertex<TType> same)
+        public void TransferIncomingEdges(Vertex same)
         {
-            foreach (Vertex<TType> vertex in IncomingNeighbours.ToArray())
+            foreach (Vertex vertex in IncomingNeighbours.ToArray())
             {
                 RemovePreviousNeighbour(vertex);
                 same.AddPreviousNeighbour(vertex);
             }
         }
 
-        public void TransferOutgoingEdges(Vertex<TType> same)
+        public void TransferOutgoingEdges(Vertex same)
         {
-            foreach (Vertex<TType> vertex in ForwardNeighbours.ToArray())
+            foreach (Vertex vertex in ForwardNeighbours.ToArray())
             {
                 RemoveNextNeighbour(vertex);
                 same.AddNextNeighbour(vertex);
             }
         }
 
-        public void TransferAllEdgesExceptOne(Vertex<TType> same, Vertex<TType> theOne)
+        public void TransferAllEdgesExceptOne(Vertex same, Vertex theOne)
         {
-            foreach (Vertex<TType> vertex in ForwardNeighbours.ToArray())
+            foreach (Vertex vertex in ForwardNeighbours.ToArray())
             {
                 if (vertex != theOne)
                 {
@@ -120,7 +120,7 @@ namespace Framework.GraphGrammar
                 }
             }
 
-            foreach (Vertex<TType> vertex in IncomingNeighbours.ToArray())
+            foreach (Vertex vertex in IncomingNeighbours.ToArray())
             {
                 if (vertex != theOne)
                 {
@@ -132,7 +132,7 @@ namespace Framework.GraphGrammar
 
         public void RemoveIncomingEdges()
         {
-            foreach (Vertex<TType> incomingNeighbour in IncomingNeighbours.ToArray())
+            foreach (Vertex incomingNeighbour in IncomingNeighbours.ToArray())
             {
                 RemovePreviousNeighbour(incomingNeighbour);
             }
@@ -140,7 +140,7 @@ namespace Framework.GraphGrammar
 
         public void RemoveOutgoingEdges()
         {
-            foreach (Vertex<TType> forwardNeighbour in ForwardNeighbours.ToArray())
+            foreach (Vertex forwardNeighbour in ForwardNeighbours.ToArray())
             {
                 RemoveNextNeighbour(forwardNeighbour);
             }
