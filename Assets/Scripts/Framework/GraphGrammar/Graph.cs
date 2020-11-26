@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 namespace Framework.GraphGrammar
 {
     [Serializable]
-    public class Graph<TType> where TType : ITerminality
+    public class Graph<TType>
     {
         public ISet<Vertex<TType>> Vertices { get; set; }
         public Vertex<TType> Start { get; set; }

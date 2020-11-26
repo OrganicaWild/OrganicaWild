@@ -50,11 +50,10 @@
               <e p="GrammarRule.cs" t="Include" />
               <e p="Graph.cs" t="Include" />
               <e p="GraphGrammar.cs" t="Include" />
-              <e p="ITerminality.cs" t="Include" />
               <e p="Vertex.cs" t="Include" />
             </e>
             <e p="ShapeGrammar" t="Include">
-              <e p="ScriptableEdges.cs" t="Include" />
+              <e p="ScriptableConnections.cs" t="Include" />
               <e p="ShapeGrammar.cs" t="Include" />
               <e p="ShapeGrammarRuler.cs" t="Include" />
               <e p="SpaceNode.cs" t="Include" />

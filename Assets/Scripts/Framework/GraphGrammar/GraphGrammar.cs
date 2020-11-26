@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Framework.GraphGrammar
 {
-    public class GraphGrammar<TType> where TType : ITerminality
+    public class GraphGrammar<TType>
     {
         private readonly IList<GrammarRule<TType>> rules;
         private readonly Graph<TType> mother;

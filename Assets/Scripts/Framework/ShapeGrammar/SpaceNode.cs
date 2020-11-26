@@ -19,8 +19,8 @@ namespace Framework.ShapeGrammar
             this.prefab = prefab;
 
             branches = new List<SpaceNode>();
-            openHooks = ruler.edge.hooks.ToList();
-            entryHook = ruler.edge.entryHook;
+            openHooks = ruler.connection.hooks.ToList();
+            entryHook = ruler.connection.entryHook;
         }
 
         internal Vector3 GetOpenHook()

@@ -14,7 +14,7 @@ namespace Framework.ShapeGrammar
         public GameObject[] rules;
         private Graph<DDorman> levelGraph;
         private SpaceTree tree;
-
+  
         public void Awake()
         {
             DormanGrammar graphGrammar = GetComponent<DormanGrammar>();
@@ -23,8 +23,6 @@ namespace Framework.ShapeGrammar
 
             levelGraph = graphGrammar.grammar.GetLevel();
             BuildTree();
-            Debug.Log("tree built");
-            Debug.Log($"{Quaternion.identity}");
             DrawTree();
         }
 
@@ -34,11 +32,23 @@ namespace Framework.ShapeGrammar
             List<Vertex<DDorman>> traversal = levelGraph.Traverse();
             Debug.Log($"{string.Join(";", traversal)}");
 
-            for (int index = 0; index < 20; index++)
+            for (int index = 0; index < traversal.Count; index++)
             {
-                //Vertex<DDorman> vertex = traversal[index];
-                GameObject ruleRep = rules[Random.Range(0, rules.Length)];
-                tree.AddSpaceNode(ruleRep);
+                Vertex<DDorman> vertex = traversal[index];
+                List<GameObject> rulesForThisType = rules.Where(rule =>
+                {
+                    ShapeGrammarRuler c = rule.GetComponent<ShapeGrammarRuler>();
+                    return Equals(c.type, vertex.Type);
+                }).ToList();
+                if (rulesForThisType.Any())
+                {
+                    GameObject ruleRep = rulesForThisType[Random.Range(0, rulesForThisType.Count)];
+                    tree.AddSpaceNode(ruleRep);
+                }
+                else
+                {
+                    Debug.LogError($"There is no rule to replace {vertex.Type}");
+                }
             }
         }
 
@@ -46,25 +56,10 @@ namespace Framework.ShapeGrammar
         {
             SpaceNode root = tree.GetRoot();
             Queue<SpaceNode> q = new Queue<SpaceNode>();
-
             q.Enqueue(root);
             HashSet<SpaceNode> visited = new HashSet<SpaceNode>(new IdentityEqualityComparer<SpaceNode>());
-            Dictionary<SpaceNode, Vector3> positions =
-                new Dictionary<SpaceNode, Vector3>(new IdentityEqualityComparer<SpaceNode>());
-
-            Dictionary<SpaceNode, Quaternion> rotations =
-                new Dictionary<SpaceNode, Quaternion>(new IdentityEqualityComparer<SpaceNode>());
-
-            Dictionary<SpaceNode, SpaceNode> parents =
-                new Dictionary<SpaceNode, SpaceNode>(new IdentityEqualityComparer<SpaceNode>());
-            
             Dictionary<SpaceNode, GameObject> parentsGameObject =
-                new Dictionary<SpaceNode, GameObject>(new IdentityEqualityComparer<SpaceNode>());
-
-            positions.Add(root, -root.GetEntryHook());
-            rotations.Add(root, Quaternion.identity);
-            parentsGameObject.Add(root, null);
-         
+                new Dictionary<SpaceNode, GameObject>(new IdentityEqualityComparer<SpaceNode>()) {{root, null}};
 
             while (q.Any())
             {
@@ -75,77 +70,48 @@ namespace Framework.ShapeGrammar
                 }
 
                 //draw actual tree
-
-                var parent = parentsGameObject[v];
+                GameObject parent = parentsGameObject[v];
                 GameObject worldPiece;
                 if (parent != null)
                 {
-                    var a = v.GetEntryHook();
-                    var b = -v.GetHook();
+                    Vector3 a = v.GetEntryHook();
+                    Vector3 b = -v.GetHook();
 
-                    Debug.DrawRay(Vector3.zero, a, Color.red, 1000);
-                    Debug.DrawRay(Vector3.zero, b, Color.blue, 1000);
-                    Debug.Log($"{b}");
+                    // Debug.DrawRay(Vector3.zero, a, Color.red, 1000);
+                    // Debug.DrawRay(Vector3.zero, b, Color.blue, 1000);
+                    // Debug.Log($"{b}");
 
+                    Vector3 cross = Vector3.Cross(a, b);
 
-                    var cross = Vector3.Cross(a, b);
+                    float sign = Mathf.Sign(cross.y);
 
-                    var sign = Mathf.Sign(cross.y);
-
-                    var dot = Vector3.Dot(a, b);
+                    float dot = Vector3.Dot(a, b);
                     float newrotation = sign * Mathf.Acos(dot);
-                    var localRotation = Quaternion.Euler(0, newrotation * 180 / Mathf.PI, 0);
-                    Debug.Log($"cross {cross} x, dot {dot},,,{newrotation} {localRotation}");
+                    Quaternion localRotation = Quaternion.Euler(0, newrotation * 180 / Mathf.PI, 0);
 
-                    var rotatedA = localRotation * v.GetEntryHook();
-                    Debug.DrawRay(Vector3.zero, rotatedA, Color.green, 1000);
+                    Vector3 rotatedA = localRotation * v.GetEntryHook();
+                    // Debug.DrawRay(Vector3.zero, rotatedA, Color.green, 1000);
 
                     worldPiece =
                         Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity, parent.transform);
                     worldPiece.transform.localRotation = localRotation;
                     v.RotateHooks(localRotation);
-
                     worldPiece.transform.localPosition = v.GetHook() - v.GetEntryHook();
-
-                 
                 }
                 else
                 {
                     worldPiece = Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity);
-                    // worldPiece.transform.localRotation = localRotation;
-                    // v.RotateHooks(localRotation);
-
                     worldPiece.transform.localPosition = v.GetEntryHook() - v.GetEntryHook();
-
-                   
                 }
 
                 visited.Add(v);
 
                 foreach (SpaceNode node in v.branches)
                 {
-                    positions.Add(node, node.GetHook());
-                    parents.Add(node, v);
                     parentsGameObject.Add(node, worldPiece);
-                    //rotations.Add(node, localRotation);
                     q.Enqueue(node);
                 }
             }
-        }
-
-        public static Quaternion ExtractRotation(Matrix4x4 matrix)
-        {
-            Vector3 forward;
-            forward.x = matrix.m02;
-            forward.y = matrix.m12;
-            forward.z = matrix.m22;
-
-            Vector3 upwards;
-            upwards.x = matrix.m01;
-            upwards.y = matrix.m11;
-            upwards.z = matrix.m21;
-
-            return Quaternion.LookRotation(forward, upwards);
         }
     }
 }

@@ -80,14 +80,14 @@ namespace Demo.GraphGrammar
             foreach (DrawableVertex<DDorman>.ListElement position in positions)
             {
                 Color color;
-                if (colors.ContainsKey(position.t.Type.Type))
+                if (colors.ContainsKey(position.t.Type.type))
                 {
-                    color = colors[position.t.Type.Type];
+                    color = colors[position.t.Type.type];
                 }
                 else
                 {
                     color = new Color(Random.value, Random.value, Random.value);
-                    colors.Add(position.t.Type.Type, color);
+                    colors.Add(position.t.Type.type, color);
                 }
 
                 if (dict.ContainsKey(position.t))

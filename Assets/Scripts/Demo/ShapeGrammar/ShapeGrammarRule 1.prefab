@@ -231,4 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095b4bfa9d6664445b73625d26c9f325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edge: {fileID: 11400000, guid: e0b496b52d3f90543b167128024bf368, type: 2}
+  type:
+    Type: 0
+  connection: {fileID: 11400000, guid: e0b496b52d3f90543b167128024bf368, type: 2}

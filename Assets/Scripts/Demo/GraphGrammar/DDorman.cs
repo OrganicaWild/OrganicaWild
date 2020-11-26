@@ -1,16 +1,18 @@
 using System;
 using Framework.GraphGrammar;
+using UnityEngine;
 
 namespace Demo.GraphGrammar
 {
     [Serializable]
-    public class DDorman : ITerminality
+    public class DDorman
     {
-        public DDormanType Type { get; }
+        [SerializeField] 
+        public DDormanType type;
 
         public DDorman(DDormanType type)
         {
-            Type = type;
+            this.type = type;
         }
 
         [Serializable]
@@ -44,7 +46,7 @@ namespace Demo.GraphGrammar
 
         public bool IsTerminal()
         {
-            switch (Type)
+            switch (type)
             {
                 case DDormanType.BossLevel:
                     return true;
@@ -101,7 +103,7 @@ namespace Demo.GraphGrammar
 
         public override string ToString()
         {
-            return $"{Type}";
+            return $"{type}";
         }
 
         public override bool Equals(object other)
@@ -119,12 +121,12 @@ namespace Demo.GraphGrammar
 
         protected bool Equals(DDorman other)
         {
-            return Type == other.Type;
+            return type == other.type;
         }
 
         public override int GetHashCode()
         {
-            return (int) Type;
+            return (int) type;
         }
     }
 }

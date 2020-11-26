@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Framework.GraphGrammar
 {
-    public class GrammarRule<TType> where TType : ITerminality
+    public class GrammarRule<TType>
     {
         public Graph<TType> LeftHandSide { get; }
         public Graph<TType> RightHandSide { get; }
