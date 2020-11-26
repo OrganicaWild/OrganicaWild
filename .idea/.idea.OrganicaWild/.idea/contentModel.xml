@@ -52,7 +52,7 @@
             <e p="ShapeGrammar" t="Include">
               <e p="ScriptableConnections.cs" t="Include" />
               <e p="ShapeGrammar.cs" t="Include" />
-              <e p="ShapeGrammarRuler.cs" t="Include" />
+              <e p="ShapeGrammarRuleComponent.cs" t="Include" />
               <e p="SpaceNode.cs" t="Include" />
               <e p="SpaceTree.cs" t="Include" />
             </e>

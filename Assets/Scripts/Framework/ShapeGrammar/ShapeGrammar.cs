@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Framework.GraphGrammar;
 using Framework.Util;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,7 +14,7 @@ namespace Framework.ShapeGrammar
         public GameObject[] rules;
         private Graph levelGraph;
         private SpaceTree tree;
-  
+
         public void Awake()
         {
             GraphGrammarComponent graphGrammarComponent = GetComponent<GraphGrammarComponent>();
@@ -36,18 +37,68 @@ namespace Framework.ShapeGrammar
                 Vertex vertex = traversal[index];
                 List<GameObject> rulesForThisType = rules.Where(rule =>
                 {
-                    ShapeGrammarRuler c = rule.GetComponent<ShapeGrammarRuler>();
-                    return Equals(c.type, vertex.Type);
+                    ShapeGrammarRuleComponent c = rule.GetComponent<ShapeGrammarRuleComponent>();
+                    return c.type.Contains(vertex.Type);
                 }).ToList();
                 if (rulesForThisType.Any())
                 {
                     GameObject ruleRep = rulesForThisType[Random.Range(0, rulesForThisType.Count)];
-                    tree.AddSpaceNode(ruleRep);
+                    AddSpaceNode(ruleRep, vertex);
                 }
                 else
                 {
                     Debug.LogError($"There is no rule to replace {vertex.Type}");
                 }
+            }
+        }
+
+        public void AddSpaceNode(GameObject shapeGrammarRule, Vertex vertex)
+        {
+            ShapeGrammarRuleComponent shapeGrammarRuleComponent =
+                shapeGrammarRule.GetComponent<ShapeGrammarRuleComponent>();
+            if (shapeGrammarRuleComponent == null)
+            {
+                throw new ArgumentException("The given GameObject does not have a Component ShapeGrammarRuler");
+            }
+
+            if (tree.root == null)
+            {
+                tree.root = new SpaceNode(Vector3.zero, shapeGrammarRule, shapeGrammarRuleComponent, vertex, null);
+                tree.leafs.Add(tree.root);
+            }
+            else
+            {
+                SpaceNode leaf = tree.leafs[Random.Range(0, tree.leafs.Count)];
+                Vector3 hook = leaf.GetOpenHook();
+
+                if (leaf.GetNumberOfOpenHooks() == 0)
+                {
+                    tree.leafs.Remove(leaf);
+                }
+
+                SpaceNode newLeaf = new SpaceNode(hook, shapeGrammarRule, shapeGrammarRuleComponent, vertex, leaf);
+                if (newLeaf.GetNumberOfOpenHooks() > 0)
+                {
+                    tree.leafs.Add(newLeaf);
+                }
+
+                leaf.AddBranch(newLeaf);
+            }
+        }
+
+        public void FindNewPlaceForNode(SpaceNode node)
+        {
+            SpaceNode leaf;
+            do
+            {
+                leaf = tree.leafs[Random.Range(0, tree.leafs.Count)];
+            } while (leaf == node);
+
+            Vector3 hook = leaf.GetOpenHook();
+
+            if (leaf.GetNumberOfOpenHooks() == 0)
+            {
+                tree.leafs.Remove(leaf);
             }
         }
 
@@ -58,7 +109,7 @@ namespace Framework.ShapeGrammar
             q.Enqueue(root);
             HashSet<SpaceNode> visited = new HashSet<SpaceNode>(new IdentityEqualityComparer<SpaceNode>());
             Dictionary<SpaceNode, GameObject> parentsGameObject =
-                new Dictionary<SpaceNode, GameObject>(new IdentityEqualityComparer<SpaceNode>()) {{root, null}};
+                new Dictionary<SpaceNode, GameObject>(new IdentityEqualityComparer<SpaceNode>()) {{root, gameObject}};
 
             while (q.Any())
             {
@@ -68,24 +119,14 @@ namespace Framework.ShapeGrammar
                     continue;
                 }
 
-                //draw actual tree
                 GameObject parent = parentsGameObject[v];
-                GameObject worldPiece;
-                if (parent != null)
-                {
-                    Quaternion localRotation = v.GetLocalRotation();
+                Quaternion localRotation = v.GetLocalRotation();
 
-                    worldPiece =
-                        Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity, parent.transform);
-                    worldPiece.transform.localRotation = localRotation;
-                    v.RotateHooks(localRotation);
-                    worldPiece.transform.localPosition = v.GetHook() - v.GetEntryHook();
-                }
-                else
-                {
-                    worldPiece = Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity);
-                    worldPiece.transform.localPosition = v.GetEntryHook() - v.GetEntryHook();
-                }
+                GameObject worldPiece = Instantiate(v.GetPrefab(), Vector3.zero, Quaternion.identity, parent.transform);
+                worldPiece.transform.localRotation = localRotation;
+                v.RotateHooks(localRotation);
+
+                worldPiece.transform.localPosition = v.GetHook() - v.GetEntryHook();
 
                 visited.Add(v);
 
@@ -96,7 +137,5 @@ namespace Framework.ShapeGrammar
                 }
             }
         }
-
-       
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Framework.ShapeGrammar
 {
-    public class ShapeGrammarRuler : MonoBehaviour
+    public class ShapeGrammarRuleComponent : MonoBehaviour
     {
-        public string type;
+        public string[] type;
         public ScriptableConnections connection;
 
         private void OnDrawGizmos()
