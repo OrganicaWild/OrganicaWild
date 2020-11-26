@@ -11,15 +11,15 @@ namespace Framework.GraphGrammar
     {
         
         private IList<GrammarRule> rules = new List<GrammarRule>();
-        private Graph mother;
+        private MissionGraph mother;
 
         public Framework.GraphGrammar.GraphGrammar grammar;
 
-        private IEnumerable<DrawableVertex.ListElement> positions =
-            new List<DrawableVertex.ListElement>();
+        private IEnumerable<DrawableMissionVertex.ListElement> positions =
+            new List<DrawableMissionVertex.ListElement>();
 
-        private readonly Dictionary<Vertex, Vector3> dictionary = new Dictionary<Vertex, Vector3>(
-            new IdentityEqualityComparer<Vertex>());
+        private readonly Dictionary<MissionVertex, Vector3> dictionary = new Dictionary<MissionVertex, Vector3>(
+            new IdentityEqualityComparer<MissionVertex>());
         
         public List<string> types = new List<string>();
         
@@ -29,7 +29,7 @@ namespace Framework.GraphGrammar
 
             foreach (GrammarRule grammarRule in rules)
             {
-                foreach (Vertex vertex in grammarRule.LeftHandSide.Vertices)
+                foreach (MissionVertex vertex in grammarRule.LeftHandSide.Vertices)
                 {
                     if (!types.Contains(vertex.Type))
                     {
@@ -37,7 +37,7 @@ namespace Framework.GraphGrammar
                     }
                    
                 }
-                foreach (Vertex vertex in grammarRule.RightHandSide.Vertices)
+                foreach (MissionVertex vertex in grammarRule.RightHandSide.Vertices)
                 {
                     if (!types.Contains(vertex.Type))
                     {
@@ -60,8 +60,8 @@ namespace Framework.GraphGrammar
 
             //show in unity
             positions =
-                (mother.Start as DrawableVertex).Paint(new Vector3(0, 0, 0),
-                    new List<DrawableVertex.ListElement>(),
+                (mother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
+                    new List<DrawableMissionVertex.ListElement>(),
                     dictionary);
         }
 
@@ -69,8 +69,8 @@ namespace Framework.GraphGrammar
         {
             grammar.ApplyOneRule();
             positions =
-                (mother.Start as DrawableVertex).Paint(new Vector3(0, 0, 0),
-                    new List<DrawableVertex.ListElement>(),
+                (mother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
+                    new List<DrawableMissionVertex.ListElement>(),
                     dictionary);
             Debug.Log($"Replaced: {string.Join("; ", mother.Vertices)}");
         }
@@ -79,8 +79,8 @@ namespace Framework.GraphGrammar
         {
             grammar.ApplyUntilNoNonTerminal();
             positions =
-                (mother.Start as DrawableVertex).Paint(new Vector3(0, 0, 0),
-                    new List<DrawableVertex.ListElement>(),
+                (mother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
+                    new List<DrawableMissionVertex.ListElement>(),
                     dictionary);
             Debug.Log($"Replaced: {string.Join("; ", mother.Vertices)}");
         }
@@ -88,11 +88,11 @@ namespace Framework.GraphGrammar
         private void OnDrawGizmos()
         {
             Dictionary<string, Color> colors = new Dictionary<string, Color>();
-            Dictionary<Vertex, Vector3> dict =
-                new Dictionary<Vertex, Vector3>(
-                    new IdentityEqualityComparer<Vertex>());
+            Dictionary<MissionVertex, Vector3> dict =
+                new Dictionary<MissionVertex, Vector3>(
+                    new IdentityEqualityComparer<MissionVertex>());
 
-            foreach (DrawableVertex.ListElement position in positions)
+            foreach (DrawableMissionVertex.ListElement position in positions)
             {
                 Color color;
                 if (colors.ContainsKey(position.t.Type))
@@ -138,18 +138,18 @@ namespace Framework.GraphGrammar
                 });
 
             //rule non linear 00
-            Graph left01 = CreateLinearGraph(new List<string>()
+            MissionGraph left01 = CreateLinearGraph(new List<string>()
                 {"ChainFinal", "Goal"});
-            Graph right01 = new Graph();
-            DrawableVertex c = new DrawableVertex(("Chain"));
-            DrawableVertex h0 = new DrawableVertex(("Hook"));
-            DrawableVertex ga = new DrawableVertex(("Gate"));
-            DrawableVertex lf = new DrawableVertex(("LockFinal"));
-            DrawableVertex bl = new DrawableVertex(("BossLevel"));
-            DrawableVertex go = new DrawableVertex(("Goal"));
-            DrawableVertex t = new DrawableVertex(("Test"));
-            DrawableVertex kf = new DrawableVertex(("KeyFinal"));
-            DrawableVertex h1 = new DrawableVertex(("Hook"));
+            MissionGraph right01 = new MissionGraph();
+            DrawableMissionVertex c = new DrawableMissionVertex(("Chain"));
+            DrawableMissionVertex h0 = new DrawableMissionVertex(("Hook"));
+            DrawableMissionVertex ga = new DrawableMissionVertex(("Gate"));
+            DrawableMissionVertex lf = new DrawableMissionVertex(("LockFinal"));
+            DrawableMissionVertex bl = new DrawableMissionVertex(("BossLevel"));
+            DrawableMissionVertex go = new DrawableMissionVertex(("Goal"));
+            DrawableMissionVertex t = new DrawableMissionVertex(("Test"));
+            DrawableMissionVertex kf = new DrawableMissionVertex(("KeyFinal"));
+            DrawableMissionVertex h1 = new DrawableMissionVertex(("Hook"));
             c.AddNextNeighbour(h0);
             c.AddNextNeighbour(t);
             c.AddNextNeighbour(ga);
@@ -264,15 +264,15 @@ namespace Framework.GraphGrammar
                 new List<string>() {"TestSecret", "ItemBonus"});
 
             //rule non-linear 01
-            Graph left = CreateLinearGraph(new List<string>()
+            MissionGraph left = CreateLinearGraph(new List<string>()
                 {"ChainParallel", "Gate"});
 
-            Graph right = new Graph();
-            DrawableVertex f = new DrawableVertex(("Fork"));
-            DrawableVertex km0 = new DrawableVertex(("KeyMultiPiece"));
-            DrawableVertex km1 = new DrawableVertex(("KeyMultiPiece"));
-            DrawableVertex km2 = new DrawableVertex(("KeyMultiPiece"));
-            DrawableVertex lm = new DrawableVertex(("LockMulti"));
+            MissionGraph right = new MissionGraph();
+            DrawableMissionVertex f = new DrawableMissionVertex(("Fork"));
+            DrawableMissionVertex km0 = new DrawableMissionVertex(("KeyMultiPiece"));
+            DrawableMissionVertex km1 = new DrawableMissionVertex(("KeyMultiPiece"));
+            DrawableMissionVertex km2 = new DrawableMissionVertex(("KeyMultiPiece"));
+            DrawableMissionVertex lm = new DrawableMissionVertex(("LockMulti"));
             f.AddNextNeighbour(km0);
             f.AddNextNeighbour(km1);
             f.AddNextNeighbour(km2);
@@ -291,14 +291,14 @@ namespace Framework.GraphGrammar
 
 
             //rule non-linear 02
-            Graph left02 = CreateLinearGraph(new List<string>()
+            MissionGraph left02 = CreateLinearGraph(new List<string>()
                 {"Fork", "KeyMultiPiece"});
-            Graph right02 = new Graph();
-            DrawableVertex f0 = new DrawableVertex(("Fork"));
-            DrawableVertex k = new DrawableVertex(("Key"));
-            DrawableVertex l = new DrawableVertex(("Lock"));
-            DrawableVertex km3 = new DrawableVertex(("KeyMultiPiece"));
-            DrawableVertex h = new DrawableVertex(("Hook"));
+            MissionGraph right02 = new MissionGraph();
+            DrawableMissionVertex f0 = new DrawableMissionVertex(("Fork"));
+            DrawableMissionVertex k = new DrawableMissionVertex(("Key"));
+            DrawableMissionVertex l = new DrawableMissionVertex(("Lock"));
+            DrawableMissionVertex km3 = new DrawableMissionVertex(("KeyMultiPiece"));
+            DrawableMissionVertex h = new DrawableMissionVertex(("Hook"));
             f0.AddNextNeighbour(k);
             k.AddNextNeighbour(l);
             l.AddNextNeighbour(km3);
@@ -314,11 +314,11 @@ namespace Framework.GraphGrammar
             rules.Add(rule02);
 
             //rule non-linear 03
-            Graph left03 = CreateLinearGraph(new List<string>() {"Fork"});
-            Graph right03 = new Graph();
-            DrawableVertex n = new DrawableVertex(("Nothing"));
-            DrawableVertex h02 = new DrawableVertex(("Hook"));
-            DrawableVertex h03 = new DrawableVertex(("Hook"));
+            MissionGraph left03 = CreateLinearGraph(new List<string>() {"Fork"});
+            MissionGraph right03 = new MissionGraph();
+            DrawableMissionVertex n = new DrawableMissionVertex(("Nothing"));
+            DrawableMissionVertex h02 = new DrawableMissionVertex(("Hook"));
+            DrawableMissionVertex h03 = new DrawableMissionVertex(("Hook"));
             n.AddNextNeighbour(h02);
             n.AddNextNeighbour(h03);
             right03.AddVertex(n);
@@ -332,36 +332,36 @@ namespace Framework.GraphGrammar
 
         private void CreateLinearRule(IList<string> leftHandSide, IList<string> rightHandSide)
         {
-            Graph left = CreateLinearGraph(leftHandSide);
-            Graph right = CreateLinearGraph(rightHandSide);
+            MissionGraph left = CreateLinearGraph(leftHandSide);
+            MissionGraph right = CreateLinearGraph(rightHandSide);
             GrammarRule rule = new GrammarRule(left, right);
             rules.Add(rule);
         }
 
-        private Graph CreateLinearGraph(IList<string> nodes)
+        private MissionGraph CreateLinearGraph(IList<string> nodes)
         {
-            Graph graph = new Graph();
-            DrawableVertex prev = null;
+            MissionGraph missionGraph = new MissionGraph();
+            DrawableMissionVertex prev = null;
             for (int index = 0; index < nodes.Count; index++)
             {
                 string type = nodes[index];
-                DrawableVertex next = new DrawableVertex(type);
-                graph.AddVertex(next);
+                DrawableMissionVertex next = new DrawableMissionVertex(type);
+                missionGraph.AddVertex(next);
                 if (index == 0)
                 {
-                    graph.Start = next;
+                    missionGraph.Start = next;
                 }
 
                 if (index == nodes.Count - 1)
                 {
-                    graph.End = next;
+                    missionGraph.End = next;
                 }
 
                 prev?.AddNextNeighbour(next);
                 prev = next;
             }
 
-            return graph;
+            return missionGraph;
         }
     }
 }

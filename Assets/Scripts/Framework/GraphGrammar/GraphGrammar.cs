@@ -9,15 +9,15 @@ namespace Framework.GraphGrammar
     public class GraphGrammar
     {
         private readonly IList<GrammarRule> rules;
-        private readonly Graph mother;
+        private readonly MissionGraph mother;
 
-        public GraphGrammar(IList<GrammarRule> rules, Graph mother)
+        public GraphGrammar(IList<GrammarRule> rules, MissionGraph mother)
         {
             this.rules = rules;
             this.mother = mother;
         }
 
-        public Graph GetLevel()
+        public MissionGraph GetLevel()
         {
             return mother.Clone();
         }
@@ -53,32 +53,32 @@ namespace Framework.GraphGrammar
         
         private bool ApplyRule(GrammarRule rule)
         {
-            List<Graph> subGraphs = mother.ContainedSubGraph(rule.LeftHandSide);
+            List<MissionGraph> subGraphs = mother.ContainedSubGraph(rule.LeftHandSide);
 
-            Graph rightHandSide = rule.RightHandSide.Clone();
+            MissionGraph rightHandSide = rule.RightHandSide.Clone();
             
             if (subGraphs.Any())
             {
                 //chose random subgraph to replace
-                Graph subGraph = subGraphs[Random.Range(0, subGraphs.Count)];
+                MissionGraph subMissionGraph = subGraphs[Random.Range(0, subGraphs.Count)];
                 
-                foreach (Vertex vertex in rightHandSide.Vertices)
+                foreach (MissionVertex vertex in rightHandSide.Vertices)
                 {
                     mother.AddVertex(vertex);
                 }
 
-                foreach (Vertex subGraphVertex in subGraph.Vertices)
+                foreach (MissionVertex subGraphVertex in subMissionGraph.Vertices)
                 {
-                    if (subGraphVertex != subGraph.End || subGraph.Start == subGraph.End)
+                    if (subGraphVertex != subMissionGraph.End || subMissionGraph.Start == subMissionGraph.End)
                     {
                         //add edges to start
-                        IEnumerable<Vertex> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subGraph.Vertices);
-                        IEnumerable<Vertex> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subGraph.Vertices);
-                        foreach (Vertex danglingOutGoingEdge in danglingOutGoingEdges)
+                        IEnumerable<MissionVertex> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subMissionGraph.Vertices);
+                        IEnumerable<MissionVertex> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subMissionGraph.Vertices);
+                        foreach (MissionVertex danglingOutGoingEdge in danglingOutGoingEdges)
                         {
                             rightHandSide.Start.AddNextNeighbour(danglingOutGoingEdge);
                         }
-                        foreach (Vertex danglingIncomingEdge in danglingIncomingEdges)
+                        foreach (MissionVertex danglingIncomingEdge in danglingIncomingEdges)
                         {
                             rightHandSide.Start.AddPreviousNeighbour(danglingIncomingEdge);
                         }
@@ -86,13 +86,13 @@ namespace Framework.GraphGrammar
                     else
                     {
                         //add edges to end
-                        IEnumerable<Vertex> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subGraph.Vertices);
-                        IEnumerable<Vertex> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subGraph.Vertices);
-                        foreach (Vertex danglingOutGoingEdge in danglingOutGoingEdges)
+                        IEnumerable<MissionVertex> danglingOutGoingEdges = subGraphVertex.ForwardNeighbours.Except(subMissionGraph.Vertices);
+                        IEnumerable<MissionVertex> danglingIncomingEdges = subGraphVertex.IncomingNeighbours.Except(subMissionGraph.Vertices);
+                        foreach (MissionVertex danglingOutGoingEdge in danglingOutGoingEdges)
                         {
                             rightHandSide.End.AddNextNeighbour(danglingOutGoingEdge);
                         }
-                        foreach (Vertex danglingIncomingEdge in danglingIncomingEdges)
+                        foreach (MissionVertex danglingIncomingEdge in danglingIncomingEdges)
                         {
                             rightHandSide.End.AddPreviousNeighbour(danglingIncomingEdge);
                         }
@@ -101,18 +101,18 @@ namespace Framework.GraphGrammar
                 }
 
                 //change start if we replace start
-                if (subGraph.Start == mother.Start)
+                if (subMissionGraph.Start == mother.Start)
                 {
                     mother.Start = rightHandSide.Start;
                 }
 
                 //change end if we replace end
-                if (subGraph.End == mother.End)
+                if (subMissionGraph.End == mother.End)
                 {
                     mother.End = rightHandSide.End;
                 }
 
-                foreach (Vertex subGraphVertex in subGraph.Vertices)
+                foreach (MissionVertex subGraphVertex in subMissionGraph.Vertices)
                 {
                     mother.RemoveVertex(subGraphVertex);
                 }

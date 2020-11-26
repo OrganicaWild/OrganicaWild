@@ -5,39 +5,39 @@ using System.Linq;
 namespace Framework.GraphGrammar
 {
     [Serializable]
-    public class Vertex : IEquatable<Vertex>
+    public class MissionVertex : IEquatable<MissionVertex>
     {
-        public IList<Vertex> ForwardNeighbours { get; }
-        public IList<Vertex> IncomingNeighbours { get; }
+        public IList<MissionVertex> ForwardNeighbours { get; }
+        public IList<MissionVertex> IncomingNeighbours { get; }
         public string Type { get; }
         public bool Discovered { get; set; }
 
-        public Vertex(string type)
+        public MissionVertex(string type)
         {
             this.Type = type;
-            ForwardNeighbours = new List<Vertex>();
-            IncomingNeighbours = new List<Vertex>();
+            ForwardNeighbours = new List<MissionVertex>();
+            IncomingNeighbours = new List<MissionVertex>();
         }
 
-        public void AddNextNeighbour(Vertex neighbour)
+        public void AddNextNeighbour(MissionVertex neighbour)
         {
             ForwardNeighbours.Add(neighbour);
             neighbour.IncomingNeighbours.Add(this);
         }
 
-        public void RemoveNextNeighbour(Vertex neighbour)
+        public void RemoveNextNeighbour(MissionVertex neighbour)
         {
             ForwardNeighbours.Remove(neighbour);
             neighbour.IncomingNeighbours.Remove(this);
         }
 
-        public void AddPreviousNeighbour(Vertex neighbour)
+        public void AddPreviousNeighbour(MissionVertex neighbour)
         {
             IncomingNeighbours.Add(neighbour);
             neighbour.ForwardNeighbours.Add(this);
         }
 
-        public void RemovePreviousNeighbour(Vertex neighbour)
+        public void RemovePreviousNeighbour(MissionVertex neighbour)
         {
             IncomingNeighbours.Remove(neighbour);
             neighbour.ForwardNeighbours.Remove(this);
@@ -45,20 +45,20 @@ namespace Framework.GraphGrammar
 
         public void RemoveFromAllNeighbours()
         {
-            foreach (Vertex neighbour in ForwardNeighbours)
+            foreach (MissionVertex neighbour in ForwardNeighbours)
             {
                 neighbour.IncomingNeighbours.Remove(this);
             }
 
-            foreach (Vertex neighbour in IncomingNeighbours)
+            foreach (MissionVertex neighbour in IncomingNeighbours)
             {
                 neighbour.ForwardNeighbours.Remove(this);
             }
         }
 
-        public bool Equals(Vertex vertex)
+        public bool Equals(MissionVertex missionVertex)
         {
-            return vertex != null && Type.Equals(vertex.Type);
+            return missionVertex != null && Type.Equals(missionVertex.Type);
         }
 
         public override bool Equals(object obj)
@@ -78,7 +78,7 @@ namespace Framework.GraphGrammar
                 return false;
             }
 
-            return Equals((Vertex) obj);
+            return Equals((MissionVertex) obj);
         }
 
         public override int GetHashCode()
@@ -91,27 +91,27 @@ namespace Framework.GraphGrammar
             return $"Vertex: {Type}";
         }
 
-        public void TransferIncomingEdges(Vertex same)
+        public void TransferIncomingEdges(MissionVertex same)
         {
-            foreach (Vertex vertex in IncomingNeighbours.ToArray())
+            foreach (MissionVertex vertex in IncomingNeighbours.ToArray())
             {
                 RemovePreviousNeighbour(vertex);
                 same.AddPreviousNeighbour(vertex);
             }
         }
 
-        public void TransferOutgoingEdges(Vertex same)
+        public void TransferOutgoingEdges(MissionVertex same)
         {
-            foreach (Vertex vertex in ForwardNeighbours.ToArray())
+            foreach (MissionVertex vertex in ForwardNeighbours.ToArray())
             {
                 RemoveNextNeighbour(vertex);
                 same.AddNextNeighbour(vertex);
             }
         }
 
-        public void TransferAllEdgesExceptOne(Vertex same, Vertex theOne)
+        public void TransferAllEdgesExceptOne(MissionVertex same, MissionVertex theOne)
         {
-            foreach (Vertex vertex in ForwardNeighbours.ToArray())
+            foreach (MissionVertex vertex in ForwardNeighbours.ToArray())
             {
                 if (vertex != theOne)
                 {
@@ -120,7 +120,7 @@ namespace Framework.GraphGrammar
                 }
             }
 
-            foreach (Vertex vertex in IncomingNeighbours.ToArray())
+            foreach (MissionVertex vertex in IncomingNeighbours.ToArray())
             {
                 if (vertex != theOne)
                 {
@@ -132,7 +132,7 @@ namespace Framework.GraphGrammar
 
         public void RemoveIncomingEdges()
         {
-            foreach (Vertex incomingNeighbour in IncomingNeighbours.ToArray())
+            foreach (MissionVertex incomingNeighbour in IncomingNeighbours.ToArray())
             {
                 RemovePreviousNeighbour(incomingNeighbour);
             }
@@ -140,7 +140,7 @@ namespace Framework.GraphGrammar
 
         public void RemoveOutgoingEdges()
         {
-            foreach (Vertex forwardNeighbour in ForwardNeighbours.ToArray())
+            foreach (MissionVertex forwardNeighbour in ForwardNeighbours.ToArray())
             {
                 RemoveNextNeighbour(forwardNeighbour);
             }

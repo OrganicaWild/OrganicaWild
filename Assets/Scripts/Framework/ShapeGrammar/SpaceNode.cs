@@ -11,17 +11,17 @@ namespace Framework.ShapeGrammar
         private Vector3 entryHook;
         private GameObject prefab;
         private SpaceNode parent;
-        public Vertex GrammarVertex { get; }
+        public MissionVertex GrammarMissionVertex { get; }
 
         public readonly List<SpaceNode> branches;
         private readonly List<Vector3> openHooks;
 
-        public SpaceNode(Vector3 hook, GameObject prefab, ShapeGrammarRuleComponent ruleComponent, Vertex vertex,SpaceNode parent)
+        public SpaceNode(Vector3 hook, GameObject prefab, ShapeGrammarRuleComponent ruleComponent, MissionVertex missionVertex,SpaceNode parent)
         {
             this.hook = hook;
             this.prefab = prefab;
             this.parent = parent;
-            GrammarVertex = vertex;
+            GrammarMissionVertex = missionVertex;
 
             branches = new List<SpaceNode>();
             openHooks = ruleComponent.connection.hooks.ToList();

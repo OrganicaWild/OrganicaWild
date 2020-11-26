@@ -12,7 +12,7 @@ namespace Framework.ShapeGrammar
     public class ShapeGrammar : MonoBehaviour
     {
         public GameObject[] rules;
-        private Graph levelGraph;
+        private MissionGraph levelMissionGraph;
         private SpaceTree tree;
 
         public void Awake()
@@ -21,7 +21,7 @@ namespace Framework.ShapeGrammar
             graphGrammarComponent.MakeGrammar();
             graphGrammarComponent.ApplyUntilFinished();
 
-            levelGraph = graphGrammarComponent.grammar.GetLevel();
+            levelMissionGraph = graphGrammarComponent.grammar.GetLevel();
             BuildTree();
             DrawTree();
         }
@@ -29,30 +29,30 @@ namespace Framework.ShapeGrammar
         private void BuildTree()
         {
             tree = new SpaceTree();
-            List<Vertex> traversal = levelGraph.Traverse();
+            List<MissionVertex> traversal = levelMissionGraph.Traverse();
             Debug.Log($"{string.Join(";", traversal)}");
 
             for (int index = 0; index < traversal.Count; index++)
             {
-                Vertex vertex = traversal[index];
+                MissionVertex missionVertex = traversal[index];
                 List<GameObject> rulesForThisType = rules.Where(rule =>
                 {
                     ShapeGrammarRuleComponent c = rule.GetComponent<ShapeGrammarRuleComponent>();
-                    return c.type.Contains(vertex.Type);
+                    return c.type.Contains(missionVertex.Type);
                 }).ToList();
                 if (rulesForThisType.Any())
                 {
                     GameObject ruleRep = rulesForThisType[Random.Range(0, rulesForThisType.Count)];
-                    AddSpaceNode(ruleRep, vertex);
+                    AddSpaceNode(ruleRep, missionVertex);
                 }
                 else
                 {
-                    Debug.LogError($"There is no rule to replace {vertex.Type}");
+                    Debug.LogError($"There is no rule to replace {missionVertex.Type}");
                 }
             }
         }
 
-        public void AddSpaceNode(GameObject shapeGrammarRule, Vertex vertex)
+        public void AddSpaceNode(GameObject shapeGrammarRule, MissionVertex missionVertex)
         {
             ShapeGrammarRuleComponent shapeGrammarRuleComponent =
                 shapeGrammarRule.GetComponent<ShapeGrammarRuleComponent>();
@@ -63,7 +63,7 @@ namespace Framework.ShapeGrammar
 
             if (tree.root == null)
             {
-                tree.root = new SpaceNode(Vector3.zero, shapeGrammarRule, shapeGrammarRuleComponent, vertex, null);
+                tree.root = new SpaceNode(Vector3.zero, shapeGrammarRule, shapeGrammarRuleComponent, missionVertex, null);
                 tree.leafs.Add(tree.root);
             }
             else
@@ -76,7 +76,7 @@ namespace Framework.ShapeGrammar
                     tree.leafs.Remove(leaf);
                 }
 
-                SpaceNode newLeaf = new SpaceNode(hook, shapeGrammarRule, shapeGrammarRuleComponent, vertex, leaf);
+                SpaceNode newLeaf = new SpaceNode(hook, shapeGrammarRule, shapeGrammarRuleComponent, missionVertex, leaf);
                 if (newLeaf.GetNumberOfOpenHooks() > 0)
                 {
                     tree.leafs.Add(newLeaf);

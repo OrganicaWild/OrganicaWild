@@ -6,10 +6,10 @@ namespace Framework.GraphGrammar
 {
     public class GrammarRule
     {
-        public Graph LeftHandSide { get; }
-        public Graph RightHandSide { get; }
+        public MissionGraph LeftHandSide { get; }
+        public MissionGraph RightHandSide { get; }
 
-        public GrammarRule(Graph leftHandSide, Graph rightHandSide)
+        public GrammarRule(MissionGraph leftHandSide, MissionGraph rightHandSide)
         {
 
             LeftHandSide = leftHandSide;

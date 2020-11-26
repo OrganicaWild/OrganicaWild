@@ -6,19 +6,19 @@ using Random = UnityEngine.Random;
 namespace Framework.GraphGrammar
 {
     [Serializable]
-    public class DrawableVertex : Vertex
+    public class DrawableMissionVertex : MissionVertex
     {
         private float x;
         private float z;
         
-        public DrawableVertex(string type) : base(type)
+        public DrawableMissionVertex(string type) : base(type)
         {
             x = Random.value;
             z = (Random.value * 2) - 1;
         }
 
         public List<ListElement> Paint(Vector3 parentPosition,
-            List<ListElement> drawPositions, Dictionary<Vertex, Vector3> dictionary)
+            List<ListElement> drawPositions, Dictionary<MissionVertex, Vector3> dictionary)
         {
             Vector3 thisPosition;
             
@@ -36,9 +36,9 @@ namespace Framework.GraphGrammar
             drawPositions.Add(new ListElement(this, parentPosition, thisPosition));
             // Debug.DrawLine(parentPosition, thisPosition, Color.blue, 100000);
 
-            foreach (Vertex forwardNeighbour in ForwardNeighbours)
+            foreach (MissionVertex forwardNeighbour in ForwardNeighbours)
             {
-                if (forwardNeighbour is DrawableVertex draw)
+                if (forwardNeighbour is DrawableMissionVertex draw)
                 {
                     draw.Paint(thisPosition, drawPositions, dictionary);
                 }
@@ -49,11 +49,11 @@ namespace Framework.GraphGrammar
 
         public class ListElement
         {
-            public DrawableVertex t;
+            public DrawableMissionVertex t;
             public Vector3 parent;
             public Vector3 tPosition;
 
-            public ListElement(DrawableVertex t, Vector3 parent, Vector3 tPosition)
+            public ListElement(DrawableMissionVertex t, Vector3 parent, Vector3 tPosition)
             {
                 this.t = t;
                 this.parent = parent;
