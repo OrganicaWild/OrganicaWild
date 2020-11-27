@@ -14,7 +14,7 @@ namespace Framework.ShapeGrammar
                 Vector3 pos = connection.entryHook;
                 Gizmos.color = Color.magenta;
                 Gizmos.DrawCube(transform.position + pos, new Vector3(0.5f, 0.1f, 0.2f));
-                Gizmos.DrawLine(Vector3.zero, pos);
+                Gizmos.DrawLine(transform.position, transform.position + pos);
             }
 
             for (int index = 0; index < connection.hooks.Length; index++)
@@ -23,7 +23,7 @@ namespace Framework.ShapeGrammar
 
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawCube(transform.position + pos, new Vector3(0.5f, 0.1f, 0.2f));
-                Gizmos.DrawLine(Vector3.zero, pos);
+                Gizmos.DrawLine(transform.position, transform.position + pos);
             }
         }
     }

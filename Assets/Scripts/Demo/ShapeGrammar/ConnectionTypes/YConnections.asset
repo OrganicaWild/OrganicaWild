@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f692e1e018b7fe4181686a0740dfb32, type: 3}
-  m_Name: YRule
+  m_Name: YConnections
   m_EditorClassIdentifier: 
-  entryHook: {x: 0, y: 0, z: 1}
+  entryHook: {x: 0, y: 0, z: 5.04}
   hooks:
-  - {x: -0.4, y: 0, z: -0.8}
-  - {x: 0.4, y: 0, z: -0.8}
+  - {x: -2.53, y: 0, z: -3.77}
+  - {x: 2.5, y: 0, z: -1.9}

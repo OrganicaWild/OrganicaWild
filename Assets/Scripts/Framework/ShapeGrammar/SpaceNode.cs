@@ -7,16 +7,18 @@ namespace Framework.ShapeGrammar
 {
     public class SpaceNode
     {
-        private Vector3 hook;
+        private readonly Vector3 hook;
         private Vector3 entryHook;
-        private GameObject prefab;
-        private SpaceNode parent;
+        private readonly GameObject prefab;
+        public readonly SpaceNode parent;
         public MissionVertex GrammarMissionVertex { get; }
+        public GameObject Instantiated { get; set; }
 
         public readonly List<SpaceNode> branches;
         private readonly List<Vector3> openHooks;
 
-        public SpaceNode(Vector3 hook, GameObject prefab, ShapeGrammarRuleComponent ruleComponent, MissionVertex missionVertex,SpaceNode parent)
+        public SpaceNode(Vector3 hook, GameObject prefab, ShapeGrammarRuleComponent ruleComponent,
+            MissionVertex missionVertex, SpaceNode parent)
         {
             this.hook = hook;
             this.prefab = prefab;
@@ -28,26 +30,33 @@ namespace Framework.ShapeGrammar
             entryHook = ruleComponent.connection.entryHook;
         }
 
+        internal SpaceNode(GameObject instantiated)
+        {
+            Instantiated = instantiated;
+        }
+
         internal SpaceNode GetParent()
         {
             return parent;
         }
-        
+
+        internal List<Vector3> GetRotatedOpenHooks()
+        {
+            Quaternion rotation = GetLocalRotation();
+            return openHooks.Select(openHook =>openHook).ToList();
+        }
+
         internal Vector3 GetOpenHook()
         {
             int index = Random.Range(0, openHooks.Count);
             Vector3 chosenHook = openHooks[index];
-            openHooks.Remove(chosenHook);
+            //openHooks.Remove(chosenHook);
             return chosenHook;
         }
-        
-        internal void ResetHook(Vector3 newHook, SpaceNode newParent)
+
+        internal void RemoveOpenHook(Vector3 hook)
         {
-            parent.branches.Remove(this); //remove this node as child from parent
-            parent.openHooks.Add(hook); //return occupied hook to parent
-            
-            hook = newHook;
-            parent = newParent;
+            openHooks.Remove(hook);
         }
 
         internal void AddBranch(SpaceNode leaf)
@@ -75,12 +84,20 @@ namespace Framework.ShapeGrammar
             return entryHook;
         }
 
-        internal void RotateHooks(Quaternion rotateBy)
+        public Vector3 GetRotatedEntryHook()
         {
-            //hook = rotateBy * hook;
-            entryHook = rotateBy * entryHook;
+            return GetLocalRotation() * entryHook;
+            // for (int index = 0; index < openHooks.Count; index++)
+            // {
+            //     openHooks[index] = rotateBy * openHooks[index];
+            // }
         }
-        
+
+        internal Vector3 GetLocalPosition()
+        {
+            return GetHook() - GetRotatedEntryHook();
+        }
+
         internal Quaternion GetLocalRotation()
         {
             Vector3 a = GetEntryHook().normalized;
@@ -102,6 +119,5 @@ namespace Framework.ShapeGrammar
             // Debug.DrawRay(Vector3.zero, rotatedA, Color.green, 1000);
             return localRotation;
         }
-        
     }
 }

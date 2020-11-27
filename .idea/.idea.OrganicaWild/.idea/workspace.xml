@@ -30,18 +30,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="organize assets">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableVertex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableMissionVertex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableVertex.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableMissionVertex.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs.meta" afterDir="false" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="rename graph to mission graph and vertex accordingly">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarDemo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarDemo.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ConnectionTypes/CrossConnections.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ConnectionTypes/CrossConnections.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ConnectionTypes/LinearConnections.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ConnectionTypes/LinearConnections.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ConnectionTypes/YConnections.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ConnectionTypes/YConnections.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/CrossRule.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/CrossRule.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/LinearRule.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/LinearRule.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/Y.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/Y.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +61,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B926ACD-10D4-48DA-9AA3-641E61A8737F/51/bcabb118/MyAlgorithmRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/2a/0d72e35c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/dev/OrganicaWild/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/37/64c83ab0/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/48/791df3b4/Array.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -110,12 +113,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableVertex.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
       </list>
     </option>
   </component>
@@ -125,8 +128,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.4520397" />
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.38588753" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3621908" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.3091873" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -152,10 +155,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1604">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1604" />
+      <option name="pid" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -185,7 +188,7 @@
       <workItem from="1606205657648" duration="27838000" />
       <workItem from="1606287177617" duration="28173000" />
       <workItem from="1606374097075" duration="8979000" />
-      <workItem from="1606387394509" duration="8166000" />
+      <workItem from="1606387394509" duration="22808000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -306,7 +309,21 @@
       <option name="project" value="LOCAL" />
       <updated>1606404465860</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="rename graph to mission graph and vertex accordingly">
+      <created>1606404604103</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1606404604103</updated>
+    </task>
+    <task id="LOCAL-00019" summary="rename graph to mission graph and vertex accordingly">
+      <created>1606404621783</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1606404621783</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +362,8 @@
     <MESSAGE value="move graph grammar component to framework" />
     <MESSAGE value="extract GetLocalRotation method" />
     <MESSAGE value="organize assets" />
-    <option name="LAST_COMMIT_MESSAGE" value="organize assets" />
+    <MESSAGE value="rename graph to mission graph and vertex accordingly" />
+    <option name="LAST_COMMIT_MESSAGE" value="rename graph to mission graph and vertex accordingly" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606126628057">
@@ -356,70 +374,70 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="459" height="464" key="DebuggerActiveHint/0.0.3440.1400@0.0.3440.1400" timestamp="1606116084380" />
-    <state width="1845" height="304" key="GridCell.Tab.0.bottom" timestamp="1606403886453">
+    <state width="2295" height="160" key="GridCell.Tab.0.bottom" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886453" />
-    <state width="1845" height="304" key="GridCell.Tab.0.center" timestamp="1606403886453">
+    <state width="2295" height="160" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.0.center" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886453" />
-    <state width="1845" height="304" key="GridCell.Tab.0.left" timestamp="1606403886453">
+    <state width="2295" height="160" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.0.left" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886453" />
-    <state width="1845" height="304" key="GridCell.Tab.0.right" timestamp="1606403886453">
+    <state width="2295" height="160" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.0.right" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886453" />
-    <state width="1845" height="304" key="GridCell.Tab.1.bottom" timestamp="1606403892103">
+    <state width="2295" height="160" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.1.bottom" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606403892103" />
-    <state width="1845" height="304" key="GridCell.Tab.1.center" timestamp="1606403892103">
+    <state width="2295" height="160" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.1.center" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606403892103" />
-    <state width="1845" height="304" key="GridCell.Tab.1.left" timestamp="1606403892103">
+    <state width="2295" height="160" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.1.left" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606403892103" />
-    <state width="1845" height="304" key="GridCell.Tab.1.right" timestamp="1606403892103">
+    <state width="2295" height="160" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.1.right" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606403892103" />
-    <state width="1845" height="304" key="GridCell.Tab.2.bottom" timestamp="1606403886355">
+    <state width="2295" height="160" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.2.bottom" timestamp="1606420387630">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.2.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886355" />
-    <state width="1845" height="304" key="GridCell.Tab.2.center" timestamp="1606403886355">
+    <state width="2295" height="160" key="GridCell.Tab.2.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387630" />
+    <state width="2295" height="160" key="GridCell.Tab.2.center" timestamp="1606420387630">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.2.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886355" />
-    <state width="1845" height="304" key="GridCell.Tab.2.left" timestamp="1606403886355">
+    <state width="2295" height="160" key="GridCell.Tab.2.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387630" />
+    <state width="2295" height="160" key="GridCell.Tab.2.left" timestamp="1606420387629">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.2.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886355" />
-    <state width="1845" height="304" key="GridCell.Tab.2.right" timestamp="1606403886355">
+    <state width="2295" height="160" key="GridCell.Tab.2.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387629" />
+    <state width="2295" height="160" key="GridCell.Tab.2.right" timestamp="1606420387630">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.2.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886355" />
-    <state width="1845" height="304" key="GridCell.Tab.3.bottom" timestamp="1606403886355">
+    <state width="2295" height="160" key="GridCell.Tab.2.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387630" />
+    <state width="2295" height="160" key="GridCell.Tab.3.bottom" timestamp="1606420387630">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.3.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886355" />
-    <state width="1845" height="304" key="GridCell.Tab.3.center" timestamp="1606403886355">
+    <state width="2295" height="160" key="GridCell.Tab.3.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387630" />
+    <state width="2295" height="160" key="GridCell.Tab.3.center" timestamp="1606420387630">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.3.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886355" />
-    <state width="1845" height="304" key="GridCell.Tab.3.left" timestamp="1606403886355">
+    <state width="2295" height="160" key="GridCell.Tab.3.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387630" />
+    <state width="2295" height="160" key="GridCell.Tab.3.left" timestamp="1606420387630">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.3.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886355" />
-    <state width="1845" height="304" key="GridCell.Tab.3.right" timestamp="1606403886355">
+    <state width="2295" height="160" key="GridCell.Tab.3.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387630" />
+    <state width="2295" height="160" key="GridCell.Tab.3.right" timestamp="1606420387630">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1845" height="304" key="GridCell.Tab.3.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606403886355" />
+    <state width="2295" height="160" key="GridCell.Tab.3.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606420387630" />
     <state x="1222" y="389" key="RiderGenerateDialog" timestamp="1606291351507">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -432,14 +450,14 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="230" y="353" width="1803" height="954" key="VCS.FileHistoryDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1606388026988" />
-    <state x="1118" y="436" key="Vcs.Push.Dialog.v2" timestamp="1606243031708">
+    <state x="1118" y="436" key="Vcs.Push.Dialog.v2" timestamp="1606404717471">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1118" y="436" key="Vcs.Push.Dialog.v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606243031708" />
-    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606383684293">
+    <state x="1118" y="436" key="Vcs.Push.Dialog.v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606404717471" />
+    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606406491620">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606383684293" />
+    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606406491620" />
     <state x="2204" y="508" key="save.file.as.template.dialog" timestamp="1604239921165">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -448,5 +466,24 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1606290771082" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs</url>
+          <line>131</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\ShapeGrammar\ShapeGrammar.cs" initialLine="116">
+            <startOffsets>
+              <option value="5515" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5583" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -9,19 +9,13 @@ namespace Framework.ShapeGrammar
 {
     public class SpaceTree
     {
-        internal SpaceNode root;
-        internal IList<SpaceNode> leafs;
+        internal SpaceNode Root { get; set; }
+        internal IList<SpaceNode> Leafs { get; }
 
         public SpaceTree()
         {
-            leafs = new List<SpaceNode>();
+            Leafs = new List<SpaceNode>();
         }
-
-        public SpaceNode GetRoot()
-        {
-            return root;
-        }
-
         
         
     }

@@ -21,6 +21,9 @@
               <e p="StandardFitnessFunction2.cs" t="Include" />
               <e p="StandardIndividual2.cs" t="Include" />
             </e>
+            <e p="ShapeGrammar" t="Include">
+              <e p="SubdivisionConnections.cs" t="Include" />
+            </e>
           </e>
           <e p="Framework" t="Include">
             <e p="Evolutionary" t="Include">

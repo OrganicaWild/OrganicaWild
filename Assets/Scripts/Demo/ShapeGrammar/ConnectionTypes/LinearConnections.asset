@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f692e1e018b7fe4181686a0740dfb32, type: 3}
   m_Name: LinearConnections
   m_EditorClassIdentifier: 
-  entryHook: {x: 0, y: 0, z: 0}
-  hooks: []
+  entryHook: {x: 0, y: 0, z: -2}
+  hooks:
+  - {x: 0, y: 0, z: 2}

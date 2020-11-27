@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f692e1e018b7fe4181686a0740dfb32, type: 3}
-  m_Name: 4way
+  m_Name: CrossConnections
   m_EditorClassIdentifier: 
-  entryHook: {x: 0, y: 0, z: 1}
+  entryHook: {x: 0, y: 0, z: 5}
   hooks:
-  - {x: 0, y: 0, z: -1}
-  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 0, z: -5}
+  - {x: -5, y: 0, z: 0}
