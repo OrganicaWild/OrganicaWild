@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f692e1e018b7fe4181686a0740dfb32, type: 3}
-  m_Name: LinearConnections
+  m_Name: BaseSubdivision
   m_EditorClassIdentifier: 
   entryCorner:
-    connectionPoint: {x: 0, y: 0, z: 1.86}
-    connectionDirection: {x: 0, y: 0, z: -0.55}
+    connectionPoint: {x: 0, y: 0, z: -1}
+    connectionDirection: {x: 0, y: 0, z: 1}
   corners:
-  - connectionPoint: {x: 0, y: 0, z: -1.95}
-    connectionDirection: {x: 0, y: 0, z: 0.39}
+  - connectionPoint: {x: 0, y: 0, z: 1}
+    connectionDirection: {x: 0, y: 0, z: -1}

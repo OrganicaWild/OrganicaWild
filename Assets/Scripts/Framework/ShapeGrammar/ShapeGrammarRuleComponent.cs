@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Demo.ShapeGrammar;
+using UnityEngine;
 
 namespace Framework.ShapeGrammar
 {
@@ -7,23 +8,30 @@ namespace Framework.ShapeGrammar
         public string[] type;
         public ScriptableConnections connection;
 
+        public virtual void Modify()
+        {
+        }
+
         private void OnDrawGizmos()
         {
-            if (connection.entryHook != null)
+            if (connection.entryCorner != null)
             {
-                Vector3 pos = connection.entryHook;
+                Vector3 pos = connection.entryCorner.connectionPoint + transform.position;
+                Vector3 negativePosition = pos - connection.entryCorner.connectionDirection;
                 Gizmos.color = Color.magenta;
-                Gizmos.DrawCube(transform.position + pos, new Vector3(0.5f, 0.1f, 0.2f));
-                Gizmos.DrawLine(transform.position, transform.position + pos);
+                Gizmos.DrawCube(pos, new Vector3(0.1f, 0.1f, 0.1f));
+                Gizmos.DrawLine(negativePosition, pos);
             }
 
-            for (int index = 0; index < connection.hooks.Length; index++)
+            for (int index = 0; index < connection.corners.Count; index++)
             {
-                Vector3 pos = connection.hooks[index];
+                MeshCorner conn = connection.corners[index];
 
+                Vector3 pos = conn.connectionPoint + transform.position;
+                Vector3 negativePosition = pos - conn.connectionDirection;
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawCube(transform.position + pos, new Vector3(0.5f, 0.1f, 0.2f));
-                Gizmos.DrawLine(transform.position, transform.position + pos);
+                Gizmos.DrawCube(pos, new Vector3(0.1f, 0.1f, 0.1f));
+                Gizmos.DrawLine(negativePosition, pos);
             }
         }
     }

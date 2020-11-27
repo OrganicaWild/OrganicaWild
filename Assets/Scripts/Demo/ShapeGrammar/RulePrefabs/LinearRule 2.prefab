@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &632468800653981101
+--- !u!1 &3370655913639810503
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4995709127727095807}
-  - component: {fileID: 610313351698029181}
-  - component: {fileID: 7388088359502614128}
+  - component: {fileID: 7157434010945519509}
+  - component: {fileID: 3348503798175693335}
+  - component: {fileID: 4649897947452370458}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -18,35 +18,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4995709127727095807
+--- !u!4 &7157434010945519509
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632468800653981101}
+  m_GameObject: {fileID: 3370655913639810503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 4}
   m_Children: []
-  m_Father: {fileID: 2697769890267278460}
+  m_Father: {fileID: 247809991745817622}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &610313351698029181
+--- !u!33 &3348503798175693335
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632468800653981101}
+  m_GameObject: {fileID: 3370655913639810503}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7388088359502614128
+--- !u!23 &4649897947452370458
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632468800653981101}
+  m_GameObject: {fileID: 3370655913639810503}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &2169338114731125071
+--- !u!1 &4042837398070937893
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,38 +87,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2697769890267278460}
-  - component: {fileID: 4445410983869651604}
-  - component: {fileID: 3565340894345280031}
+  - component: {fileID: 247809991745817622}
+  - component: {fileID: 1995454212620090110}
+  - component: {fileID: 1691840615046896245}
   m_Layer: 0
-  m_Name: LinearRule
+  m_Name: LinearRule 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2697769890267278460
+--- !u!4 &247809991745817622
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2169338114731125071}
+  m_GameObject: {fileID: 4042837398070937893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4995709127727095807}
+  - {fileID: 7157434010945519509}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4445410983869651604
+--- !u!114 &1995454212620090110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2169338114731125071}
+  m_GameObject: {fileID: 4042837398070937893}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 095b4bfa9d6664445b73625d26c9f325, type: 3}
@@ -128,27 +128,20 @@ MonoBehaviour:
   - TestItem
   - TestSecret
   - Key
-  - LockMulit
   - Lock
   - KeyMulti
   - ItemBonus
-  - Test
-  - BossMini
   - ItemQuest
-  - LockFinal
-  - BossLevel
   - KeyFinal
-  - Goal
   - KeyMultiPiece
-  - LockMulti
-  connection: {fileID: 11400000, guid: 006aac73404a9d046b5c737bd7d7439a, type: 2}
---- !u!65 &3565340894345280031
+  connection: {fileID: 11400000, guid: fabae86a8dbe6a144a3708b79a7ee092, type: 2}
+--- !u!65 &1691840615046896245
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2169338114731125071}
+  m_GameObject: {fileID: 4042837398070937893}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

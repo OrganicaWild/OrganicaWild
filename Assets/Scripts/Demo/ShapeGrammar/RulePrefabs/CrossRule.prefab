@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type:
-  - Entrance
   - Fork
+  - Goal
   connection: {fileID: 11400000, guid: 91cccc7b4d6767b458be3a38bb6367f7, type: 2}
 --- !u!65 &6449285890876581696
 BoxCollider:

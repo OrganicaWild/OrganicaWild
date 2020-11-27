@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Demo.ShapeGrammar;
+using UnityEngine;
 
 namespace Framework.ShapeGrammar
 {
     [CreateAssetMenu]
     public class ScriptableConnections : ScriptableObject
     {
-        public Vector3 entryHook;
-        public Vector3[] hooks;
+        public MeshCorner entryCorner;
+        public List<MeshCorner> corners;
     }
 }

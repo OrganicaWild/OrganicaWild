@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Demo.ShapeGrammar;
 using Framework.GraphGrammar;
 using Framework.Util;
 using UnityEditor;
@@ -50,54 +51,70 @@ namespace Framework.ShapeGrammar
 
                 if (tree.Root == null)
                 {
-                    tree.Root = new SpaceNode(transform.position, ruleRep,
+                    tree.Root = new SpaceNode(
+                        new MeshCorner() {connectionPoint = transform.position, connectionDirection = Vector3.zero},
+                        ruleRep,
                         ruleRep.GetComponent<ShapeGrammarRuleComponent>(), missionVertex, new SpaceNode(gameObject));
-                    tree.Root.Instantiated = DrawNode(tree.Root);
+                    tree.Root.InstantiatedReference = DrawNode(tree.Root);
                     tree.Leafs.Add(tree.Root);
                 }
                 else
                 {
                     bool hasNoPlace = true;
-                    Vector3 openHook;
+                    MeshCorner openHook;
                     SpaceNode attachLeaf;
                     SpaceNode newNode;
 
+                    var triedLeafs = new List<SpaceNode>();
+                    //var leafsCopy = tree.Leafs.ToList();
                     do
                     {
-                        attachLeaf = tree.Leafs[Random.Range(0, tree.Leafs.Count)];
+                        var attachableLeafs = tree.Leafs.Except(triedLeafs).ToArray();
+                        attachLeaf = attachableLeafs[Random.Range(0, attachableLeafs.Length)];
                         openHook = attachLeaf.GetOpenHook();
 
+                        var rule = ruleRep.GetComponent<ShapeGrammarRuleComponent>();
                         newNode = new SpaceNode(openHook, ruleRep,
-                            ruleRep.GetComponent<ShapeGrammarRuleComponent>(), missionVertex, attachLeaf);
+                            rule, missionVertex, attachLeaf);
 
-                        newNode.Instantiated = DrawNode(newNode);
-                        newNode.Instantiated.SetActive(false);
+                        newNode.InstantiatedReference = DrawNode(newNode);
+                        
+                        var b = newNode.InstantiatedReference.GetComponent<ShapeGrammarRuleComponent>();
+                        b.Modify();
+
+
+                        //newNode.Instantiated.SetActive(false);
+
 
                         //check for space
                         Vector3 potentialPosition =
-                            newNode.Instantiated.transform.position;
+                            newNode.InstantiatedReference.transform.position;
                         //Debug.DrawRay(Vector3.zero, newNode.parent.Instantiated.transform.position, Color.green, 1000f);
                         //Debug.DrawRay(Vector3.zero, potentialPosition, Color.green, 1000f);
                         // Debug.DrawLine(newNode.parent.Instantiated.transform.position, newNode.GetHook(), Color.blue, 1000f);
                         // Debug.DrawLine(newNode.GetEntryHook(), potentialPosition, Color.red, 1000f);
-                        Debug.Log($"{attachLeaf.Instantiated.transform.position}");
+                        //Debug.Log($"{attachLeaf.Instantiated.transform.position}");
 
                         bool hitSomething = false;
-                        foreach (Vector3 hook in newNode.GetRotatedOpenHooks())
+
+                        foreach (MeshCorner hook in newNode.GetOpenHooks())
                         {
-                            var worldHook = newNode.Instantiated.transform.TransformPoint(hook);
-                            var scaledWorldHook = worldHook ;
-                            hitSomething = Physics.Raycast(potentialPosition, scaledWorldHook);
+                            var worldHook = newNode.InstantiatedReference.transform.TransformPoint(hook.connectionPoint);
+                            var worldDirection =
+                                newNode.InstantiatedReference.transform.TransformDirection(hook.connectionDirection);
+                            worldDirection *= 5;
+                            hitSomething = Physics.Raycast(worldHook, worldDirection);
                             if (hitSomething)
                             {
-                                Debug.DrawRay(potentialPosition, scaledWorldHook, Color.red, 1000f);
+                                Debug.DrawRay(worldHook, worldDirection, Color.red, 1000f);
+                                break;
                             }
                         }
 
                         //if not space return to leaf and take other
                         if (!hitSomething)
                         {
-                            newNode.Instantiated.SetActive(true);
+                            //newNode.Instantiated.SetActive(true);
                             attachLeaf.RemoveOpenHook(openHook);
                             if (attachLeaf.GetNumberOfOpenHooks() == 0)
                             {
@@ -108,9 +125,16 @@ namespace Framework.ShapeGrammar
                         }
                         else
                         {
-                            Destroy(newNode.Instantiated);
+                            triedLeafs.Add(attachLeaf);
+                            //leafsCopy.Remove(attachLeaf);
+                            Destroy(newNode.InstantiatedReference);
                         }
-                    } while (hasNoPlace);
+                    } while (hasNoPlace && triedLeafs.Count < tree.Leafs.Count);
+
+                    if (triedLeafs.Count > tree.Leafs.Count)
+                    {
+                        Debug.LogError($"Ran out of spaces when trying to place {missionVertex.Type}");
+                    }
 
                     if (newNode.GetNumberOfOpenHooks() > 0)
                     {
@@ -135,97 +159,14 @@ namespace Framework.ShapeGrammar
             return rulesForThisType;
         }
 
-        public void AddSpaceNode(GameObject shapeGrammarRule, MissionVertex missionVertex)
-        {
-            ShapeGrammarRuleComponent shapeGrammarRuleComponent =
-                shapeGrammarRule.GetComponent<ShapeGrammarRuleComponent>();
-            if (shapeGrammarRuleComponent == null)
-            {
-                throw new ArgumentException("The given GameObject does not have a Component ShapeGrammarRuler");
-            }
-
-            if (tree.Root == null)
-            {
-                tree.Root = new SpaceNode(Vector3.zero, shapeGrammarRule, shapeGrammarRuleComponent, missionVertex,
-                    null);
-
-
-                tree.Leafs.Add(tree.Root);
-            }
-            else
-            {
-                SpaceNode leaf = tree.Leafs[Random.Range(0, tree.Leafs.Count)];
-                Vector3 hook = leaf.GetOpenHook();
-
-                if (leaf.GetNumberOfOpenHooks() == 0)
-                {
-                    tree.Leafs.Remove(leaf);
-                }
-
-                SpaceNode newLeaf =
-                    new SpaceNode(hook, shapeGrammarRule, shapeGrammarRuleComponent, missionVertex, leaf);
-                if (newLeaf.GetNumberOfOpenHooks() > 0)
-                {
-                    tree.Leafs.Add(newLeaf);
-                }
-
-                leaf.AddBranch(newLeaf);
-            }
-        }
-
-        public void FindNewPlaceForNode(SpaceNode node)
-        {
-            SpaceNode leaf;
-            do
-            {
-                leaf = tree.Leafs[Random.Range(0, tree.Leafs.Count)];
-            } while (leaf == node);
-
-            Vector3 hook = leaf.GetOpenHook();
-
-            if (leaf.GetNumberOfOpenHooks() == 0)
-            {
-                tree.Leafs.Remove(leaf);
-            }
-        }
-
-        private void DrawTree()
-        {
-            SpaceNode root = tree.Root;
-            Queue<SpaceNode> q = new Queue<SpaceNode>();
-            q.Enqueue(root);
-            HashSet<SpaceNode> visited = new HashSet<SpaceNode>(new IdentityEqualityComparer<SpaceNode>());
-            Dictionary<SpaceNode, GameObject> parentsGameObject =
-                new Dictionary<SpaceNode, GameObject>(new IdentityEqualityComparer<SpaceNode>()) {{root, gameObject}};
-
-            while (q.Any())
-            {
-                SpaceNode v = q.Dequeue();
-                if (visited.Contains(v))
-                {
-                    continue;
-                }
-
-                GameObject parent = parentsGameObject[v];
-                GameObject worldPiece = DrawNode(v);
-
-                visited.Add(v);
-
-                foreach (SpaceNode node in v.branches)
-                {
-                    parentsGameObject.Add(node, worldPiece);
-                    q.Enqueue(node);
-                }
-            }
-        }
-
         private static GameObject DrawNode(SpaceNode node)
         {
             Quaternion localRotation = node.GetLocalRotation();
 
             GameObject worldPiece =
-                Instantiate(node.GetPrefab(), Vector3.zero, Quaternion.identity, node.parent.Instantiated.transform);
+                Instantiate(node.GetPrefab(), Vector3.zero, Quaternion.identity, node.parentSpaceNode.InstantiatedReference.transform);
             worldPiece.transform.localRotation = localRotation;
+
 
             worldPiece.transform.localPosition = node.GetLocalPosition();
             return worldPiece;

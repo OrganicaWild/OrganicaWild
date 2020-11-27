@@ -145,22 +145,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type:
-  - TestItem
-  - TestSecret
-  - Key
   - LockMulit
   - Lock
-  - KeyMulti
-  - ItemBonus
   - Test
   - BossMini
-  - ItemQuest
   - LockFinal
   - BossLevel
-  - KeyFinal
-  - Goal
-  - KeyMultiPiece
   - LockMulti
+  - Entrance
+  - Nothing
   connection: {fileID: 11400000, guid: 006aac73404a9d046b5c737bd7d7439a, type: 2}
 --- !u!65 &222950779133300127
 BoxCollider:

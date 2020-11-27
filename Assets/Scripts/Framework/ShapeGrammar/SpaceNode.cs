@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Demo.ShapeGrammar;
 using Framework.GraphGrammar;
 using UnityEngine;
 
@@ -7,86 +8,82 @@ namespace Framework.ShapeGrammar
 {
     public class SpaceNode
     {
-        private readonly Vector3 hook;
-        private Vector3 entryHook;
-        private readonly GameObject prefab;
-        public readonly SpaceNode parent;
+        private readonly MeshCorner attachedToHook;
+        private readonly MeshCorner attacherHook;
+        private readonly GameObject toInstantiate;
+        public readonly SpaceNode parentSpaceNode;
         public MissionVertex GrammarMissionVertex { get; }
-        public GameObject Instantiated { get; set; }
+        public GameObject InstantiatedReference { get; set; }
 
-        public readonly List<SpaceNode> branches;
-        private readonly List<Vector3> openHooks;
+        private readonly List<MeshCorner> openHooks;
 
-        public SpaceNode(Vector3 hook, GameObject prefab, ShapeGrammarRuleComponent ruleComponent,
-            MissionVertex missionVertex, SpaceNode parent)
+        public SpaceNode(MeshCorner attachedToHook, GameObject toInstantiate, ShapeGrammarRuleComponent ruleComponent,
+            MissionVertex missionVertex, SpaceNode parentSpaceNode)
         {
-            this.hook = hook;
-            this.prefab = prefab;
-            this.parent = parent;
+            this.attachedToHook = attachedToHook;
+            this.toInstantiate = toInstantiate;
+            this.parentSpaceNode = parentSpaceNode;
             GrammarMissionVertex = missionVertex;
+            
+            List<MeshCorner> corners = ruleComponent.connection.corners.ToList();
+            MeshCorner entryCorner = ruleComponent.connection.entryCorner;
 
-            branches = new List<SpaceNode>();
-            openHooks = ruleComponent.connection.hooks.ToList();
-            entryHook = ruleComponent.connection.entryHook;
+            openHooks = corners;
+
+            attacherHook = entryCorner;
         }
 
-        internal SpaceNode(GameObject instantiated)
+        internal SpaceNode(GameObject instantiatedReference)
         {
-            Instantiated = instantiated;
+            InstantiatedReference = instantiatedReference;
         }
 
         internal SpaceNode GetParent()
         {
-            return parent;
+            return parentSpaceNode;
         }
 
-        internal List<Vector3> GetRotatedOpenHooks()
+        internal List<MeshCorner> GetOpenHooks()
         {
-            Quaternion rotation = GetLocalRotation();
-            return openHooks.Select(openHook =>openHook).ToList();
+            return openHooks.ToList();
         }
 
-        internal Vector3 GetOpenHook()
+        internal MeshCorner GetOpenHook()
         {
             int index = Random.Range(0, openHooks.Count);
-            Vector3 chosenHook = openHooks[index];
+            MeshCorner chosenHook = openHooks[index];
             //openHooks.Remove(chosenHook);
             return chosenHook;
         }
 
-        internal void RemoveOpenHook(Vector3 hook)
+        internal void RemoveOpenHook(MeshCorner hook)
         {
             openHooks.Remove(hook);
         }
-
-        internal void AddBranch(SpaceNode leaf)
-        {
-            branches.Add(leaf);
-        }
-
+        
         internal int GetNumberOfOpenHooks()
         {
             return openHooks.Count;
         }
 
-        internal Vector3 GetHook()
+        internal MeshCorner GetHook()
         {
-            return hook;
+            return attachedToHook;
         }
 
         internal GameObject GetPrefab()
         {
-            return prefab;
+            return toInstantiate;
         }
 
-        internal Vector3 GetEntryHook()
+        internal MeshCorner GetEntryHook()
         {
-            return entryHook;
+            return attacherHook;
         }
 
         public Vector3 GetRotatedEntryHook()
         {
-            return GetLocalRotation() * entryHook;
+            return GetLocalRotation() * attacherHook.connectionPoint;
             // for (int index = 0; index < openHooks.Count; index++)
             // {
             //     openHooks[index] = rotateBy * openHooks[index];
@@ -95,13 +92,13 @@ namespace Framework.ShapeGrammar
 
         internal Vector3 GetLocalPosition()
         {
-            return GetHook() - GetRotatedEntryHook();
+            return GetHook().connectionPoint - GetRotatedEntryHook();
         }
 
         internal Quaternion GetLocalRotation()
         {
-            Vector3 a = GetEntryHook().normalized;
-            Vector3 b = -GetHook().normalized;
+            Vector3 a = GetEntryHook().connectionDirection.normalized;
+            Vector3 b = -GetHook().connectionDirection.normalized;
 
             // Debug.DrawRay(Vector3.zero, a, Color.red, 1000);
             // Debug.DrawRay(Vector3.zero, b, Color.blue, 1000);

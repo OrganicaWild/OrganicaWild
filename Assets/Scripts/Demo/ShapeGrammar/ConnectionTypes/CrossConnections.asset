@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f692e1e018b7fe4181686a0740dfb32, type: 3}
   m_Name: CrossConnections
   m_EditorClassIdentifier: 
-  entryHook: {x: 0, y: 0, z: 5}
-  hooks:
-  - {x: 0, y: 0, z: -5}
-  - {x: -5, y: 0, z: 0}
+  entryCorner:
+    connectionPoint: {x: -4.93, y: 0, z: -0.06}
+    connectionDirection: {x: 0.82, y: 0, z: 0}
+  corners:
+  - connectionPoint: {x: -0.02, y: 0, z: -5.07}
+    connectionDirection: {x: 0, y: 0, z: 1.12}
+  - connectionPoint: {x: -0.03, y: 0, z: 4.91}
+    connectionDirection: {x: 0, y: 0, z: -0.99}
