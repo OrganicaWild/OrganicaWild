@@ -22,6 +22,7 @@
               <e p="StandardIndividual2.cs" t="Include" />
             </e>
             <e p="ShapeGrammar" t="Include">
+              <e p="ShapeGrammarController.cs" t="Include" />
               <e p="SubdivisionConnections.cs" t="Include" />
             </e>
           </e>

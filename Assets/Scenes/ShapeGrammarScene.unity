@@ -174,7 +174,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 60
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -197,13 +197,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18666514}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 90, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &82988250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6972316986720370306, guid: 5defdd78843a9344fae0f24332524475,
+    type: 3}
+  m_PrefabInstance: {fileID: 1878102272}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &82988254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82988250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3c6de1f6d410e4fa9c3f49eb78b793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1243151723
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,13 +307,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243151723}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.5684386, y: -0.20925616, z: 0.15231264, w: 0.7809548}
   m_LocalPosition: {x: -2.274, y: 3, z: -1.313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 72.1, y: -30, z: 0}
 --- !u!1001 &1878102272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 6972316986720370304, guid: 5defdd78843a9344fae0f24332524475,
         type: 3}
       propertyPath: rules.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6972316986720370304, guid: 5defdd78843a9344fae0f24332524475,
         type: 3}
@@ -324,7 +342,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rules.Array.data[1]
       value: 
-      objectReference: {fileID: 1923952748036108602, guid: 78422a300a82eae47b535be87a5d7914,
+      objectReference: {fileID: 4042837398070937893, guid: b30a6f506d0aee64c9cff0e62c42bbf5,
         type: 3}
     - target: {fileID: 6972316986720370304, guid: 5defdd78843a9344fae0f24332524475,
         type: 3}

@@ -18,22 +18,32 @@ namespace Framework.ShapeGrammar
 
         public void Awake()
         {
+            GenerateLevel();
+            GenerateGeometry();
+        }
+
+        public void GenerateLevel()
+        {
             GraphGrammarComponent graphGrammarComponent = GetComponent<GraphGrammarComponent>();
             graphGrammarComponent.MakeGrammar();
             graphGrammarComponent.ApplyUntilFinished();
 
             levelMissionGraph = graphGrammarComponent.grammar.GetLevel();
-            // levelMissionGraph = new MissionGraph();
-            // MissionVertex vertex = new MissionVertex("Entrance");
-            // MissionVertex verte1x = new MissionVertex("Entrance");
-            // vertex.AddNextNeighbour(verte1x);
-            // levelMissionGraph.AddVertex(verte1x);
-            // levelMissionGraph.AddVertex(vertex);
-            // levelMissionGraph.Start = vertex;
-            // levelMissionGraph.End = verte1x;
+        }
+
+        public void ClearOldLeve()
+        {
+            foreach (Transform child in transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
+
+        public void GenerateGeometry()
+        {
+         
 
             BuildTree();
-            //DrawTree();
         }
 
         private void BuildTree()
@@ -78,7 +88,7 @@ namespace Framework.ShapeGrammar
                             rule, missionVertex, attachLeaf);
 
                         newNode.InstantiatedReference = DrawNode(newNode);
-                        
+
                         var b = newNode.InstantiatedReference.GetComponent<ShapeGrammarRuleComponent>();
                         b.Modify();
 
@@ -99,7 +109,8 @@ namespace Framework.ShapeGrammar
 
                         foreach (MeshCorner hook in newNode.GetOpenHooks())
                         {
-                            var worldHook = newNode.InstantiatedReference.transform.TransformPoint(hook.connectionPoint);
+                            var worldHook =
+                                newNode.InstantiatedReference.transform.TransformPoint(hook.connectionPoint);
                             var worldDirection =
                                 newNode.InstantiatedReference.transform.TransformDirection(hook.connectionDirection);
                             worldDirection *= 5;
@@ -164,7 +175,8 @@ namespace Framework.ShapeGrammar
             Quaternion localRotation = node.GetLocalRotation();
 
             GameObject worldPiece =
-                Instantiate(node.GetPrefab(), Vector3.zero, Quaternion.identity, node.parentSpaceNode.InstantiatedReference.transform);
+                Instantiate(node.GetPrefab(), Vector3.zero, Quaternion.identity,
+                    node.parentSpaceNode.InstantiatedReference.transform);
             worldPiece.transform.localRotation = localRotation;
 
 

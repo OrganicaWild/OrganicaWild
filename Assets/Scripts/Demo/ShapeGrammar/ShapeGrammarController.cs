@@ -1,0 +1,42 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using Framework.ShapeGrammar;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ShapeGrammarController : MonoBehaviour
+{
+    private ShapeGrammar grammar;
+    // Start is called before the first frame update
+    void Start()
+    {
+        grammar = GetComponent<ShapeGrammar>();
+    }
+
+    private bool cleared = true;
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (cleared)
+            {
+                grammar.GenerateGeometry();
+                cleared = false;
+            }
+            else
+            {
+                grammar.ClearOldLeve();
+                cleared = true;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            grammar.ClearOldLeve();
+            grammar.GenerateGeometry();
+        }
+    }
+}

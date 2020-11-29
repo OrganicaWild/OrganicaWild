@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BaseSubdivision
   m_EditorClassIdentifier: 
   entryCorner:
-    connectionPoint: {x: 0, y: 0, z: -1}
-    connectionDirection: {x: 0, y: 0, z: 1}
+    connectionPoint: {x: 0, y: 0, z: -0.99}
+    connectionDirection: {x: 0, y: 0, z: 1.18}
   corners:
   - connectionPoint: {x: 0, y: 0, z: 1}
     connectionDirection: {x: 0, y: 0, z: -1}
