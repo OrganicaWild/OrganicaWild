@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Framework.GraphGrammar
 {
+    [Serializable]
     public class GrammarRule
     {
         public MissionGraph LeftHandSide { get; }
@@ -15,6 +17,7 @@ namespace Framework.GraphGrammar
             LeftHandSide = leftHandSide;
             RightHandSide = rightHandSide;
         }
+        
 
         public override string ToString()
         {

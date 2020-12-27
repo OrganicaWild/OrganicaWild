@@ -31,13 +31,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add actual rooms to prefabs">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphEditor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphEditor.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/MissionGraphEditor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/MissionGraphEditor.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorMissionGraph.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorMissionGraph.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/TestScriptableObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/TestScriptableObject.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ShapeGrammarScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ShapeGrammarScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ConnectionTypes/BaseSubdivision.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ConnectionTypes/BaseSubdivision.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarDemo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarDemo.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/CrossRule.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/CrossRule.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/LinearRule 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/LinearRule 1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/LinearRule 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/LinearRule 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,72 +65,40 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/4a/76aa60a6/ArraySortHelper`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/69/6aa67097/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/7a/c11e4210/Matrix4x4.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/f2/0f1f2397/IEquatable`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B926ACD-10D4-48DA-9AA3-641E61A8737F/51/bcabb118/MyAlgorithmRunner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1FE7A3C0-284A-456B-9681-B7A93141C89A/01/36760dee/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/19/b9d2955a/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/2a/0d72e35c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/37/64c83ab0/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1FE7A3C0-284A-456B-9681-B7A93141C89A/25/bf93e060/AssetDatabase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/9e/40bffb1f/Void.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/48/791df3b4/Array.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/7a/c11e4210/Matrix4x4.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/37/64c83ab0/String.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/2a/0d72e35c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/4a/76aa60a6/ArraySortHelper`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B926ACD-10D4-48DA-9AA3-641E61A8737F/51/bcabb118/MyAlgorithmRunner.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphRunner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Node.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GramarRule.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyIndividual.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/ITerminality.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/EditorGraphGrammar.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/EditorGraphGrammar1.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/IdentityEqualityComparer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/GraphGrammar1.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/MutableTuple.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceHook.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableEdges.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DDorman.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Vertex.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Graph.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DrawableVertex.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/DormanGrammar.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/GraphGrammar1Editor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/GraphGrammarComponent.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuler.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableVertex.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ShapeConnection.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/SubdivisionEditor.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Triangulator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/MeshCorner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector3Extensions.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/SubdivisionConnections.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/MeshCorner.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ShapeGrammarController.cs" />
-      </list>
-    </option>
+    <changedPaths>
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/Rule.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphConnection.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/EditorGraph.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorGraph.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphConnection.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarRule.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GrammarRuleEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/MissionGraphEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/TestScriptableObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorMissionGraph.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
+    </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
   <component name="ProjectViewState">
@@ -121,8 +106,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.26532716" />
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.22668727" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.2823194" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -135,7 +120,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="RiderNuGetOptionsPageId" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -144,16 +129,16 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="selectedOptions">
-        <set />
+        <list />
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="25556">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="18844">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="25556" />
+      <option name="pid" value="18844" />
       <option name="selectedOptions">
-        <set />
+        <list />
       </option>
       <method v="2" />
     </configuration>
@@ -183,7 +168,10 @@
       <workItem from="1606374097075" duration="8979000" />
       <workItem from="1606387394509" duration="22808000" />
       <workItem from="1606461461005" duration="24458000" />
-      <workItem from="1606666073802" duration="849000" />
+      <workItem from="1606666073802" duration="3459000" />
+      <workItem from="1607690563454" duration="1211000" />
+      <workItem from="1608105030894" duration="3207000" />
+      <workItem from="1608979702849" duration="34118000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -367,139 +355,5 @@
     <MESSAGE value="rename graph to mission graph and vertex accordingly" />
     <MESSAGE value="add actual rooms to prefabs" />
     <option name="LAST_COMMIT_MESSAGE" value="add actual rooms to prefabs" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606126628057">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="1417" y="507" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400@0.0.3440.1400" timestamp="1606126628057" />
-    <state width="459" height="464" key="DebuggerActiveHint" timestamp="1606116084380">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="459" height="464" key="DebuggerActiveHint/0.0.3440.1400@0.0.3440.1400" timestamp="1606116084380" />
-    <state width="1972" height="295" key="GridCell.Tab.0.bottom" timestamp="1606666471550">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471550" />
-    <state width="1972" height="295" key="GridCell.Tab.0.center" timestamp="1606666471550">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471550" />
-    <state width="1972" height="295" key="GridCell.Tab.0.left" timestamp="1606666471549">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471549" />
-    <state width="1972" height="295" key="GridCell.Tab.0.right" timestamp="1606666471550">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471550" />
-    <state width="1972" height="295" key="GridCell.Tab.1.bottom" timestamp="1606666475906">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606666475906" />
-    <state width="1972" height="295" key="GridCell.Tab.1.center" timestamp="1606666475906">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606666475906" />
-    <state width="1972" height="295" key="GridCell.Tab.1.left" timestamp="1606666475906">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606666475906" />
-    <state width="1972" height="295" key="GridCell.Tab.1.right" timestamp="1606666475906">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606666475906" />
-    <state width="1972" height="295" key="GridCell.Tab.2.bottom" timestamp="1606666471400">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.2.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471400" />
-    <state width="1972" height="295" key="GridCell.Tab.2.center" timestamp="1606666471399">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.2.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471399" />
-    <state width="1972" height="295" key="GridCell.Tab.2.left" timestamp="1606666471399">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.2.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471399" />
-    <state width="1972" height="295" key="GridCell.Tab.2.right" timestamp="1606666471400">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.2.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471400" />
-    <state width="1972" height="295" key="GridCell.Tab.3.bottom" timestamp="1606666471400">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.3.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471400" />
-    <state width="1972" height="295" key="GridCell.Tab.3.center" timestamp="1606666471400">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.3.center/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471400" />
-    <state width="1972" height="295" key="GridCell.Tab.3.left" timestamp="1606666471400">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.3.left/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471400" />
-    <state width="1972" height="295" key="GridCell.Tab.3.right" timestamp="1606666471400">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state width="1972" height="295" key="GridCell.Tab.3.right/0.0.3440.1400@0.0.3440.1400" timestamp="1606666471400" />
-    <state x="1222" y="389" key="RiderGenerateDialog" timestamp="1606468325432">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="1222" y="389" key="RiderGenerateDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1606468325432" />
-    <state x="2122" y="207" width="998" height="981" key="SettingsEditor" timestamp="1605864771884">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="2122" y="207" width="998" height="981" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1605864771884" />
-    <state x="230" y="353" width="1803" height="954" key="VCS.FileHistoryDialog" timestamp="1606469386196">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="230" y="353" width="1803" height="954" key="VCS.FileHistoryDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1606469386196" />
-    <state x="1118" y="436" key="Vcs.Push.Dialog.v2" timestamp="1606404717471">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="1118" y="436" key="Vcs.Push.Dialog.v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606404717471" />
-    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606478071558">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1606478071558" />
-    <state x="2204" y="508" key="save.file.as.template.dialog" timestamp="1604239921165">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="2204" y="508" key="save.file.as.template.dialog/0.0.3440.1400@0.0.3440.1400" timestamp="1604239921165" />
-    <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1606470498413">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1606470498413" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs</url>
-          <line>45</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\ShapeGrammar\ShapeGrammar.cs" initialLine="40">
-            <startOffsets>
-              <option value="1126" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1138" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs</url>
-          <line>52</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\ShapeGrammar\ShapeGrammar.cs" initialLine="47">
-            <startOffsets>
-              <option value="1315" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1359" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

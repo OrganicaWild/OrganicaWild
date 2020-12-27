@@ -4,23 +4,19 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Framework.Util;
-using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using Random = UnityEngine.Random;
-
 
 namespace Framework.GraphGrammar
 {
     [Serializable]
     public class MissionGraph
     {
-        public ISet<MissionVertex> Vertices { get; set; }
+        public List<MissionVertex> Vertices { get; set; }
         public MissionVertex Start { get; set; }
         public MissionVertex End { get; set; }
 
         public MissionGraph()
         {
-            Vertices = new HashSet<MissionVertex>();
+            Vertices = new List<MissionVertex>();
         }
 
         public MissionGraph Clone()

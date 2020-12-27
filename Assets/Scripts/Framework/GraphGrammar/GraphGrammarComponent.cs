@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Framework.Util;
 using UnityEditor;
 using UnityEngine;
@@ -9,53 +8,51 @@ namespace Framework.GraphGrammar
 {
     public class GraphGrammarComponent : MonoBehaviour
     {
-        
-        private IList<GrammarRule> rules = new List<GrammarRule>();
+        private List<GrammarRule> rules = new List<GrammarRule>();
+
         private MissionGraph mother;
 
-        public Framework.GraphGrammar.GraphGrammar grammar;
+        public GraphGrammar grammar;
 
         private IEnumerable<DrawableMissionVertex.ListElement> positions =
             new List<DrawableMissionVertex.ListElement>();
 
         private readonly Dictionary<MissionVertex, Vector3> dictionary = new Dictionary<MissionVertex, Vector3>(
             new IdentityEqualityComparer<MissionVertex>());
-        
+
         public List<string> types = new List<string>();
-        
+
         public void MakeGrammar()
         {
             BuildRules();
 
-            foreach (GrammarRule grammarRule in rules)
-            {
-                foreach (MissionVertex vertex in grammarRule.LeftHandSide.Vertices)
-                {
-                    if (!types.Contains(vertex.Type))
-                    {
-                        types.Add(vertex.Type);
-                    }
-                   
-                }
-                foreach (MissionVertex vertex in grammarRule.RightHandSide.Vertices)
-                {
-                    if (!types.Contains(vertex.Type))
-                    {
-                        types.Add(vertex.Type);
-                    }
-                }
-            }
+            // foreach (GrammarRule grammarRule in rules)
+            // {
+            //     foreach (MissionVertex vertex in grammarRule.LeftHandSide.Vertices)
+            //     {
+            //         if (!types.Contains(vertex.Type))
+            //         {
+            //             types.Add(vertex.Type);
+            //         }
+            //        
+            //     }
+            //     foreach (MissionVertex vertex in grammarRule.RightHandSide.Vertices)
+            //     {
+            //         if (!types.Contains(vertex.Type))
+            //         {
+            //             types.Add(vertex.Type);
+            //         }
+            //     }
+            // }
 
-            types = types.Distinct().ToList();
+            // types = types.Distinct().ToList();
 
             //mother graph
             mother = CreateLinearGraph(new List<string>()
             {
                 "Start"
             });
-
             grammar = new Framework.GraphGrammar.GraphGrammar(rules, mother);
-
             Debug.Log($"Replaced: {string.Join("; ", mother.Vertices)}");
 
             //show in unity
@@ -88,10 +85,10 @@ namespace Framework.GraphGrammar
         private void OnDrawGizmos()
         {
             Dictionary<string, Color> colors = new Dictionary<string, Color>();
+
             Dictionary<MissionVertex, Vector3> dict =
                 new Dictionary<MissionVertex, Vector3>(
                     new IdentityEqualityComparer<MissionVertex>());
-
             foreach (DrawableMissionVertex.ListElement position in positions)
             {
                 Color color;
@@ -128,7 +125,10 @@ namespace Framework.GraphGrammar
         private void BuildRules()
         {
             //rule 00
-            CreateLinearRule(new List<string>() {"Start"},
+            CreateLinearRule(new List<string>()
+                {
+                    "Start"
+                },
                 new List<string>()
                 {
                     "Entrance", "Chain", "Gate",
@@ -140,6 +140,7 @@ namespace Framework.GraphGrammar
             //rule non linear 00
             MissionGraph left01 = CreateLinearGraph(new List<string>()
                 {"ChainFinal", "Goal"});
+
             MissionGraph right01 = new MissionGraph();
             DrawableMissionVertex c = new DrawableMissionVertex(("Chain"));
             DrawableMissionVertex h0 = new DrawableMissionVertex(("Hook"));
@@ -174,14 +175,20 @@ namespace Framework.GraphGrammar
             rules.Add(rule);
 
             //rule 01
-            CreateLinearRule(new List<string>() {"Chain", "Gate"},
+            CreateLinearRule(new List<string>()
+                {
+                    "Chain", "Gate"
+                },
                 new List<string>()
                 {
                     "ChainLinear", "ChainLinear", "ChainLinear",
                 });
 
             //rule 02
-            CreateLinearRule(new List<string>() {"Chain", "Goal"},
+            CreateLinearRule(new List<string>()
+                {
+                    "Chain", "Goal"
+                },
                 new List<string>()
                 {
                     "ChainLinear", "ChainLinear", "ChainLinear",
@@ -189,7 +196,10 @@ namespace Framework.GraphGrammar
                 });
 
             //rule 03
-            CreateLinearRule(new List<string>() {"Chain", "Goal"},
+            CreateLinearRule(new List<string>()
+                {
+                    "Chain", "Goal"
+                },
                 new List<string>()
                 {
                     "ChainLinear", "ChainLinear", "ChainLinear",
@@ -198,70 +208,138 @@ namespace Framework.GraphGrammar
                 });
 
             //rule 04
-            CreateLinearRule(new List<string>() {"ChainLinear"},
-                new List<string>() {"Test"});
+            CreateLinearRule(new List<string>()
+                {
+                    "ChainLinear"
+                },
+                new List<string>()
+                {
+                    "Test"
+                });
 
             //rule 05
-            CreateLinearRule(new List<string>() {"ChainLinear"},
+            CreateLinearRule(new List<string>()
+                {
+                    "ChainLinear"
+                },
                 new List<string>()
-                    {"Test", "Test", "ItemBonus"});
+                {
+                    "Test", "Test", "ItemBonus"
+                });
 
             //rule 06
-            CreateLinearRule(new List<string>() {"ChainLinear"},
-                new List<string>() {"TestSecret"});
+            CreateLinearRule(new List<string>()
+                {
+                    "ChainLinear"
+                },
+                new List<string>()
+                {
+                    "TestSecret"
+                });
 
             //rule 07
             CreateLinearRule(
-                new List<string>() {"ChainLinear", "ChainLinear"},
-                new List<string>() {"Key", "Lock"});
+                new List<string>()
+                {
+                    "ChainLinear", "ChainLinear"
+                },
+                new List<string>()
+                {
+                    "Key", "Lock"
+                });
 
             //rule 08
             CreateLinearRule(
-                new List<string>() {"ChainLinear", "ChainLinear"},
                 new List<string>()
-                    {"Key", "Lock", "ChainLinear"});
+                {
+                    "ChainLinear", "ChainLinear"
+                },
+                new List<string>()
+                {
+                    "Key", "Lock", "ChainLinear"
+                });
 
             //rule 09
-            CreateLinearRule(new List<string>() {"Chain", "Gate"},
-                new List<string>() {"ChainParallel", "Gate"});
+            CreateLinearRule(new List<string>()
+                {
+                    "Chain", "Gate"
+                },
+                new List<string>()
+                {
+                    "ChainParallel", "Gate"
+                });
 
             //rule 10 
             CreateLinearRule(
-                new List<string>() {"Fork", "KeyMultiPiece"},
                 new List<string>()
-                    {"Fork", "Test", "KeyMultiPiece"});
+                {
+                    "Fork", "KeyMultiPiece"
+                },
+                new List<string>()
+                {
+                    "Fork", "Test", "KeyMultiPiece"
+                });
 
             //rule 11
             CreateLinearRule(
-                new List<string>() {"Fork", "KeyMultiPiece"},
                 new List<string>()
-                    {"Fork", "TestSecret", "KeyMultiPiece"});
+                {
+                    "Fork", "KeyMultiPiece"
+                },
+                new List<string>()
+                {
+                    "Fork", "TestSecret", "KeyMultiPiece"
+                });
 
             //rule 12
-            CreateLinearRule(new List<string>() {"Fork", "Key"},
+            CreateLinearRule(new List<string>()
+                {
+                    "Fork", "Key"
+                },
                 new List<string>()
-                    {"Fork", "Test", "Key"});
+                {
+                    "Fork", "Test", "Key"
+                });
 
             //rule 13
-            CreateLinearRule(new List<string>() {"Fork", "Key"},
+            CreateLinearRule(new List<string>()
+                {
+                    "Fork", "Key"
+                },
                 new List<string>()
-                    {"Fork", "TestSecret", "Key"});
-
+                {
+                    "Fork", "TestSecret", "Key"
+                });
 
             //hook resolve 01
-            CreateLinearRule(new List<string>() {"Hook"},
+            CreateLinearRule(new List<string>()
+                {
+                    "Hook"
+                },
                 new List<string>()
                 {
                     "Nothing"
                 });
 
             //hook resolve 02
-            CreateLinearRule(new List<string>() {"Hook"},
-                new List<string>() {"Test", "ItemBonus"});
+            CreateLinearRule(new List<string>()
+                {
+                    "Hook"
+                },
+                new List<string>()
+                {
+                    "Test", "ItemBonus"
+                });
 
             //hook resolve 03
-            CreateLinearRule(new List<string>() {"Hook"},
-                new List<string>() {"TestSecret", "ItemBonus"});
+            CreateLinearRule(new List<string>()
+                {
+                    "Hook"
+                },
+                new List<string>()
+                {
+                    "TestSecret", "ItemBonus"
+                });
 
             //rule non-linear 01
             MissionGraph left = CreateLinearGraph(new List<string>()
@@ -289,10 +367,10 @@ namespace Framework.GraphGrammar
             GrammarRule rule01 = new GrammarRule(left, right);
             rules.Add(rule01);
 
-
             //rule non-linear 02
             MissionGraph left02 = CreateLinearGraph(new List<string>()
                 {"Fork", "KeyMultiPiece"});
+
             MissionGraph right02 = new MissionGraph();
             DrawableMissionVertex f0 = new DrawableMissionVertex(("Fork"));
             DrawableMissionVertex k = new DrawableMissionVertex(("Key"));
@@ -341,8 +419,11 @@ namespace Framework.GraphGrammar
         private MissionGraph CreateLinearGraph(IList<string> nodes)
         {
             MissionGraph missionGraph = new MissionGraph();
+
             DrawableMissionVertex prev = null;
-            for (int index = 0; index < nodes.Count; index++)
+            for (int index = 0;
+                index < nodes.Count;
+                index++)
             {
                 string type = nodes[index];
                 DrawableMissionVertex next = new DrawableMissionVertex(type);

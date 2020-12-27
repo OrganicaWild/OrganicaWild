@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Framework.GraphGrammar
 {
     [Serializable]
     public class MissionVertex : IEquatable<MissionVertex>
     {
-        public IList<MissionVertex> ForwardNeighbours { get; }
-        public IList<MissionVertex> IncomingNeighbours { get; }
-        public string Type { get; }
+        public List<MissionVertex> ForwardNeighbours { get; }
+        public List<MissionVertex> IncomingNeighbours { get; }
+        public string Type { get; set; }
         public bool Discovered { get; set; }
 
         public MissionVertex(string type)
