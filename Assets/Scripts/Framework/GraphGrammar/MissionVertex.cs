@@ -13,11 +13,18 @@ namespace Framework.GraphGrammar
         public string Type { get; set; }
         public bool Discovered { get; set; }
 
+        public Vector2 Position { get; set; }
+
         public MissionVertex(string type)
         {
             this.Type = type;
             ForwardNeighbours = new List<MissionVertex>();
             IncomingNeighbours = new List<MissionVertex>();
+        }
+
+        private MissionVertex()
+        {
+            
         }
 
         public void AddNextNeighbour(MissionVertex neighbour)

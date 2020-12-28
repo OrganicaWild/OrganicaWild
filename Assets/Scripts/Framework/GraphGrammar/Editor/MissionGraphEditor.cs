@@ -1,6 +1,4 @@
-using System;
-using System.Data;
-using System.Linq;
+using Framework.GraphGrammar.Data;
 using UnityEditor;
 using UnityEngine;
 

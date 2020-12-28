@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Xml.Serialization;
 using Framework.Util;
 
 namespace Framework.GraphGrammar
@@ -166,6 +168,35 @@ namespace Framework.GraphGrammar
         public override string ToString()
         {
             return $"({string.Join(", ", Vertices)})";
+        }
+
+        public string Serialize()
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(ms, this);
+                ms.Position = 0;
+            
+                // StreamWriter sw = new StreamWriter(ms);
+                // sw.Flush();
+                // ms.Position = 0;
+                // StreamReader sr = new StreamReader(ms);
+                // string serializedData = sr.ReadToEnd();
+                return Encoding.ASCII.GetString(ms.ToArray());
+                //return serializedData;
+            }
+
+            //XmlSerializer serializer = new XmlSerializer(GetType()); 
+            
+        }
+
+        public static MissionGraph Deserialize(string serializedData)
+        {
+            var stream = new MemoryStream(Encoding.ASCII.GetBytes(serializedData ?? ""));
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            return (MissionGraph) formatter.Deserialize(stream);
         }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using Framework.GraphGrammar.Data;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,21 +10,23 @@ namespace Framework.GraphGrammar.Editor
 {
     public class GraphEditor : EditorWindow
     {
-        public EditorMissionGraph missionGraph;
-        public bool newRule = true;
-        private SerializedObject obj;
+        //model
+        private EditorMissionGraph missionGraph;
+        private MissionGraph graph;
+        private SerializedObject unitySerializedObject;
 
-        private Vector2 scrollPos = Vector2.zero;
-
+        //UI Config
         public float size = 10f;
         public Texture aTexture;
 
+        //UI Model State Variables
         private MissionVertex start;
+        private VertexContainer[] vertices = new VertexContainer[100];
+        private Vector2 scrollPos = Vector2.zero;
+        private int currentlyEnabledWindows = 0;
 
-        public VertexContainer[] vertices = new VertexContainer[100];
-
-        public int currentlyEnabledWindows = 0;
-
+        private static int MaximumNumberOfNodes = 112;
+        
         [MenuItem("Organica Wild/Create/Graph Grammar Rule")]
         private static void ShowWindow()
         {
@@ -34,7 +38,11 @@ namespace Framework.GraphGrammar.Editor
         public void Setup(EditorMissionGraph missionGraph)
         {
             this.missionGraph = missionGraph;
-            obj = new SerializedObject(this.missionGraph);
+            string serialized = missionGraph.serializedMissionGraph;
+            SerializableMissionGraph deserializedSerializableMissionGraph =
+                SerializableMissionGraph.Deserialize(serialized);
+            graph = deserializedSerializableMissionGraph.GetMissionGraph();
+            unitySerializedObject = new SerializedObject(missionGraph);
         }
 
         private void OnGUI()
@@ -44,23 +52,33 @@ namespace Framework.GraphGrammar.Editor
             if (missionGraph == null)
             {
                 missionGraph = CreateInstance<EditorMissionGraph>();
-                AssetDatabase.CreateAsset(missionGraph, $"Assets/MissionGraph.asset");
-                obj = new SerializedObject(missionGraph);
+                graph = new MissionGraph();
+                AssetDatabase.CreateAsset(missionGraph,
+                    $"Assets/MissionGraph_{DateTime.Now:yy_MMM_dd_hh_mm_ss_ms}.asset");
+                unitySerializedObject = new SerializedObject(missionGraph);
             }
-            
+
             if (GUILayout.Button("Save Rule"))
             {
-                Save();
+                if (graph.Start == null || graph.End == null)
+                {
+                    Debug.LogError("Start or End of the graph is not set.");
+                }
+                else
+                {
+                    Save();
+                }
+               
             }
-            
+
             MissionGraphNodeArea();
         }
 
         private void MissionGraphNodeArea()
         {
             currentlyEnabledWindows = 0;
-            
-            foreach (MissionVertex missionVertex in missionGraph.graph.Vertices)
+
+            foreach (MissionVertex missionVertex in graph.Vertices)
             {
                 VertexContainer newContainer = new VertexContainer()
                     {vertex = missionVertex, index = currentlyEnabledWindows, enabled = true};
@@ -70,17 +88,21 @@ namespace Framework.GraphGrammar.Editor
 
             if (GUILayout.Button("New Vertex"))
             {
-                MissionVertex vertex = new MissionVertex("default");
-
-                //enable window for vertex
-                vertices[currentlyEnabledWindows] = new VertexContainer()
-                    {vertex = vertex, index = currentlyEnabledWindows, enabled = true};
-                currentlyEnabledWindows = vertices.Length;
-                missionGraph.graph.Vertices.Add(vertex);
-                //Add vertex to the graph
+                if (currentlyEnabledWindows < MaximumNumberOfNodes)
+                {
+                    MissionVertex vertex = new MissionVertex("default");
+                    //enable window for vertex
+                    vertices[currentlyEnabledWindows] = new VertexContainer()
+                        {vertex = vertex, index = currentlyEnabledWindows, enabled = true};
+                    currentlyEnabledWindows = vertices.Length;
+                    graph.Vertices.Add(vertex);
+                }
+                else
+                {
+                    Debug.LogError("Maximum number of mission nodes reached");
+                }
             }
 
-            //DisplayList("currentVertices");
             scrollPos = GUI.BeginScrollView(new Rect(0, 50, position.width, position.height), scrollPos,
                 new Rect(0, 0, 1000, 1000));
             BeginWindows();
@@ -121,20 +143,20 @@ namespace Framework.GraphGrammar.Editor
 
             GUILayout.Label($"Type:");
             vertex.Type = GUILayout.TextField(vertex.Type);
-            bool isStart = missionGraph.graph.Start == vertex;
+            bool isStart = graph.Start == vertex;
             bool toggledStart = GUILayout.Toggle(isStart, "is start of graph?");
 
             if (toggledStart != isStart)
             {
-                missionGraph.graph.Start = toggledStart ? vertex : null;
+                graph.Start = toggledStart ? vertex : null;
             }
 
-            bool isEnd = missionGraph.graph.End == vertex;
+            bool isEnd = graph.End == vertex;
             bool toggledEnd = GUILayout.Toggle(isEnd, "is end of graph?");
 
             if (toggledEnd != isEnd)
             {
-                missionGraph.graph.End = toggledEnd ? vertex : null;
+                graph.End = toggledEnd ? vertex : null;
             }
 
             if (GUILayout.Button("Connect"))
@@ -156,16 +178,7 @@ namespace Framework.GraphGrammar.Editor
 
         private void CreateVertexWindow(int index)
         {
-            vertices[index].windowRect = GUILayout.Window(index + 1, vertices[index].windowRect, DoWindow, "Node");
-        }
-
-        private void DisplayList(string name)
-        {
-            ScriptableObject target = this;
-            SerializedObject so = new SerializedObject(target);
-            SerializedProperty property = so.FindProperty(name);
-            EditorGUILayout.PropertyField(property, true); // True means show children
-            so.ApplyModifiedProperties();
+            vertices[index].windowRect = GUILayout.Window(index + 1, vertices[index].windowRect, DoWindow, "Mission Node");
         }
 
         private void DrawNodeCurve(Rect start, Rect end)
@@ -187,69 +200,13 @@ namespace Framework.GraphGrammar.Editor
 
         private void Save()
         {
-            
+            SerializableMissionGraph serializableGraph = new SerializableMissionGraph(graph);
+            string serialized = serializableGraph.Serialize();
+            string _ = unitySerializedObject.FindProperty("serializedMissionGraph").stringValue = serialized;
+            unitySerializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(missionGraph);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
-
-        public class VertexContainer
-        {
-            public MissionVertex vertex = null;
-            public int index;
-
-            public Rect windowRect
-            {
-                get => windowRects[index];
-                set => windowRects[index] = value;
-            }
-
-            public bool enabled;
-        }
-
-        public static Rect[] windowRects = new[]
-        {
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-            new Rect(250, 400, 200, 150),
-        };
     }
 }
