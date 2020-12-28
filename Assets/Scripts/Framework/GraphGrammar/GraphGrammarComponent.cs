@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Framework.GraphGrammar.Data;
 using Framework.Util;
 using UnityEditor;
 using UnityEngine;
@@ -8,9 +11,11 @@ namespace Framework.GraphGrammar
 {
     public class GraphGrammarComponent : MonoBehaviour
     {
-        private List<GrammarRule> rules = new List<GrammarRule>();
+        public List<EditorGrammarRule> rules = new List<EditorGrammarRule>();
+        public EditorMissionGraph mother;
+        private List<GrammarRule> internalRules;
 
-        private MissionGraph mother;
+        private MissionGraph internalMother;
 
         public GraphGrammar grammar;
 
@@ -20,44 +25,23 @@ namespace Framework.GraphGrammar
         private readonly Dictionary<MissionVertex, Vector3> dictionary = new Dictionary<MissionVertex, Vector3>(
             new IdentityEqualityComparer<MissionVertex>());
 
-        public List<string> types = new List<string>();
-
         public void MakeGrammar()
         {
-            BuildRules();
-
-            // foreach (GrammarRule grammarRule in rules)
-            // {
-            //     foreach (MissionVertex vertex in grammarRule.LeftHandSide.Vertices)
-            //     {
-            //         if (!types.Contains(vertex.Type))
-            //         {
-            //             types.Add(vertex.Type);
-            //         }
-            //        
-            //     }
-            //     foreach (MissionVertex vertex in grammarRule.RightHandSide.Vertices)
-            //     {
-            //         if (!types.Contains(vertex.Type))
-            //         {
-            //             types.Add(vertex.Type);
-            //         }
-            //     }
-            // }
-
-            // types = types.Distinct().ToList();
-
-            //mother graph
-            mother = CreateLinearGraph(new List<string>()
+            internalRules = new List<GrammarRule>();
+            foreach (GrammarRule rule in rules.Select(editorGrammarRule => editorGrammarRule.GetGrammarRule()))
             {
-                "Start"
-            });
-            grammar = new Framework.GraphGrammar.GraphGrammar(rules, mother);
-            Debug.Log($"Replaced: {string.Join("; ", mother.Vertices)}");
+                internalRules.Add(rule);
+            }
 
+            internalMother = mother.DeserializeAndConvert();
+            
+            grammar = new GraphGrammar(internalRules, internalMother);
+            Debug.Log($"Replaced: {string.Join("; ", internalMother.Vertices)}");
+
+            DrawableMissionVertex motherAsDrawable = internalMother.Start as DrawableMissionVertex;
             //show in unity
             positions =
-                (mother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
+                motherAsDrawable.Paint(new Vector3(0, 0, 0),
                     new List<DrawableMissionVertex.ListElement>(),
                     dictionary);
         }
@@ -66,20 +50,20 @@ namespace Framework.GraphGrammar
         {
             grammar.ApplyOneRule();
             positions =
-                (mother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
+                (internalMother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
                     new List<DrawableMissionVertex.ListElement>(),
                     dictionary);
-            Debug.Log($"Replaced: {string.Join("; ", mother.Vertices)}");
+            Debug.Log($"Replaced: {string.Join("; ", internalMother.Vertices)}");
         }
 
         public void ApplyUntilFinished()
         {
             grammar.ApplyUntilNoNonTerminal();
             positions =
-                (mother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
+                (internalMother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
                     new List<DrawableMissionVertex.ListElement>(),
                     dictionary);
-            Debug.Log($"Replaced: {string.Join("; ", mother.Vertices)}");
+            Debug.Log($"Replaced: {string.Join("; ", internalMother.Vertices)}");
         }
 
         private void OnDrawGizmos()
@@ -172,7 +156,7 @@ namespace Framework.GraphGrammar
             right01.Start = c;
             right01.End = go;
             GrammarRule rule = new GrammarRule(left01, right01);
-            rules.Add(rule);
+            internalRules.Add(rule);
 
             //rule 01
             CreateLinearRule(new List<string>()
@@ -365,7 +349,7 @@ namespace Framework.GraphGrammar
             right.Start = f;
             right.End = lm;
             GrammarRule rule01 = new GrammarRule(left, right);
-            rules.Add(rule01);
+            internalRules.Add(rule01);
 
             //rule non-linear 02
             MissionGraph left02 = CreateLinearGraph(new List<string>()
@@ -389,7 +373,7 @@ namespace Framework.GraphGrammar
             right02.Start = f0;
             right02.End = h;
             GrammarRule rule02 = new GrammarRule(left02, right02);
-            rules.Add(rule02);
+            internalRules.Add(rule02);
 
             //rule non-linear 03
             MissionGraph left03 = CreateLinearGraph(new List<string>() {"Fork"});
@@ -405,7 +389,7 @@ namespace Framework.GraphGrammar
             right03.Start = n;
             right03.End = h02;
             GrammarRule rule03 = new GrammarRule(left03, right03);
-            rules.Add(rule03);
+            internalRules.Add(rule03);
         }
 
         private void CreateLinearRule(IList<string> leftHandSide, IList<string> rightHandSide)
@@ -413,7 +397,7 @@ namespace Framework.GraphGrammar
             MissionGraph left = CreateLinearGraph(leftHandSide);
             MissionGraph right = CreateLinearGraph(rightHandSide);
             GrammarRule rule = new GrammarRule(left, right);
-            rules.Add(rule);
+            internalRules.Add(rule);
         }
 
         private MissionGraph CreateLinearGraph(IList<string> nodes)
@@ -443,6 +427,21 @@ namespace Framework.GraphGrammar
             }
 
             return missionGraph;
+        }
+
+        private void Save(MissionGraph graph, int n)
+        {
+            EditorMissionGraph missionGraph = ScriptableObject.CreateInstance<EditorMissionGraph>();
+            AssetDatabase.CreateAsset(missionGraph,
+                $"Assets/MissionGraph_{DateTime.Now:yy_MMM_dd_hh_mm_ss_ms}_{n}.asset");
+            SerializedObject unitySerializedObject = new SerializedObject(missionGraph);
+            SerializableMissionGraph serializableGraph = new SerializableMissionGraph(graph);
+            string serialized = serializableGraph.Serialize();
+            string _ = unitySerializedObject.FindProperty("serializedMissionGraph").stringValue = serialized;
+            unitySerializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(missionGraph);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
     }
 }

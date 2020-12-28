@@ -28,8 +28,7 @@ namespace Framework.GraphGrammar.Data
             {
                 MissionVertex missionVertex = source.Vertices[index];
                 
-                SerializableMissionVertex serMissionVertex = new SerializableMissionVertex(index, missionVertex.Type,
-                    missionVertex.Position);
+                SerializableMissionVertex serMissionVertex = new SerializableMissionVertex(index, missionVertex.Type);
                 numberOfEdges += missionVertex.ForwardNeighbours.Count;
                 ids.Add(missionVertex, index);
                 Vertices[index] = serMissionVertex;
@@ -61,10 +60,7 @@ namespace Framework.GraphGrammar.Data
 
             foreach (SerializableMissionVertex serializableMissionVertex in Vertices)
             {
-                MissionVertex vertex = new MissionVertex(serializableMissionVertex.Type)
-                {
-                    Position = serializableMissionVertex.pos
-                };
+                MissionVertex vertex = new DrawableMissionVertex(serializableMissionVertex.Type);
                 result.AddVertex(vertex);
                 
                 missionVertices.Add(serializableMissionVertex.ID, vertex);

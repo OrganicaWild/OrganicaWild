@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Demo.ShapeGrammar;
 using Framework.GraphGrammar;
-using Framework.Util;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

@@ -13,8 +13,6 @@ namespace Framework.GraphGrammar
         public string Type { get; set; }
         public bool Discovered { get; set; }
 
-        public Vector2 Position { get; set; }
-
         public MissionVertex(string type)
         {
             this.Type = type;
