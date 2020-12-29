@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="restructre">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/riderModule.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/4a/76aa60a6/ArraySortHelper`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B926ACD-10D4-48DA-9AA3-641E61A8737F/51/bcabb118/MyAlgorithmRunner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/2a/0d72e35c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/48/791df3b4/Array.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/StandardAlgorithmRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/StandardMapBuilder.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IGenoPhenoCombination.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/DistanceToBorderFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/StandardGenoPhenoCombination.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Standard/EnemyDistanceFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardAlgorithmRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardGenoPhenoCombination.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardMapBuilder.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IFitnessFunctionBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/INsga2FitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IAlgorithmIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/StandardGenoPhenotypeCombination2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/StandardAlgorithmRunner2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/StandardFitnessFunction2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/MyIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/MyAlgorithmRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/StandardIndividual2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/StandardFitnessFunction2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual/DistanceToBorderFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardFitnessFunction2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/FitnessFunctionMismatch.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/FitnessFunctionMismatchException.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/AbstractNsga2FitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/INsga2Individual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/AbstractNsga2Individual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IEvolutionaryAlgorithm.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/FitnessFunctionNumberMismatchException.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/WallMapBuilder.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ForestIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/RoundnessFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/RoundnessFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestFilledFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestFitnessFunctions.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IEvolutionaryAlgorithmIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Forest/ForestBuilder.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/OptimizationTargetComparer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/RankCrowdingComparer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/DistanceToBorderFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/EnemyDistanceFitnessFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyAlgorithmRunner2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/MyIndividual.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Demo/StandardIndividual2.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34945163" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.3000997" />
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="" />
+      <created>1604225076163</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604225076163</updated>
+      <workItem from="1604225079487" duration="26492000" />
+      <workItem from="1604261479064" duration="3360000" />
+      <workItem from="1604338712458" duration="2203000" />
+      <workItem from="1604399383375" duration="19561000" />
+      <workItem from="1604681526908" duration="3991000" />
+      <workItem from="1604851673389" duration="15544000" />
+      <workItem from="1604919117822" duration="3332000" />
+      <workItem from="1605171268135" duration="2171000" />
+    </task>
+    <task id="LOCAL-00001" summary="restructre">
+      <created>1604263216246</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604263216246</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="restructre" />
+    <option name="LAST_COMMIT_MESSAGE" value="restructre" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="459" height="464" key="DebuggerActiveHint" timestamp="1604872908148">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="459" height="464" key="DebuggerActiveHint/0.0.3440.1400@0.0.3440.1400" timestamp="1604872908148" />
+    <state width="2037" height="373" key="GridCell.Tab.0.bottom" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.0.center" timestamp="1604875203384">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203384" />
+    <state width="2037" height="373" key="GridCell.Tab.0.left" timestamp="1604875203384">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203384" />
+    <state width="2037" height="373" key="GridCell.Tab.0.right" timestamp="1604875203384">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203384" />
+    <state width="2037" height="373" key="GridCell.Tab.1.bottom" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.1.center" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.1.left" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.1.right" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.2.bottom" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.2.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.2.center" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.2.center/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.2.left" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.2.left/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.2.right" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.2.right/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.3.bottom" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.3.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.3.center" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.3.center/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.3.left" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.3.left/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state width="2037" height="373" key="GridCell.Tab.3.right" timestamp="1604875203385">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="2037" height="373" key="GridCell.Tab.3.right/0.0.3440.1400@0.0.3440.1400" timestamp="1604875203385" />
+    <state x="1222" y="389" key="RiderGenerateDialog" timestamp="1604870774916">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1222" y="389" key="RiderGenerateDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1604870774916" />
+    <state x="2122" y="207" width="998" height="981" key="SettingsEditor" timestamp="1605177681120">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2122" y="207" width="998" height="981" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1605177681120" />
+    <state x="230" y="353" width="1803" height="954" key="VCS.FileHistoryDialog" timestamp="1604432399338">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="230" y="353" width="1803" height="954" key="VCS.FileHistoryDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1604432399338" />
+    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604424563370">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2239" y="617" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1604424563370" />
+    <state x="2204" y="508" key="save.file.as.template.dialog" timestamp="1604239921165">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2204" y="508" key="save.file.as.template.dialog/0.0.3440.1400@0.0.3440.1400" timestamp="1604239921165" />
+    <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup" timestamp="1604870213693">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2085" y="320" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1604870213693" />
+  </component>
+</project>
