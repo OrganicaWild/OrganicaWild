@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public static class PoissonDiskSampling
 {
+    // This should become the final approach that does not yet work 100%
+
     //public static IEnumerable<Vector2> GeneratePoints(float width, float height, float radius,
     //    int numSamplesBeforeRejection = 30)
     //{
