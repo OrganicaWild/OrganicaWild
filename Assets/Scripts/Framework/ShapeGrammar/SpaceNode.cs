@@ -6,27 +6,28 @@ using UnityEngine;
 
 namespace Framework.ShapeGrammar
 {
-    public class SpaceNode
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class SpaceNode
     {
-        private readonly MeshCorner attachedToHook;
-        private readonly MeshCorner attacherHook;
-        private readonly GameObject toInstantiate;
-        public readonly SpaceNode parentSpaceNode;
-        public MissionVertex GrammarMissionVertex { get; }
+        private readonly SpaceNodeConnection attachedToHook;
+        private readonly SpaceNodeConnection attacherHook;
+        private readonly GameObject prefab;
+        internal readonly SpaceNode parentSpaceNode;
         public GameObject InstantiatedReference { get; set; }
 
-        private readonly List<MeshCorner> openHooks;
+        private readonly List<SpaceNodeConnection> openHooks;
 
-        public SpaceNode(MeshCorner attachedToHook, GameObject toInstantiate, ShapeGrammarRuleComponent ruleComponent,
+        internal SpaceNode(SpaceNodeConnection attachedToHook, GameObject prefab, ShapeGrammarRuleComponent ruleComponent,
             MissionVertex missionVertex, SpaceNode parentSpaceNode)
         {
             this.attachedToHook = attachedToHook;
-            this.toInstantiate = toInstantiate;
+            this.prefab = prefab;
             this.parentSpaceNode = parentSpaceNode;
-            GrammarMissionVertex = missionVertex;
-            
-            List<MeshCorner> corners = ruleComponent.connection.corners.ToList();
-            MeshCorner entryCorner = ruleComponent.connection.entryCorner;
+
+            List<SpaceNodeConnection> corners = ruleComponent.connection.corners.ToList();
+            SpaceNodeConnection entryCorner = ruleComponent.connection.entryCorner;
 
             openHooks = corners;
 
@@ -43,20 +44,20 @@ namespace Framework.ShapeGrammar
             return parentSpaceNode;
         }
 
-        internal List<MeshCorner> GetOpenHooks()
+        internal List<SpaceNodeConnection> GetOpenHooks()
         {
             return openHooks.ToList();
         }
 
-        internal MeshCorner GetOpenHook()
+        internal SpaceNodeConnection GetOpenHook()
         {
             int index = Random.Range(0, openHooks.Count);
-            MeshCorner chosenHook = openHooks[index];
+            SpaceNodeConnection chosenHook = openHooks[index];
             //openHooks.Remove(chosenHook);
             return chosenHook;
         }
 
-        internal void RemoveOpenHook(MeshCorner hook)
+        internal void RemoveOpenHook(SpaceNodeConnection hook)
         {
             openHooks.Remove(hook);
         }
@@ -66,28 +67,28 @@ namespace Framework.ShapeGrammar
             return openHooks.Count;
         }
 
-        internal MeshCorner GetHook()
+        private SpaceNodeConnection GetHook()
         {
             return attachedToHook;
         }
 
         internal GameObject GetPrefab()
         {
-            return toInstantiate;
+            return prefab;
         }
 
-        internal MeshCorner GetEntryHook()
+        private SpaceNodeConnection GetEntryHook()
         {
             return attacherHook;
         }
 
-        public Vector3 GetRotatedEntryHook()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private Vector3 GetRotatedEntryHook()
         {
             return GetLocalRotation() * attacherHook.connectionPoint;
-            // for (int index = 0; index < openHooks.Count; index++)
-            // {
-            //     openHooks[index] = rotateBy * openHooks[index];
-            // }
         }
 
         internal Vector3 GetLocalPosition()
@@ -95,6 +96,12 @@ namespace Framework.ShapeGrammar
             return GetHook().connectionPoint - GetRotatedEntryHook();
         }
 
+        /// <summary>
+        /// Returns the localRotation, which needs to be applied to the SpaceNode when being placed in the GameWorld
+        /// The Rotation is calculated by using the orientation of the hook that the new SpaceNode is getting attached to
+        /// and also the orientation of the entry hook of the new SpaceNode
+        /// </summary>
+        /// <returns>LocalRotation for this SpaceNode as a Quaternion</returns>
         internal Quaternion GetLocalRotation()
         {
             Vector3 a = GetEntryHook().connectionDirection.normalized;
@@ -109,8 +116,8 @@ namespace Framework.ShapeGrammar
             float sign = Mathf.Sign(cross.y);
 
             float dot = Vector3.Dot(a, b);
-            float newrotation = sign * Mathf.Acos(dot);
-            Quaternion localRotation = Quaternion.Euler(0, newrotation * Mathf.Rad2Deg, 0);
+            float newRotation = sign * Mathf.Acos(dot);
+            Quaternion localRotation = Quaternion.Euler(0, newRotation * Mathf.Rad2Deg, 0);
 
             // Vector3 rotatedA = localRotation * v.GetEntryHook();
             // Debug.DrawRay(Vector3.zero, rotatedA, Color.green, 1000);

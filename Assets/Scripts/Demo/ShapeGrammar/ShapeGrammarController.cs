@@ -25,14 +25,14 @@ public class ShapeGrammarController : MonoBehaviour
             }
             else
             {
-                grammar.ClearOldLeve();
+                grammar.ClearOldLevel();
                 cleared = true;
             }
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            grammar.ClearOldLeve();
+            grammar.ClearOldLevel();
             grammar.GenerateGeometry();
         }
     }

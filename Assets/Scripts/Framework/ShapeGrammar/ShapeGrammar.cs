@@ -8,7 +8,13 @@ namespace Framework.ShapeGrammar
 {
     public class ShapeGrammar : MonoBehaviour
     {
+        /// <summary>
+        /// Supply this in the editor with the prefabs of the shape grammar rules.
+        /// The minimum shape grammar rule is an empty GameObject with a ShapeGrammarRuleComponent,
+        /// a Rigidbody set to kinematic and a collider encompassing the full rule.
+        /// </summary>
         public GameObject[] rules;
+        
         private MissionGraph levelMissionGraph;
         private SpaceTree tree;
 
@@ -18,6 +24,9 @@ namespace Framework.ShapeGrammar
             GenerateGeometry();
         }
 
+        /// <summary>
+        /// Run the passed GraphGrammar to generate the underlying mission
+        /// </summary>
         public void GenerateLevel()
         {
             GraphGrammarComponent graphGrammarComponent = GetComponent<GraphGrammarComponent>();
@@ -27,18 +36,22 @@ namespace Framework.ShapeGrammar
             levelMissionGraph = graphGrammarComponent.GetLevel();
         }
 
-        public void ClearOldLeve()
+        /// <summary>
+        /// Clears all children of this GameObject
+        /// </summary>
+        public void ClearOldLevel()
         {
             foreach (Transform child in transform)
             {
-                GameObject.Destroy(child.gameObject);
+                Destroy(child.gameObject);
             }
         }
 
+        /// <summary>
+        /// Place the level down in geometry
+        /// </summary>
         public void GenerateGeometry()
         {
-         
-
             BuildTree();
         }
 
@@ -58,7 +71,7 @@ namespace Framework.ShapeGrammar
                 if (tree.Root == null)
                 {
                     tree.Root = new SpaceNode(
-                        new MeshCorner() {connectionPoint = transform.position, connectionDirection = Vector3.zero},
+                        new SpaceNodeConnection() {connectionPoint = transform.position, connectionDirection = Vector3.zero},
                         ruleRep,
                         ruleRep.GetComponent<ShapeGrammarRuleComponent>(), missionVertex, new SpaceNode(gameObject));
                     tree.Root.InstantiatedReference = DrawNode(tree.Root);
@@ -67,7 +80,7 @@ namespace Framework.ShapeGrammar
                 else
                 {
                     bool hasNoPlace = true;
-                    MeshCorner openHook;
+                    SpaceNodeConnection openHook;
                     SpaceNode attachLeaf;
                     SpaceNode newNode;
 
@@ -103,7 +116,7 @@ namespace Framework.ShapeGrammar
 
                         bool hitSomething = false;
 
-                        foreach (MeshCorner hook in newNode.GetOpenHooks())
+                        foreach (SpaceNodeConnection hook in newNode.GetOpenHooks())
                         {
                             var worldHook =
                                 newNode.InstantiatedReference.transform.TransformPoint(hook.connectionPoint);

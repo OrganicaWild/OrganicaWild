@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Demo.ShapeGrammar
 {
-    public class SubdivisionConnections : ShapeGrammarRuleComponent
+    public class SubdivisionGrammarRuleComponent : ShapeGrammarRuleComponent
     {
         private void Awake()
         {
@@ -21,7 +21,7 @@ namespace Demo.ShapeGrammar
 
             connection.entryCorner.center = transform.position;
 
-            foreach (MeshCorner shapeConnection in connection.corners)
+            foreach (SpaceNodeConnection shapeConnection in connection.corners)
             {
                 shapeConnection.center = transform.position;
             }
@@ -36,7 +36,7 @@ namespace Demo.ShapeGrammar
 
         public void SubDivide()
         {
-            List<MeshCorner> corners = new List<MeshCorner>() {connection.entryCorner};
+            List<SpaceNodeConnection> corners = new List<SpaceNodeConnection>() {connection.entryCorner};
             corners.AddRange(connection.corners);
 
             int index = Random.Range(0, corners.Count);
@@ -50,14 +50,14 @@ namespace Demo.ShapeGrammar
 
             Vector3 newPoint = Vector3.Lerp(v0, v1, percentage) + normal;
 
-            MeshCorner newConnection = new MeshCorner()
+            SpaceNodeConnection newConnection = new SpaceNodeConnection()
                 {connectionPoint = newPoint, connectionDirection = -normal, center = transform.position};
             connection.corners.Add(newConnection);
         }
 
         public void DrawPolygon()
         {
-            List<MeshCorner> corners = new List<MeshCorner>() {connection.entryCorner};
+            List<SpaceNodeConnection> corners = new List<SpaceNodeConnection>() {connection.entryCorner};
             corners.AddRange(connection.corners);
 
             Mesh mesh = new Mesh();

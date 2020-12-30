@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Framework.ShapeGrammar
 {
+    /// <summary>
+    /// Provides to ability to make any GameObject into a ShapeGrammarRule.
+    /// The GameObject should also have a kinematic Rigidbody and a Collider for overlap detection.
+    /// </summary>
     public class ShapeGrammarRuleComponent : MonoBehaviour
     {
         public string[] type;
@@ -25,7 +29,7 @@ namespace Framework.ShapeGrammar
 
             for (int index = 0; index < connection.corners.Count; index++)
             {
-                MeshCorner conn = connection.corners[index];
+                SpaceNodeConnection conn = connection.corners[index];
 
                 Vector3 pos = conn.connectionPoint + transform.position;
                 Vector3 negativePosition = pos - conn.connectionDirection;

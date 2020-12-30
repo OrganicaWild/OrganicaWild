@@ -4,10 +4,13 @@ using UnityEngine;
 
 namespace Framework.ShapeGrammar
 {
+    /// <summary>
+    /// Provides an interface to add hooks and connections to ShapeGrammarRuleComponents.
+    /// </summary>
     [CreateAssetMenu]
     public class ScriptableConnections : ScriptableObject
     {
-        public MeshCorner entryCorner;
-        public List<MeshCorner> corners;
+        public SpaceNodeConnection entryCorner;
+        public List<SpaceNodeConnection> corners;
     }
 }
