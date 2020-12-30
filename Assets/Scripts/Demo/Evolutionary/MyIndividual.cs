@@ -1,10 +1,10 @@
 using System;
 using Framework.Evolutionary;
 using Framework.Evolutionary.Nsga2;
-using Util;
+using Framework.Util;
 using Random = UnityEngine.Random;
 
-namespace Demo
+namespace Demo.Evolutionary
 {
     public class MyIndividual : AbstractNsga2Individual
     {

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6972316986720370306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6972316986720370319}
+  - component: {fileID: 6972316986720370304}
+  - component: {fileID: 6972316986720370305}
+  m_Layer: 0
+  m_Name: ShapeGrammarRunner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6972316986720370319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6972316986720370306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6972316986720370304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6972316986720370306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8c64e540ed446cbde1204e1bd54f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rules:
+  - {fileID: 695548299330847231, guid: 9cd6791396a10eb4d966be3601c0e783, type: 3}
+  - {fileID: 3031704389150323467, guid: 51dca317852195c42a6f4d2ebfe43c17, type: 3}
+  - {fileID: 956872417569925560, guid: c62cb059506d86a4b9ac74df7144ef2d, type: 3}
+--- !u!114 &6972316986720370305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6972316986720370306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe6ff05780043a4aa5d4a16f55df85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  types:
+  - ok
+  - Start
+  - Entrance
+  - Chain
+  - Gate
+  - BossMini
+  - ItemQuest
+  - TestItem
+  - ChainFinal
+  - Goal
+  - Hook
+  - LockFinal
+  - BossLevel
+  - Test
+  - KeyFinal
+  - ChainLinear
+  - ItemBonus
+  - TestSecret
+  - Key
+  - Lock
+  - ChainParallel
+  - Fork
+  - KeyMultiPiece
+  - Nothing
+  - LockMulti
