@@ -2,22 +2,29 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\dev\OrganicaWild" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Demo" t="Include">
-            <e p="DistanceToBorderFitnessFunction.cs" t="Include" />
-            <e p="EnemyDistanceFitnessFunction.cs" t="Include" />
-            <e p="Forest" t="Include">
-              <e p="ForestBuilder.cs" t="Include" />
-              <e p="ForestFitnessFunctions.cs" t="Include" />
-              <e p="ForestIndividual.cs" t="Include" />
+            <e p="Evolutionary" t="Include">
+              <e p="DistanceToBorderFitnessFunction.cs" t="Include" />
+              <e p="EnemyDistanceFitnessFunction.cs" t="Include" />
+              <e p="Forest" t="Include">
+                <e p="ForestBuilder.cs" t="Include" />
+                <e p="ForestFitnessFunctions.cs" t="Include" />
+                <e p="ForestIndividual.cs" t="Include" />
+              </e>
+              <e p="MyAlgorithmRunner.cs" t="Include" />
+              <e p="MyAlgorithmRunner2.cs" t="Include" />
+              <e p="MyIndividual.cs" t="Include" />
+              <e p="StandardFitnessFunction2.cs" t="Include" />
+              <e p="StandardIndividual2.cs" t="Include" />
             </e>
-            <e p="MyAlgorithmRunner.cs" t="Include" />
-            <e p="MyAlgorithmRunner2.cs" t="Include" />
-            <e p="MyIndividual.cs" t="Include" />
-            <e p="StandardFitnessFunction2.cs" t="Include" />
-            <e p="StandardIndividual2.cs" t="Include" />
+            <e p="ShapeGrammar" t="Include">
+              <e p="ShapeGrammarController.cs" t="Include" />
+              <e p="SubdivisionGrammarRuleComponent.cs" t="Include" />
+            </e>
           </e>
           <e p="Framework" t="Include">
             <e p="Evolutionary" t="Include">
@@ -35,8 +42,41 @@
                 <e p="RankCrowdingComparer.cs" t="Include" />
               </e>
             </e>
+            <e p="GraphGrammar" t="Include">
+              <e p="DrawableMissionVertex.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="GraphEditor.cs" t="Include" />
+                <e p="GraphGrammarComponentEditor.cs" t="Include" />
+                <e p="MissionGraphEditor.cs" t="Include" />
+              </e>
+              <e p="EditorData" t="Include">
+                <e p="EditorGrammarRule.cs" t="Include" />
+                <e p="EditorMissionGraph.cs" t="Include" />
+                <e p="SerializableMissionGraph.cs" t="Include" />
+                <e p="SerializableMissionGraphConnection.cs" t="Include" />
+                <e p="SerializableMissionVertex.cs" t="Include" />
+                <e p="VertexContainer.cs" t="Include" />
+              </e>
+              <e p="GrammarRule.cs" t="Include" />
+              <e p="GraphGrammar.cs" t="Include" />
+              <e p="GraphGrammarComponent.cs" t="Include" />
+              <e p="MissionGraph.cs" t="Include" />
+              <e p="MissionVertex.cs" t="Include" />
+            </e>
+            <e p="ShapeGrammar" t="Include">
+              <e p="ScriptableConnections.cs" t="Include" />
+              <e p="ShapeGrammar.cs" t="Include" />
+              <e p="ShapeGrammarRuleComponent.cs" t="Include" />
+              <e p="SpaceNode.cs" t="Include" />
+              <e p="SpaceNodeConnection.cs" t="Include" />
+              <e p="SpaceTree.cs" t="Include" />
+            </e>
             <e p="Util" t="Include">
+              <e p="IdentityEqualityComparer.cs" t="Include" />
+              <e p="MutableTuple.cs" t="Include" />
               <e p="RandomUtil.cs" t="Include" />
+              <e p="Triangulator.cs" t="Include" />
+              <e p="Vector3Extensions.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -46,7 +86,7 @@
       <e p="Packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
-    <e p="C:\Users\Christoph\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Christoph\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_OrganicaWild.1756585290.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Christoph\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Christoph\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_OrganicaWild.1756585290.00" t="ExcludeRecursive" />
   </component>
 </project>
