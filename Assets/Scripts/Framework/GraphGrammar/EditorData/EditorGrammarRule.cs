@@ -1,6 +1,6 @@
 using System;
 
-namespace Framework.GraphGrammar.Data
+namespace Framework.GraphGrammar.EditorData
 {
     [Serializable]
     public class EditorGrammarRule

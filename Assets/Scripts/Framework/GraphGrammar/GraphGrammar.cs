@@ -1,65 +1,90 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Framework.GraphGrammar
 {
+    /// <summary>
+    /// This Class represents a Graph Grammar with all its components
+    ///
+    /// The class contains all of the rules of the graph grammar and the initial graph.
+    /// The initial graph is 
+    /// 
+    /// </summary>
     public class GraphGrammar
     {
         private readonly IList<GrammarRule> rules;
         private readonly MissionGraph mother;
 
+        /// <summary>
+        /// Creates a Graph Grammar with the passed rules and the given mother graph.
+        /// The mother graph is the graph that will turn into the level graph after applied rules.
+        /// </summary>
+        /// <param name="rules">List of grammar rules</param>
+        /// <param name="mother">Initial graph for manipulation</param>
         public GraphGrammar(IList<GrammarRule> rules, MissionGraph mother)
         {
             this.rules = rules;
             this.mother = mother;
         }
 
+        /// <summary>
+        /// Returns a copy of the level graph in it's current state.
+        /// </summary>
         public MissionGraph GetLevel()
         {
             return mother.Clone();
         }
-
-        public int RuleCount()
-        {
-            return rules.Count;
-        }
-
+        
+       /// <summary>
+       /// Applies one random rule from the supplied rules on the level graph.
+       /// A rule can be applied several times. It is not removed after being applied once.
+       /// </summary>
+       /// <exception cref="Exception">thrown if no rules can be applied to the level graph</exception>
         public void ApplyOneRule()
         {
-            GrammarRule[] workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
+            GrammarRule[] workingRules = this.rules.Where(x => mother.ContainsSubGraphBool(x.LeftHandSide)).ToArray();
             if (workingRules.Any())
             {
                 GrammarRule chosenRule = workingRules[Random.Range(0, workingRules.Length)];
-                bool applied = ApplyRule(chosenRule);
-                Debug.Log(chosenRule);
+                ApplyRule(chosenRule);
             }
-
-            Debug.Log($"{string.Join(";", mother.Vertices)} Count: {mother.Vertices.Count}");
+            else
+            {
+                throw new Exception("No fitting rules found.");
+            }
+            
         }
 
-        public void ApplyUntilNoNonTerminal()
+       /// <summary>
+       /// Applies rules to the level graph, until no rule can be applied anymore.
+       /// </summary>
+       /// <returns>number of applied rules</returns>
+        public int ApplyUntilNoRulesFitAnymore()
         {
-            GrammarRule[] workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
+            GrammarRule[] workingRules = rules.Where(x => mother.ContainsSubGraphBool(x.LeftHandSide)).ToArray();
+            int appliedRules = 0;
             while (workingRules.Any())
             {
                 GrammarRule chosenRule = workingRules[Random.Range(0, workingRules.Count())];
-                bool applied = ApplyRule(chosenRule);
-                workingRules = this.rules.Where(x => mother.Contains(x.LeftHandSide)).ToArray();
+                ApplyRule(chosenRule);
+                workingRules = this.rules.Where(x => mother.ContainsSubGraphBool(x.LeftHandSide)).ToArray();
+                appliedRules++;
             }
+
+            return appliedRules;
         }
         
         private bool ApplyRule(GrammarRule rule)
         {
-            List<MissionGraph> subGraphs = mother.ContainedSubGraph(rule.LeftHandSide);
+            List<MissionGraph> subGraphs = mother.ContainsSubGraphMultiple(rule.LeftHandSide);
 
             MissionGraph rightHandSide = rule.RightHandSide.Clone();
             
             if (subGraphs.Any())
             {
-                //chose random subgraph to replace
+                //chose random subgraph to replace, if there are several fitting sub graphs
                 MissionGraph subMissionGraph = subGraphs[Random.Range(0, subGraphs.Count)];
                 
                 foreach (MissionVertex vertex in rightHandSide.Vertices)

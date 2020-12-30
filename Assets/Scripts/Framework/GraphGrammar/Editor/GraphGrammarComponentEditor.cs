@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,48 +17,20 @@ namespace Framework.GraphGrammar.Editor
 
             if (GUILayout.Button("Reset Graph"))
             {
-                grammarComponent.MakeGrammar();
+                grammarComponent.Initialize();
             }
 
             if (GUILayout.Button("One Rule"))
             {
-                grammarComponent.RunOneRule();
+                grammarComponent.ApplyOneRule();
             }
 
             if (GUILayout.Button("Run Until Termination"))
             {
-                grammarComponent.MakeGrammar();
-                grammarComponent.ApplyUntilFinished();
+                grammarComponent.Initialize();
+                grammarComponent.ApplyUntilNoRulesFitAnymore();
             }
             
         }
-
-        // private void TypeControl(GraphGrammarComponent grammarComponent)
-        // {
-        //     GUIStyle style = new GUIStyle
-        //     {
-        //         fontSize = 15,
-        //         fontStyle = FontStyle.Bold,
-        //         alignment = TextAnchor.MiddleCenter,
-        //         normal = {textColor = Color.white}
-        //     };
-        //
-        //     GUILayout.Label("All Types", style);
-        //     
-        //     types = grammarComponent.types.ToArray();
-        //     string allTypes = types.Aggregate("", (current, type) => current + ($"{type} \n"));
-        //     GUILayout.Label(allTypes);
-        //
-        //     newType = EditorGUILayout.TextField("New Type", newType);
-        //
-        //     if (GUILayout.Button("Add new Type"))
-        //     {
-        //         if (newType != "")
-        //         {
-        //             grammarComponent.types.Add(newType);
-        //             newType = "";
-        //         }
-        //     }
-        // }
     }
 }

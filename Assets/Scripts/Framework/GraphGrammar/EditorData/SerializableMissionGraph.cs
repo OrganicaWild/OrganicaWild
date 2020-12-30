@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
-using UnityEngine;
 
-namespace Framework.GraphGrammar.Data
+namespace Framework.GraphGrammar.EditorData
 {
     [Serializable]
     public class SerializableMissionGraph
@@ -49,8 +48,16 @@ namespace Framework.GraphGrammar.Data
                 }
             }
 
-            start = ids[source.Start];
-            end = ids[source.End];
+            if (source.Start != null)
+            {
+                start = ids[source.Start];
+            }
+
+            if (source.End != null)
+            {
+                end = ids[source.End];
+            }
+         
         }
 
         public MissionGraph GetMissionGraph()

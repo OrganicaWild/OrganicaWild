@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Framework.GraphGrammar.Data
+namespace Framework.GraphGrammar.EditorData
 {
     [Serializable]
     //[CreateAssetMenu(fileName = "GrammarRule", menuName = "Graph Grammar Rule", order = 0)]

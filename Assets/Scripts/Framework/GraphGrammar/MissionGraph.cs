@@ -3,24 +3,40 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Xml.Serialization;
 using Framework.Util;
 
 namespace Framework.GraphGrammar
 {
+    /// <summary>
+    /// Provides a graph structure for missions
+    /// </summary>
     [Serializable]
     public class MissionGraph
     {
-        public List<MissionVertex> Vertices { get; set; }
-        public MissionVertex Start { get; set; }
-        public MissionVertex End { get; set; }
+        /// <summary>
+        /// All vertices of the graph in a readonly list
+        /// </summary>
+        public List<MissionVertex> Vertices { get; }
 
+        /// <summary>
+        /// The Start vertex of the mission graph
+        /// </summary>
+        public MissionVertex Start { get; set; }
+
+        /// <summary>
+        /// The End vertex of the mission graph
+        /// </summary>
+        public MissionVertex End { get; set; }
+        
         public MissionGraph()
         {
             Vertices = new List<MissionVertex>();
         }
 
+        /// <summary>
+        /// Clone the mission graph
+        /// </summary>
+        /// <returns>A clone of this</returns>
         public MissionGraph Clone()
         {
             using (MemoryStream ms = new MemoryStream())
@@ -33,11 +49,20 @@ namespace Framework.GraphGrammar
             }
         }
 
+        /// <summary>
+        /// Add a vertex to a graph
+        /// </summary>
+        /// <param name="missionVertex">vertex to be added</param>
         public void AddVertex(MissionVertex missionVertex)
         {
             Vertices.Add(missionVertex);
         }
 
+        /// <summary>
+        /// Create and add a new Vertex by type to this MissionGraph.
+        /// </summary>
+        /// <param name="type">type of vertex</param>
+        /// <returns>A new MissionVertex instance with the specified type</returns>
         public MissionVertex AddVertex(string type)
         {
             MissionVertex missionVertex = new MissionVertex(type);
@@ -45,19 +70,35 @@ namespace Framework.GraphGrammar
             return missionVertex;
         }
 
+        /// <summary>
+        /// Removes a vertex from the MissionGraph.
+        /// Uncoupling from other vertices is also done here and does not have to be done manually.
+        /// </summary>
+        /// <param name="missionVertex"></param>
         public void RemoveVertex(MissionVertex missionVertex)
         {
             missionVertex.RemoveFromAllNeighbours();
             Vertices.Remove(missionVertex);
         }
 
-        public bool Contains(MissionGraph missionGraph)
+        /// <summary>
+        /// Check whether a given MissionGraph is contained in this MissionGraph.
+        /// </summary>
+        /// <param name="missionGraph">MissionGraph to test if it is a subgraph</param>
+        /// <returns>   true - missionGraph is subgraph
+        ///             false - missionGraph is not subgraph</returns>
+        public bool ContainsSubGraphBool(MissionGraph missionGraph)
         {
-            List<MissionGraph> containedAt = ContainedSubGraph(missionGraph);
+            List<MissionGraph> containedAt = ContainsSubGraphMultiple(missionGraph);
             return containedAt.Count > 0;
         }
 
-        public List<MissionGraph> ContainedSubGraph(MissionGraph missionGraph)
+        /// <summary>
+        /// Check whether a given MissionGraph is contained in this MissionGraph
+        /// </summary>
+        /// <param name="missionGraph"></param>
+        /// <returns>A list of all the SubGraphes in the mother graph, that have the same structure as the supplied MissionGraph</returns>
+        internal List<MissionGraph> ContainsSubGraphMultiple(MissionGraph missionGraph)
         {
             List<MutableTuple<MissionVertex>> potentialPositions
                 = Vertices.Where(x => x.Equals(missionGraph.Start))
@@ -138,6 +179,10 @@ namespace Framework.GraphGrammar
             return potentialSubGraphs;
         }
 
+        /// <summary>
+        /// Traverse MissionGraph by BFS.
+        /// </summary>
+        /// <returns>List of vertices in traversed order</returns>
         public List<MissionVertex> Traverse()
         {
             List<MissionVertex> traversal = new List<MissionVertex>();

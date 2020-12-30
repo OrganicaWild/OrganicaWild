@@ -21,10 +21,10 @@ namespace Framework.ShapeGrammar
         public void GenerateLevel()
         {
             GraphGrammarComponent graphGrammarComponent = GetComponent<GraphGrammarComponent>();
-            graphGrammarComponent.MakeGrammar();
-            graphGrammarComponent.ApplyUntilFinished();
+            graphGrammarComponent.Initialize();
+            graphGrammarComponent.ApplyUntilNoRulesFitAnymore();
 
-            levelMissionGraph = graphGrammarComponent.grammar.GetLevel();
+            levelMissionGraph = graphGrammarComponent.GetLevel();
         }
 
         public void ClearOldLeve()

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Framework.GraphGrammar.Data;
+using Framework.GraphGrammar.EditorData;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace Framework.GraphGrammar.Editor
         private int currentlyEnabledWindows = 0;
 
         private static int MaximumNumberOfNodes = 112;
-        
+
         [MenuItem("Organica Wild/Create/Graph Grammar Rule")]
         private static void ShowWindow()
         {
@@ -33,8 +33,13 @@ namespace Framework.GraphGrammar.Editor
             window.Show();
         }
 
+        /// <summary>
+        /// Setup the EditorView with a given MissionGraph.
+        /// </summary>
+        /// <param name="missionGraph">Given EditorMissionGraph to edit</param>
         public void Setup(EditorMissionGraph missionGraph)
         {
+            CleanUp();
             this.missionGraph = missionGraph;
             string serialized = missionGraph.serializedMissionGraph;
             SerializableMissionGraph deserializedSerializableMissionGraph =
@@ -43,17 +48,34 @@ namespace Framework.GraphGrammar.Editor
             unitySerializedObject = new SerializedObject(missionGraph);
         }
 
+        private void CleanUp()
+        {
+            foreach (VertexContainer vertexContainer in vertices)
+            {
+                if (vertexContainer != null)
+                {
+                    vertexContainer.vertex = null;
+                    vertexContainer.enabled = false;
+                }
+            }
+        }
+
         private void OnGUI()
         {
             GUILayout.Label("MissionGraph Editor");
 
+            //if no MissionGraph is set via SetUp, create a new one and create the asset
             if (missionGraph == null)
             {
+                CleanUp();
                 missionGraph = CreateInstance<EditorMissionGraph>();
                 graph = new MissionGraph();
                 AssetDatabase.CreateAsset(missionGraph,
                     $"Assets/MissionGraph_{DateTime.Now:yy_MMM_dd_hh_mm_ss_ms}.asset");
                 unitySerializedObject = new SerializedObject(missionGraph);
+                
+                //instantly save once, so that the xml at least has a root element
+                Save();
             }
 
             if (GUILayout.Button("Save Rule"))
@@ -66,7 +88,6 @@ namespace Framework.GraphGrammar.Editor
                 {
                     Save();
                 }
-               
             }
 
             MissionGraphNodeArea();
@@ -176,7 +197,8 @@ namespace Framework.GraphGrammar.Editor
 
         private void CreateVertexWindow(int index)
         {
-            vertices[index].windowRect = GUILayout.Window(index + 1, vertices[index].windowRect, DoWindow, "Mission Node");
+            vertices[index].windowRect =
+                GUILayout.Window(index + 1, vertices[index].windowRect, DoWindow, "Mission Node");
         }
 
         private void DrawNodeCurve(Rect start, Rect end)
@@ -196,6 +218,9 @@ namespace Framework.GraphGrammar.Editor
             Handles.color = Handles.xAxisColor;
         }
 
+        /// <summary>
+        /// Save all changes to the Asset
+        /// </summary>
         private void Save()
         {
             SerializableMissionGraph serializableGraph = new SerializableMissionGraph(graph);

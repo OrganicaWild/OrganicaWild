@@ -43,19 +43,19 @@
               </e>
             </e>
             <e p="GraphGrammar" t="Include">
-              <e p="Data" t="Include">
+              <e p="DrawableMissionVertex.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="GraphEditor.cs" t="Include" />
+                <e p="GraphGrammarComponentEditor.cs" t="Include" />
+                <e p="MissionGraphEditor.cs" t="Include" />
+              </e>
+              <e p="EditorData" t="Include">
                 <e p="EditorGrammarRule.cs" t="Include" />
                 <e p="EditorMissionGraph.cs" t="Include" />
                 <e p="SerializableMissionGraph.cs" t="Include" />
                 <e p="SerializableMissionGraphConnection.cs" t="Include" />
                 <e p="SerializableMissionVertex.cs" t="Include" />
                 <e p="VertexContainer.cs" t="Include" />
-              </e>
-              <e p="DrawableMissionVertex.cs" t="Include" />
-              <e p="Editor" t="Include">
-                <e p="GraphEditor.cs" t="Include" />
-                <e p="GraphGrammarComponentEditor.cs" t="Include" />
-                <e p="MissionGraphEditor.cs" t="Include" />
               </e>
               <e p="GrammarRule.cs" t="Include" />
               <e p="GraphGrammar.cs" t="Include" />

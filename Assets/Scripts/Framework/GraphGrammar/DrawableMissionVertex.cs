@@ -5,20 +5,27 @@ using Random = UnityEngine.Random;
 
 namespace Framework.GraphGrammar
 {
+    /// <summary>
+    /// Provides an extension to the MissionVertex class with a Position, to make it drawable in the debug view.
+    /// </summary>
     [Serializable]
     public class DrawableMissionVertex : MissionVertex
     {
         private float x;
         private float z;
         
+        /// <summary>
+        /// Create new DrawableMissionVertex with the supplied Type
+        /// </summary>
+        /// <param name="type">mission part</param>
         public DrawableMissionVertex(string type) : base(type)
         {
             x = Random.value;
             z = (Random.value * 2) - 1;
         }
 
-        public List<ListElement> Paint(Vector3 parentPosition,
-            List<ListElement> drawPositions, Dictionary<MissionVertex, Vector3> dictionary)
+        internal List<Branch> Paint(Vector3 parentPosition,
+            List<Branch> drawPositions, Dictionary<MissionVertex, Vector3> dictionary)
         {
             Vector3 thisPosition;
             
@@ -33,7 +40,7 @@ namespace Framework.GraphGrammar
                 dictionary.Add(this, thisPosition);
                
             }
-            drawPositions.Add(new ListElement(this, parentPosition, thisPosition));
+            drawPositions.Add(new Branch(this, parentPosition, thisPosition));
             // Debug.DrawLine(parentPosition, thisPosition, Color.blue, 100000);
 
             foreach (MissionVertex forwardNeighbour in ForwardNeighbours)
@@ -47,13 +54,13 @@ namespace Framework.GraphGrammar
             return drawPositions;
         }
 
-        public class ListElement
+        internal class Branch
         {
-            public DrawableMissionVertex t;
+            public readonly DrawableMissionVertex t;
             public Vector3 parent;
             public Vector3 tPosition;
 
-            public ListElement(DrawableMissionVertex t, Vector3 parent, Vector3 tPosition)
+            public Branch(DrawableMissionVertex t, Vector3 parent, Vector3 tPosition)
             {
                 this.t = t;
                 this.parent = parent;

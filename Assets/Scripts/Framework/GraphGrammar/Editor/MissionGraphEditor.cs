@@ -1,4 +1,4 @@
-using Framework.GraphGrammar.Data;
+using Framework.GraphGrammar.EditorData;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,11 +14,19 @@ namespace Framework.GraphGrammar.Editor
 
         public override void OnInspectorGUI()
         {
-            if (GUILayout.Button("Edit"))
+            EditorMissionGraph graph = target as EditorMissionGraph;
+
+            if (!(graph is null))
             {
-                GraphEditor window = (GraphEditor) EditorWindow.GetWindow(typeof(GraphEditor), false, $"{target}");
-                window.Setup(target as EditorMissionGraph);
-                window.Show();
+                
+                if (GUILayout.Button("Edit"))
+                {
+                    GraphEditor window = (GraphEditor) EditorWindow.GetWindow(typeof(GraphEditor), false, $"{target}");
+                    window.Setup(graph);
+                    window.Show();
+                }
+                GUILayout.Label(graph.serializedMissionGraph);
+                
             }
         }
     }

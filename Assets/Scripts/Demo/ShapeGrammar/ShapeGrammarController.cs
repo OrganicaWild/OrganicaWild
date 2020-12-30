@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Framework.ShapeGrammar;
+﻿using Framework.ShapeGrammar;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ShapeGrammarController : MonoBehaviour
 {
