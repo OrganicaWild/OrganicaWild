@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
 
-namespace Util
+namespace Framework.Util
 {
     public static class RandomUtil
     {
