@@ -79,7 +79,7 @@ namespace Demo.Evolutionary
             }
         }
 
-        public override INsga2Individual MakeOffspring(INsga2Individual parent2)
+        public override IEvolutionaryAlgorithmIndividual MakeOffspring(IEvolutionaryAlgorithmIndividual parent2)
         {
             if (!(parent2 is MyIndividual other))
                 throw new ArgumentException("second parent must be of same type as first parent!");

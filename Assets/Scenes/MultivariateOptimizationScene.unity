@@ -197,13 +197,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 183113227}
-  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 25, y: 45, z: -20}
+  m_LocalRotation: {x: 0.56958765, y: -0, z: -0, w: 0.8219306}
+  m_LocalPosition: {x: 53, y: 60, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 69.443, y: 0, z: 0}
 --- !u!1 &1688901248
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,6 +251,8 @@ MonoBehaviour:
   treePrefabs:
   - {fileID: 2228662142306374336, guid: ee67401f91c2f5a4fb77edcb08eade23, type: 3}
   - {fileID: 5335881068245736737, guid: ebdacffa7b1033c4fa7fc87e4ae3c0ec, type: 3}
+  waitForSecondsBetweenGeneration: 0
+  numberOfDrawInParetoFront: 2
 --- !u!4 &1688901250
 Transform:
   m_ObjectHideFlags: 0

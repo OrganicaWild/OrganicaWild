@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Demo.Forest;
@@ -28,6 +29,10 @@ namespace Demo
         public GameObject playerPrefab;
         public GameObject enemyPrefab;
         public GameObject[] treePrefabs;
+        private Nsga2Algorithm algorithm;
+
+        public int waitForSecondsBetweenGeneration;
+        public int numberOfDrawInParetoFront;
 
         void Start()
         {
@@ -52,34 +57,51 @@ namespace Demo
                         sideLength, mutationPercentage, fitnessFunctions);
             }
 
-            var algorithm = new Nsga2Algorithm(population);
+            algorithm = new Nsga2Algorithm(population);
 
-            var grandchildren = algorithm.RunForGenerations(generations);
+            StartCoroutine(nameof(ShowFront));
 
-            var paretoFront = new List<ForestIndividual>();
-            foreach (var cGrandchild in grandchildren)
-            {
-                var child = cGrandchild as ForestIndividual;
-                if (child.Rank == 0)
-                {
-                    paretoFront.Add(child);
-                }
-            }
-
-            Debug.Log(paretoFront.Count);
-
-            var offset = new Vector2(0,0);
-            for (int i = 0; i < paretoFront.Count; i++)
-            {
-                var paretoIndividual = paretoFront[i];
-                DrawRepresentation(paretoIndividual.Map, offset);
-                offset.y += sideLength;
-                offset.y += 5;
-            }
 
             //DrawRepresentation((grandchildren.First() as ForestIndividual).Map, new Vector2(0, 0));
 
             // DrawRepresentation(population[0].Map);
+        }
+
+        IEnumerator ShowFront()
+        {
+            for (int j = 0; j < generations; j++)
+            {
+
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    Destroy(transform.GetChild(i).gameObject);
+                }
+                
+                var grandchildren = algorithm.NextGeneration();
+
+                var paretoFront = new List<ForestIndividual>();
+                foreach (var cGrandchild in grandchildren)
+                {
+                    var child = cGrandchild as ForestIndividual;
+                    if (child.Rank == 0)
+                    {
+                        paretoFront.Add(child);
+                    }
+                }
+
+                Debug.Log(paretoFront.Count);
+
+                var offset = new Vector2(0, 0);
+                for (int i = 0; i < Math.Min(paretoFront.Count, numberOfDrawInParetoFront); i++)
+                {
+                    var paretoIndividual = paretoFront[i];
+                    DrawRepresentation(paretoIndividual.Map, offset);
+                    offset.y += sideLength;
+                    offset.y += 5;
+                }
+
+                yield return new WaitForSeconds(waitForSecondsBetweenGeneration);
+            }
         }
 
         public void DrawRepresentation(int[,] map, Vector2 offset)
@@ -96,9 +118,10 @@ namespace Demo
                     if (map[localX, localZ] == 0)
                     {
                         var localScale = floorPrefab.transform.localScale;
-                        Instantiate(floorPrefab,
+                        var floor = Instantiate(floorPrefab,
                             new Vector3(z * localScale.x, 0.0f, x * localScale.y),
                             Quaternion.identity);
+                        floor.transform.SetParent(transform);
                     }
 
                     if (map[localX, localZ] == 1)
@@ -106,9 +129,11 @@ namespace Demo
                         var localScale = floorPrefab.transform.localScale;
                         var position = new Vector3(z * localScale.x, 0.0f,
                             x * localScale.y);
-                        Instantiate(floorPrefab, position, Quaternion.identity);
-                        Instantiate(playerPrefab, playerPrefab.transform.position + position + Vector3.up,
+                        var floor = Instantiate(floorPrefab, position, Quaternion.identity);
+                        floor.transform.SetParent(transform);
+                        var player = Instantiate(playerPrefab, playerPrefab.transform.position + position + Vector3.up,
                             Quaternion.identity);
+                        player.transform.SetParent(transform);
                     }
 
                     if (map[localX, localZ] == 2)
@@ -116,9 +141,11 @@ namespace Demo
                         var localScale = floorPrefab.transform.localScale;
                         var position = new Vector3(z * localScale.x, 0.0f,
                             x * localScale.y);
-                        Instantiate(floorPrefab, position, Quaternion.identity);
-                        Instantiate(enemyPrefab, enemyPrefab.transform.position + position + Vector3.up,
+                        var floor =  Instantiate(floorPrefab, position, Quaternion.identity);
+                        floor.transform.SetParent(transform);
+                        var enemy = Instantiate(enemyPrefab, enemyPrefab.transform.position + position + Vector3.up,
                             Quaternion.identity);
+                        enemy.transform.SetParent(transform);
                     }
 
                     if (map[localX, localZ] == 3)
@@ -126,9 +153,11 @@ namespace Demo
                         var localScale = floorPrefab.transform.localScale;
                         var position = new Vector3(z * localScale.x, 0.0f,
                             x * localScale.y);
-                        Instantiate(floorPrefab, position, Quaternion.identity);
+                        var floor = Instantiate(floorPrefab, position, Quaternion.identity);
+                        floor.transform.SetParent(transform);
                         var tree = treePrefabs[r.NextDouble() < 0.5 ? 0 : 1];
-                        Instantiate(tree, position + Vector3.up, tree.transform.rotation);
+                        var tre = Instantiate(tree, position + Vector3.up, tree.transform.rotation);
+                        tre.transform.SetParent(transform);
                     }
                 }
             }

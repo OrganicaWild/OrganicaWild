@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\dev\OrganicaWild" t="IncludeRecursive">
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Demo" t="Include">
+            <e p="Cellular Automata" t="Include">
+              <e p="Editor" t="Include">
+                <e p="OrganicRectangularCAMapGeneratorEditor.cs" t="Include" />
+                <e p="RectangularCAMapGeneratorEditor.cs" t="Include" />
+              </e>
+              <e p="OrganicRectangularCAMapGenerator.cs" t="Include" />
+              <e p="RectangularCAMapGenerator.cs" t="Include" />
+            </e>
             <e p="Evolutionary" t="Include">
               <e p="DistanceToBorderFitnessFunction.cs" t="Include" />
               <e p="EnemyDistanceFitnessFunction.cs" t="Include" />
@@ -21,12 +29,19 @@
               <e p="StandardFitnessFunction2.cs" t="Include" />
               <e p="StandardIndividual2.cs" t="Include" />
             </e>
+            <e p="Poisson Disk Sampling" t="Include">
+              <e p="PDSGenerator.cs" t="Include" />
+            </e>
             <e p="ShapeGrammar" t="Include">
               <e p="ShapeGrammarController.cs" t="Include" />
               <e p="SubdivisionGrammarRuleComponent.cs" t="Include" />
             </e>
           </e>
           <e p="Framework" t="Include">
+            <e p="Cellular Automata" t="Include">
+              <e p="CACell.cs" t="Include" />
+              <e p="CANetwork.cs" t="Include" />
+            </e>
             <e p="Evolutionary" t="Include">
               <e p="IEvolutionaryAlgorithm.cs" t="Include" />
               <e p="IEvolutionaryAlgorithmIndividual.cs" t="Include" />
@@ -63,6 +78,9 @@
               <e p="MissionGraph.cs" t="Include" />
               <e p="MissionVertex.cs" t="Include" />
             </e>
+            <e p="Poisson Disk Sampling" t="Include">
+              <e p="PoissonDiskSampling.cs" t="Include" />
+            </e>
             <e p="ShapeGrammar" t="Include">
               <e p="ScriptableConnections.cs" t="Include" />
               <e p="ShapeGrammar.cs" t="Include" />
@@ -84,9 +102,9 @@
       <e p="obj" t="ExcludeRecursive" />
       <e p="OrganicaWild.sln" t="IncludeFlat" />
       <e p="Packages" t="ExcludeRecursive" />
-      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="Temp/bin" t="ExcludeRecursive" />
     </e>
-    <e p="C:\Users\Christoph\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Christoph\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_OrganicaWild.1756585290.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.3/resharper-host/local/Transient/Rider/v203/SolutionCaches/_OrganicaWild.-1747825386.00" t="ExcludeRecursive" />
   </component>
 </project>

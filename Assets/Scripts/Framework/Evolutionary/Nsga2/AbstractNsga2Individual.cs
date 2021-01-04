@@ -101,13 +101,14 @@ namespace Framework.Evolutionary.Nsga2
             return fitnessResults[index];
         }
         
+
         /// <summary>
         /// Produce offspring of two INsga2Individuals. Implement this method according to what your Individuals look like.
         /// It is safe to cast parent2 back to the concrete Implementation, since all Individuals inside of an array must have the same Assigned type.
         /// </summary>
         /// <param name="parent2">second parent</param>
         /// <returns>New Instance of a child</returns>
-        public abstract INsga2Individual MakeOffspring(INsga2Individual parent2);
+        public abstract IEvolutionaryAlgorithmIndividual MakeOffspring(IEvolutionaryAlgorithmIndividual parent2);
 
         /// <summary>
         /// Reset all values for the next generation.

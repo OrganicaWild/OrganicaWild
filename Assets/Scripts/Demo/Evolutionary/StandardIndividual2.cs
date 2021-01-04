@@ -31,9 +31,9 @@ namespace Demo
             map[playerY, playerX] = 2;
         }
         
-        public override INsga2Individual MakeOffspring(INsga2Individual parent2)
+        public override IEvolutionaryAlgorithmIndividual MakeOffspring(IEvolutionaryAlgorithmIndividual parent2)
         {
-            StandardIndividual2 other = (parent2 as StandardIndividual2);
+            StandardIndividual2 other = parent2 as StandardIndividual2;
             if (other == null)
                 throw new NullReferenceException($"Give a Nsga2 Individual of Type {nameof(StandardIndividual2)}");
             if (Random.value < 0.5f)

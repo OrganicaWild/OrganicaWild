@@ -26,7 +26,7 @@ namespace Framework.Evolutionary
         /// </summary>
         /// <param name="parent2">second parent</param>
         /// <returns>New Instance of a child</returns>
-        INsga2Individual MakeOffspring(INsga2Individual parent2);
+        IEvolutionaryAlgorithmIndividual MakeOffspring(IEvolutionaryAlgorithmIndividual parent2);
 
         /// <summary>
         /// Prepare this individual for next generation.

@@ -55,7 +55,7 @@ namespace Demo.Forest
             DrawEnd(Goal);
         }
 
-        public override INsga2Individual MakeOffspring(INsga2Individual parent2)
+        public override IEvolutionaryAlgorithmIndividual MakeOffspring(IEvolutionaryAlgorithmIndividual parent2)
         {
             var child = new ForestIndividual(random, RoundForestAreas.Length, LongForestAreas.Length, radius,
                 areaLength, sideLength, mutationPercentage, FitnessFunctions);

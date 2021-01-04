@@ -93,7 +93,7 @@ namespace Framework.Evolutionary.Nsga2
                         ? newPopulation[first2]
                         : newPopulation[second2];
 
-                    population[i] = parent1.MakeOffspring(parent2);
+                    population[i] = parent1.MakeOffspring(parent2) as INsga2Individual;
                 }
             }
 
