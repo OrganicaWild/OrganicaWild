@@ -18,7 +18,7 @@ namespace Framework.ShapeGrammar
         private MissionGraph levelMissionGraph;
         private SpaceTree tree;
 
-        public void Awake()
+        public void Start()
         {
             GenerateLevel();
             GenerateGeometry();
