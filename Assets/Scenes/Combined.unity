@@ -193,11 +193,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3783592351573359011, guid: 3c86971b591ad4027a9563c8a6d76f91,
-        type: 3}
-      propertyPath: initialFillPercentage
-      value: 0.508
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c86971b591ad4027a9563c8a6d76f91, type: 3}
 --- !u!1 &1143235106
@@ -563,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 7842130738536507114, guid: c4a719ba93c404566b6eeca7d3f94dfd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7842130738536507114, guid: c4a719ba93c404566b6eeca7d3f94dfd,
         type: 3}
@@ -615,12 +610,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7842130738536507117, guid: c4a719ba93c404566b6eeca7d3f94dfd,
-        type: 3}
-      propertyPath: floor
-      value: 
-      objectReference: {fileID: 4284913072249543423, guid: 0b587e4d577471c48b60b845ea3ec9df,
-        type: 3}
     - target: {fileID: 7842130738536507119, guid: c4a719ba93c404566b6eeca7d3f94dfd,
         type: 3}
       propertyPath: m_Name

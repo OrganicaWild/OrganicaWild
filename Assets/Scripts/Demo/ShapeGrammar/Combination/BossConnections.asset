@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BossConnections
   m_EditorClassIdentifier: 
   entryCorner:
-    connectionPoint: {x: -25, y: 0, z: 0}
-    connectionDirection: {x: 1, y: 0, z: 1}
+    connectionPoint: {x: -25, y: 0, z: 20}
+    connectionDirection: {x: 1, y: 0, z: 0}
   corners:
   - connectionPoint: {x: 25, y: 0, z: 0}
     connectionDirection: {x: -1, y: 0, z: 0}

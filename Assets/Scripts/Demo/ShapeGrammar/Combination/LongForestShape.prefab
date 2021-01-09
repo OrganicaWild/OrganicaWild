@@ -77,6 +77,8 @@ MonoBehaviour:
   minWidth: 0
   minHeight: 15
   floor: {fileID: 4284913072249543423, guid: 0b587e4d577471c48b60b845ea3ec9df, type: 3}
+  nonFloor: {fileID: 8886116933004270063, guid: a93de53cd3fa244bab18560c3e9a0e90,
+    type: 3}
 --- !u!54 &1685701831282342572
 Rigidbody:
   m_ObjectHideFlags: 0

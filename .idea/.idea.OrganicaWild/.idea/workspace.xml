@@ -31,12 +31,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add actual rooms to prefabs">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCAConnectable.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ShapeGrammarScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ShapeGrammarScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,14 +85,17 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/SubdivisionGrammarRuleComponent.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNodeConnection.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/CARuleNetwork.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ShapeGrammarRuleProvider.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/ForestCAConnectable.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCAConnectable.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/QuaternionExtensions.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" />
     </changedPaths>
   </component>
@@ -104,7 +105,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.2831126" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.28368795" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -131,10 +132,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="14661">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="14661" />
+      <option name="pid" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -173,7 +174,9 @@
       <workItem from="1609153548696" duration="9877000" />
       <workItem from="1609266295333" duration="1902000" />
       <workItem from="1609321221912" duration="7025000" />
-      <workItem from="1609933003855" duration="12133000" />
+      <workItem from="1609933003855" duration="17337000" />
+      <workItem from="1610126151226" duration="3520000" />
+      <workItem from="1610220291582" duration="1868000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -380,10 +383,17 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>
-          <line>144</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="146" containingFunctionPresentation="method 'ApplyRule'" />
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs</url>
+          <line>124</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" initialLine="123" containingFunctionPresentation="method 'GetLocalRotation'">
+            <startOffsets>
+              <option value="5021" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5073" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

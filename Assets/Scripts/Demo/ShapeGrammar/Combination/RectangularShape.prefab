@@ -72,12 +72,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruleComponent: {fileID: 3783592351573359010}
-  initialFillPercentage: 0.454
+  initialFillPercentage: 0.508
   iterations: 4
   radius: 8
   minWidth: 0
   minHeight: 0
   floor: {fileID: 4284913072249543423, guid: 0b587e4d577471c48b60b845ea3ec9df, type: 3}
+  nonFloor: {fileID: 8886116933004270063, guid: a93de53cd3fa244bab18560c3e9a0e90,
+    type: 3}
 --- !u!54 &3966018623299339711
 Rigidbody:
   m_ObjectHideFlags: 0

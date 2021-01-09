@@ -38,6 +38,8 @@
                 <e p="CARuleCellState.cs" t="Include" />
                 <e p="CARuleNetwork.cs" t="Include" />
                 <e p="ForestCAConnectable.cs" t="Include" />
+                <e p="ForestCaNetwork.cs" t="Include" />
+                <e p="ForestCell.cs" t="Include" />
                 <e p="ShapeGrammarRuleProvider.cs" t="Include" />
               </e>
               <e p="ShapeGrammarController.cs" t="Include" />
