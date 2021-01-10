@@ -2,167 +2,258 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Framework.Cellular;
+using Framework.Evolutionary;
+using Framework.Evolutionary.Nsga2;
 using Framework.ShapeGrammar;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Demo.ShapeGrammar.Combination
 {
-    public partial class ForestCaConnectable
+    public class ForestCaNetwork : CANetwork, INsga2Individual
     {
-        public class ForestCaNetwork : CANetwork
+        public int Width { get; set; }
+        public int Height { get; set; }
+
+        public Vector2 Start { get; set; }
+        public Vector2 End { get; set; }
+
+        public ForestCaNetwork(ScriptableConnections connections, float initialFillPercentage, float radius,
+            int minWidth, int minHeight, IFitnessFunction[] fitnessFunctions)
         {
-            public int Width { get; set; }
-            public int Height { get; set; }
+            dominatedIndividuals = new List<INsga2Individual>();
+            FitnessFunctions = fitnessFunctions;
+            fitnessResults = new double[fitnessFunctions.Length];
 
-            public Vector2 Start { get; set; }
-            public Vector2 End { get; set; }
+            float minX = connections.corners.Min(x => x.connectionPoint.x);
+            float minZ = connections.corners.Min(x => x.connectionPoint.z);
 
-            public ForestCaNetwork(ScriptableConnections connections, float initialFillPercentage, float radius,
-                int minWidth, int minHeight)
+            float maxX = connections.corners.Max(x => x.connectionPoint.x);
+            float maxZ = connections.corners.Max(x => x.connectionPoint.z);
+
+            minX = Mathf.Min(connections.entryCorner.connectionPoint.x, minX);
+            minZ = Mathf.Min(connections.entryCorner.connectionPoint.z, minZ);
+
+            maxX = Mathf.Max(connections.entryCorner.connectionPoint.x, maxX);
+            maxZ = Mathf.Max(connections.entryCorner.connectionPoint.z, maxZ);
+
+            Width = Math.Max(minWidth, (int) (maxX - minX));
+            Height = Math.Max(minHeight, (int) (maxZ - minZ));
+
+            Start = new Vector2(minX, minZ);
+            End = new Vector2(maxZ, maxZ);
+
+            Cells = new CACell[Width * Height];
+            Connections = new bool[Width * Height][];
+
+            for (var i = 0; i < Cells.Length; i++)
             {
-                float minX = connections.corners.Min(x => x.connectionPoint.x);
-                float minZ = connections.corners.Min(x => x.connectionPoint.z);
-
-                float maxX = connections.corners.Max(x => x.connectionPoint.x);
-                float maxZ = connections.corners.Max(x => x.connectionPoint.z);
-
-                minX = Mathf.Min(connections.entryCorner.connectionPoint.x, minX);
-                minZ = Mathf.Min(connections.entryCorner.connectionPoint.z, minZ);
-
-                maxX = Mathf.Max(connections.entryCorner.connectionPoint.x, maxX);
-                maxZ = Mathf.Max(connections.entryCorner.connectionPoint.z, maxZ);
-
-                Width = Math.Max(minWidth, (int) (maxX - minX));
-                Height = Math.Max(minHeight, (int) (maxZ - minZ));
-
-                Start = new Vector2(minX, minZ);
-                End = new Vector2(maxZ, maxZ);
-
-                Cells = new CACell[Width * Height];
-                Connections = new bool[Width * Height][];
-
-                for (var i = 0; i < Cells.Length; i++)
+                Cells[i] = new ForestCell(i);
+                CACell cell = Cells[i];
+                cell.Network = this;
+                float r = Random.value;
+                if (r <= initialFillPercentage)
                 {
-                    Cells[i] = new ForestCell(i);
-                    CACell cell = Cells[i];
-                    cell.Network = this;
-                    if (Random.value <= initialFillPercentage)
-                    {
-                        ((ForestCell) cell).state = State.Filled;
-                    }
-                    else
-                    {
-                        ((ForestCell) cell).state = State.Empty;
-                    }
+                    ((ForestCell) cell).state = State.Water;
                 }
-
-                FillAtPoint(connections.entryCorner.connectionPoint, radius);
-
-                foreach (SpaceNodeConnection spaceNodeConnection in connections.corners)
+                else if (r > initialFillPercentage || r <= 1)
                 {
-                    FillAtPoint(spaceNodeConnection.connectionPoint, radius);
+                    ((ForestCell) cell).state = State.Land;
                 }
-
-                for (int i = 0; i < Width * Height; i++)
+                else
                 {
-                    Connections[i] = new bool[Width * Height];
+                    ((ForestCell) cell).state = State.Beach;
                 }
             }
 
-            private void FillAtPoint(Vector3 point, float radius)
+            FillAtPoint(connections.entryCorner.connectionPoint, radius);
+
+            foreach (SpaceNodeConnection spaceNodeConnection in connections.corners)
             {
-                for (int i = 0; i < Width; i++)
+                FillAtPoint(spaceNodeConnection.connectionPoint, radius);
+            }
+
+            for (int i = 0; i < Width * Height; i++)
+            {
+                Connections[i] = new bool[Width * Height];
+            }
+        }
+
+        private void FillAtPoint(Vector3 point, float radius)
+        {
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
                 {
-                    for (int j = 0; j < Height; j++)
+                    //offset position
+                    Vector2 mappedPoint = GetMappedPoint(point);
+
+                    //equation for circle
+                    bool pointIsInCircle =
+                        (i - mappedPoint.x) * (i - mappedPoint.x) +
+                        (j - mappedPoint.y) * (j - mappedPoint.y) <= radius;
+
+                    if (pointIsInCircle)
                     {
-                        //offset position
-                        float a = point.x - Start.x;
-                        float b = point.z - Start.y;
-
-                        //equation for circle
-                        bool pointIsInCircle = (i - a) * (i - a) + (j - b) * (j - b) <= radius;
-                        if (pointIsInCircle)
-                        {
-                            int index = j * Width + i;
-                            ((ForestCell) Cells[index]).state = State.Filled;
-                        }
-                    }
-                }
-            }
-
-            public bool IsOnTopBorder(int index)
-            {
-                return index < Width;
-            }
-
-            public bool IsOnRightBorder(int index)
-            {
-                return index % Width == Width - 1;
-            }
-
-            public bool IsOnBottomBorder(int index)
-            {
-                return Width * (Height - 1) <= index;
-            }
-
-            public bool IsOnLeftBorder(int index)
-            {
-                return index % Width == 0;
-            }
-
-            public override IEnumerable<CACell> GetNeighborsOf(int cellNumber)
-            {
-                List<CACell> result = new List<CACell>();
-
-
-                // The four directly adjacent neighbors
-                if (!IsOnTopBorder(cellNumber))
-                {
-                    // Top
-                    result.Add(Cells[cellNumber - Width]);
-                    if (!IsOnRightBorder(cellNumber))
-                    {
-                        // Top Right
-                        result.Add(Cells[cellNumber - Width + 1]);
+                        int index = j * Width + i;
+                        ((ForestCell) Cells[index]).state = State.Land;
                     }
                 }
+            }
+        }
 
+        private Vector2 GetMappedPoint(Vector3 point)
+        {
+            float a = point.x - Start.x;
+            float b = point.z - Start.y;
+            return new Vector2(a, b);
+        }
+
+        public void SetMappedPosition(Vector3 point, State state, State ifState)
+        {
+            Vector2 mappedPosition = GetMappedPoint(point);
+            int x = (int) mappedPosition.x % Width;
+            int y = (int) mappedPosition.y % Height;
+
+            int index = y * Width + x;
+            ForestCell cell = Cells[index] as ForestCell;
+            if (cell.state == ifState)
+            {
+                cell.state = state;
+            }
+            Cells[index] = cell;
+        }
+
+        public bool IsOnTopBorder(int index)
+        {
+            return index < Width;
+        }
+
+        public bool IsOnRightBorder(int index)
+        {
+            return index % Width == Width - 1;
+        }
+
+        public bool IsOnBottomBorder(int index)
+        {
+            return Width * (Height - 1) <= index;
+        }
+
+        public bool IsOnLeftBorder(int index)
+        {
+            return index % Width == 0;
+        }
+
+        public override IEnumerable<CACell> GetNeighborsOf(int cellNumber)
+        {
+            List<CACell> result = new List<CACell>();
+
+
+            // The four directly adjacent neighbors
+            if (!IsOnTopBorder(cellNumber))
+            {
+                // Top
+                result.Add(Cells[cellNumber - Width]);
                 if (!IsOnRightBorder(cellNumber))
                 {
-                    // Right
-                    result.Add(Cells[cellNumber + 1]);
-                    if (!IsOnBottomBorder(cellNumber))
-                    {
-                        // Right Bottom
-                        result.Add(Cells[cellNumber + Width + 1]);
-                    }
+                    // Top Right
+                    result.Add(Cells[cellNumber - Width + 1]);
                 }
+            }
 
+            if (!IsOnRightBorder(cellNumber))
+            {
+                // Right
+                result.Add(Cells[cellNumber + 1]);
                 if (!IsOnBottomBorder(cellNumber))
                 {
-                    // Bottom
-                    result.Add(Cells[cellNumber + Width]);
-                    if (!IsOnLeftBorder(cellNumber))
-                    {
-                        // Bottom Left
-                        result.Add(Cells[cellNumber - 1 + Width]);
-                    }
+                    // Right Bottom
+                    result.Add(Cells[cellNumber + Width + 1]);
                 }
+            }
 
+            if (!IsOnBottomBorder(cellNumber))
+            {
+                // Bottom
+                result.Add(Cells[cellNumber + Width]);
                 if (!IsOnLeftBorder(cellNumber))
                 {
-                    // Left
-                    result.Add(Cells[cellNumber - 1]);
-                    if (!IsOnTopBorder(cellNumber))
-                    {
-                        // Left Top
-                        result.Add(Cells[cellNumber - Width - 1]);
-                    }
+                    // Bottom Left
+                    result.Add(Cells[cellNumber - 1 + Width]);
                 }
-
-                return result;
             }
+
+            if (!IsOnLeftBorder(cellNumber))
+            {
+                // Left
+                result.Add(Cells[cellNumber - 1]);
+                if (!IsOnTopBorder(cellNumber))
+                {
+                    // Left Top
+                    result.Add(Cells[cellNumber - Width - 1]);
+                }
+            }
+
+            return result;
+        }
+
+
+        public INsga2Individual MakeOffspring(INsga2Individual parent2)
+        {
+            throw new NotImplementedException();
+        }
+
+        //boilerplate from the INsga2Interface
+        private IFitnessFunction[] FitnessFunctions;
+        private double[] fitnessResults;
+        private List<INsga2Individual> dominatedIndividuals;
+
+        public void EvaluateFitness()
+        {
+            for (var index = 0; index < FitnessFunctions.Length; index++)
+            {
+                var f = FitnessFunctions[index];
+                fitnessResults[index] = f.DetermineFitness(this);
+            }
+        }
+
+        public int GetNumberOfFitnessFunctions()
+        {
+            return FitnessFunctions.Length;
+        }
+
+        public double GetOptimizationTarget(int index)
+        {
+            if (index >= FitnessFunctions.Length || index < 0)
+            {
+                throw new IndexOutOfRangeException(
+                    $"The Index is out of range for the Optimization Targets. Valid Range is {0} to {FitnessFunctions.Length - 1} ");
+            }
+
+            return fitnessResults[index];
+        }
+
+        public void PrepareForNextGeneration()
+        {
+            DominationCount = 0;
+            Rank = 0;
+            Crowding = 0;
+            dominatedIndividuals = new List<INsga2Individual>();
+        }
+
+
+        public int Rank { get; set; }
+        public double Crowding { get; set; }
+        public int DominationCount { get; set; }
+
+        public void AddDominatedIndividual(INsga2Individual dominated)
+        {
+            dominatedIndividuals.Add(dominated);
+        }
+
+        public IList<INsga2Individual> GetDominated()
+        {
+            return dominatedIndividuals;
         }
     }
 }

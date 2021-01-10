@@ -47,14 +47,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruleComponent: {fileID: 3884113930731364646}
-  initialFillPercentage: 0.532
+  initialFillPercentage: 0.32
   iterations: 3
   radius: 0
   minWidth: 50
   minHeight: 50
-  floor: {fileID: 4284913072249543423, guid: 0b587e4d577471c48b60b845ea3ec9df, type: 3}
   nonFloor: {fileID: 8886116933004270063, guid: a93de53cd3fa244bab18560c3e9a0e90,
     type: 3}
+  floor: {fileID: 4284913072249543423, guid: 0b587e4d577471c48b60b845ea3ec9df, type: 3}
+  bush: {fileID: 8833444675341105608, guid: c09cc8f6546c95b40a9bcc916fd8e1c3, type: 3}
+  radiusPoisson: 2.38
+  widthPoisson: 17.52
+  heightPoisson: 16.61
+  numberOfPoisson: 3
+  numberOfRejections: 1
 --- !u!114 &3884113930731364646
 MonoBehaviour:
   m_ObjectHideFlags: 0

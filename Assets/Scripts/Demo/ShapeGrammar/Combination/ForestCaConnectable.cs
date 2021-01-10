@@ -1,9 +1,13 @@
-﻿using Framework.ShapeGrammar;
+﻿using System;
+using System.Collections.Generic;
+using Framework.Evolutionary;
+using Framework.ShapeGrammar;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Demo.ShapeGrammar.Combination
 {
-    public partial class ForestCaConnectable : MonoBehaviour
+    public class ForestCaConnectable : MonoBehaviour
     {
         public ShapeGrammarRuleComponent ruleComponent;
 
@@ -13,30 +17,52 @@ namespace Demo.ShapeGrammar.Combination
         [Tooltip("Number of iterations each automaton goes through.")]
         public int iterations = 6;
 
-        private ForestCaConnectable.ForestCaNetwork forestCaNetwork;
+        private ForestCaNetwork forestCaNetwork;
 
         public float radius;
         public int minWidth;
         public int minHeight;
 
-        public GameObject floor;
         public GameObject nonFloor;
+        public GameObject floor;
+        public GameObject bush;
+
+        public float radiusPoisson;
+        public float widthPoisson;
+        public float heightPoisson;
+        public int numberOfPoisson;
+        public int numberOfRejections;
 
         void Start()
         {
-            Generate();
+            GenerateCa();
+            AddBushes();
+            Draw();
         }
 
-        public void Generate()
+        public void GenerateCa()
         {
-            forestCaNetwork = new ForestCaConnectable.ForestCaNetwork(ruleComponent.connection, initialFillPercentage, radius, minWidth,
-                minHeight);
+            forestCaNetwork = new ForestCaNetwork(ruleComponent.connection, initialFillPercentage,
+                radius, minWidth,
+                minHeight, new IFitnessFunction[0]);
             forestCaNetwork.Run(iterations);
-            //CA done
-            
-            //place with poisson
+        }
 
-            Draw();
+        public void AddBushes()
+        {
+            for (var i = 0; i < numberOfPoisson; i++)
+            {
+                IEnumerable<Vector2> points =
+                    PoissonDiskSampling.GeneratePoints(radiusPoisson, widthPoisson, heightPoisson, numberOfRejections);
+                Vector3 randomPointOnMap = new Vector3(Random.Range(0, forestCaNetwork.Width), 0,
+                    Random.Range(0, forestCaNetwork.Height));
+                foreach (Vector2 point in points)
+                {
+                    Debug.Log(point);
+                    forestCaNetwork.SetMappedPosition(randomPointOnMap + new Vector3(point.x, 0, +point.y),
+                        State.Bush, State.Land);
+                }
+            }
         }
 
         public void Step()
@@ -44,8 +70,18 @@ namespace Demo.ShapeGrammar.Combination
             forestCaNetwork.Step();
         }
 
-        private void Draw()
+        public void Draw()
         {
+            // GameObject floor = Instantiate(floorPlane, transform);
+            // float planeWidth = forestCaNetwork.Width / 10f;
+            // float planeHeight = forestCaNetwork.Height / 10f;
+            // //plane.transform.position = transform.position;
+            // floor.transform.rotation = transform.rotation;
+            // floor.transform.localPosition =
+            //     new Vector3(forestCaNetwork.Start.x + forestCaNetwork.Width / 2f, 0,
+            //         forestCaNetwork.Start.y + forestCaNetwork.Height / 2f);
+            // floor.transform.localScale = new Vector3(planeWidth, 0, planeHeight);
+
             if (forestCaNetwork != null)
             {
                 for (int x = 0; x < forestCaNetwork.Width; x++)
@@ -58,25 +94,42 @@ namespace Demo.ShapeGrammar.Combination
                             forestCaNetwork.Start.x + x + .5f,
                             0,
                             forestCaNetwork.Start.y + y + .5f);
-                        if (currentCell.state == State.Filled)
+
+                        if (currentCell != null)
                         {
-                            GameObject prefab = Instantiate(floor, transform);
-                            prefab.transform.localPosition = pos;
-                        }
-                        else
-                        {
-                            GameObject prefab = Instantiate(nonFloor, transform);
-                            prefab.transform.localPosition = pos;
+                            switch (currentCell.state)
+                            {
+                                case State.Beach:
+                                {
+                                    GameObject prefab = Instantiate(nonFloor, transform);
+                                    prefab.transform.localPosition = pos;
+                                    break;
+                                }
+                                case State.Bush:
+                                {
+                                    GameObject prefab = Instantiate(bush, transform);
+                                    prefab.transform.localPosition = pos;
+                                    break;
+                                }
+                                case State.Land:
+                                {
+                                    GameObject prefab = Instantiate(floor, transform);
+                                    prefab.transform.localPosition = pos;
+                                    break;
+                                }
+                                case State.Water:
+                                {
+                                    // GameObject prefab = Instantiate(water, transform);
+                                    // prefab.transform.localPosition = pos;
+                                    break;
+                                }
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
                         }
                     }
                 }
             }
-        }
-
-        public enum State
-        {
-            Filled,
-            Empty
         }
     }
 }

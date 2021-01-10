@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+    <e p="C:\dev\OrganicaWild" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -41,6 +41,7 @@
                 <e p="ForestCaNetwork.cs" t="Include" />
                 <e p="ForestCell.cs" t="Include" />
                 <e p="ShapeGrammarRuleProvider.cs" t="Include" />
+                <e p="State.cs" t="Include" />
               </e>
               <e p="ShapeGrammarController.cs" t="Include" />
               <e p="SubdivisionGrammarRuleComponent.cs" t="Include" />
@@ -111,9 +112,9 @@
       <e p="obj" t="ExcludeRecursive" />
       <e p="OrganicaWild.sln" t="IncludeFlat" />
       <e p="Packages" t="ExcludeRecursive" />
-      <e p="Temp/bin" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
-    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.3/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/JetBrains/Rider2020.3/resharper-host/local/Transient/Rider/v203/SolutionCaches/_OrganicaWild.-1747825386.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Christoph\AppData\local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Christoph\AppData\local\JetBrains\Rider2020.3\resharper-host\local\Transient\Rider\v203\SolutionCaches\_OrganicaWild.1756585290.00" t="ExcludeRecursive" />
   </component>
 </project>

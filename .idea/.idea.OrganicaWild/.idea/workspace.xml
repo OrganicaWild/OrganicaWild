@@ -31,10 +31,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add actual rooms to prefabs">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/State.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/State.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Combined.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Combined.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/BossForestRule.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/BossForestRule.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/LongForestShape.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/LongForestShape.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/RectangularShape.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/RectangularShape.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,13 +96,16 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNodeConnection.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/CARuleNetwork.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ShapeGrammarRuleProvider.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/ForestCAConnectable.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCAConnectable.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/QuaternionExtensions.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/Individual.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/Editor/ForestCaConnectableEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/State.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/CARuleNetwork.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" />
@@ -105,7 +117,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.28368795" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.28356165" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -132,10 +144,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="3792">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="3792" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -177,6 +189,7 @@
       <workItem from="1609933003855" duration="17337000" />
       <workItem from="1610126151226" duration="3520000" />
       <workItem from="1610220291582" duration="1868000" />
+      <workItem from="1610272221069" duration="12384000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -383,17 +396,108 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs</url>
-          <line>124</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" initialLine="123" containingFunctionPresentation="method 'GetLocalRotation'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/AbstractNsga2Individual.cs</url>
+          <line>57</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\Evolutionary\Nsga2\AbstractNsga2Individual.cs" initialLine="57" containingFunctionPresentation="constructor 'AbstractNsga2Individual'">
             <startOffsets>
-              <option value="5021" />
+              <option value="2472" />
             </startOffsets>
             <endOffsets>
-              <option value="5073" />
+              <option value="2473" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="17" />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs</url>
+          <line>51</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Demo\ShapeGrammar\Combination\ForestCell.cs" initialLine="52" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="1704" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1731" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs</url>
+          <line>54</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Demo\ShapeGrammar\Combination\ForestCell.cs" initialLine="55" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="1850" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1877" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs</url>
+          <line>48</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Demo\ShapeGrammar\Combination\ForestCell.cs" initialLine="49" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="1559" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1585" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs</url>
+          <line>45</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Demo\ShapeGrammar\Combination\ForestCell.cs" initialLine="46" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="1412" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1439" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs</url>
+          <line>57</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Demo\ShapeGrammar\Combination\ForestCell.cs" initialLine="58" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="1971" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1998" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs</url>
+          <line>60</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Demo\ShapeGrammar\Combination\ForestCell.cs" initialLine="61" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="2091" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2117" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs</url>
+          <line>63</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Demo\ShapeGrammar\Combination\ForestCell.cs" initialLine="64" containingFunctionPresentation="method 'Update'">
+            <startOffsets>
+              <option value="2211" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2238" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
