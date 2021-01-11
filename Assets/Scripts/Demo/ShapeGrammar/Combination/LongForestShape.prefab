@@ -71,8 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruleComponent: {fileID: 7842130738536507116}
-  initialFillPercentage: 0.46
-  iterations: 20
+  initialFillPercentage: 0.4
   radius: 15
   minWidth: 0
   minHeight: 15
@@ -83,8 +82,10 @@ MonoBehaviour:
   radiusPoisson: 3.05
   widthPoisson: 33.16
   heightPoisson: 17.07
-  numberOfPoisson: 1
+  numberOfPoisson: 5
   numberOfRejections: 1
+  evolutionPopulation: 20
+  generations: 6
 --- !u!54 &1685701831282342572
 Rigidbody:
   m_ObjectHideFlags: 0

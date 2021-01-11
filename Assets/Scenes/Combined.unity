@@ -610,16 +610,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7842130738536507117, guid: c4a719ba93c404566b6eeca7d3f94dfd,
-        type: 3}
-      propertyPath: numberOfPoisson
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7842130738536507117, guid: c4a719ba93c404566b6eeca7d3f94dfd,
-        type: 3}
-      propertyPath: initialFillPercentage
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 7842130738536507119, guid: c4a719ba93c404566b6eeca7d3f94dfd,
         type: 3}
       propertyPath: m_Name

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Framework.Evolutionary;
+using Framework.Evolutionary.Nsga2;
 using Framework.ShapeGrammar;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,9 +14,8 @@ namespace Demo.ShapeGrammar.Combination
 
         [Tooltip("Percentage of vertices that will be set to black at the beginning.")] [Range(0.0f, 1.0f)]
         public float initialFillPercentage = 0.45f;
-
-        [Tooltip("Number of iterations each automaton goes through.")]
-        public int iterations = 6;
+        
+       
 
         private ForestCaNetwork forestCaNetwork;
 
@@ -33,43 +33,32 @@ namespace Demo.ShapeGrammar.Combination
         public int numberOfPoisson;
         public int numberOfRejections;
 
+        public int evolutionPopulation;
+        public int generations = 6;
+
         void Start()
         {
-            GenerateCa();
-            AddBushes();
+            IFitnessFunction[] fitnessFunctions = new []
+            {
+                new BushesFitnessFunction()
+            };
+            ForestCaNetwork[] population = new ForestCaNetwork[evolutionPopulation];
+
+            for (int i = 0; i < evolutionPopulation; i++)
+            {
+                population[i] = new ForestCaNetwork(ruleComponent.connection, initialFillPercentage,
+                    radius, minWidth,
+                    minHeight, fitnessFunctions, numberOfPoisson, numberOfRejections, heightPoisson, widthPoisson,
+                    radiusPoisson);
+            }
+
+            Nsga2Algorithm algorithm = new Nsga2Algorithm(population);
+            IEvolutionaryAlgorithmIndividual[] endPopulation = algorithm.RunForGenerations(generations);
+            
+            forestCaNetwork = endPopulation[0] as ForestCaNetwork;
             Draw();
         }
-
-        public void GenerateCa()
-        {
-            forestCaNetwork = new ForestCaNetwork(ruleComponent.connection, initialFillPercentage,
-                radius, minWidth,
-                minHeight, new IFitnessFunction[0]);
-            forestCaNetwork.Run(iterations);
-        }
-
-        public void AddBushes()
-        {
-            for (var i = 0; i < numberOfPoisson; i++)
-            {
-                IEnumerable<Vector2> points =
-                    PoissonDiskSampling.GeneratePoints(radiusPoisson, widthPoisson, heightPoisson, numberOfRejections);
-                Vector3 randomPointOnMap = new Vector3(Random.Range(0, forestCaNetwork.Width), 0,
-                    Random.Range(0, forestCaNetwork.Height));
-                foreach (Vector2 point in points)
-                {
-                    Debug.Log(point);
-                    forestCaNetwork.SetMappedPosition(randomPointOnMap + new Vector3(point.x, 0, +point.y),
-                        State.Bush, State.Land);
-                }
-            }
-        }
-
-        public void Step()
-        {
-            forestCaNetwork.Step();
-        }
-
+        
         public void Draw()
         {
             // GameObject floor = Instantiate(floorPlane, transform);

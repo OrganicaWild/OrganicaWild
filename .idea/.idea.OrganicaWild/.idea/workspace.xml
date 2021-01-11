@@ -31,17 +31,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add actual rooms to prefabs">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/State.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/State.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Combined.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Combined.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/BossForestRule.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/BossForestRule.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/LongForestShape.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/LongForestShape.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/RectangularShape.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/RectangularShape.prefab" afterDir="false" />
     </list>
@@ -107,8 +102,9 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/State.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/CARuleNetwork.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCell.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaConnectable.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/BushesFitnessFunction.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/Combination/ForestCaNetwork.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -117,7 +113,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.28356165" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.28341132" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -144,10 +140,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="3792">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="3792" />
+      <option name="pid" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -189,7 +185,8 @@
       <workItem from="1609933003855" duration="17337000" />
       <workItem from="1610126151226" duration="3520000" />
       <workItem from="1610220291582" duration="1868000" />
-      <workItem from="1610272221069" duration="12384000" />
+      <workItem from="1610272221069" duration="17909000" />
+      <workItem from="1610359562487" duration="2496000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -498,6 +495,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs</url>
+          <line>37</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\Evolutionary\Nsga2\Nsga2Algorithm.cs" initialLine="37" containingFunctionPresentation="constructor 'Nsga2Algorithm'">
+            <startOffsets>
+              <option value="1726" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1808" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

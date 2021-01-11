@@ -73,7 +73,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruleComponent: {fileID: 3783592351573359010}
   initialFillPercentage: 0.43
-  iterations: 4
   radius: 8
   minWidth: 0
   minHeight: 0
@@ -86,6 +85,8 @@ MonoBehaviour:
   heightPoisson: 19.2
   numberOfPoisson: 5
   numberOfRejections: 1
+  evolutionPopulation: 20
+  generations: 6
 --- !u!54 &3966018623299339711
 Rigidbody:
   m_ObjectHideFlags: 0

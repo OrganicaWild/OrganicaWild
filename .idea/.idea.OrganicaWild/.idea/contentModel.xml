@@ -34,6 +34,7 @@
             </e>
             <e p="ShapeGrammar" t="Include">
               <e p="Combination" t="Include">
+                <e p="BushesFitnessFunction.cs" t="Include" />
                 <e p="CARuleCell.cs" t="Include" />
                 <e p="CARuleCellState.cs" t="Include" />
                 <e p="CARuleNetwork.cs" t="Include" />

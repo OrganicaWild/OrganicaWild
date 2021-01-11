@@ -18,11 +18,33 @@ namespace Demo.ShapeGrammar.Combination
         public Vector2 Start { get; set; }
         public Vector2 End { get; set; }
 
+        private readonly float radiusPoisson;
+        private readonly float widthPoisson;
+        private readonly float heightPoisson;
+        private readonly int numberOfRejections;
+        private readonly int numberOfPoisson;
+        private readonly ScriptableConnections connections;
+        private readonly float initialFillPercentage;
+        private readonly float radius;
+        private readonly int minWidth;
+        private readonly int minHeight;
+        
         public ForestCaNetwork(ScriptableConnections connections, float initialFillPercentage, float radius,
-            int minWidth, int minHeight, IFitnessFunction[] fitnessFunctions)
+            int minWidth, int minHeight, IFitnessFunction[] fitnessFunctions, int numberOfPoisson,
+            int numberOfRejections, float heightPoisson, float widthPoisson, float radiusPoisson)
         {
             dominatedIndividuals = new List<INsga2Individual>();
+            this.connections = connections;
+            this.radius = radius;
+            this.minWidth = minWidth;
+            this.minHeight = minHeight;
             FitnessFunctions = fitnessFunctions;
+            this.numberOfPoisson = numberOfPoisson;
+            this.numberOfRejections = numberOfRejections;
+            this.heightPoisson = heightPoisson;
+            this.widthPoisson = widthPoisson;
+            this.radiusPoisson = radiusPoisson;
+            this.initialFillPercentage = initialFillPercentage;
             fitnessResults = new double[fitnessFunctions.Length];
 
             float minX = connections.corners.Min(x => x.connectionPoint.x);
@@ -46,7 +68,7 @@ namespace Demo.ShapeGrammar.Combination
             Cells = new CACell[Width * Height];
             Connections = new bool[Width * Height][];
 
-            for (var i = 0; i < Cells.Length; i++)
+            for (int i = 0; i < Cells.Length; i++)
             {
                 Cells[i] = new ForestCell(i);
                 CACell cell = Cells[i];
@@ -77,6 +99,10 @@ namespace Demo.ShapeGrammar.Combination
             {
                 Connections[i] = new bool[Width * Height];
             }
+
+            //Finish initialization for NSGA-2
+            Run(25);
+            AddBushes();
         }
 
         private void FillAtPoint(Vector3 point, float radius)
@@ -102,6 +128,23 @@ namespace Demo.ShapeGrammar.Combination
             }
         }
 
+        private void AddBushes()
+        {
+            for (var i = 0; i < numberOfPoisson; i++)
+            {
+                IEnumerable<Vector2> points =
+                    PoissonDiskSampling.GeneratePoints(radiusPoisson, widthPoisson, heightPoisson, numberOfRejections);
+                Vector3 randomPointOnMap = new Vector3(Random.Range(0, Width), 0,
+                    Random.Range(0, Height));
+                foreach (Vector2 point in points)
+                {
+                    Debug.Log(point);
+                    SetMappedPosition(randomPointOnMap + new Vector3(point.x, 0, +point.y),
+                        State.Bush, State.Land);
+                }
+            }
+        }
+
         private Vector2 GetMappedPoint(Vector3 point)
         {
             float a = point.x - Start.x;
@@ -121,6 +164,7 @@ namespace Demo.ShapeGrammar.Combination
             {
                 cell.state = state;
             }
+
             Cells[index] = cell;
         }
 
@@ -196,23 +240,36 @@ namespace Demo.ShapeGrammar.Combination
 
             return result;
         }
-
-
+        
         public INsga2Individual MakeOffspring(INsga2Individual parent2)
         {
-            throw new NotImplementedException();
+            var other = parent2 as ForestCaNetwork;
+            
+            ForestCaNetwork child = new ForestCaNetwork(connections, initialFillPercentage, radius, minWidth, minHeight,
+                FitnessFunctions, numberOfPoisson, numberOfRejections, heightPoisson, widthPoisson, radiusPoisson);
+            for (var i = 0; i < Cells.Length / 2; i++)
+            {
+                child.Cells[i] = Cells[i];
+            }
+
+            for (var i = Cells.Length / 2; i < Cells.Length; i++)
+            {
+                child.Cells[i] = other.Cells[i];
+            }
+
+            return child;
         }
 
         //boilerplate from the INsga2Interface
         private IFitnessFunction[] FitnessFunctions;
         private double[] fitnessResults;
         private List<INsga2Individual> dominatedIndividuals;
-
+        
         public void EvaluateFitness()
         {
             for (var index = 0; index < FitnessFunctions.Length; index++)
             {
-                var f = FitnessFunctions[index];
+                IFitnessFunction f = FitnessFunctions[index];
                 fitnessResults[index] = f.DetermineFitness(this);
             }
         }
@@ -240,8 +297,7 @@ namespace Demo.ShapeGrammar.Combination
             Crowding = 0;
             dominatedIndividuals = new List<INsga2Individual>();
         }
-
-
+        
         public int Rank { get; set; }
         public double Crowding { get; set; }
         public int DominationCount { get; set; }
