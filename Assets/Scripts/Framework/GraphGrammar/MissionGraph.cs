@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Framework.Util;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Framework.GraphGrammar
 {
@@ -207,6 +209,8 @@ namespace Framework.GraphGrammar
                 }
             }
 
+            Debug.Assert(Vertices.Count == traversal.Count);
+            
             return traversal;
         }
 
