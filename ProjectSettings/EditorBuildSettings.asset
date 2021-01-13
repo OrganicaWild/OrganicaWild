@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MultivariateOptimizationScene.unity
+    guid: 03cd76096cbbf481799b8f4d4fe7e46b
   m_configObjects: {}

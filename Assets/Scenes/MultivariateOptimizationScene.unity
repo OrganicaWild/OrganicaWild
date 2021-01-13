@@ -240,7 +240,7 @@ MonoBehaviour:
   numberRoundForests: 2
   numberLongForests: 30
   sizeOfPopulation: 20
-  generations: 200
+  generations: 10000
   mutationPercentage: 10
   floorPrefab: {fileID: 4284913072249543423, guid: 0b587e4d577471c48b60b845ea3ec9df,
     type: 3}

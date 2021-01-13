@@ -7,6 +7,14 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Demo" t="Include">
+            <e p="Cellular Automata" t="Include">
+              <e p="Editor" t="Include">
+                <e p="OrganicRectangularCAMapGeneratorEditor.cs" t="Include" />
+                <e p="RectangularCAMapGeneratorEditor.cs" t="Include" />
+              </e>
+              <e p="OrganicRectangularCAMapGenerator.cs" t="Include" />
+              <e p="RectangularCAMapGenerator.cs" t="Include" />
+            </e>
             <e p="Evolutionary" t="Include">
               <e p="DistanceToBorderFitnessFunction.cs" t="Include" />
               <e p="EnemyDistanceFitnessFunction.cs" t="Include" />
@@ -21,12 +29,19 @@
               <e p="StandardFitnessFunction2.cs" t="Include" />
               <e p="StandardIndividual2.cs" t="Include" />
             </e>
+            <e p="Poisson Disk Sampling" t="Include">
+              <e p="PDSGenerator.cs" t="Include" />
+            </e>
             <e p="ShapeGrammar" t="Include">
               <e p="ShapeGrammarController.cs" t="Include" />
               <e p="SubdivisionGrammarRuleComponent.cs" t="Include" />
             </e>
           </e>
           <e p="Framework" t="Include">
+            <e p="Cellular Automata" t="Include">
+              <e p="CACell.cs" t="Include" />
+              <e p="CANetwork.cs" t="Include" />
+            </e>
             <e p="Evolutionary" t="Include">
               <e p="IEvolutionaryAlgorithm.cs" t="Include" />
               <e p="IEvolutionaryAlgorithmIndividual.cs" t="Include" />
@@ -62,6 +77,9 @@
               <e p="GraphGrammarComponent.cs" t="Include" />
               <e p="MissionGraph.cs" t="Include" />
               <e p="MissionVertex.cs" t="Include" />
+            </e>
+            <e p="Poisson Disk Sampling" t="Include">
+              <e p="PoissonDiskSampling.cs" t="Include" />
             </e>
             <e p="ShapeGrammar" t="Include">
               <e p="ScriptableConnections.cs" t="Include" />
