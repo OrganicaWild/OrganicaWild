@@ -28,7 +28,7 @@ namespace Framework.GraphGrammar.Editor
             if (GUILayout.Button("Run Until Termination"))
             {
                 grammarComponent.Initialize();
-                grammarComponent.ApplyUntilNoRulesFitAnymore();
+                grammarComponent.ApplyUntilNoRulesFitAnymore(10);
             }
             
         }

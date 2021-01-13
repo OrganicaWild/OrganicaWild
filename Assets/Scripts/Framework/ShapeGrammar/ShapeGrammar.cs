@@ -1,7 +1,12 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Framework.GraphGrammar;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Framework.ShapeGrammar
@@ -14,26 +19,88 @@ namespace Framework.ShapeGrammar
         /// a Rigidbody set to kinematic and a collider encompassing the full rule.
         /// </summary>
         public GameObject[] rules;
-        
+
         private MissionGraph levelMissionGraph;
         private SpaceTree tree;
 
+        private int numberOfNodes = 10000;
+        private int steps = 100;
+
         public void Awake()
         {
-            GenerateLevel();
-            GenerateGeometry();
+            // GenerateLevel();
+            // GenerateGeometry();
+
+            StartCoroutine(nameof(Run));
+        }
+
+        private IEnumerator Run()
+        {
+            string path = @"C:\Users\Christoph\Desktop\results.txt";
+            string timeString = "";
+            string memoryString = "";
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                for (int i = 0; i <= numberOfNodes; i += steps)
+                {
+                    foreach (Transform child in transform)
+                    {
+                        Destroy(child.gameObject);
+                    }
+
+                    yield return null;
+                    
+                    Stopwatch start = new Stopwatch();
+                    start.Start();
+                    long preInitiMemory = GC.GetTotalMemory(true);
+
+                    GenerateLevel(i);
+                    GenerateGeometry();
+
+                    start.Stop();
+                    timeString += $"{start.ElapsedMilliseconds} ms elapsed for {i} generations. \n";
+
+                    long postInit = GC.GetTotalMemory(true);
+                    memoryString +=
+                        $"{postInit - preInitiMemory}        , {postInit} {preInitiMemory}  bytes allocated for {i} generations. \n";
+
+                    Debug.Log($"max: {i} done");
+
+                    if (i == numberOfNodes)
+                    {
+                        sw.Write(timeString);
+                        sw.Write(memoryString);
+                        sw.Flush();
+                        Application.Quit();
+                    }
+
+                    yield return null;
+                }
+            }
         }
 
         /// <summary>
         /// Run the passed GraphGrammar to generate the underlying mission
         /// </summary>
-        public void GenerateLevel()
+        public void GenerateLevel(int max)
         {
-            GraphGrammarComponent graphGrammarComponent = GetComponent<GraphGrammarComponent>();
-            graphGrammarComponent.Initialize();
-            graphGrammarComponent.ApplyUntilNoRulesFitAnymore();
+            // GraphGrammarComponent graphGrammarComponent = GetComponent<GraphGrammarComponent>();
+            // graphGrammarComponent.Initialize();
+            // graphGrammarComponent.ApplyUntilNoRulesFitAnymore(max);
+            //
+            // levelMissionGraph = graphGrammarComponent.GetLevel();
 
-            levelMissionGraph = graphGrammarComponent.GetLevel();
+            levelMissionGraph = new MissionGraph();
+            levelMissionGraph.Start = new MissionVertex("Test");
+            var prev = levelMissionGraph.Start;
+            for (int i = 0; i < max; i++)
+            {
+                var newNode = new MissionVertex("Test");
+                newNode.AddPreviousNeighbour(prev);
+                prev = newNode;
+            }
+
+            levelMissionGraph.End = prev;
         }
 
         /// <summary>
@@ -59,7 +126,7 @@ namespace Framework.ShapeGrammar
         {
             tree = new SpaceTree();
             List<MissionVertex> traversal = levelMissionGraph.Traverse();
-            Debug.Log($"{string.Join(";", traversal)}");
+            Debug.Log($" {traversal.Count}");
 
             foreach (MissionVertex missionVertex in traversal)
             {
@@ -71,7 +138,8 @@ namespace Framework.ShapeGrammar
                 if (tree.Root == null)
                 {
                     tree.Root = new SpaceNode(
-                        new SpaceNodeConnection() {connectionPoint = transform.position, connectionDirection = Vector3.zero},
+                        new SpaceNodeConnection()
+                            {connectionPoint = transform.position, connectionDirection = Vector3.zero},
                         ruleRep,
                         ruleRep.GetComponent<ShapeGrammarRuleComponent>(), missionVertex, new SpaceNode(gameObject));
                     tree.Root.InstantiatedReference = DrawNode(tree.Root);
@@ -151,9 +219,9 @@ namespace Framework.ShapeGrammar
                         }
                     } while (hasNoPlace && triedLeafs.Count < tree.Leafs.Count);
 
-                    if (triedLeafs.Count > tree.Leafs.Count)
+                    if (triedLeafs.Count >= tree.Leafs.Count)
                     {
-                        Debug.LogError($"Ran out of spaces when trying to place {missionVertex.Type}");
+                        Debug.LogWarning($"Ran out of spaces when trying to place {missionVertex.Type}");
                     }
 
                     if (newNode.GetNumberOfOpenHooks() > 0)

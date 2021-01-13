@@ -1,9 +1,15 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Framework.GraphGrammar.EditorData;
 using Framework.Util;
 using UnityEditor;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace Framework.GraphGrammar
@@ -35,6 +41,49 @@ namespace Framework.GraphGrammar
 
         private readonly Dictionary<MissionVertex, Vector3> dictionary = new Dictionary<MissionVertex, Vector3>(
             new IdentityEqualityComparer<MissionVertex>());
+
+        private void Start()
+        {
+            //StartCoroutine(nameof(Run));
+        }
+
+        private IEnumerator Run()
+        {
+            string path = @"C:\Users\Christoph\Desktop\results.txt";
+            string timeString = "";
+            string memoryString = "";
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                for (int i = 0; i <= 10_000; i += 10_00)
+                {
+                    Stopwatch start = new Stopwatch();
+                    start.Start();
+                    long preInitiMemory = GC.GetTotalMemory(true);
+
+                    Initialize();
+                    ApplyUntilNoRulesFitAnymore(i);
+
+                    start.Stop();
+                    timeString += $"{start.ElapsedMilliseconds} ms elapsed for {i} generations. \n";
+
+
+                    long postInit = GC.GetTotalMemory(true);
+                    memoryString +=
+                        $"diff:{postInit - preInitiMemory}, {postInit} {preInitiMemory}  bytes allocated for {i} generations. \n";
+
+                    Debug.Log($"max: {i} vertices: {grammar.GetLevel().Vertices.Count} done");
+
+                    if (i == 100_00)
+                    {
+                        sw.Write(timeString);
+                        sw.Write(memoryString);
+                        sw.Flush();
+                        Application.Quit();
+                    }
+                    yield return null;
+                }
+            }
+        }
 
         /// <summary>
         /// Initializes grammar for use. Must be run, before it is possible to apply rules.
@@ -68,9 +117,9 @@ namespace Framework.GraphGrammar
                     dictionary);
         }
 
-        public void ApplyUntilNoRulesFitAnymore()
+        public void ApplyUntilNoRulesFitAnymore(int max)
         {
-            grammar.ApplyUntilNoRulesFitAnymore();
+            grammar.ApplyUntilNoRulesFitAnymore(max);
             positions =
                 (internalMother.Start as DrawableMissionVertex).Paint(new Vector3(0, 0, 0),
                     new List<DrawableMissionVertex.Branch>(),

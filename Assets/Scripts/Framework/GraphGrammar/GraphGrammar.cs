@@ -61,11 +61,11 @@ namespace Framework.GraphGrammar
        /// Applies rules to the level graph, until no rule can be applied anymore.
        /// </summary>
        /// <returns>number of applied rules</returns>
-        public int ApplyUntilNoRulesFitAnymore()
+        public int ApplyUntilNoRulesFitAnymore(int max)
         {
             GrammarRule[] workingRules = rules.Where(x => mother.ContainsSubGraphBool(x.LeftHandSide)).ToArray();
             int appliedRules = 0;
-            while (workingRules.Any())
+            while (workingRules.Any() && mother.Vertices.Count <= max)
             {
                 GrammarRule chosenRule = workingRules[Random.Range(0, workingRules.Count())];
                 ApplyRule(chosenRule);

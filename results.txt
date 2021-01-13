@@ -1,0 +1,8 @@
+482 ms elapsed for 0 generations.
+0 bytes allocated for 0 generations.
+1564 ms elapsed for 50 generations.
+0 bytes allocated for 50 generations.
+2361 ms elapsed for 100 generations.
+0 bytes allocated for 100 generations.
+3107 ms elapsed for 150 generations.
+0 bytes allocated for 150 generations.

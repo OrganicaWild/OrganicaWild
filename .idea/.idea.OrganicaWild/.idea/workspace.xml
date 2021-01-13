@@ -30,14 +30,24 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="add actual rooms to prefabs">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarPerformance.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarPerformance.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Combined.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/CrossRule 1.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/CrossRule 1.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Test.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Test.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/TestTest.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/TestTest.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MultivariateOptimizationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MultivariateOptimizationScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,15 +104,12 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraphConnection.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionVertex.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/VertexContainer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/MissionGraphEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraph.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/SubdivisionGrammarRuleComponent.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" />
@@ -110,8 +117,12 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNodeConnection.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/AbstractNsga2Individual.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestBuilder.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
+      <option value="$USER_HOME$/Desktop/results.txt" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -120,7 +131,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.2823276" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.28210312" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -198,7 +209,7 @@
       <workItem from="1609266295333" duration="1902000" />
       <workItem from="1609321221912" duration="7025000" />
       <workItem from="1610482946891" duration="4043000" />
-      <workItem from="1610525861096" duration="7623000" />
+      <workItem from="1610525861096" duration="16715000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -340,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606461622021</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="adjust search-based demo for performance measurement">
+      <created>1610542098110</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1610542098110</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +399,8 @@
     <MESSAGE value="organize assets" />
     <MESSAGE value="rename graph to mission graph and vertex accordingly" />
     <MESSAGE value="add actual rooms to prefabs" />
-    <option name="LAST_COMMIT_MESSAGE" value="add actual rooms to prefabs" />
+    <MESSAGE value="adjust search-based demo for performance measurement" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjust search-based demo for performance measurement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -426,17 +445,56 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>
-          <line>144</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="146" containingFunctionPresentation="method 'ApplyRule'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs</url>
+          <line>58</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammarComponent.cs" initialLine="58" containingFunctionPresentation="method 'Run'">
             <startOffsets>
-              <option value="6044" />
+              <option value="1989" />
             </startOffsets>
             <endOffsets>
-              <option value="6056" />
+              <option value="2023" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs</url>
+          <line>54</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammarComponent.cs" initialLine="54" containingFunctionPresentation="method 'Run'">
+            <startOffsets>
+              <option value="1832" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1879" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs</url>
+          <line>139</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\ShapeGrammar\ShapeGrammar.cs" initialLine="137" containingFunctionPresentation="method 'BuildTree'">
+            <startOffsets>
+              <option value="4519" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4850" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs</url>
+          <line>149</line>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\ShapeGrammar\ShapeGrammar.cs" initialLine="147" containingFunctionPresentation="method 'BuildTree'">
+            <startOffsets>
+              <option value="5050" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5073" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
