@@ -7,11 +7,6 @@ namespace Framework.GraphGrammar.Editor
     [CustomEditor(typeof(EditorMissionGraph))]
     public class MissionGraphEditor : UnityEditor.Editor
     {
-        private void Start()
-        {
-            base.OnInspectorGUI();
-        }
-
         public override void OnInspectorGUI()
         {
             EditorMissionGraph graph = target as EditorMissionGraph;

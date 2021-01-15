@@ -61,7 +61,7 @@ namespace Framework.Evolutionary.Nsga2
                 p.EvaluateFitness();
             }
 
-            List<List<INsga2Individual>> fronts = NonDominatedSorting();
+            IEnumerable<List<INsga2Individual>> fronts = NonDominatedSorting();
             List<List<INsga2Individual>> crowdedFronts = fronts.Select(CrowdingDistanceSortFront).ToList();
 
             INsga2Individual[] newPopulation = crowdedFronts.SelectMany(x => x).ToArray();
@@ -105,7 +105,7 @@ namespace Framework.Evolutionary.Nsga2
         /// </summary>
         /// <param name="generations">Number indicating how many generations to advance</param>
         /// <returns>Population after advance that many generations</returns>
-        public IEvolutionaryAlgorithmIndividual[] RunForGenerations(int generations)
+        public IEnumerable<IEvolutionaryAlgorithmIndividual> RunForGenerations(int generations)
         {
             for (int i = 0; i < generations; i++)
             {
@@ -119,7 +119,7 @@ namespace Framework.Evolutionary.Nsga2
         /// Sort the population with non-dominated sorting.
         /// </summary>
         /// <returns>Population sorted into fronts. Front 0 is the pareto front.</returns>
-        private List<List<INsga2Individual>> NonDominatedSorting()
+        private IEnumerable<List<INsga2Individual>> NonDominatedSorting()
         {
             foreach (INsga2Individual p in population)
             {

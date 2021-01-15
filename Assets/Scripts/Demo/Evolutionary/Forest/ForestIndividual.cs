@@ -3,23 +3,23 @@ using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Demo.Forest
+namespace Demo.Evolutionary.Forest
 {
     public class ForestIndividual : AbstractNsga2Individual
     {
-        private int areaLength;
-        public readonly int[,] Map;
-        private int sideLength;
-        private Random random;
-        private int radius;
-        private double mutationPercentage;
+        private readonly int areaLength;
+        public readonly int[,] map;
+        private readonly int sideLength;
+        private readonly Random random;
+        private readonly int radius;
+        private readonly double mutationPercentage;
 
-        public readonly LongForestArea[] LongForestAreas;
-        public readonly RoundForestArea[] RoundForestAreas;
-        public Vector2 Start;
-        public Vector2 Goal;
-        public int[] INTStart;
-        public int[] INTGoal;
+        private readonly LongForestArea[] longForestAreas;
+        public readonly RoundForestArea[] roundForestAreas;
+        public Vector2 start;
+        public Vector2 goal;
+        public int[] intStart;
+        public int[] intGoal;
 
         public ForestIndividual(Random random, int numberRoundForests, int numberLongForests, int radius,
             int areaLength, int sideLength, double mutationPercentage
@@ -31,106 +31,106 @@ namespace Demo.Forest
             this.random = random;
             this.sideLength = sideLength;
             this.areaLength = areaLength;
-            Map = new int[sideLength, sideLength];
+            map = new int[sideLength, sideLength];
 
-            LongForestAreas = new LongForestArea[numberLongForests];
+            longForestAreas = new LongForestArea[numberLongForests];
 
             for (int i = 0; i < numberLongForests; i++)
             {
-                LongForestAreas[i] = new LongForestArea(random);
-                DrawLongForest(LongForestAreas[i]);
+                longForestAreas[i] = new LongForestArea(random);
+                DrawLongForest(longForestAreas[i]);
             }
 
-            RoundForestAreas = new RoundForestArea[numberRoundForests];
+            roundForestAreas = new RoundForestArea[numberRoundForests];
 
             for (int i = 0; i < numberRoundForests; i++)
             {
-                RoundForestAreas[i] = new RoundForestArea(random);
-                DrawRoundForest(RoundForestAreas[i]);
+                roundForestAreas[i] = new RoundForestArea(random);
+                DrawRoundForest(roundForestAreas[i]);
             }
 
-            Start = new Vector2((float) random.NextDouble(), (float) random.NextDouble());
-            DrawStart(Start);
-            Goal = new Vector2((float) random.NextDouble(), (float) random.NextDouble());
-            DrawEnd(Goal);
+            start = new Vector2((float) random.NextDouble(), (float) random.NextDouble());
+            DrawStart();
+            goal = new Vector2((float) random.NextDouble(), (float) random.NextDouble());
+            DrawGoal();
         }
 
         public override INsga2Individual MakeOffspring(INsga2Individual parent2)
         {
-            var child = new ForestIndividual(random, RoundForestAreas.Length, LongForestAreas.Length, radius,
-                areaLength, sideLength, mutationPercentage, FitnessFunctions);
+            ForestIndividual child = new ForestIndividual(random, roundForestAreas.Length, longForestAreas.Length, radius,
+                areaLength, sideLength, mutationPercentage, fitnessFunctions);
 
-            var other = parent2 as ForestIndividual;
-            for (var i = 0; i < LongForestAreas.Length; i++)
+            ForestIndividual other = parent2 as ForestIndividual;
+            for (int i = 0; i < longForestAreas.Length; i++)
             {
                 if (random.NextDouble() < mutationPercentage)
                 {
-                    child.LongForestAreas[i] = other.LongForestAreas[i];
+                    child.longForestAreas[i] = other.longForestAreas[i];
                 }
                 else if (random.NextDouble() < mutationPercentage)
                 {
-                    child.LongForestAreas[i] = LongForestAreas[i];
+                    child.longForestAreas[i] = longForestAreas[i];
                 }
             }
 
-            for (int i = 0; i < RoundForestAreas.Length; i++)
+            for (int i = 0; i < roundForestAreas.Length; i++)
             {
                 if (random.NextDouble() < mutationPercentage)
                 {
-                    child.RoundForestAreas[i] = other.RoundForestAreas[i];
+                    child.roundForestAreas[i] = other.roundForestAreas[i];
                 }
                 else if (random.NextDouble() < mutationPercentage)
                 {
-                    child.RoundForestAreas[i] = RoundForestAreas[i];
+                    child.roundForestAreas[i] = roundForestAreas[i];
                 }
             }
 
             if (random.NextDouble() < mutationPercentage)
             {
-                child.Start = other.Start;
+                child.start = other.start;
             }
             else if (random.NextDouble() < mutationPercentage)
             {
-                child.Start = Start;
+                child.start = start;
             }
 
             if (random.NextDouble() < mutationPercentage)
             {
-                child.Start = other.Goal;
+                child.start = other.goal;
             }
             else if (random.NextDouble() < mutationPercentage)
             {
-                child.Start = Goal;
+                child.start = goal;
             }
 
 
             return child;
         }
 
-        private void DrawStart(Vector2 Start)
+        private void DrawStart()
         {
-            var x = (int) (Start.x * sideLength);
-            var y = (int) (Start.y * sideLength);
-            INTStart = new[] {x, y};
+            int x = (int) (start.x * sideLength);
+            int y = (int) (start.y * sideLength);
+            intStart = new[] {x, y};
             if (x < sideLength && x >= 0 && y < sideLength && y >= 0)
-                Map[x, y] = 1;
+                map[x, y] = 1;
         }
 
-        private void DrawEnd(Vector2 end)
+        private void DrawGoal()
         {
-            var x = (int) (end.x * sideLength);
-            var y = (int) (end.y * sideLength);
-            INTGoal = new[] {x, y};
+            int x = (int) (goal.x * sideLength);
+            int y = (int) (goal.y * sideLength);
+            intGoal = new[] {x, y};
             if (x < sideLength && x >= 0 && y < sideLength && y >= 0)
-                Map[x, y] = 2;
+                map[x, y] = 2;
         }
 
         private void DrawLongForest(LongForestArea area)
         {
-            var x = (int) (area.X * sideLength);
-            var y = (int) (area.Y * sideLength);
+            int x = (int) (area.X * sideLength);
+            int y = (int) (area.Y * sideLength);
             if (x < sideLength && x >= 0 && y < sideLength && y >= 0)
-                Map[x, y] = 3;
+                map[x, y] = 3;
 
             for (int i = 0; i < area.Length * areaLength; i++)
             {
@@ -146,10 +146,9 @@ namespace Demo.Forest
                 {
                     x++;
                 }
-
-                //Debug.Log($"{y} und {x}");
+                
                 if (x < sideLength && x >= 0 && y < sideLength && y >= 0)
-                    Map[x, y] = 3;
+                    map[x, y] = 3;
             }
         }
 
@@ -173,21 +172,21 @@ namespace Demo.Forest
 
         private void DrawRoundForest(RoundForestArea area)
         {
-            var x1 = (int) (area.X * sideLength);
-            var y1 = (int) (area.Y * sideLength);
+            int x1 = (int) (area.X * sideLength);
+            int y1 = (int) (area.Y * sideLength);
 
-            var x2 = (int) (area.X * sideLength);
-            var y2 = (int) (area.Y * sideLength);
+            int x2 = (int) (area.X * sideLength);
+            int y2 = (int) (area.Y * sideLength);
 
-            var x3 = (int) (area.X * sideLength);
-            var y3 = (int) (area.Y * sideLength);
+            int x3 = (int) (area.X * sideLength);
+            int y3 = (int) (area.Y * sideLength);
 
-            var x4 = (int) (area.X * sideLength);
-            var y4 = (int) (area.Y * sideLength);
-            var origin = new Vector2(x1, y1);
+            int x4 = (int) (area.X * sideLength);
+            int y4 = (int) (area.Y * sideLength);
+            Vector2 origin = new Vector2(x1, y1);
 
             if (x1 < sideLength && x1 >= 0 && y1 < sideLength && y1 >= 0)
-                Map[x1, y1] = 3;
+                map[x1, y1] = 3;
 
 
             while (x1 < sideLength || y1 < sideLength || x2 >= 0 || y2 >= 0 || x3 >= 0 || y3 < sideLength ||
@@ -205,46 +204,46 @@ namespace Demo.Forest
                 x4++;
                 y4--;
 
-                for (var yq = y1; yq > y4; yq--)
+                for (int yq = y1; yq > y4; yq--)
                     if ((new Vector2(x1, yq) - origin).magnitude < radius * area.ExpandFactor)
                     {
                         if (random.NextDouble() < area.HoleFactor)
                         {
                             if (x1 < sideLength && x1 >= 0 && yq < sideLength && yq >= 0)
-                                Map[x1, yq] = 3;
+                                map[x1, yq] = 3;
                         }
                     }
 
 
-                for (var yq = y2; yq < y3; yq++)
+                for (int yq = y2; yq < y3; yq++)
                     if ((new Vector2(x2, yq) - origin).magnitude < radius * area.ExpandFactor)
                     {
                         if (random.NextDouble() < area.HoleFactor)
                         {
                             if (x2 < sideLength && x2 >= 0 && yq < sideLength && yq >= 0)
-                                Map[x2, yq] = 3;
+                                map[x2, yq] = 3;
                         }
                     }
 
 
-                for (var xq = x3; xq < x1; xq++)
+                for (int xq = x3; xq < x1; xq++)
                     if ((new Vector2(xq, y3) - origin).magnitude < radius * area.ExpandFactor)
                     {
                         if (random.NextDouble() < area.HoleFactor)
                         {
                             if (xq < sideLength && xq >= 0 && y3 < sideLength && y3 >= 0)
-                                Map[xq, y3] = 3;
+                                map[xq, y3] = 3;
                         }
                     }
 
 
-                for (var xq = x4; xq > x2; xq--)
+                for (int xq = x4; xq > x2; xq--)
                     if ((new Vector2(xq, y4) - origin).magnitude < radius * area.ExpandFactor)
                     {
                         if (random.NextDouble() < area.HoleFactor)
                         {
                             if (xq < sideLength && xq >= 0 && y4 < sideLength && y4 >= 0)
-                                Map[xq, y4] = 3;
+                                map[xq, y4] = 3;
                         }
                     }
             }

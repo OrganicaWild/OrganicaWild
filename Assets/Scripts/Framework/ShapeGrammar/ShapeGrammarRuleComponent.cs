@@ -1,5 +1,4 @@
-﻿using Demo.ShapeGrammar;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Framework.ShapeGrammar
 {
@@ -27,12 +26,10 @@ namespace Framework.ShapeGrammar
                 Gizmos.DrawLine(negativePosition, pos);
             }
 
-            for (int index = 0; index < connection.corners.Count; index++)
+            foreach (SpaceNodeConnection spaceNodeConnection in connection.corners)
             {
-                SpaceNodeConnection conn = connection.corners[index];
-
-                Vector3 pos = conn.connectionPoint + transform.position;
-                Vector3 negativePosition = pos - conn.connectionDirection;
+                Vector3 pos = spaceNodeConnection.connectionPoint + transform.position;
+                Vector3 negativePosition = pos - spaceNodeConnection.connectionDirection;
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawCube(pos, new Vector3(0.1f, 0.1f, 0.1f));
                 Gizmos.DrawLine(negativePosition, pos);

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.Framework.Cellular;
+using Framework.Cellular_Automata;
 using UnityEngine;
 
-namespace Assets.Scripts.Demo.Cellular
+namespace Demo.Cellular_Automata
 {
-    public class RectangularCAMapGenerator : MonoBehaviour
+    public class RectangularCaMapGenerator : MonoBehaviour
     {
 
         [Tooltip("Width of the board.")]
@@ -19,7 +19,7 @@ namespace Assets.Scripts.Demo.Cellular
         
         private RectangularNetwork rectangularNetwork;
 
-        void Start()
+        public void Start()
         {
             rectangularNetwork = new RectangularNetwork(width, height, initialFillPercentage);
             rectangularNetwork.Run(iterations);
@@ -36,12 +36,7 @@ namespace Assets.Scripts.Demo.Cellular
             rectangularNetwork.Step();
         }
 
-        void Update()
-        {
-        
-        }
-
-        void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             if (rectangularNetwork != null)
             {
@@ -50,7 +45,7 @@ namespace Assets.Scripts.Demo.Cellular
                     for (int y = 0; y < height; y++)
                     {
                         RectangularCell currentCell = rectangularNetwork.Cells[x + y * width] as RectangularCell;
-                        Gizmos.color = (currentCell.state == State.Filled) ? Color.black : Color.white;
+                        Gizmos.color = currentCell.state == State.Filled ? Color.black : Color.white;
                         Vector3 pos = new Vector3(-width / 2 + x + .5f, 0, -height / 2 + y + .5f);
                         Gizmos.DrawSphere(pos, 0.5f);
                     }
@@ -59,25 +54,26 @@ namespace Assets.Scripts.Demo.Cellular
         }
 
 
-        public class RectangularNetwork : CANetwork
+        private class RectangularNetwork : CaNetwork
         {
-            public int Width { get; set; }
-            public int Height { get; set; }
+            private int Width { get; }
+            private int Height { get; }
 
             public RectangularNetwork(int width, int height, float initialFillPercentage)
             {
-                Cells = new CACell[width * height];
+                Cells = new CaCell[width * height];
                 Connections = new bool[width * height][];
 
                 Width = width;
                 Height = height;
 
-                for (var i = 0; i < Cells.Length; i++)
+                for (int i = 0; i < Cells.Length; i++)
                 {
                     
                     Cells[i] = new RectangularCell(i);
-                    CACell cell = Cells[i];
+                    CaCell cell = Cells[i];
                     cell.Network = this;
+                    
                     if (Random.value <= initialFillPercentage)
                     {
                         ((RectangularCell) cell).state = State.Filled;
@@ -126,9 +122,9 @@ namespace Assets.Scripts.Demo.Cellular
                 return index % Width == 0;
             }
 
-            public override IEnumerable<CACell> GetNeighborsOf(int cellNumber)
+            public override IEnumerable<CaCell> GetNeighborsOf(int cellNumber)
             {
-                List<CACell> result = new List<CACell>();
+                List<CaCell> result = new List<CaCell>();
 
                 if (!IsOnTopBorder(cellNumber))
                     result.Add(Cells[cellNumber - Width]);
@@ -143,21 +139,21 @@ namespace Assets.Scripts.Demo.Cellular
             }
         }
 
-        private class RectangularCell : CACell
+        private class RectangularCell : CaCell
         {
             public State state;
 
             public RectangularCell(int index) : base(index) { }
 
-            public override CACell Update()
+            public override CaCell Update()
             {
 
                 RectangularNetwork net = (RectangularNetwork) Network;
-                IEnumerable<CACell> neighbors = net.GetNeighborsOf(Index);
+                IEnumerable<CaCell> neighbors = net.GetNeighborsOf(Index);
 
 
                 int filled = 0;
-                foreach (CACell caCell in neighbors)
+                foreach (CaCell caCell in neighbors)
                 {
                     RectangularCell cell = (RectangularCell) caCell;
                     if (cell.state == State.Filled)
@@ -167,8 +163,7 @@ namespace Assets.Scripts.Demo.Cellular
                 }
 
 
-                RectangularCell result = new RectangularCell(Index);
-                result.Network = Network;
+                RectangularCell result = new RectangularCell(Index) {Network = Network};
 
                 bool isOnBorder = net.IsOnTopBorder(Index) || net.IsOnRightBorder(Index) || net.IsOnBottomBorder(Index) || net.IsOnLeftBorder(Index);
 

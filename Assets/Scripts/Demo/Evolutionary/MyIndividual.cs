@@ -30,7 +30,7 @@ namespace Demo.Evolutionary
         private readonly double[] data;
 
         public MyIndividual(int height, int width, int mutationPercentage,
-            AbstractNsga2FitnessFunction<MyIndividual>[] fitnessFunctions) : base(fitnessFunctions)
+            IFitnessFunction[] fitnessFunctions) : base(fitnessFunctions)
         {
             this.height = height;
             this.width = width;
@@ -94,7 +94,7 @@ namespace Demo.Evolutionary
                 newGenes[i] = newGene;
             }
 
-            MyIndividual child = new MyIndividual(height, width, mutationPercentage, newGenes, FitnessFunctions);
+            MyIndividual child = new MyIndividual(height, width, mutationPercentage, newGenes, fitnessFunctions);
             child.Mutate();
 
             return child;

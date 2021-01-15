@@ -44,7 +44,7 @@ namespace Framework.GraphGrammar
        /// <exception cref="Exception">thrown if no rules can be applied to the level graph</exception>
         public void ApplyOneRule()
         {
-            GrammarRule[] workingRules = this.rules.Where(x => mother.ContainsSubGraphBool(x.LeftHandSide)).ToArray();
+            GrammarRule[] workingRules = rules.Where(x => mother.ContainsSubGraphBool(x.LeftHandSide)).ToArray();
             if (workingRules.Any())
             {
                 GrammarRule chosenRule = workingRules[Random.Range(0, workingRules.Length)];
@@ -61,22 +61,20 @@ namespace Framework.GraphGrammar
        /// Applies rules to the level graph, until no rule can be applied anymore.
        /// </summary>
        /// <returns>number of applied rules</returns>
-        public int ApplyUntilNoRulesFitAnymore()
+        public void ApplyUntilNoRulesFitAnymore()
         {
             GrammarRule[] workingRules = rules.Where(x => mother.ContainsSubGraphBool(x.LeftHandSide)).ToArray();
             int appliedRules = 0;
             while (workingRules.Any())
             {
-                GrammarRule chosenRule = workingRules[Random.Range(0, workingRules.Count())];
+                GrammarRule chosenRule = workingRules[Random.Range(0, workingRules.Length)];
                 ApplyRule(chosenRule);
                 workingRules = this.rules.Where(x => mother.ContainsSubGraphBool(x.LeftHandSide)).ToArray();
                 appliedRules++;
             }
-
-            return appliedRules;
         }
         
-        private bool ApplyRule(GrammarRule rule)
+        private void ApplyRule(GrammarRule rule)
         {
             List<MissionGraph> subGraphs = mother.ContainsSubGraphMultiple(rule.LeftHandSide);
 
@@ -141,11 +139,8 @@ namespace Framework.GraphGrammar
                 {
                     mother.RemoveVertex(subGraphVertex);
                 }
-
-                return true;
+                
             }
-            
-            return false;
         }
     }
 }

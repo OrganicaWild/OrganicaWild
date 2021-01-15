@@ -1,19 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
-using Demo.ShapeGrammar;
 using Framework.GraphGrammar;
 using UnityEngine;
 
 namespace Framework.ShapeGrammar
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    
     internal class SpaceNode
     {
         private readonly SpaceNodeConnection attachedToHook;
         private readonly SpaceNodeConnection attacherHook;
         private readonly GameObject prefab;
+        private readonly MissionVertex missionVertex;
         internal readonly SpaceNode parentSpaceNode;
         public GameObject InstantiatedReference { get; set; }
 
@@ -24,13 +22,13 @@ namespace Framework.ShapeGrammar
         {
             this.attachedToHook = attachedToHook;
             this.prefab = prefab;
+            this.missionVertex = missionVertex;
             this.parentSpaceNode = parentSpaceNode;
 
             List<SpaceNodeConnection> corners = ruleComponent.connection.corners.ToList();
             SpaceNodeConnection entryCorner = ruleComponent.connection.entryCorner;
 
             openHooks = corners;
-
             attacherHook = entryCorner;
         }
 
@@ -44,7 +42,7 @@ namespace Framework.ShapeGrammar
             return parentSpaceNode;
         }
 
-        internal List<SpaceNodeConnection> GetOpenHooks()
+        internal IEnumerable<SpaceNodeConnection> GetOpenHooks()
         {
             return openHooks.ToList();
         }

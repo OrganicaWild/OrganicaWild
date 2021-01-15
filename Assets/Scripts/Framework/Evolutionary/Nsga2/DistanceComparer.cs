@@ -35,7 +35,7 @@ namespace Framework.Evolutionary.Nsga2
                 return -1;
             }
 
-            return (x.Crowding.CompareTo(y.Crowding));
+            return x.Crowding.CompareTo(y.Crowding);
         }
     }
 }

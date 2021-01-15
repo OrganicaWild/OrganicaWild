@@ -6,7 +6,7 @@ namespace Framework.ShapeGrammar
     [Serializable]
     public class SpaceNodeConnection : IComparable<SpaceNodeConnection>
     {
-        internal Vector3 center;
+        internal Vector3 center = Vector3.zero;
 
         /// <summary>
         /// Point in 3D space where the connection ends.

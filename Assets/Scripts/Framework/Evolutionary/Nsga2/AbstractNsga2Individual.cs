@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Demo;
 
 namespace Framework.Evolutionary.Nsga2
 {
@@ -23,12 +22,12 @@ namespace Framework.Evolutionary.Nsga2
         /// Indicates to what front the individual belongs.
         /// </summary>
         public int Rank { get; set; }
-        
+
         /// <summary>
         /// Crowding Distance
         /// </summary>
         public double Crowding { get; set; }
-        
+
         /// <summary>
         /// Number of individuals this individual dominated by.
         /// </summary>
@@ -42,7 +41,7 @@ namespace Framework.Evolutionary.Nsga2
         /// <summary>
         /// Fitness Functions that the individual will be tested on by the Nsga2 Algorithm.
         /// </summary>
-        public readonly IFitnessFunction[] FitnessFunctions;
+        protected readonly IFitnessFunction[] fitnessFunctions;
 
         /// <summary>
         /// results of the FitnessFunctions after EvaluateFitness() has been called by the Algorithm.
@@ -57,9 +56,11 @@ namespace Framework.Evolutionary.Nsga2
         protected AbstractNsga2Individual(IFitnessFunction[] fitnessFunctions)
         {
             if (fitnessFunctions is null)
+            {
                 throw new ArgumentNullException($"{nameof(fitnessFunctions)} is null.");
+            }
             
-            FitnessFunctions = fitnessFunctions;
+            this.fitnessFunctions = fitnessFunctions;
             fitnessResults = new double[fitnessFunctions.Length];
         }
 
@@ -68,9 +69,9 @@ namespace Framework.Evolutionary.Nsga2
         /// </summary>
         public void EvaluateFitness()
         {
-            for (var index = 0; index < FitnessFunctions.Length; index++)
+            for (int index = 0; index < fitnessFunctions.Length; index++)
             {
-                var f = FitnessFunctions[index];
+                IFitnessFunction f = fitnessFunctions[index];
                 fitnessResults[index] = f.DetermineFitness(this);
             }
         }
@@ -81,7 +82,7 @@ namespace Framework.Evolutionary.Nsga2
         /// <returns>number of fitness functions</returns>
         public int GetNumberOfFitnessFunctions()
         {
-            return FitnessFunctions.Length;
+            return fitnessFunctions.Length;
         }
 
         /// <summary>
@@ -92,15 +93,15 @@ namespace Framework.Evolutionary.Nsga2
         /// <exception cref="IndexOutOfRangeException">if index is not in range of fitness functions</exception>
         public double GetOptimizationTarget(int index)
         {
-            if (index >= FitnessFunctions.Length || index < 0)
+            if (index >= fitnessFunctions.Length || index < 0)
             {
                 throw new IndexOutOfRangeException(
-                    $"The Index is out of range for the Optimization Targets. Valid Range is {0} to {FitnessFunctions.Length - 1} ");
+                    $"The Index is out of range for the Optimization Targets. Valid Range is {0} to {fitnessFunctions.Length - 1} ");
             }
 
             return fitnessResults[index];
         }
-        
+
         /// <summary>
         /// Produce offspring of two INsga2Individuals. Implement this method according to what your Individuals look like.
         /// It is safe to cast parent2 back to the concrete Implementation, since all Individuals inside of an array must have the same Assigned type.
@@ -120,7 +121,7 @@ namespace Framework.Evolutionary.Nsga2
             Crowding = 0;
             dominatedIndividuals = new List<INsga2Individual>();
         }
-        
+
         /// <summary>
         /// Adds an individual to the list of individuals this individual dominates.
         /// </summary>

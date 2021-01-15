@@ -206,12 +206,7 @@ namespace Framework.GraphGrammar
                 return true;
             }
 
-            if (obj.GetType() != this.GetType())
-            {
-                return false;
-            }
-
-            return Equals((MissionVertex) obj);
+            return obj.GetType() == GetType() && Equals((MissionVertex) obj);
         }
 
         public override int GetHashCode()

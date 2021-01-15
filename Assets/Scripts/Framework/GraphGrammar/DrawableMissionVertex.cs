@@ -21,7 +21,7 @@ namespace Framework.GraphGrammar
         public DrawableMissionVertex(string type) : base(type)
         {
             x = Random.value;
-            z = (Random.value * 2) - 1;
+            z = Random.value * 2 - 1;
         }
 
         internal List<Branch> Paint(Vector3 parentPosition,

@@ -4,7 +4,7 @@ using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Demo
+namespace Demo.Evolutionary
 {
     public class StandardIndividual2 : AbstractNsga2Individual
     {
@@ -17,10 +17,10 @@ namespace Demo
         {
             StartLocation = start;
             EndLocation = end;
-            BuildPhenoType();
+            BuildPhenotype();
         }
 
-        private void BuildPhenoType()
+        private void BuildPhenotype()
         {
             int playerX = (int) (StartLocation[0] * 100);
             int playerY = (int) (StartLocation[1] * 100);
@@ -33,17 +33,16 @@ namespace Demo
         
         public override INsga2Individual MakeOffspring(INsga2Individual parent2)
         {
-            StandardIndividual2 other = (parent2 as StandardIndividual2);
-            if (other == null)
+            if (!(parent2 is StandardIndividual2))
                 throw new NullReferenceException($"Give a Nsga2 Individual of Type {nameof(StandardIndividual2)}");
             if (Random.value < 0.5f)
                 return new StandardIndividual2(
                     new Vector2(StartLocation.x, StartLocation.y),
-                    new Vector2(EndLocation.x, EndLocation.y), FitnessFunctions);
+                    new Vector2(EndLocation.x, EndLocation.y), fitnessFunctions);
 
             return new StandardIndividual2(
                 new Vector2(StartLocation.x, StartLocation.y),
-                new Vector2(EndLocation.x, EndLocation.y), FitnessFunctions);
+                new Vector2(EndLocation.x, EndLocation.y), fitnessFunctions);
         }
     }
 }

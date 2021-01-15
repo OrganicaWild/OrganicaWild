@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
-using Demo.Evolutionary;
 using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 
-namespace Demo
+namespace Demo.Evolutionary
 {
     public class MyAlgorithmRunner : MonoBehaviour
     {
@@ -19,7 +17,6 @@ namespace Demo
         private void Awake()
         {
             AbstractNsga2FitnessFunction<MyIndividual>[] fitnessFunctions =
-                new AbstractNsga2FitnessFunction<MyIndividual>[2]
                 {
                     new DistanceToBorderFitnessFunction(),
                     new EnemyDistanceFitnessFunction()
@@ -36,7 +33,7 @@ namespace Demo
             DrawRepresentation(endPopulation.First());
         }
 
-        public void DrawRepresentation(MyIndividual individual)
+        private void DrawRepresentation(MyIndividual individual)
         {
             int[,] map = individual.map;
             for (int index1 = 0; index1 < height; ++index1)

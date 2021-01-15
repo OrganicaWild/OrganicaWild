@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Assets.Scripts.Framework.Cellular
+namespace Framework.Cellular_Automata
 {
-    public abstract class CANetwork
+    public abstract class CaNetwork
     {
-        public CACell[] Cells { get; set; }
+        public CaCell[] Cells { get; set; }
 
         /// <summary>
         /// Adjacency matrix of all connections
@@ -16,7 +16,7 @@ namespace Assets.Scripts.Framework.Cellular
         /// </summary>
         public void PrepareCells()
         {
-            foreach (CACell cell in Cells)
+            foreach (CaCell cell in Cells)
             {
                 if (cell != null)
                     cell.Network = this;
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Framework.Cellular
         /// </summary>
         public void Step()
         {
-            CACell[] next = new CACell[Cells.Length];
+            CaCell[] next = new CaCell[Cells.Length];
 
             for (int i = 0; i < Cells.Length; i++)
             {
@@ -55,6 +55,6 @@ namespace Assets.Scripts.Framework.Cellular
         /// </summary>
         /// <param name="cellNumber">The index of the cell you want to know the neighbors of.</param>
         /// <returns></returns>
-        public abstract IEnumerable<CACell> GetNeighborsOf(int cellNumber);
+        public abstract IEnumerable<CaCell> GetNeighborsOf(int cellNumber);
     }
 }

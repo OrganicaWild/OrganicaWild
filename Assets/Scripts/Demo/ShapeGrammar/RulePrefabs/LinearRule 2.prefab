@@ -135,6 +135,9 @@ MonoBehaviour:
   - KeyFinal
   - KeyMultiPiece
   - Hook
+  - ChainLinear
+  - Chain
+  - ChainParallel
   connection: {fileID: 11400000, guid: fabae86a8dbe6a144a3708b79a7ee092, type: 2}
 --- !u!65 &1691840615046896245
 BoxCollider:

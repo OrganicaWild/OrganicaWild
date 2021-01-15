@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Framework.Evolutionary
 {
     /// <summary>
@@ -16,6 +18,6 @@ namespace Framework.Evolutionary
         /// </summary>
         /// <param name="generations">number of generations to advance</param>
         /// <returns>population after advancing the given number of generations</returns>
-        IEvolutionaryAlgorithmIndividual[] RunForGenerations(int generations);
+        IEnumerable<IEvolutionaryAlgorithmIndividual> RunForGenerations(int generations);
     }
 }

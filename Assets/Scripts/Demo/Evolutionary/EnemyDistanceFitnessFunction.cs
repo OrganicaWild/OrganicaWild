@@ -1,9 +1,7 @@
-using Demo.Evolutionary;
-using Framework.Evolutionary;
 using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 
-namespace Demo
+namespace Demo.Evolutionary
 {
     public class EnemyDistanceFitnessFunction : AbstractNsga2FitnessFunction<MyIndividual>
     {

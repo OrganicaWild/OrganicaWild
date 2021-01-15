@@ -32,8 +32,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PDSGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PDSGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Poisson Disk Sampling/PoissonDiskSampling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Poisson Disk Sampling/PoissonDiskSampling.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/LinearRule 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/LinearRule 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraph.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraphConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraphConnection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionVertex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionVertex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +57,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/f2/0f1f2397/IEquatable`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/02/7683d80c/MemoryStream.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B926ACD-10D4-48DA-9AA3-641E61A8737F/51/bcabb118/MyAlgorithmRunner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1FE7A3C0-284A-456B-9681-B7A93141C89A/01/36760dee/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/19/b9d2955a/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/2a/0d72e35c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
@@ -67,46 +71,57 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/Rule.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphConnection.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/EditorGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphConnection.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarRule.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GrammarRuleEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/TestScriptableObject.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorMissionGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/EditorGrammarRule.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/SerializableMissionGraphEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Data/EditorGrammarRule.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Data/EditorMissionGraph.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Data/SerializableMissionVertex.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Data/SerializableMissionGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ShapeGrammarController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableMissionVertex.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/EditorGrammarRule.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/EditorMissionGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraphConnection.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionVertex.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/VertexContainer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/MissionGraphEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraph.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Editor/RectangularCAMapGeneratorEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/MissionGraphEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Editor/OrganicRectangularCAMapGeneratorEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/DistanceToBorderFitnessFunction.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/EnemyDistanceFitnessFunction.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyAlgorithmRunner2.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyIndividual.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/StandardFitnessFunction2.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ShapeGrammarController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/SubdivisionGrammarRuleComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/CACell.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNodeConnection.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector3Extensions.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Poisson Disk Sampling/PoissonDiskSampling.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableMissionVertex.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/VertexContainer.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/AbstractNsga2Individual.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/CANetwork.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PDSGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/StandardIndividual2.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyAlgorithmRunner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestIndividual.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestFitnessFunctions.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestBuilder.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/RectangularCAMapGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IEvolutionaryAlgorithm.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraphConnection.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionVertex.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -133,6 +148,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../OrganicaWildBuild/OrganicaWild.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\dev\OrganicaWildBuild" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -376,10 +399,10 @@
           <line>47</line>
           <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="49" containingFunctionPresentation="method 'ApplyOneRule'">
             <startOffsets>
-              <option value="1751" />
+              <option value="1746" />
             </startOffsets>
             <endOffsets>
-              <option value="1774" />
+              <option value="1769" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
@@ -389,10 +412,10 @@
           <line>54</line>
           <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="56" containingFunctionPresentation="method 'ApplyOneRule'">
             <startOffsets>
-              <option value="1982" />
+              <option value="1977" />
             </startOffsets>
             <endOffsets>
-              <option value="2029" />
+              <option value="2024" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="3" />
@@ -402,23 +425,23 @@
           <line>49</line>
           <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="51" containingFunctionPresentation="method 'ApplyOneRule'">
             <startOffsets>
-              <option value="1805" />
+              <option value="1800" />
             </startOffsets>
             <endOffsets>
-              <option value="1881" />
+              <option value="1876" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs</url>
-          <line>213</line>
+          <line>212</line>
           <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\MissionGraph.cs" initialLine="213" containingFunctionPresentation="method 'Traverse'">
             <startOffsets>
-              <option value="8493" />
+              <option value="8541" />
             </startOffsets>
             <endOffsets>
-              <option value="8510" />
+              <option value="8558" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="21" />

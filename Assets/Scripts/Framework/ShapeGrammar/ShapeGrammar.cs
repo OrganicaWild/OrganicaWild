@@ -27,7 +27,7 @@ namespace Framework.ShapeGrammar
         /// <summary>
         /// Run the passed GraphGrammar to generate the underlying mission
         /// </summary>
-        public void GenerateLevel()
+        private void GenerateLevel()
         {
             GraphGrammarComponent graphGrammarComponent = GetComponent<GraphGrammarComponent>();
             graphGrammarComponent.Initialize();
@@ -59,19 +59,17 @@ namespace Framework.ShapeGrammar
         {
             tree = new SpaceTree();
             List<MissionVertex> traversal = levelMissionGraph.Traverse();
-            Debug.Log($"{string.Join(";", traversal)}");
 
             foreach (MissionVertex missionVertex in traversal)
             {
                 List<GameObject> rulesForThisType = GetRulesForThisType(missionVertex);
 
                 GameObject ruleRep = rulesForThisType[Random.Range(0, rulesForThisType.Count)];
-                //AddSpaceNode(ruleRep, missionVertex);
 
                 if (tree.Root == null)
                 {
                     tree.Root = new SpaceNode(
-                        new SpaceNodeConnection() {connectionPoint = transform.position, connectionDirection = Vector3.zero},
+                        new SpaceNodeConnection {connectionPoint = transform.position, connectionDirection = Vector3.zero},
                         ruleRep,
                         ruleRep.GetComponent<ShapeGrammarRuleComponent>(), missionVertex, new SpaceNode(gameObject));
                     tree.Root.InstantiatedReference = DrawNode(tree.Root);
@@ -80,47 +78,31 @@ namespace Framework.ShapeGrammar
                 else
                 {
                     bool hasNoPlace = true;
-                    SpaceNodeConnection openHook;
-                    SpaceNode attachLeaf;
                     SpaceNode newNode;
 
-                    var triedLeafs = new List<SpaceNode>();
-                    //var leafsCopy = tree.Leafs.ToList();
+                    List<SpaceNode> triedLeafs = new List<SpaceNode>();
                     do
                     {
-                        var attachableLeafs = tree.Leafs.Except(triedLeafs).ToArray();
-                        attachLeaf = attachableLeafs[Random.Range(0, attachableLeafs.Length)];
-                        openHook = attachLeaf.GetOpenHook();
+                        SpaceNode[] attachableLeafs = tree.Leafs.Except(triedLeafs).ToArray();
+                        SpaceNode attachLeaf = attachableLeafs[Random.Range(0, attachableLeafs.Length)];
+                        SpaceNodeConnection openHook = attachLeaf.GetOpenHook();
 
-                        var rule = ruleRep.GetComponent<ShapeGrammarRuleComponent>();
+                        ShapeGrammarRuleComponent rule = ruleRep.GetComponent<ShapeGrammarRuleComponent>();
                         newNode = new SpaceNode(openHook, ruleRep,
                             rule, missionVertex, attachLeaf);
 
                         newNode.InstantiatedReference = DrawNode(newNode);
 
-                        var b = newNode.InstantiatedReference.GetComponent<ShapeGrammarRuleComponent>();
+                        ShapeGrammarRuleComponent b = newNode.InstantiatedReference.GetComponent<ShapeGrammarRuleComponent>();
                         b.Modify();
-
-
-                        //newNode.Instantiated.SetActive(false);
-
-
-                        //check for space
-                        Vector3 potentialPosition =
-                            newNode.InstantiatedReference.transform.position;
-                        //Debug.DrawRay(Vector3.zero, newNode.parent.Instantiated.transform.position, Color.green, 1000f);
-                        //Debug.DrawRay(Vector3.zero, potentialPosition, Color.green, 1000f);
-                        // Debug.DrawLine(newNode.parent.Instantiated.transform.position, newNode.GetHook(), Color.blue, 1000f);
-                        // Debug.DrawLine(newNode.GetEntryHook(), potentialPosition, Color.red, 1000f);
-                        //Debug.Log($"{attachLeaf.Instantiated.transform.position}");
 
                         bool hitSomething = false;
 
                         foreach (SpaceNodeConnection hook in newNode.GetOpenHooks())
                         {
-                            var worldHook =
+                            Vector3 worldHook =
                                 newNode.InstantiatedReference.transform.TransformPoint(hook.connectionPoint);
-                            var worldDirection =
+                            Vector3 worldDirection =
                                 newNode.InstantiatedReference.transform.TransformDirection(hook.connectionDirection);
                             worldDirection *= 5;
                             hitSomething = Physics.Raycast(worldHook, worldDirection);
@@ -134,7 +116,6 @@ namespace Framework.ShapeGrammar
                         //if not space return to leaf and take other
                         if (!hitSomething)
                         {
-                            //newNode.Instantiated.SetActive(true);
                             attachLeaf.RemoveOpenHook(openHook);
                             if (attachLeaf.GetNumberOfOpenHooks() == 0)
                             {
@@ -146,7 +127,6 @@ namespace Framework.ShapeGrammar
                         else
                         {
                             triedLeafs.Add(attachLeaf);
-                            //leafsCopy.Remove(attachLeaf);
                             Destroy(newNode.InstantiatedReference);
                         }
                     } while (hasNoPlace && triedLeafs.Count < tree.Leafs.Count);

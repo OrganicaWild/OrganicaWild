@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Demo.ShapeGrammar;
 using UnityEngine;
 
 namespace Framework.ShapeGrammar

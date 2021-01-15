@@ -10,19 +10,19 @@ namespace Framework.GraphGrammar
 {
     /// <summary>
     /// Unity Component for using a graph grammar.
-    /// Attach this to a Gameobject and supply the rules and the mother as ScriptableObjects.
+    /// Attach this to a GameObject and supply the rules and the mother as ScriptableObjects.
     /// </summary>
     public class GraphGrammarComponent : MonoBehaviour
     {
         /// <summary>
         /// Supplied rules as ScriptableObjects.
-        /// Create the graphs for the rules via the OrganicaWild > Create Graph Grammar Rule menu entry.
+        /// Create the graphs for the rules via the Organica Wild > Create Graph Grammar Rule menu entry.
         /// </summary>
         public List<EditorGrammarRule> rules = new List<EditorGrammarRule>();
         
         /// <summary>
         /// Initial graph
-        /// Create the graph via the via the OrganicaWild > Create Graph Grammar Rule menu entry
+        /// Create the graph via the via the Organica Wild > Create Graph Grammar Rule menu entry
         /// </summary>
         public EditorMissionGraph mother;
         

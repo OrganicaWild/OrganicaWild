@@ -7,15 +7,15 @@ namespace Framework.GraphGrammar.EditorData
         public MissionVertex vertex = null;
         public int index;
 
-        public Rect windowRect
+        public Rect WindowRect
         {
-            get => windowRects[index];
-            set => windowRects[index] = value;
+            get => WindowRects[index];
+            set => WindowRects[index] = value;
         }
 
         public bool enabled;
 
-        private static Rect[] windowRects = new[]
+        private static readonly Rect[] WindowRects =
         {
             new Rect(0010, 100, 0, 0),
             new Rect(0160, 100, 0, 0),
@@ -73,7 +73,7 @@ namespace Framework.GraphGrammar.EditorData
             new Rect(0760, 1000, 0, 0),
             new Rect(0910, 1000, 0, 0),
             new Rect(1060, 1000, 0, 0),
-            
+
             new Rect(100, 100, 0, 0),
             new Rect(100, 100, 0, 0),
             new Rect(100, 100, 0, 0),
@@ -129,7 +129,7 @@ namespace Framework.GraphGrammar.EditorData
             new Rect(100, 100, 0, 0),
             new Rect(100, 100, 0, 0),
             new Rect(100, 100, 0, 0),
-            new Rect(100, 100, 0, 0),
+            new Rect(100, 100, 0, 0)
         };
     }
 }

@@ -1,14 +1,14 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Scripts.Demo.Cellular.Editor
+namespace Demo.Cellular_Automata.Editor
 {
-    [CustomEditor(typeof(OrganicRectangularCAMapGenerator))]
-    public class OrganicRectangleCAMapGeneratorEditor : UnityEditor.Editor
+    [CustomEditor(typeof(OrganicRectangularCaMapGenerator))]
+    public class OrganicRectangleCaMapGeneratorEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
-            OrganicRectangularCAMapGenerator generator = (OrganicRectangularCAMapGenerator) target;
+            OrganicRectangularCaMapGenerator generator = (OrganicRectangularCaMapGenerator) target;
 
             DrawDefaultInspector();
 

@@ -1,7 +1,7 @@
 ﻿using Framework.Evolutionary.Nsga2;
 using UnityEngine;
 
-namespace Demo
+namespace Demo.Evolutionary
 {
     internal static class Constants
     {

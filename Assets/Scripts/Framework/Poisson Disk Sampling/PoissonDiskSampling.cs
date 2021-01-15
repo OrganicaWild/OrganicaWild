@@ -22,9 +22,8 @@ namespace Framework.Poisson_Disk_Sampling
 
             int[,] grid = new int[Mathf.CeilToInt(sampleRegionSize.x / cellSize), Mathf.CeilToInt(sampleRegionSize.y / cellSize)];
             List<Vector2> points = new List<Vector2>();
-            List<Vector2> spawnPoints = new List<Vector2>();
+            List<Vector2> spawnPoints = new List<Vector2> {sampleRegionSize / 2};
 
-            spawnPoints.Add(sampleRegionSize / 2);
             while (spawnPoints.Count > 0)
             {
                 int spawnIndex = Random.Range(0, spawnPoints.Count);

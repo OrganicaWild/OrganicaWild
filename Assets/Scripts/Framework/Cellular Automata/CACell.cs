@@ -1,14 +1,14 @@
-﻿namespace Assets.Scripts.Framework.Cellular
+﻿namespace Framework.Cellular_Automata
 {
-    public abstract class CACell
+    public abstract class CaCell
     {
         public int Index { get; set; }
-        public CANetwork Network { get; set; }
+        public CaNetwork Network { get; set; }
 
-        public CACell(int index)
+        public CaCell(int index)
         {
             Index = index;
         }
-        public abstract CACell Update();
+        public abstract CaCell Update();
     }
 }

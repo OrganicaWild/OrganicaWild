@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.Framework.Cellular;
+using Framework.Cellular_Automata;
 using UnityEngine;
 
-namespace Assets.Scripts.Demo.Cellular
+namespace Demo.Cellular_Automata
 {
-    public class OrganicRectangularCAMapGenerator : MonoBehaviour
+    public class OrganicRectangularCaMapGenerator : MonoBehaviour
     {
         [Tooltip("Width of the board.")]
         public int width = 100;
@@ -18,7 +18,7 @@ namespace Assets.Scripts.Demo.Cellular
 
         private OrganicRectangularNetwork organicRectangularNetwork;
 
-        void Start()
+        public void Start()
         {
             organicRectangularNetwork = new OrganicRectangularNetwork(width, height, initialFillPercentage);
             organicRectangularNetwork.Run(iterations);
@@ -35,12 +35,7 @@ namespace Assets.Scripts.Demo.Cellular
             organicRectangularNetwork.Step();
         }
 
-        void Update()
-        {
-        
-        }
-
-        void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             if (organicRectangularNetwork != null)
             {
@@ -58,24 +53,24 @@ namespace Assets.Scripts.Demo.Cellular
         }
 
 
-        public class OrganicRectangularNetwork : CANetwork
+        private class OrganicRectangularNetwork : CaNetwork
         {
-            public int Width { get; set; }
-            public int Height { get; set; }
+            private int Width { get; }
+            private int Height { get; }
 
             public OrganicRectangularNetwork(int width, int height, float initialFillPercentage)
             {
-                Cells = new CACell[width * height];
+                Cells = new CaCell[width * height];
                 Connections = new bool[width * height][];
 
                 Width = width;
                 Height = height;
 
-                for (var i = 0; i < Cells.Length; i++)
+                for (int i = 0; i < Cells.Length; i++)
                 {
                     
                     Cells[i] = new RectangularCell(i);
-                    CACell cell = Cells[i];
+                    CaCell cell = Cells[i];
                     cell.Network = this;
                     if (Random.value <= initialFillPercentage)
                     {
@@ -125,9 +120,9 @@ namespace Assets.Scripts.Demo.Cellular
                 return index % Width == 0;
             }
 
-            public override IEnumerable<CACell> GetNeighborsOf(int cellNumber)
+            public override IEnumerable<CaCell> GetNeighborsOf(int cellNumber)
             {
-                List<CACell> result = new List<CACell>();
+                List<CaCell> result = new List<CaCell>();
 
 
                 // The four directly adjacent neighbors
@@ -176,21 +171,21 @@ namespace Assets.Scripts.Demo.Cellular
             }
         }
 
-        private class RectangularCell : CACell
+        private class RectangularCell : CaCell
         {
             public State state;
 
             public RectangularCell(int index) : base(index) { }
 
-            public override CACell Update()
+            public override CaCell Update()
             {
 
                 OrganicRectangularNetwork net = (OrganicRectangularNetwork) Network;
-                IEnumerable<CACell> neighbors = net.GetNeighborsOf(Index);
+                IEnumerable<CaCell> neighbors = net.GetNeighborsOf(Index);
 
 
                 int filled = 0;
-                foreach (CACell caCell in neighbors)
+                foreach (CaCell caCell in neighbors)
                 {
                     RectangularCell cell = (RectangularCell) caCell;
                     if (cell.state == State.Filled)
@@ -200,8 +195,7 @@ namespace Assets.Scripts.Demo.Cellular
                 }
 
 
-                RectangularCell result = new RectangularCell(Index);
-                result.Network = Network;
+                RectangularCell result = new RectangularCell(Index) {Network = Network};
 
                 bool isOnBorder = net.IsOnTopBorder(Index) || net.IsOnRightBorder(Index) || net.IsOnBottomBorder(Index) || net.IsOnLeftBorder(Index);
 

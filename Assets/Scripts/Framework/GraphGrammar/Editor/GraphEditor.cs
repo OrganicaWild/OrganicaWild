@@ -21,7 +21,7 @@ namespace Framework.GraphGrammar.Editor
         private MissionVertex start;
         private VertexContainer[] vertices = new VertexContainer[100];
         private Vector2 scrollPos = Vector2.zero;
-        private int currentlyEnabledWindows = 0;
+        private int currentlyEnabledWindows;
 
         private static int MaximumNumberOfNodes = 112;
 
@@ -36,16 +36,16 @@ namespace Framework.GraphGrammar.Editor
         /// <summary>
         /// Setup the EditorView with a given MissionGraph.
         /// </summary>
-        /// <param name="missionGraph">Given EditorMissionGraph to edit</param>
-        public void Setup(EditorMissionGraph missionGraph)
+        /// <param name="editorMissionGraph">Given EditorMissionGraph to edit</param>
+        public void Setup(EditorMissionGraph editorMissionGraph)
         {
             CleanUp();
-            this.missionGraph = missionGraph;
-            string serialized = missionGraph.serializedMissionGraph;
+            this.missionGraph = editorMissionGraph;
+            string serialized = editorMissionGraph.serializedMissionGraph;
             SerializableMissionGraph deserializedSerializableMissionGraph =
                 SerializableMissionGraph.Deserialize(serialized);
             graph = deserializedSerializableMissionGraph.GetMissionGraph();
-            unitySerializedObject = new SerializedObject(missionGraph);
+            unitySerializedObject = new SerializedObject(editorMissionGraph);
         }
 
         private void CleanUp()
@@ -145,8 +145,9 @@ namespace Framework.GraphGrammar.Editor
                 {
                     foreach (MissionVertex vertexForwardNeighbour in vertex.vertex.ForwardNeighbours)
                     {
+                        // ReSharper disable once PossibleUnintendedReferenceComparison
                         VertexContainer endContainer = vertices.First(x => x.vertex == vertexForwardNeighbour);
-                        DrawNodeCurve(vertex.windowRect, endContainer.windowRect);
+                        DrawNodeCurve(vertex.WindowRect, endContainer.WindowRect);
                     }
                 }
             }
@@ -162,6 +163,7 @@ namespace Framework.GraphGrammar.Editor
 
             GUILayout.Label($"Type:");
             vertex.Type = GUILayout.TextField(vertex.Type);
+            // ReSharper disable once PossibleUnintendedReferenceComparison
             bool isStart = graph.Start == vertex;
             bool toggledStart = GUILayout.Toggle(isStart, "is start of graph?");
 
@@ -170,6 +172,7 @@ namespace Framework.GraphGrammar.Editor
                 graph.Start = toggledStart ? vertex : null;
             }
 
+            // ReSharper disable once PossibleUnintendedReferenceComparison
             bool isEnd = graph.End == vertex;
             bool toggledEnd = GUILayout.Toggle(isEnd, "is end of graph?");
 
@@ -197,14 +200,14 @@ namespace Framework.GraphGrammar.Editor
 
         private void CreateVertexWindow(int index)
         {
-            vertices[index].windowRect =
-                GUILayout.Window(index + 1, vertices[index].windowRect, DoWindow, "Mission Node");
+            vertices[index].WindowRect =
+                GUILayout.Window(index + 1, vertices[index].WindowRect, DoWindow, "Mission Node");
         }
 
-        private void DrawNodeCurve(Rect start, Rect end)
+        private void DrawNodeCurve(Rect startRect, Rect endRect)
         {
-            Vector3 startPos = new Vector3(start.x + start.width, start.y + start.height / 2, 0);
-            Vector3 endPos = new Vector3(end.x - size, end.y + end.height / 2, 0);
+            Vector3 startPos = new Vector3(startRect.x + startRect.width, startRect.y + startRect.height / 2, 0);
+            Vector3 endPos = new Vector3(endRect.x - size, endRect.y + endRect.height / 2, 0);
             DrawNodeCurve(startPos, endPos);
         }
 
