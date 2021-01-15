@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MultivariateOptimizationScene.unity
     guid: 03cd76096cbbf481799b8f4d4fe7e46b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GraphGrammarPerformance.unity
     guid: f266362b5a1bc1f4a950c87f7361ff9d
+  - enabled: 0
+    path: Assets/Scenes/CAPerformance.unity
+    guid: f0589a1868c317d4abe06fdd454b75c2
+  - enabled: 1
+    path: Assets/Scenes/PoissonPerformance.unity
+    guid: 5ed58476f07dda446a4eda2ee3b4db5b
   m_configObjects: {}

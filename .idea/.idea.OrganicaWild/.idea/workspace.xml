@@ -31,23 +31,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarPerformance.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/GraphGrammarPerformance.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Combined.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/CrossRule 1.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/RulePrefabs/CrossRule 1.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Test.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Test.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/TestTest.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/TestTest.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MultivariateOptimizationScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MultivariateOptimizationScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +42,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/PoissonPerformance.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/356F1DDB-1D52-4AD5-9C7A-2C95775BB38E/65/4dd34234/CallbackEventHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/69/6aa67097/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
@@ -122,6 +107,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/PoissonPerformance.cs" />
       <option value="$USER_HOME$/Desktop/results.txt" />
     </changedPaths>
   </component>

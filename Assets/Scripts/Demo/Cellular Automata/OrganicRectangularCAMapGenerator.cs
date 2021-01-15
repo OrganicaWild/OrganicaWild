@@ -1,18 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using Assets.Scripts.Framework.Cellular;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Demo.Cellular
 {
     public class OrganicRectangularCAMapGenerator : MonoBehaviour
     {
-        [Tooltip("Width of the board.")]
-        public int width = 100;
-        [Tooltip("Height of the board.")] 
-        public int height = 100;
-        [Tooltip("Percentage of vertices that will be set to black at the beginning.")]
-        [Range(0.0f, 1.0f)]
+        [Tooltip("Width of the board.")] public int width = 100;
+        [Tooltip("Height of the board.")] public int height = 100;
+
+        [Tooltip("Percentage of vertices that will be set to black at the beginning.")] [Range(0.0f, 1.0f)]
         public float initialFillPercentage = 0.45f;
+
         [Tooltip("Number of iterations each automaton goes through.")]
         public int iterations = 6;
 
@@ -20,8 +25,48 @@ namespace Assets.Scripts.Demo.Cellular
 
         void Start()
         {
-            organicRectangularNetwork = new OrganicRectangularNetwork(width, height, initialFillPercentage);
-            organicRectangularNetwork.Run(iterations);
+            StartCoroutine(Run());
+        }
+
+        IEnumerator Run()
+        {
+            string path = @"C:\Users\Christoph\Desktop\results.txt";
+            var timeString = "";
+            var memoryString = "";
+
+            // Create a file to write to.
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                for (int i = 0; i <= width; i += 50)
+                {
+                    Stopwatch start = new Stopwatch();
+                    start.Start();
+                    long preInitiMemory = GC.GetTotalMemory(true);
+                    
+                    organicRectangularNetwork = new OrganicRectangularNetwork(i, i, initialFillPercentage);
+                    organicRectangularNetwork.Run(iterations);
+                    
+                    start.Stop();
+                    timeString += $"{start.ElapsedMilliseconds}     ms elapsed for size {i} squared. \n";
+
+
+                    long postInit = GC.GetTotalMemory(true);
+                    memoryString +=
+                        $"diff:{postInit - preInitiMemory}    , {postInit} {preInitiMemory}  bytes allocated for size {i} squared. \n";
+                    
+                    Debug.Log($"{i}");
+                    
+                    if (i == width)
+                    {
+                        sw.Write(timeString);
+                        sw.Write(memoryString);
+                        sw.Flush();
+                        Application.Quit();
+                    }
+
+                    yield return null;
+                }
+            }
         }
 
         public void Regenerate()
@@ -37,25 +82,24 @@ namespace Assets.Scripts.Demo.Cellular
 
         void Update()
         {
-        
         }
 
-        void OnDrawGizmos()
-        {
-            if (organicRectangularNetwork != null)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    for (int y = 0; y < height; y++)
-                    {
-                        RectangularCell currentCell = organicRectangularNetwork.Cells[x + y * width] as RectangularCell;
-                        Gizmos.color = (currentCell.state == State.Filled) ? Color.black : Color.white;
-                        Vector3 pos = new Vector3(-width / 2 + x + .5f, 0, -height / 2 + y + .5f);
-                        Gizmos.DrawSphere(pos, 0.5f);
-                    }
-                }
-            }
-        }
+        // void OnDrawGizmos()
+        // {
+        //     if (organicRectangularNetwork != null)
+        //     {
+        //         for (int x = 0; x < width; x++)
+        //         {
+        //             for (int y = 0; y < height; y++)
+        //             {
+        //                 RectangularCell currentCell = organicRectangularNetwork.Cells[x + y * width] as RectangularCell;
+        //                 Gizmos.color = (currentCell.state == State.Filled) ? Color.black : Color.white;
+        //                 Vector3 pos = new Vector3(-width / 2 + x + .5f, 0, -height / 2 + y + .5f);
+        //                 Gizmos.DrawSphere(pos, 0.5f);
+        //             }
+        //         }
+        //     }
+        // }
 
 
         public class OrganicRectangularNetwork : CANetwork
@@ -73,7 +117,6 @@ namespace Assets.Scripts.Demo.Cellular
 
                 for (var i = 0; i < Cells.Length; i++)
                 {
-                    
                     Cells[i] = new RectangularCell(i);
                     CACell cell = Cells[i];
                     cell.Network = this;
@@ -83,15 +126,16 @@ namespace Assets.Scripts.Demo.Cellular
                     }
                     else
                     {
-                        ((RectangularCell)cell).state = State.Empty;
+                        ((RectangularCell) cell).state = State.Empty;
                     }
                 }
 
-            
+
                 for (int i = 0; i < Width * Height; i++)
                 {
                     Connections[i] = new bool[Width * Height];
                 }
+
                 for (int i = 0; i < Width * Height; i++)
                 {
                     if (!IsOnTopBorder(i))
@@ -101,7 +145,7 @@ namespace Assets.Scripts.Demo.Cellular
                     if (!IsOnBottomBorder(i))
                         Connections[i][i + Width] = true;
                     if (!IsOnLeftBorder(i))
-                        Connections[i][i-1] = true;
+                        Connections[i][i - 1] = true;
                 }
             }
 
@@ -138,9 +182,10 @@ namespace Assets.Scripts.Demo.Cellular
                     if (!IsOnRightBorder(cellNumber))
                     {
                         // Top Right
-                        result.Add(Cells[cellNumber - Width +  1]);
+                        result.Add(Cells[cellNumber - Width + 1]);
                     }
                 }
+
                 if (!IsOnRightBorder(cellNumber))
                 {
                     // Right
@@ -151,6 +196,7 @@ namespace Assets.Scripts.Demo.Cellular
                         result.Add(Cells[cellNumber + Width + 1]);
                     }
                 }
+
                 if (!IsOnBottomBorder(cellNumber))
                 {
                     // Bottom
@@ -161,6 +207,7 @@ namespace Assets.Scripts.Demo.Cellular
                         result.Add(Cells[cellNumber - 1 + Width]);
                     }
                 }
+
                 if (!IsOnLeftBorder(cellNumber))
                 {
                     // Left
@@ -180,11 +227,12 @@ namespace Assets.Scripts.Demo.Cellular
         {
             public State state;
 
-            public RectangularCell(int index) : base(index) { }
+            public RectangularCell(int index) : base(index)
+            {
+            }
 
             public override CACell Update()
             {
-
                 OrganicRectangularNetwork net = (OrganicRectangularNetwork) Network;
                 IEnumerable<CACell> neighbors = net.GetNeighborsOf(Index);
 
@@ -203,7 +251,8 @@ namespace Assets.Scripts.Demo.Cellular
                 RectangularCell result = new RectangularCell(Index);
                 result.Network = Network;
 
-                bool isOnBorder = net.IsOnTopBorder(Index) || net.IsOnRightBorder(Index) || net.IsOnBottomBorder(Index) || net.IsOnLeftBorder(Index);
+                bool isOnBorder = net.IsOnTopBorder(Index) || net.IsOnRightBorder(Index) ||
+                                  net.IsOnBottomBorder(Index) || net.IsOnLeftBorder(Index);
 
                 if (filled >= 4 || isOnBorder)
                 {
@@ -220,7 +269,8 @@ namespace Assets.Scripts.Demo.Cellular
 
         private enum State
         {
-            Filled, Empty
+            Filled,
+            Empty
         }
     }
 }
