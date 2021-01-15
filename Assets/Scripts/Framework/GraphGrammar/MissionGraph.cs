@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Framework.Util;
-using UnityEngine;
 
 namespace Framework.GraphGrammar
 {

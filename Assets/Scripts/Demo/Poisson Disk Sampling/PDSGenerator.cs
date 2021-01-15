@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Framework.Poisson_Disk_Sampling;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -17,7 +18,7 @@ namespace Demo.Poisson_Disk_Sampling
 
         private void OnValidate()
         {
-            points = PoissonDiskSampling.GeneratePoints(radius, regionSize.x, regionSize.y, rejectionSamples);
+           points = PoissonDiskSampling.GeneratePoints(radius, regionSize.x, regionSize.y, rejectionSamples);
         }
 
         private void OnDrawGizmos()

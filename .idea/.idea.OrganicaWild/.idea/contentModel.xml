@@ -12,6 +12,12 @@
                 <e p="OrganicRectangularCAMapGeneratorEditor.cs" t="Include" />
                 <e p="RectangularCAMapGeneratorEditor.cs" t="Include" />
               </e>
+              <e p="Elliptical Cellular Automata" t="Include">
+                <e p="EllipticalCACell.cs" t="Include" />
+                <e p="EllipticalCAMapGenerator.cs" t="Include" />
+                <e p="EllipticalCANetwork.cs" t="Include" />
+                <e p="EllipticalCAState.cs" t="Include" />
+              </e>
               <e p="OrganicRectangularCAMapGenerator.cs" t="Include" />
               <e p="RectangularCAMapGenerator.cs" t="Include" />
             </e>
