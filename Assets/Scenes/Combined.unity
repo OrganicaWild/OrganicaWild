@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 1143235109}
   - component: {fileID: 1143235108}
   - component: {fileID: 1143235107}
+  - component: {fileID: 1143235110}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -271,13 +272,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143235106}
-  m_LocalRotation: {x: 0.6532815, y: 0.27059805, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: -29.1, y: 200, z: 0}
+  m_LocalRotation: {x: 0.51234263, y: 0, z: 0, w: 0.85878116}
+  m_LocalPosition: {x: 68.6, y: 138.6, z: -70.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 61.64, y: 0, z: 0}
+--- !u!114 &1143235110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143235106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87e24180cbb74029bbea3d754e186c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grammarRunner: {fileID: 6972316985672170437}
+  speed: 10
 --- !u!1 &1196875835
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,10 +404,6 @@ MonoBehaviour:
     right: {fileID: 11400000, guid: 6daab6a4b1244514ea980b44609d452d, type: 2}
   - left: {fileID: 11400000, guid: 6b77e86eed3db2b4f9665fad75582ea4, type: 2}
     right: {fileID: 11400000, guid: d2693cc5a91633640a79e69e6e936348, type: 2}
-  - left: {fileID: 11400000, guid: 4d5facc5b2d7fae42b4725ab36380948, type: 2}
-    right: {fileID: 11400000, guid: fbc507b30be6a6f4e9f3b4016fe1f8c7, type: 2}
-  - left: {fileID: 11400000, guid: ffaee53e5b2fba148b46e6bcf335414c, type: 2}
-    right: {fileID: 11400000, guid: 1d492c4eec5fdb143bd378de37ea0efd, type: 2}
   - left: {fileID: 11400000, guid: e4f0a85a7c5ae664cb317eab8fec9521, type: 2}
     right: {fileID: 11400000, guid: 2be6d65156da39145b27fb1577f49185, type: 2}
   - left: {fileID: 11400000, guid: 0208176d48318f74fa34ca23ba8bbc17, type: 2}
@@ -487,16 +498,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3884113930731364647, guid: e284e2d92b41f440d81b250297ddf8a3,
-        type: 3}
-      propertyPath: initialFillPercentage
-      value: 0.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 3884113930731364647, guid: e284e2d92b41f440d81b250297ddf8a3,
-        type: 3}
-      propertyPath: evolutionPopulation
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3884113930731364665, guid: e284e2d92b41f440d81b250297ddf8a3,
         type: 3}
