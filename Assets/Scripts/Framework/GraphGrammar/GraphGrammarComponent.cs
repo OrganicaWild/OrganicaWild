@@ -116,8 +116,8 @@ namespace Framework.GraphGrammar
 
                     GUIStyle guiStyle = new GUIStyle {fontSize = 30, fontStyle = FontStyle.Bold};
 
-                    Handles.Label(position.tPosition, $"{position.t.Type}", guiStyle);
-                    dict.Add(position.t, position.tPosition);
+                    /*Handles.Label(position.tPosition, $"{position.t.Type}", guiStyle);
+                    dict.Add(position.t, position.tPosition);*/
                 }
             }
         }
