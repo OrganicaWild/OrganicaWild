@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\dev\OrganicaWild" t="IncludeRecursive">
+    <e p="C:\Users\cvoegele\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\cvoegele\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_OrganicaWild.201421100.00" t="ExcludeRecursive" />
+    <e p="C:\Users\cvoegele\Development\OrganicaWild" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -101,6 +103,38 @@
               <e p="Vector3Extensions.cs" t="Include" />
             </e>
           </e>
+          <e p="PolyBool.Net" t="Include">
+            <e p="PolyBool.Net" t="Include">
+              <e p="Logic" t="Include">
+                <e p="Intersecter.cs" t="Include" />
+                <e p="PointUtils.cs" t="Include" />
+                <e p="PolyBool.cs" t="Include" />
+                <e p="SegmentSelector.cs" t="Include" />
+                <e p="Utils.cs" t="Include" />
+              </e>
+              <e p="Objects" t="Include">
+                <e p="CombinedPolySegments.cs" t="Include" />
+                <e p="Epsilon.cs" t="Include" />
+                <e p="Fill.cs" t="Include" />
+                <e p="IntersectionPoint.cs" t="Include" />
+                <e p="LinkedList.cs" t="Include" />
+                <e p="Matcher.cs" t="Include" />
+                <e p="Node.cs" t="Include" />
+                <e p="Point.cs" t="Include" />
+                <e p="Polygon.cs" t="Include" />
+                <e p="PolySegments.cs" t="Include" />
+                <e p="Region.cs" t="Include" />
+                <e p="Segment.cs" t="Include" />
+                <e p="Transition.cs" t="Include" />
+              </e>
+            </e>
+            <e p="PolyBool.Net.Examples" t="Include">
+              <e p="Program.cs" t="Include" />
+              <e p="Properties" t="Include">
+                <e p="AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
@@ -108,7 +142,5 @@
       <e p="Packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
-    <e p="C:\Users\Christoph\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Christoph\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_OrganicaWild.1756585290.00" t="ExcludeRecursive" />
   </component>
 </project>
