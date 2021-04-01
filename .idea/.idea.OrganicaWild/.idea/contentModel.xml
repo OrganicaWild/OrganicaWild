@@ -91,6 +91,7 @@
             <e p="Pipeline" t="Include">
               <e p="Geometry" t="Include">
                 <e p="IGeometry.cs" t="Include" />
+                <e p="OwCircle.cs" t="Include" />
                 <e p="OwInvalidGeometry.cs" t="Include" />
                 <e p="OwLine.cs" t="Include" />
                 <e p="OwPoint.cs" t="Include" />

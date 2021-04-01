@@ -12,6 +12,7 @@ namespace Demo.Pipeline
         private OwLine line0;
         private OwLine line1;
         private IGeometry point;
+        private OwPolygon circle;
 
         private void Start()
         {
@@ -34,7 +35,9 @@ namespace Demo.Pipeline
             line0 = new OwLine(new Vector2(0, 0), new Vector2(10, 10));
             line1 = new OwLine(new Vector2(0, 10), new Vector2(10, 0));
 
-            point = line0.Intersection(line1);
+            circle = new OwCircle(new Vector2(10,10), 5, 20);
+            
+            point = poly.Intersection(circle);
             Debug.Log(point);
             
             Debug.Log(poly.Contains(poly2));
@@ -42,18 +45,20 @@ namespace Demo.Pipeline
 
         private void OnDrawGizmos()
         {
-            // if (poly == null)
-            // {
-            //     return;
-            // }
+            if (poly == null)
+            {
+                return;
+            }
             //
-            // poly.DrawDebug(Color.red);
+            poly.DrawDebug(Color.red);
             // poly2.DrawDebug(Color.blue);
             // union.DrawDebug(Color.green);
             
-            line0.DrawDebug(Color.green);
-            line1.DrawDebug(Color.red);
-
+            // line0.DrawDebug(Color.green);
+            // line1.DrawDebug(Color.red);
+            //
+            
+            circle.DrawDebug(Color.magenta);
             point.DrawDebug(Color.blue);
         }
     }
