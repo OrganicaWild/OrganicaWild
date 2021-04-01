@@ -39,7 +39,7 @@ namespace Framework.Pipeline.Geometry
                 representation.Regions.Add(region);
             }
         }
-
+ 
         public bool Contains(IGeometry other)
         {
             //is polygon other fully contained in this?
@@ -78,15 +78,16 @@ namespace Framework.Pipeline.Geometry
                 return Difference(otherPoly);
             }
 
-            return new OwPolygon(Enumerable.Empty<Vector2>());
+            return new OwInvalidGeometry();
         }
 
         public float DistanceTo(IGeometry other)
         {
-            throw new System.NotImplementedException();
+            Vector2 center = other.GetCentroid();
+            return (center - GetCentroid()).magnitude;
         }
 
-        public Vector2 GetWeightedCenter()
+        public Vector2 GetCentroid()
         {
             //TODO: This center is not weighted since our vertices do not have weights.
             //according to this : https://stackoverflow.com/questions/2832771/find-the-centroid-of-a-polygon-with-weighted-vertices

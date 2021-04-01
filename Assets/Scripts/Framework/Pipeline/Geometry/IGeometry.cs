@@ -14,7 +14,7 @@ namespace Framework.Pipeline
 
         float DistanceTo(IGeometry other);
 
-        Vector2 GetWeightedCenter();
+        Vector2 GetCentroid();
 
         void DrawDebug(Color debugColor);
     }
