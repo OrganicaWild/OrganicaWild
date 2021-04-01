@@ -30,7 +30,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/IGeometry.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/IGeometry.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGameWorldObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGameWorldObject.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,22 +56,11 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/36424DC0-1747-4D85-8711-DEFC8AFB4475/64/5e9f7cce/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/EditorMissionGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Editor/RectangularCAMapGeneratorEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/MissionGraphEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Editor/OrganicRectangularCAMapGeneratorEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/DistanceToBorderFitnessFunction.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/EnemyDistanceFitnessFunction.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyAlgorithmRunner2.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyIndividual.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/StandardFitnessFunction2.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ShapeGrammarController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/SubdivisionGrammarRuleComponent.cs" />
@@ -97,6 +100,18 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCACell.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCAMapGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PdsGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGeometry.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/IGeometry.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Polygon.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OrganicaPolygon.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net/Polybool.Net/Objects/Point.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/DebugDataStructure.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/ShiftList.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net/Polybool.Net/Objects/Region.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net/Polybool.Net/Objects/Polygon.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -105,7 +120,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.2826087" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.17957245" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -140,10 +155,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="24624">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="24624" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -183,6 +198,7 @@
       <workItem from="1609266295333" duration="1902000" />
       <workItem from="1609321221912" duration="7025000" />
       <workItem from="1610740728801" duration="699000" />
+      <workItem from="1617267677010" duration="2044000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>

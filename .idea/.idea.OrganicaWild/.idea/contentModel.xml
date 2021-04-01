@@ -37,6 +37,9 @@
               <e p="StandardFitnessFunction2.cs" t="Include" />
               <e p="StandardIndividual2.cs" t="Include" />
             </e>
+            <e p="Pipeline" t="Include">
+              <e p="DebugDataStructure.cs" t="Include" />
+            </e>
             <e p="Poisson Disk Sampling" t="Include">
               <e p="PDSGenerator.cs" t="Include" />
             </e>
@@ -85,6 +88,13 @@
               <e p="MissionGraph.cs" t="Include" />
               <e p="MissionVertex.cs" t="Include" />
             </e>
+            <e p="Pipeline" t="Include">
+              <e p="Geometry" t="Include">
+                <e p="IGeometry.cs" t="Include" />
+                <e p="OwPolygon.cs" t="Include" />
+              </e>
+              <e p="IGameWorldObject.cs" t="Include" />
+            </e>
             <e p="Poisson Disk Sampling" t="Include">
               <e p="PoissonDiskSampling.cs" t="Include" />
             </e>
@@ -110,6 +120,7 @@
                 <e p="PointUtils.cs" t="Include" />
                 <e p="PolyBool.cs" t="Include" />
                 <e p="SegmentSelector.cs" t="Include" />
+                <e p="ShiftList.cs" t="Include" />
                 <e p="Utils.cs" t="Include" />
               </e>
               <e p="Objects" t="Include">
