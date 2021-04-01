@@ -9,7 +9,7 @@ namespace Framework.Pipeline.Geometry
 {
     public class OwPolygon : IGeometry
     {
-        private readonly Polygon representation;
+        protected readonly Polygon representation;
 
         public OwPolygon(IEnumerable<Vector2> points)
         {
@@ -22,7 +22,7 @@ namespace Framework.Pipeline.Geometry
                     }
                 }));
         }
-
+        
         private OwPolygon(Polygon polygon)
         {
             representation = new Polygon() {Regions = new List<Region>()};
