@@ -89,6 +89,8 @@
               <e p="MissionVertex.cs" t="Include" />
             </e>
             <e p="Pipeline" t="Include">
+              <e p="AbstractLeafGameWorldObject.cs" t="Include" />
+              <e p="GameWorld.cs" t="Include" />
               <e p="Geometry" t="Include">
                 <e p="IGeometry.cs" t="Include" />
                 <e p="OwCircle.cs" t="Include" />
@@ -100,6 +102,7 @@
                 <e p="OwSquare.cs" t="Include" />
               </e>
               <e p="IGameWorldObject.cs" t="Include" />
+              <e p="NoChildPolicyException.cs" t="Include" />
             </e>
             <e p="Poisson Disk Sampling" t="Include">
               <e p="PoissonDiskSampling.cs" t="Include" />
