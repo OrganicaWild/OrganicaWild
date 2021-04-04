@@ -89,7 +89,6 @@
               <e p="MissionVertex.cs" t="Include" />
             </e>
             <e p="Pipeline" t="Include">
-              <e p="AbstractLeafGameWorldObject.cs" t="Include" />
               <e p="GameWorld.cs" t="Include" />
               <e p="Geometry" t="Include">
                 <e p="IGeometry.cs" t="Include" />
