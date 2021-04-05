@@ -31,12 +31,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ILeafGameWorldObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ILeafGameWorldObject.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/NoChildException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/NoChildException.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/AbstractGameWorldObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/AbstractGameWorldObject.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/AbstractLeafGameWorldObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/AbstractLeafGameWorldObject.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGameWorldObject.cs" afterDir="false" />
     </list>
@@ -57,11 +56,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Poisson Disk Sampling/PoissonDiskSampling.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableMissionVertex.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/VertexContainer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" />
@@ -104,10 +98,15 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwSquare.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwCircle.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGameWorldObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ILeafGameWorldObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/NoChildException.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/NoChildPolicyException.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ILeafGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Area.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/AbstratGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/AbstractGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/AbstractLeafGameWorldObject.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -195,7 +194,7 @@
       <workItem from="1609321221912" duration="7025000" />
       <workItem from="1610740728801" duration="699000" />
       <workItem from="1617267677010" duration="11209000" />
-      <workItem from="1617544409806" duration="438000" />
+      <workItem from="1617544409806" duration="4767000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
