@@ -25,7 +25,7 @@ namespace Framework.Pipeline
 
         public void AddStep(IPipelineStep step)
         {
-            IPipelineStep last = executionPipeline.Last();
+            IPipelineStep last = executionPipeline.LastOrDefault();
             if (step.IsValidStep(last))
             {  
               executionPipeline.Add(step);
@@ -44,7 +44,7 @@ namespace Framework.Pipeline
             }
         }
 
-        public GameObject Execute()
+        public GameWorld Execute()
         {
             GameWorld world = null;
             foreach (IPipelineStep step in executionPipeline)
@@ -52,7 +52,7 @@ namespace Framework.Pipeline
                 world = step.Apply(world);
             }
 
-            return themeApplicator.Apply(world);
+            return world;
         }
     }
 }

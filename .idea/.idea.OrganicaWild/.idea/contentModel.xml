@@ -39,6 +39,7 @@
             </e>
             <e p="Pipeline" t="Include">
               <e p="DebugDataStructure.cs" t="Include" />
+              <e p="DebugPipelineStep.cs" t="Include" />
             </e>
             <e p="Poisson Disk Sampling" t="Include">
               <e p="PDSGenerator.cs" t="Include" />
@@ -89,6 +90,10 @@
               <e p="MissionVertex.cs" t="Include" />
             </e>
             <e p="Pipeline" t="Include">
+              <e p="Example" t="Include">
+                <e p="AreaPlacementStep.cs" t="Include" />
+                <e p="EmptyStep.cs" t="Include" />
+              </e>
               <e p="GameWorld.cs" t="Include" />
               <e p="GameWorldObjects" t="Include">
                 <e p="AbstractGameWorldObject.cs" t="Include" />
@@ -100,6 +105,8 @@
                 <e p="MainPath.cs" t="Include" />
                 <e p="Subsidiary.cs" t="Include" />
               </e>
+              <e p="GameWorldState.cs" t="Include" />
+              <e p="GameWorldStateAttribute.cs" t="Include" />
               <e p="Geometry" t="Include">
                 <e p="IGeometry.cs" t="Include" />
                 <e p="OwCircle.cs" t="Include" />
