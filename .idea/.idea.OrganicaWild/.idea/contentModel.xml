@@ -110,7 +110,11 @@
                 <e p="OwRectangle.cs" t="Include" />
                 <e p="OwSquare.cs" t="Include" />
               </e>
+              <e p="IllegalExecutionOrderException.cs" t="Include" />
+              <e p="IPipelineStep.cs" t="Include" />
+              <e p="IThemeApplicator.cs" t="Include" />
               <e p="NoChildPolicyException.cs" t="Include" />
+              <e p="PipeLineRunner.cs" t="Include" />
             </e>
             <e p="Poisson Disk Sampling" t="Include">
               <e p="PoissonDiskSampling.cs" t="Include" />
