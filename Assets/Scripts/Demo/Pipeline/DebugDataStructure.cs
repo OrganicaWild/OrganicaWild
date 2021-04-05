@@ -1,4 +1,5 @@
 using Framework.Pipeline;
+using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Demo.Pipeline
         private OwLine line1;
         private IGeometry point;
         private OwPolygon circle;
+        private GameWorld world;
 
         private void Start()
         {
@@ -41,6 +43,9 @@ namespace Demo.Pipeline
             Debug.Log(point);
             
             Debug.Log(poly.Contains(poly2));
+
+            world = new GameWorld(new Area(poly));
+            world.Root.AddChild(new Area(circle));
         }
 
         private void OnDrawGizmos()
@@ -49,17 +54,19 @@ namespace Demo.Pipeline
             {
                 return;
             }
+            // //
+            // poly.DrawDebug(Color.red);
+            // // poly2.DrawDebug(Color.blue);
+            // // union.DrawDebug(Color.green);
             //
-            poly.DrawDebug(Color.red);
-            // poly2.DrawDebug(Color.blue);
-            // union.DrawDebug(Color.green);
-            
-            // line0.DrawDebug(Color.green);
-            // line1.DrawDebug(Color.red);
+            // // line0.DrawDebug(Color.green);
+            // // line1.DrawDebug(Color.red);
+            // //
             //
+            // circle.DrawDebug(Color.magenta);
+            // point.DrawDebug(Color.blue);
             
-            circle.DrawDebug(Color.magenta);
-            point.DrawDebug(Color.blue);
+            world.DrawDebug();
         }
     }
 }

@@ -4,9 +4,9 @@ namespace Framework.Pipeline.GameWorldObjects
 {
     public interface IGameWorldObject
     {
-        public IGeometry Shape { get; set; }
+        IGeometry Shape { get; set; }
 
-        public IGameWorldObject this[int index]
+        IGameWorldObject this[int index]
         {
             get;
             set;
