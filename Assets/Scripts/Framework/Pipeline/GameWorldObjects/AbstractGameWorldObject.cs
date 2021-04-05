@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Framework.Pipeline
+namespace Framework.Pipeline.GameWorldObjects
 {
     public class AbstractGameWorldObject : IGameWorldObject
     {

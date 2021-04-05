@@ -93,7 +93,12 @@
               <e p="GameWorldObjects" t="Include">
                 <e p="AbstractGameWorldObject.cs" t="Include" />
                 <e p="AbstractLeafGameWorldObject.cs" t="Include" />
+                <e p="Area.cs" t="Include" />
+                <e p="AreaConnection.cs" t="Include" />
                 <e p="IGameWorldObject.cs" t="Include" />
+                <e p="Landmark.cs" t="Include" />
+                <e p="MainPath.cs" t="Include" />
+                <e p="Subsidiary.cs" t="Include" />
               </e>
               <e p="Geometry" t="Include">
                 <e p="IGeometry.cs" t="Include" />

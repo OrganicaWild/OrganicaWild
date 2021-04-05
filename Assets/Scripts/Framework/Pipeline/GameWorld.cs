@@ -1,3 +1,5 @@
+using Framework.Pipeline.GameWorldObjects;
+
 namespace Framework.Pipeline
 {
     public class GameWorld

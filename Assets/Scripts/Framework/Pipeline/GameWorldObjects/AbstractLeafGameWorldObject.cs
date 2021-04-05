@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Framework.Pipeline
+namespace Framework.Pipeline.GameWorldObjects
 {
     public class AbstractLeafGameWorldObject : IGameWorldObject
     {
