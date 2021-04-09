@@ -70,12 +70,17 @@ namespace Framework.Pipeline.Geometry
         {
             throw new System.NotImplementedException();
         }
-
+        
         public IGeometry Intersection(IGeometry other)
         {
             if (other is OwPolygon otherPoly)
             {
                 return Difference(otherPoly);
+            }
+
+            if (other is OwLine line)
+            {
+                
             }
 
             return new OwInvalidGeometry();
