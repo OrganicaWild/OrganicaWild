@@ -147,6 +147,32 @@ namespace Framework.Pipeline.Geometry
             return new OwPolygon(difference);
         }
 
+        public List<OwLine> GetLines()
+        {
+            List<OwLine> lines = new List<OwLine>();
+
+            foreach (Region representationRegion in representation.Regions)
+            {
+                Point first = null;
+                Point prev = null;
+                foreach (Point representationRegionPoint in representationRegion.Points)
+                {
+                    if (first == null)
+                    {
+                        first = representationRegionPoint;
+                        prev = representationRegionPoint;
+                    }
+                    else
+                    {
+                        lines.Add(new OwLine(prev, representationRegionPoint));
+                    }
+                }
+                lines.Add(new OwLine(prev, first));
+            }
+
+            return lines;
+        }
+
         public void DrawDebug(Color debugColor, Vector2 coordinateSystemCenter)
         {
             Vector3 center = new Vector3(coordinateSystemCenter.x, 0, coordinateSystemCenter.y);
