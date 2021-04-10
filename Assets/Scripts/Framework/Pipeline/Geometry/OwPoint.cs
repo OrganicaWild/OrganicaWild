@@ -47,18 +47,19 @@ namespace Framework.Pipeline.Geometry
             return $"{position}";
         }
 
-        public void DrawDebug(Color debugColor)
+        public void DrawDebug(Color debugColor, Vector2 coordinateSystemCenter)
         {
             const float offset = 0.5f;
-            
+            Vector3 center = new Vector3(coordinateSystemCenter.x, 0, coordinateSystemCenter.y);
             Gizmos.color = debugColor;
-            Vector3 coord = new Vector3(position.x, 0, position.y);
-            Gizmos.DrawLine(coord + new Vector3(-offset, 0, -offset).normalized * offset, coord + new Vector3(offset, 0, offset).normalized * offset);
-            Gizmos.DrawLine(coord + new Vector3(offset, 0, -offset).normalized * offset, coord + new Vector3(-offset, 0, offset).normalized * offset);
-            
+            Vector3 coord = center + new Vector3(position.x, 0, position.y);
+            Gizmos.DrawLine(coord + new Vector3(-offset, 0, -offset).normalized * offset,
+                coord + new Vector3(offset, 0, offset).normalized * offset);
+            Gizmos.DrawLine(coord + new Vector3(offset, 0, -offset).normalized * offset,
+                coord + new Vector3(-offset, 0, offset).normalized * offset);
+
             Gizmos.DrawLine(coord + new Vector3(0, 0, -offset), coord + new Vector3(0, 0, offset));
             Gizmos.DrawLine(coord + new Vector3(offset, 0, 0), coord + new Vector3(-offset, 0, 0));
-            
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
@@ -6,11 +7,7 @@ namespace Framework.Pipeline.GameWorldObjects
     {
         IGeometry Shape { get; set; }
 
-        IGameWorldObject this[int index]
-        {
-            get;
-            set;
-        }
+        IGameWorldObject this[int index] { get; set; }
 
         void AddChild(IGameWorldObject child);
 
@@ -23,7 +20,7 @@ namespace Framework.Pipeline.GameWorldObjects
         void ClearChildren();
 
         int GetChildCount();
-        
+
         /// <summary>
         /// Adds a IGameWorldObject to the child specified in the index.
         /// Implementations of the interface should implementing this function with a range check.
@@ -31,5 +28,13 @@ namespace Framework.Pipeline.GameWorldObjects
         /// <param name="childIndex">index of child</param>
         /// <param name="child">child to add</param>
         void AddChildInChild(int childIndex, IGameWorldObject child);
+
+        IGameWorldObject GetParent();
+
+        void SetParent(IGameWorldObject parent);
+
+        Vector2 GetLocalPosition();
+
+        Vector2 GetGlobalPosition();
     }
 }

@@ -1,0 +1,25 @@
+using System;
+using Framework.Pipeline.GameWorldObjects;
+using Framework.Pipeline.Geometry;
+using UnityEngine;
+
+namespace Framework.Pipeline.Example
+{
+    public class LandmarkPlacer : IPipelineStep
+    {
+        public bool IsValidStep(IPipelineStep prev)
+        {
+            return true;
+        }
+
+        public GameWorld Apply(GameWorld world)
+        {
+            foreach (IGameWorldObject child in world.Root.GetChildren())
+            {
+               child.AddChild(new Landmark(new OwPoint(new Vector2(0,0))));
+            }
+
+            return world;
+        }
+    }
+}

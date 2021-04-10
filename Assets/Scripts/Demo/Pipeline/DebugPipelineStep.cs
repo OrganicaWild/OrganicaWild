@@ -14,6 +14,7 @@ namespace Demo.Pipeline
             PipeLineRunner runner = new PipeLineRunner();
             runner.AddStep(new EmptyStep());
             runner.AddStep(new AreaPlacementStep());
+            runner.AddStep(new LandmarkPlacer());
             endWorld = runner.Execute();
         }
 

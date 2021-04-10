@@ -28,8 +28,9 @@ namespace Framework.Pipeline
             {
                 colors.Add(depth, new Color(Random.value, Random.value, Random.value));
             }
-            
-            gameWorldObject.Shape.DrawDebug(colors[depth]);
+
+            IGameWorldObject parent = gameWorldObject.GetParent();
+            gameWorldObject.Shape.DrawDebug(colors[depth], parent?.GetGlobalPosition() ?? Vector2.zero);
 
             foreach (IGameWorldObject child in gameWorldObject.GetChildren())
             {

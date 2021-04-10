@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
     public class AbstractLeafGameWorldObject : IGameWorldObject
     {
         public IGeometry Shape { get; set; }
+        private IGameWorldObject parent;
 
         public IGameWorldObject this[int index]
         {
@@ -24,12 +27,12 @@ namespace Framework.Pipeline.GameWorldObjects
 
         public IEnumerable<IGameWorldObject> GetChildren()
         {
-            throw new NoChildPolicyException();
+            return Enumerable.Empty<IGameWorldObject>();
         }
 
         public IEnumerable<IGameWorldObject> GetChildrenInChildren()
         {
-            throw new NoChildPolicyException();
+            return Enumerable.Empty<IGameWorldObject>();
         }
 
         public void ClearChildren()
@@ -45,6 +48,30 @@ namespace Framework.Pipeline.GameWorldObjects
         public void AddChildInChild(int childIndex, IGameWorldObject child)
         {
             throw new NoChildPolicyException();
+        }
+
+        public IGameWorldObject GetParent()
+        {
+            return parent;
+        }
+
+        public void SetParent(IGameWorldObject parent)
+        {
+            this.parent = parent;
+        }
+
+        public Vector2 GetLocalPosition()
+        {
+            return Shape.GetCentroid();
+        }
+
+        public Vector2 GetGlobalPosition()
+        {
+            if (parent == null)
+            {
+                return GetLocalPosition();
+            }
+            return parent.GetGlobalPosition() + GetLocalPosition();
         }
     }
 }

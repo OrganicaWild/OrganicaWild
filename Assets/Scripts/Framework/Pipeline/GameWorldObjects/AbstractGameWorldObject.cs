@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
     public class AbstractGameWorldObject : IGameWorldObject
     {
         public IGeometry Shape { get; set; }
+        private IGameWorldObject parent;
 
         public IGameWorldObject this[int index]
         {
@@ -25,6 +27,7 @@ namespace Framework.Pipeline.GameWorldObjects
             if (child != null && !children.Contains(child))
             {
                 children.Add(child);
+                child.SetParent(this);
             }
         }
 
@@ -33,6 +36,7 @@ namespace Framework.Pipeline.GameWorldObjects
             if (child != null)
             {
                 children.Remove(child);
+                child.SetParent(null);
             }
         }
 
@@ -61,7 +65,34 @@ namespace Framework.Pipeline.GameWorldObjects
             if (!(childIndex < 0 && childIndex > GetChildCount() - 1))
             {
                 children[childIndex].AddChild(child);
+                child.SetParent(children[childIndex]);
             }
+        }
+
+        public IGameWorldObject GetParent()
+        {
+            return parent;
+        }
+
+        public void SetParent(IGameWorldObject parent)
+        {
+            this.parent = parent;
+        }
+
+        public Vector2 GetLocalPosition()
+        {
+            Debug.Log(Shape.GetCentroid());
+            return Shape.GetCentroid();
+        }
+
+        public Vector2 GetGlobalPosition()
+        {
+            if (parent == null)
+            {
+                return GetLocalPosition();
+            }
+
+            return parent.GetGlobalPosition() + GetLocalPosition();
         }
     }
 }

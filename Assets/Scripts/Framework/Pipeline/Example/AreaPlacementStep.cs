@@ -21,7 +21,7 @@ namespace Framework.Pipeline.Example
 
         public GameWorld Apply(GameWorld world)
         {
-            Vector2 pos = new Vector2(0, 0);
+            Vector2 pos = new Vector2(-25, -25);
             for (int i = 0; i < 5; i++)
             {
                 world.Root.AddChild(new Area(new OwCircle(pos += new Vector2(9f,9f),5f, 5)));

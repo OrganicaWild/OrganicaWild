@@ -22,7 +22,7 @@ namespace Framework.Pipeline.Geometry
                     }
                 }));
         }
-        
+
         private OwPolygon(Polygon polygon)
         {
             representation = new Polygon() {Regions = new List<Region>()};
@@ -39,7 +39,7 @@ namespace Framework.Pipeline.Geometry
                 representation.Regions.Add(region);
             }
         }
- 
+
         public bool Contains(IGeometry other)
         {
             //is polygon other fully contained in this?
@@ -70,7 +70,7 @@ namespace Framework.Pipeline.Geometry
         {
             throw new System.NotImplementedException();
         }
-        
+
         public IGeometry Intersection(IGeometry other)
         {
             if (other is OwPolygon otherPoly)
@@ -80,7 +80,6 @@ namespace Framework.Pipeline.Geometry
 
             if (other is OwLine line)
             {
-                
             }
 
             return new OwInvalidGeometry();
@@ -97,7 +96,7 @@ namespace Framework.Pipeline.Geometry
             //TODO: This center is not weighted since our vertices do not have weights.
             //according to this : https://stackoverflow.com/questions/2832771/find-the-centroid-of-a-polygon-with-weighted-vertices
             //if we leave it like this its just called the Centroid : https://en.wikipedia.org/wiki/Centroid
-            
+
             Vector2 sum = Vector2.zero;
             int n = 0;
             foreach (Region representationRegion in representation.Regions)
@@ -113,7 +112,7 @@ namespace Framework.Pipeline.Geometry
             {
                 return Vector2.zero;
             }
-            
+
             return sum / n;
         }
 
@@ -148,8 +147,9 @@ namespace Framework.Pipeline.Geometry
             return new OwPolygon(difference);
         }
 
-        public void DrawDebug(Color debugColor)
+        public void DrawDebug(Color debugColor, Vector2 coordinateSystemCenter)
         {
+            Vector3 center = new Vector3(coordinateSystemCenter.x, 0, coordinateSystemCenter.y);
             Gizmos.color = debugColor;
             foreach (Region representationRegion in representation.Regions)
             {
@@ -166,8 +166,8 @@ namespace Framework.Pipeline.Geometry
                     {
                         Vector2 prevVec2 = prev;
                         Vector2 currentVec2 = representationRegionPoint;
-                        Gizmos.DrawLine(new Vector3(prevVec2.x, 0, prevVec2.y),
-                            new Vector3(currentVec2.x, 0, currentVec2.y));
+                        Gizmos.DrawLine(center + new Vector3(prevVec2.x, 0, prevVec2.y),
+                            center + new Vector3(currentVec2.x, 0, currentVec2.y));
                         prev = representationRegionPoint;
                     }
                 }
