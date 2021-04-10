@@ -4,11 +4,11 @@ namespace Framework.Pipeline.Geometry
 {
     public class OwPoint : IGeometry
     {
-        private readonly Vector2 position;
+        public Vector2 Position { get; }
 
         public OwPoint(Vector2 position)
         {
-            this.position = position;
+            this.Position = position;
         }
 
         public bool Contains(IGeometry other)
@@ -39,12 +39,12 @@ namespace Framework.Pipeline.Geometry
 
         public Vector2 GetCentroid()
         {
-            return position;
+            return Position;
         }
 
         public override string ToString()
         {
-            return $"{position}";
+            return $"{Position}";
         }
 
         public void DrawDebug(Color debugColor, Vector2 coordinateSystemCenter)
@@ -52,7 +52,7 @@ namespace Framework.Pipeline.Geometry
             const float offset = 0.5f;
             Vector3 center = new Vector3(coordinateSystemCenter.x, 0, coordinateSystemCenter.y);
             Gizmos.color = debugColor;
-            Vector3 coord = center + new Vector3(position.x, 0, position.y);
+            Vector3 coord = center + new Vector3(Position.x, 0, Position.y);
             Gizmos.DrawLine(coord + new Vector3(-offset, 0, -offset).normalized * offset,
                 coord + new Vector3(offset, 0, offset).normalized * offset);
             Gizmos.DrawLine(coord + new Vector3(offset, 0, -offset).normalized * offset,

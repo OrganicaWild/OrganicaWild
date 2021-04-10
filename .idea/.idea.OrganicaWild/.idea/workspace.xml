@@ -31,26 +31,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/LandmarkPlacer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/LandmarkPlacer.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/modules.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/LineLineInteractor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/LineLineInteractor.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/LinePointInteractor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/LinePointInteractor.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/riderModule.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaPlacementStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/IGeometry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/IGeometry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwInvalidGeometry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwInvalidGeometry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,8 +69,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCAMapGenerator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PdsGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IGeometry.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Polygon.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OrganicaPolygon.cs" />
@@ -110,7 +96,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IPipelineStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IllegalExecutionOrderException.cs" />
@@ -123,8 +108,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/IGeometry.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwInvalidGeometry.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/LandmarkPlacer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" />
@@ -132,6 +115,11 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/LineLineInteractor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/LinePointInteractor.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -223,7 +211,7 @@
       <workItem from="1617267677010" duration="11209000" />
       <workItem from="1617544409806" duration="4767000" />
       <workItem from="1617618427827" duration="8349000" />
-      <workItem from="1618061535724" duration="2144000" />
+      <workItem from="1618061535724" duration="7675000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
