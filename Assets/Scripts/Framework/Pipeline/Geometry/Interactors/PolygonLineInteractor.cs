@@ -74,7 +74,7 @@ namespace Framework.Pipeline.Geometry.Interactors
                 }
             }
 
-            if (intersections.Count == 1)
+            if (intersections.Count >= 1)
             {
                 return startContained ? new OwLine(second.Start, intersections[0].Position) : new OwLine(second.End, intersections[0].Position);
             }
