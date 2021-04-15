@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Example
 {
-    [GameWorldState(GameWorldState.HasRoot)]
+    
     public class EmptyStep : IPipelineStep
     {
         public bool IsValidStep(IPipelineStep prev)

@@ -1,3 +1,4 @@
+using Tektosyne.Geometry;
 using UnityEngine;
 
 namespace Framework.Pipeline.Geometry
@@ -60,6 +61,16 @@ namespace Framework.Pipeline.Geometry
 
             Gizmos.DrawLine(coord + new Vector3(0, 0, -offset), coord + new Vector3(0, 0, offset));
             Gizmos.DrawLine(coord + new Vector3(offset, 0, 0), coord + new Vector3(-offset, 0, 0));
+        }
+
+        public static implicit operator OwPoint(PointD pointD)
+        {
+            return new OwPoint(new Vector2((float) pointD.X, (float) pointD.Y));
+        }
+
+        public static implicit operator PointD(OwPoint owPoint)
+        {
+            return new PointD(owPoint.Position.x, owPoint.Position.y);
         }
     }
 }

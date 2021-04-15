@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Example
 {
-    [GameWorldState(GameWorldState.HasAreas)]
+ 
     public class AreaPlacementStep : IPipelineStep
     {
         public bool IsValidStep(IPipelineStep prev)

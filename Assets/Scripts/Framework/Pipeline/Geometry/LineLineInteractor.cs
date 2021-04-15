@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Framework.Util;
+using Tektosyne.Geometry;
 using UnityEngine;
 
 namespace Framework.Pipeline.Geometry
@@ -64,13 +66,13 @@ namespace Framework.Pipeline.Geometry
         {
             OwPoint A = new OwPoint(first.Start);
             OwPoint B = new OwPoint(first.End);
-            
+
             OwPoint C = new OwPoint(second.Start);
             OwPoint D = new OwPoint(second.End);
 
             OwLine d0 = LinePointInteractor.use().CalculateShortestPath(first, C);
             OwLine d1 = LinePointInteractor.use().CalculateShortestPath(first, D);
-            
+
             OwLine d2 = LinePointInteractor.use().CalculateShortestPath(second, A);
             OwLine d3 = LinePointInteractor.use().CalculateShortestPath(second, B);
 
@@ -82,22 +84,14 @@ namespace Framework.Pipeline.Geometry
 
         public IGeometry Intersect(OwLine first, OwLine second)
         {
-            const double eps = 0.000001d;
+            LineIntersection intersection = LineIntersection.Find(a: Vector2Extensions.Convert(first.Start),
+                Vector2Extensions.Convert(first.End),
+                Vector2Extensions.Convert(second.Start),
+                Vector2Extensions.Convert(second.End));
 
-            Vector2 CD = second.End - second.Start;
-            Vector2 AB = first.End - first.Start;
-            Vector2 AC = second.Start - first.Start;
-
-            double det = 1d / (AB.y * CD.x - AB.x * CD.y);
-
-            double alpha = det * (-CD.y * AC.x + CD.x * AC.y);
-            double beta = det * (-AB.y * AC.x + AB.x * AC.y);
-
-            if (0 < alpha && alpha < 1 && alpha > eps && 1 - alpha > eps && beta > eps && 1 - beta > eps && 0 < beta &&
-                beta < 1)
+            if (intersection.Exists)
             {
-                var result =  first.Start + AB * (float) alpha;
-                return new OwPoint(result);
+                return new OwPoint(Vector2Extensions.Convert((PointD) intersection.Shared));
             }
 
             return new OwInvalidGeometry();
