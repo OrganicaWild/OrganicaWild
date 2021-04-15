@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Framework.Pipeline.Geometry
+namespace Framework.Pipeline.Geometry.Interactors
 {
     public class LinePointInteractor : IGeometryInteractor<OwLine, OwPoint>
     {

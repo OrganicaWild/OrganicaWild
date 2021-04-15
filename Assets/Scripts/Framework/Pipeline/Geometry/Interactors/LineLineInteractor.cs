@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Framework.Util;
 using Tektosyne.Geometry;
 using UnityEngine;
 
-namespace Framework.Pipeline.Geometry
+namespace Framework.Pipeline.Geometry.Interactors
 {
     public class LineLineInteractor : IGeometryInteractor<OwLine, OwLine>
     {
@@ -89,7 +88,7 @@ namespace Framework.Pipeline.Geometry
                 Vector2Extensions.Convert(second.Start),
                 Vector2Extensions.Convert(second.End));
 
-            if (intersection.Exists)
+            if (intersection.Exists && intersection.First == LineLocation.Between && intersection.Second == LineLocation.Between)
             {
                 return new OwPoint(Vector2Extensions.Convert((PointD) intersection.Shared));
             }

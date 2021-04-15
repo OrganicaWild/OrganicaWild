@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace Framework.Pipeline.Geometry
+namespace Framework.Pipeline.Geometry.Interactors
 {
     public interface IGeometryInteractor<A, B> where A : IGeometry where B : IGeometry
     {

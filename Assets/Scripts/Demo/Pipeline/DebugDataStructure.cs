@@ -1,92 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
 using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
+using Framework.Pipeline.Geometry.Interactors;
 using Tektosyne.Geometry;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Demo.Pipeline
 {
     public class DebugDataStructure : MonoBehaviour
     {
-        private OwPolygon poly;
-        private OwPolygon poly2;
-        private OwPolygon union;
-        private OwLine line0;
-        private OwLine line1;
-        private IGeometry point;
-        private OwPolygon circle;
-        private GameWorld world;
-        private IGeometry line;
-        private OwPoint point0;
+        private IGeometry first;
+        private IGeometry second;
+        private IGeometry result;
+        private List<OwPoint> intersections = new List<OwPoint>();
 
         private void Start()
         {
-            poly = new OwPolygon(new[]
-            {
-                new Vector2(0, 10),
-                new Vector2(10, 10),
-                new Vector2(10, 0)
-            });
-            
-            poly2 = new OwPolygon(new[]
-            {
-                new Vector2(0, 0),
-                new Vector2(10, 10),
-                new Vector2(0, 10)
-            });
+            StartCoroutine(nameof(DoPolyLineTests));
+        }
 
-            union = poly.Union(poly2);
-            // var A = new PointD(1, 1);
-            // var B = new PointD(10, 10);
-            //
-            //
-            // var C = new PointD(1, 10);
-            // var D = new PointD(10, 1);
-            // var result = LineIntersection.Find(A, B, C, D);
-            // Debug.Log(result);
+        private IEnumerator DoPolyLineTests()
+        {
+            //Polygon Line Tests
+            first = new OwCircle(Vector2.zero, 5, 20);
+            second = new OwLine(Vector2.zero, new Vector2(10, 10));
 
-            line0 = new OwLine(new Vector2(0, 0), new Vector2(10, 10));
-            //point0 = new OwPoint(new Vector2(5, 5));
-            
-            line1 = new OwLine(new Vector2(0, 8), new Vector2(8, 0));
-            line =  LineLineInteractor.use().Intersect(line0, line1);
-/*
-            circle = new OwCircle(new Vector2(10,10), 5, 20);
-            
-            point = poly.Intersection(circle);
-            Debug.Log(point);
-            
-            Debug.Log(poly.Contains(poly2));
+            //poly line full contains => false
+            bool boolResult = PolygonLineInteractor.use().Contains((OwPolygon) first, (OwLine) second);
+            Assert.IsFalse(boolResult);
 
-            world = new GameWorld(new Area(poly));
-            world.Root.AddChild(new Area(circle));*/
+            //poly line partial contains => true
+            boolResult = PolygonLineInteractor.use().PartiallyContains((OwPolygon) first, (OwLine) second);
+            Assert.IsTrue(boolResult);
+
+            //poly line intersection ==> partial line
+            result = PolygonLineInteractor.use().Intersect((OwPolygon) first, (OwLine) second);
+            Assert.IsTrue(result is OwLine);
+            yield return null;
+            
+            //poly line shortestpath => has path
+            second = new OwLine(new Vector2(10, 0), new Vector2(0, 10));
+            result = PolygonLineInteractor.use().CalculateShortestPath((OwPolygon) first, (OwLine) second);
+            Assert.IsTrue(result is OwLine);
+            yield return null;
         }
 
         private void OnDrawGizmos()
         {
-            if (poly == null)
+            if (first != null && second != null)
             {
-                return;
+                first.DrawDebug(Color.green, Vector2.zero);
+                second.DrawDebug(Color.blue, Vector2.zero);
             }
-            
-            // union.DrawDebug(Color.red, Vector2.zero);
-            // //
-            // poly.DrawDebug(Color.red);
-            // // poly2.DrawDebug(Color.blue);
-            // // union.DrawDebug(Color.green);
+
+            if (result != null)
+            {
+                result.DrawDebug(Color.red, Vector2.zero);
+            }
+
+            // foreach (OwPoint intersection in intersections)
+            // {
+            //     intersection.DrawDebug(Color.yellow, Vector2.zero);
+            // }
             //
-            // // line0.DrawDebug(Color.green);
-            // // line1.DrawDebug(Color.red);
-            // //
-            //
-            // circle.DrawDebug(Color.magenta);
-            // point.DrawDebug(Color.blue);
-            
-        
-           line1.DrawDebug(Color.blue, Vector2.zero);
-           line0.DrawDebug(Color.blue, Vector2.zero);
-           line.DrawDebug(Color.red, Vector2.zero);
-           //point0.DrawDebug(Color.yellow, Vector2.zero);
+            // foreach (var line in (first as OwPolygon).GetLines())
+            // {
+            //     line.DrawDebug(Color.cyan, Vector2.zero);
+            // }
         }
     }
 }

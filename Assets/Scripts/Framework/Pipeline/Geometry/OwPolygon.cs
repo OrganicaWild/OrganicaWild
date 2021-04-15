@@ -9,7 +9,7 @@ namespace Framework.Pipeline.Geometry
 {
     public class OwPolygon : IGeometry
     {
-        protected readonly Polygon representation;
+        public readonly Polygon representation;
 
         public OwPolygon(IEnumerable<Vector2> points)
         {
@@ -165,6 +165,7 @@ namespace Framework.Pipeline.Geometry
                     else
                     {
                         lines.Add(new OwLine(prev, representationRegionPoint));
+                        prev = representationRegionPoint;
                     }
                 }
                 lines.Add(new OwLine(prev, first));
