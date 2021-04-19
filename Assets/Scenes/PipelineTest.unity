@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67607c1e69a74131804c5b54fa91a95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionPoly0: {x: 8.5, y: -1.33}
 --- !u!4 &1675604389
 Transform:
   m_ObjectHideFlags: 0

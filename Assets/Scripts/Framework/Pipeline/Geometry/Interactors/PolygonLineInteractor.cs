@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Framework.Pipeline.Geometry.Interactors
 {
@@ -35,15 +36,18 @@ namespace Framework.Pipeline.Geometry.Interactors
 
         public OwLine CalculateShortestPath(OwPolygon first, OwLine second)
         {
-            List<OwLine> all = new List<OwLine>();
+            OwLine shortest = new OwLine(Vector2.zero, new Vector2(float.MaxValue, float.MaxValue));
 
             foreach (OwLine polygonLine in first.GetLines())
             {
-                all.Add( LineLineInteractor.use().CalculateShortestPath(polygonLine, second));
+                OwLine potentiallyShortest = LineLineInteractor.use().CalculateShortestPath(polygonLine, second);
+                if (shortest.Length() > potentiallyShortest.Length())
+                {
+                    shortest = potentiallyShortest;
+                }
             }
-            all.Sort((line, owLine) => (int) (200 * (line.Length() - owLine.Length())));
 
-            return all.First();
+            return shortest;
         }
 
         public IGeometry Intersect(OwPolygon first, OwLine second)
