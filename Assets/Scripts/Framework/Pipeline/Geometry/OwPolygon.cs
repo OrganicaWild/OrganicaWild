@@ -23,7 +23,7 @@ namespace Framework.Pipeline.Geometry
                 }));
         }
 
-        private OwPolygon(Polygon polygon)
+        public OwPolygon(Polygon polygon)
         {
             representation = new Polygon() {Regions = new List<Region>()};
 
@@ -39,58 +39,7 @@ namespace Framework.Pipeline.Geometry
                 representation.Regions.Add(region);
             }
         }
-
-        public bool Contains(IGeometry other)
-        {
-            //is polygon other fully contained in this?
-            if (other is OwPolygon otherPoly)
-            {
-                Polygon result = SegmentSelector.Union(representation, otherPoly.representation);
-                // if the result equals this polygon if the other polygon is not present in the union result and this polygon is not changed
-                return result.Equals(representation);
-            }
-
-            //default false for any undefined IGeometry Implementations
-            return false;
-        }
-
-        public bool PartiallyContains(IGeometry other)
-        {
-            if (other is OwPolygon otherPoly)
-            {
-                Polygon intersection = SegmentSelector.Union(representation, otherPoly.representation);
-                //if the intersection of the two polygons is not empty the second polygon is partially contained in the first
-                return !intersection.IsEmpty();
-            }
-
-            return false;
-        }
-
-        public IGeometry GetShortestPathTo(IGeometry other)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IGeometry Intersection(IGeometry other)
-        {
-            if (other is OwPolygon otherPoly)
-            {
-                return Difference(otherPoly);
-            }
-
-            if (other is OwLine line)
-            {
-            }
-
-            return new OwInvalidGeometry();
-        }
-
-        public float DistanceTo(IGeometry other)
-        {
-            Vector2 center = other.GetCentroid();
-            return (center - GetCentroid()).magnitude;
-        }
-
+        
         public Vector2 GetCentroid()
         {
             //TODO: This center is not weighted since our vertices do not have weights.
@@ -114,37 +63,6 @@ namespace Framework.Pipeline.Geometry
             }
 
             return sum / n;
-        }
-
-        public OwPolygon Union(OwPolygon other)
-        {
-            Polygon union = SegmentSelector.Union(representation, other.representation);
-
-            return new OwPolygon(union);
-        }
-
-        public OwPolygon Intersection(OwPolygon other)
-        {
-            Polygon intersection = SegmentSelector.Intersect(representation, other.representation);
-            return new OwPolygon(intersection);
-        }
-
-        public OwPolygon Xor(OwPolygon other)
-        {
-            Polygon xor = SegmentSelector.Xor(representation, other.representation);
-            return new OwPolygon(xor);
-        }
-
-        public OwPolygon Difference(OwPolygon other)
-        {
-            Polygon difference = SegmentSelector.Difference(representation, other.representation);
-            return new OwPolygon(difference);
-        }
-
-        public OwPolygon DifferenceReversed(OwPolygon other)
-        {
-            Polygon difference = SegmentSelector.DifferenceRev(representation, other.representation);
-            return new OwPolygon(difference);
         }
 
         public List<OwLine> GetLines()

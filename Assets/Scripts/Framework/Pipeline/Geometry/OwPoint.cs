@@ -12,32 +12,6 @@ namespace Framework.Pipeline.Geometry
             this.Position = position;
         }
 
-        public bool Contains(IGeometry other)
-        {
-            return false;
-        }
-
-        public bool PartiallyContains(IGeometry other)
-        {
-            return false;
-        }
-
-        public IGeometry GetShortestPathTo(IGeometry other)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IGeometry Intersection(IGeometry other)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public float DistanceTo(IGeometry other)
-        {
-            Vector2 center = other.GetCentroid();
-            return (center - GetCentroid()).magnitude;
-        }
-
         public Vector2 GetCentroid()
         {
             return Position;

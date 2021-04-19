@@ -50,17 +50,26 @@ namespace Demo.Pipeline
 
         private void OnDrawGizmos()
         {
-            if (first != null && second != null)
-            {
-                first.DrawDebug(Color.green, Vector2.zero);
-                second.DrawDebug(Color.blue, Vector2.zero);
-            }
+            // if (first != null && second != null)
+            // {
+            //     first.DrawDebug(Color.green, Vector2.zero);
+            //     second.DrawDebug(Color.blue, Vector2.zero);
+            // }
+            //
+            // if (result != null)
+            // {
+            //     result.DrawDebug(Color.red, Vector2.zero);
+            // }
 
-            if (result != null)
-            {
-                result.DrawDebug(Color.red, Vector2.zero);
-            }
+            OwCircle circle0 = new OwCircle(Vector2.zero, 2f, 20);
+            OwCircle circle1 = new OwCircle(Vector2.one * 5f, 2f, 20);
 
+            OwLine path = PolygonPolygonInteractor.use().CalculateShortestPath(circle0, circle1);
+            
+            circle0.DrawDebug(Color.yellow, Vector2.zero);
+            circle1.DrawDebug(Color.blue, Vector2.zero);
+            
+            path.DrawDebug(Color.red, Vector2.zero);
             // foreach (OwPoint intersection in intersections)
             // {
             //     intersection.DrawDebug(Color.yellow, Vector2.zero);

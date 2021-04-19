@@ -81,7 +81,7 @@ namespace Framework.Pipeline.Geometry.Interactors
 
             return new OwInvalidGeometry();
 
-        }
+        } 
 
         public float CalculateDistance(OwPolygon first, OwLine second)
         {
