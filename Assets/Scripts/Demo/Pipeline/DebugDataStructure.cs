@@ -65,10 +65,10 @@ namespace Demo.Pipeline
 
             OwLine path = PolygonPolygonInteractor.use().CalculateShortestPath(circle0, circle1);
             
-            circle0.DrawDebug(Color.yellow, Vector2.zero);
-            circle1.DrawDebug(Color.blue, Vector2.zero);
+            circle0.DrawDebug(Color.yellow);
+            circle1.DrawDebug(Color.blue);
             
-            path.DrawDebug(Color.red, Vector2.zero);
+            path.DrawDebug(Color.red);
             // foreach (OwPoint intersection in intersections)
             // {
             //     intersection.DrawDebug(Color.yellow, Vector2.zero);

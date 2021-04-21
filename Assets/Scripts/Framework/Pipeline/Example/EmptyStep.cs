@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Example
 {
-    
     public class EmptyStep : IPipelineStep
     {
         public bool IsValidStep(IPipelineStep prev)

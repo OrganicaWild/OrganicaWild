@@ -16,7 +16,7 @@ namespace Framework.Pipeline.Example
         {
             foreach (IGameWorldObject child in world.Root.GetChildren())
             {
-               child.AddChild(new Landmark(new OwPoint(new Vector2(0,0))));
+               child.AddChild(new Landmark(new OwPoint(child.Shape.GetCentroid())));
             }
 
             return world;

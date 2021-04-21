@@ -15,6 +15,7 @@ namespace Demo.Pipeline
             runner.AddStep(new EmptyStep());
             runner.AddStep(new AreaPlacementStep());
             runner.AddStep(new LandmarkPlacer());
+            runner.AddStep(new AreaRefinementStep());
             endWorld = runner.Execute();
         }
 
