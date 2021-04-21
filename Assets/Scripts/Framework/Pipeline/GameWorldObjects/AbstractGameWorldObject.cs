@@ -50,6 +50,11 @@ namespace Framework.Pipeline.GameWorldObjects
             return children.SelectMany(child => child.GetChildren());
         }
 
+        public IEnumerable<T> GetAllChildrenOfType<T>()
+        {
+            return children.Where(child => child is T).Select(x => x is T ? (T) x : default);
+        }
+
         public void ClearChildren()
         {
             children.Clear();
@@ -78,6 +83,5 @@ namespace Framework.Pipeline.GameWorldObjects
         {
             this.parent = parent;
         }
-        
     }
 }

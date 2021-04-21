@@ -17,6 +17,8 @@ namespace Framework.Pipeline.GameWorldObjects
 
         IEnumerable<IGameWorldObject> GetChildrenInChildren();
 
+        IEnumerable<T> GetAllChildrenOfType<T>();
+
         void ClearChildren();
 
         int GetChildCount();
