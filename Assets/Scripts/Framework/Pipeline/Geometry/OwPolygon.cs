@@ -39,7 +39,7 @@ namespace Framework.Pipeline.Geometry
                 representation.Regions.Add(region);
             }
         }
-        
+
         public Vector2 GetCentroid()
         {
             //TODO: This center is not weighted since our vertices do not have weights.
@@ -86,15 +86,15 @@ namespace Framework.Pipeline.Geometry
                         prev = representationRegionPoint;
                     }
                 }
+
                 lines.Add(new OwLine(prev, first));
             }
 
             return lines;
         }
 
-        public void DrawDebug(Color debugColor, Vector2 coordinateSystemCenter)
+        public void DrawDebug(Color debugColor)
         {
-            Vector3 center = new Vector3(coordinateSystemCenter.x, 0, coordinateSystemCenter.y);
             Gizmos.color = debugColor;
             foreach (Region representationRegion in representation.Regions)
             {
@@ -111,8 +111,8 @@ namespace Framework.Pipeline.Geometry
                     {
                         Vector2 prevVec2 = prev;
                         Vector2 currentVec2 = representationRegionPoint;
-                        Gizmos.DrawLine(center + new Vector3(prevVec2.x, 0, prevVec2.y),
-                            center + new Vector3(currentVec2.x, 0, currentVec2.y));
+                        Gizmos.DrawLine(new Vector3(prevVec2.x, 0, prevVec2.y),
+                            new Vector3(currentVec2.x, 0, currentVec2.y));
                         prev = representationRegionPoint;
                     }
                 }

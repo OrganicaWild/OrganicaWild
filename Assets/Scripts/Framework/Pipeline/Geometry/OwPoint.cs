@@ -22,12 +22,12 @@ namespace Framework.Pipeline.Geometry
             return $"{Position}";
         }
 
-        public void DrawDebug(Color debugColor, Vector2 coordinateSystemCenter)
+        public void DrawDebug(Color debugColor)
         {
             const float offset = 0.5f;
-            Vector3 center = new Vector3(coordinateSystemCenter.x, 0, coordinateSystemCenter.y);
+   
             Gizmos.color = debugColor;
-            Vector3 coord = center + new Vector3(Position.x, 0, Position.y);
+            Vector3 coord = new Vector3(Position.x, 0, Position.y);
             Gizmos.DrawLine(coord + new Vector3(-offset, 0, -offset).normalized * offset,
                 coord + new Vector3(offset, 0, offset).normalized * offset);
             Gizmos.DrawLine(coord + new Vector3(offset, 0, -offset).normalized * offset,

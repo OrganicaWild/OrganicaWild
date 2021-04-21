@@ -20,11 +20,11 @@ namespace Framework.Pipeline.Geometry
             return End - Start / 2f;
         }
 
-        public void DrawDebug(Color debugColor, Vector2 coordinateSystemCenter)
+        public void DrawDebug(Color debugColor)
         {
             Gizmos.color = debugColor;
-            Vector3 center = new Vector3(coordinateSystemCenter.x, 0, coordinateSystemCenter.y);
-            Gizmos.DrawLine(center + new Vector3(Start.x, 0, Start.y), center + new Vector3(End.x, 0, End.y));
+         
+            Gizmos.DrawLine(new Vector3(Start.x, 0, Start.y), new Vector3(End.x, 0, End.y));
         }
 
         public float Length()

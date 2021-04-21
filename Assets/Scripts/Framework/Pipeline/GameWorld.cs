@@ -30,7 +30,7 @@ namespace Framework.Pipeline
             }
 
             IGameWorldObject parent = gameWorldObject.GetParent();
-            gameWorldObject.Shape.DrawDebug(colors[depth], parent?.GetGlobalPosition() ?? Vector2.zero);
+            gameWorldObject.Shape.DrawDebug(colors[depth]);
 
             foreach (IGameWorldObject child in gameWorldObject.GetChildren())
             {

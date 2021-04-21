@@ -59,19 +59,5 @@ namespace Framework.Pipeline.GameWorldObjects
         {
             this.parent = parent;
         }
-
-        public Vector2 GetLocalPosition()
-        {
-            return Shape.GetCentroid();
-        }
-
-        public Vector2 GetGlobalPosition()
-        {
-            if (parent == null)
-            {
-                return GetLocalPosition();
-            }
-            return parent.GetGlobalPosition() + GetLocalPosition();
-        }
     }
 }

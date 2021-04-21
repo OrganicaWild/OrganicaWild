@@ -78,21 +78,6 @@ namespace Framework.Pipeline.GameWorldObjects
         {
             this.parent = parent;
         }
-
-        public Vector2 GetLocalPosition()
-        {
-            Debug.Log(Shape.GetCentroid());
-            return Shape.GetCentroid();
-        }
-
-        public Vector2 GetGlobalPosition()
-        {
-            if (parent == null)
-            {
-                return GetLocalPosition();
-            }
-
-            return parent.GetGlobalPosition() + GetLocalPosition();
-        }
+        
     }
 }

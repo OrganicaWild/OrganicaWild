@@ -6,6 +6,6 @@ namespace Framework.Pipeline
     {
         Vector2 GetCentroid();
 
-        void DrawDebug(Color debugColor, Vector2 coordinateSystemCenter);
+        void DrawDebug(Color debugColor);
     }
 }

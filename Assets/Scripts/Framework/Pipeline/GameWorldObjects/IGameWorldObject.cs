@@ -32,9 +32,5 @@ namespace Framework.Pipeline.GameWorldObjects
         IGameWorldObject GetParent();
 
         void SetParent(IGameWorldObject parent);
-
-        Vector2 GetLocalPosition();
-
-        Vector2 GetGlobalPosition();
     }
 }
