@@ -13,14 +13,14 @@ namespace Framework.Pipeline.Geometry.Interactors
         {
         }
 
-        public static PolygonPointInteractor use()
+        public static PolygonPointInteractor Use()
         {
             return instance ?? (instance = new PolygonPointInteractor());
         }
 
         public bool Contains(OwPolygon first, OwPoint second)
         {
-            return Intersect(first, second) is OwPoint;
+            return Intersect(first, second).Count() != 0;
         }
 
         public bool PartiallyContains(OwPolygon first, OwPoint second)
@@ -34,27 +34,28 @@ namespace Framework.Pipeline.Geometry.Interactors
 
             foreach (OwLine owLine in first.GetLines())
             {
-                paths.Add(LinePointInteractor.use().CalculateShortestPath(owLine, second));
+                paths.Add(LinePointInteractor.Use().CalculateShortestPath(owLine, second));
             }
 
             paths.Sort((line, owLine) => (int) (200 * (line.Length() - owLine.Length())));
             return paths.First();
         }
 
-        public IGeometry Intersect(OwPolygon first, OwPoint second)
+        public IEnumerable<IGeometry> Intersect(OwPolygon first, OwPoint second)
         {
+            List<IGeometry> result = new List<IGeometry>();
             foreach (Region region in first.representation.Regions)
             {
-                PolygonLocation result = GeoAlgorithms.PointInPolygon(second,
+                PolygonLocation singleResult = GeoAlgorithms.PointInPolygon(second,
                     region.Points.Select(point => (PointD) point).ToArray());
 
-                if (result == PolygonLocation.Inside)
+                if (singleResult == PolygonLocation.Inside)
                 {
-                    return second;
+                    result.Add(new OwPoint(second.Position));
                 }
             }
 
-            return new OwInvalidGeometry();
+            return result;
         }
 
         public float CalculateDistance(OwPolygon first, OwPoint second)

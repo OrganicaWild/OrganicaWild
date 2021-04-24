@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Framework.Pipeline;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
@@ -28,21 +29,21 @@ namespace Demo.Pipeline
             second = new OwLine(Vector2.zero, new Vector2(10, 10));
 
             //poly line full contains => false
-            bool boolResult = PolygonLineInteractor.use().Contains((OwPolygon) first, (OwLine) second);
+            bool boolResult = PolygonLineInteractor.Use().Contains((OwPolygon) first, (OwLine) second);
             Assert.IsFalse(boolResult);
 
             //poly line partial contains => true
-            boolResult = PolygonLineInteractor.use().PartiallyContains((OwPolygon) first, (OwLine) second);
+            boolResult = PolygonLineInteractor.Use().PartiallyContains((OwPolygon) first, (OwLine) second);
             Assert.IsTrue(boolResult);
 
             //poly line intersection ==> partial line
-            result = PolygonLineInteractor.use().Intersect((OwPolygon) first, (OwLine) second);
+            result = PolygonLineInteractor.Use().Intersect((OwPolygon) first, (OwLine) second).First();
             Assert.IsTrue(result is OwLine);
             yield return null;
             
             //poly line shortestpath => has path
             second = new OwLine(new Vector2(10, 0), new Vector2(0, 10));
-            result = PolygonLineInteractor.use().CalculateShortestPath((OwPolygon) first, (OwLine) second);
+            result = PolygonLineInteractor.Use().CalculateShortestPath((OwPolygon) first, (OwLine) second);
             Assert.IsTrue(result is OwLine);
             yield return null;
         }
@@ -63,7 +64,7 @@ namespace Demo.Pipeline
             OwCircle circle0 = new OwCircle(positionPoly0, 2f, 20);
             OwCircle circle1 = new OwCircle(Vector2.one * 5f, 2f, 20);
 
-            OwLine path = PolygonPolygonInteractor.use().CalculateShortestPath(circle0, circle1);
+            OwLine path = PolygonPolygonInteractor.Use().CalculateShortestPath(circle0, circle1);
             
             circle0.DrawDebug(Color.yellow);
             circle1.DrawDebug(Color.blue);

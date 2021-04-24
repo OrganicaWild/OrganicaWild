@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,7 +6,7 @@ namespace Framework.Pipeline
 {
     public class PipeLineRunner
     {
-        private IList<IPipelineStep> executionPipeline;
+        private readonly IList<IPipelineStep> executionPipeline;
         private IThemeApplicator themeApplicator;
         private GameWorld world;
 
@@ -28,8 +27,8 @@ namespace Framework.Pipeline
         {
             IPipelineStep last = executionPipeline.LastOrDefault();
             if (step.IsValidStep(last))
-            {  
-              executionPipeline.Add(step);
+            {
+                executionPipeline.Add(step);
             }
             else
             {
@@ -47,10 +46,8 @@ namespace Framework.Pipeline
 
         public GameWorld Execute()
         {
-            foreach (IPipelineStep step in executionPipeline)
-            {
-                world = step.Apply(world);
-            }
+            
+            foreach (IPipelineStep step in executionPipeline) world = step.Apply(world);
 
             return world;
         }

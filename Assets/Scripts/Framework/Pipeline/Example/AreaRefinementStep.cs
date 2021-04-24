@@ -60,7 +60,7 @@ namespace Framework.Pipeline.Example
                     if (potentialArea is Area area)
                     {
                         OwPoint owPoint = new OwPoint(naCell.Position);
-                        if (PolygonPointInteractor.use().Contains(area.Shape as OwPolygon, owPoint))
+                        if (PolygonPointInteractor.Use().Contains(area.Shape as OwPolygon, owPoint))
                         {
                             naCell.State = true;
                         }
@@ -71,11 +71,7 @@ namespace Framework.Pipeline.Example
             naturalCa.Run(1);
   
             List<Vector2> activeCellPositions = new List<Vector2>();
-            OwPolygon areaPolygon = world.Root.GetChildren().First(x =>
-            {
-                return (x as Area).Shape is OwPolygon;
-                
-            }).Shape as OwPolygon;
+            OwPolygon areaPolygon = world.Root.GetChildren().First(x => (x as Area).Shape is OwPolygon).Shape as OwPolygon;
 
             for (int index = 1; index < naturalCa.Cells.Length; index++)
             {
@@ -87,9 +83,9 @@ namespace Framework.Pipeline.Example
 
                     OwCircle partArea = new OwCircle(naturalCaCell.Position, r, 8);
                     //segments.Add(partArea.representation);
-                    areaPolygon = PolygonPolygonInteractor.use().Union(areaPolygon, partArea);
+                    areaPolygon = PolygonPolygonInteractor.Use().Union(areaPolygon, partArea);
 
-                    //world.Root.AddChild(new Subsidiary(new OwPoint(naturalCaCell.Position)));
+                    world.Root.AddChild(new Subsidiary(new OwPoint(naturalCaCell.Position)));
                 }
             }
 
@@ -111,7 +107,7 @@ namespace Framework.Pipeline.Example
                     
                     world.Root.RemoveChild(area);
 
-                    areaPolygon = PolygonPolygonInteractor.use().Union(areaPolygon, area.Shape as OwPolygon);
+                    areaPolygon = PolygonPolygonInteractor.Use().Union(areaPolygon, area.Shape as OwPolygon);
                 }
             }
 

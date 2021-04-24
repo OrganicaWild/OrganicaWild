@@ -31,21 +31,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/BorderStep.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Materials/MapMapterial.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Materials/MapMapterial.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/Attributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/Attributes.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/IGeometry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/IGeometry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwInvalidGeometry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwInvalidGeometry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaPlacementStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/EmptyStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/EmptyStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/LandmarkPlacer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/LandmarkPlacer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldState.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldState.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldStateAttribute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldStateAttribute.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/IGeometryInteractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/IGeometryInteractor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LineLineInteractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LineLineInteractor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LinePointInteractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LinePointInteractor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPointInteractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPointInteractor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPolygonInteractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPolygonInteractor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/brick.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/dirt.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/stained-glass.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/tree.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +77,6 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/7e/e5575c5e/Fortran.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
@@ -74,7 +85,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SoftwareRasterizer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
@@ -98,12 +108,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net/Polybool.Net/Objects/Point.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/PolygonPointInteractor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/IGeometryInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LinePointInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPointInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LineLineInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/EmptyStep.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaPlacementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugDataStructure.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/LandmarkPlacer.cs" />
@@ -115,7 +119,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinenmentStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/NaturalCaCell.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" />
@@ -129,10 +132,17 @@
       <option value="$PROJECT_DIR$/Assets/SoftwareRasterizer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/BorderStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/EmptyStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LinePointInteractor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LineLineInteractor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPointInteractor.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -177,10 +187,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="8500">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="8500" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -231,6 +241,7 @@
       <workItem from="1618991980375" duration="16326000" />
       <workItem from="1619017151191" duration="3000000" />
       <workItem from="1619177608133" duration="11127000" />
+      <workItem from="1619258908480" duration="1304000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -490,56 +501,82 @@
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LineLineInteractor.cs</url>
-          <line>92</line>
-          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\Geometry\Interactors\LineLineInteractor.cs" initialLine="92" containingFunctionPresentation="method 'Intersect'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/BorderStep.cs</url>
+          <line>43</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\Example\BorderStep.cs" initialLine="43" containingFunctionPresentation="method 'Apply'">
             <startOffsets>
-              <option value="3461" />
+              <option value="1433" />
             </startOffsets>
             <endOffsets>
-              <option value="3537" />
+              <option value="1446" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="33" />
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/SoftwareRasterizer.cs</url>
-          <line>59</line>
-          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\SoftwareRasterizer.cs" initialLine="59" containingFunctionPresentation="method 'drawTriangle'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs</url>
+          <line>87</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\Example\AreaRefinementStep.cs" initialLine="91" containingFunctionPresentation="method 'Apply'">
             <startOffsets>
-              <option value="1728" />
+              <option value="3241" />
             </startOffsets>
             <endOffsets>
-              <option value="1761" />
+              <option value="3314" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="37" />
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/SoftwareRasterizer.cs</url>
-          <line>45</line>
-          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\SoftwareRasterizer.cs" initialLine="45" containingFunctionPresentation="method 'drawTriangle'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs</url>
+          <line>75</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\Example\AreaRefinementStep.cs" initialLine="79" containingFunctionPresentation="method 'Apply'">
             <startOffsets>
-              <option value="1291" />
+              <option value="2650" />
             </startOffsets>
             <endOffsets>
-              <option value="1330" />
+              <option value="2710" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="38" />
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/SoftwareRasterizer.cs</url>
-          <line>56</line>
-          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\SoftwareRasterizer.cs" initialLine="56" containingFunctionPresentation="method 'drawTriangle'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs</url>
+          <line>79</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\Example\AreaRefinementStep.cs" initialLine="79" containingFunctionPresentation="method 'Apply'">
             <startOffsets>
-              <option value="1612" />
+              <option value="2867" />
             </startOffsets>
             <endOffsets>
-              <option value="1648" />
+              <option value="2891" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="39" />
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs</url>
+          <line>62</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\Example\AreaRefinementStep.cs" initialLine="62" containingFunctionPresentation="method 'Apply'">
+            <startOffsets>
+              <option value="2178" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2254" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs</url>
+          <line>64</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\Example\AreaRefinementStep.cs" initialLine="64" containingFunctionPresentation="method 'Apply'">
+            <startOffsets>
+              <option value="2309" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2329" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

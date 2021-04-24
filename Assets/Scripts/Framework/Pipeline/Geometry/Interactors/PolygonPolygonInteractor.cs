@@ -15,7 +15,7 @@ namespace Framework.Pipeline.Geometry.Interactors
         {
         }
 
-        public static PolygonPolygonInteractor use()
+        public static PolygonPolygonInteractor Use()
         {
             return instance ?? (instance = new PolygonPolygonInteractor());
         }
@@ -29,7 +29,7 @@ namespace Framework.Pipeline.Geometry.Interactors
 
         public bool PartiallyContains(OwPolygon first, OwPolygon second)
         {
-            Polygon intersection = SegmentSelector.Union(first.representation, second.representation);
+            Polygon intersection = SegmentSelector.Intersect(first.representation, second.representation);
             //if the intersection of the two polygons is not empty the second polygon is partially contained in the first
             return !intersection.IsEmpty();
         }
@@ -40,7 +40,7 @@ namespace Framework.Pipeline.Geometry.Interactors
             
             foreach (OwLine linesFirst in first.GetLines())
             {
-               OwLine potentiallyShortest = PolygonLineInteractor.use().CalculateShortestPath(second, linesFirst);
+               OwLine potentiallyShortest = PolygonLineInteractor.Use().CalculateShortestPath(second, linesFirst);
                if (shortest.Length() > potentiallyShortest.Length())
                {
                    shortest = potentiallyShortest;
@@ -50,9 +50,9 @@ namespace Framework.Pipeline.Geometry.Interactors
             return shortest;
         }
 
-        public IGeometry Intersect(OwPolygon first, OwPolygon second)
+        public IEnumerable<IGeometry> Intersect(OwPolygon first, OwPolygon second)
         {
-            return Difference(first, second);
+            return new []{ Intersection(first, second) };
         }
 
         public float CalculateDistance(OwPolygon first, OwPolygon second)
