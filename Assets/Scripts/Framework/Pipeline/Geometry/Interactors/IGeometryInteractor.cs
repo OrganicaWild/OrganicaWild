@@ -33,7 +33,7 @@ namespace Framework.Pipeline.Geometry.Interactors
         /// </summary>
         /// <param name="first"></param>
         /// <param name="second"></param>
-        /// <returns>the appropriate IGeometry object</returns>
+        /// <returns>the appropriate IGeometry objects</returns>
         IEnumerable<IGeometry> Intersect(A first, B second);
 
         /// <summary>
