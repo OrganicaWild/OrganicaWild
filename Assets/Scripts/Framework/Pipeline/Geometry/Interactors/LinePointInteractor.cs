@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Framework.Pipeline.Geometry.Interactors
@@ -18,10 +20,11 @@ namespace Framework.Pipeline.Geometry.Interactors
 
         public bool Contains(OwLine first, OwPoint second)
         {
-            IGeometry intersect = Intersect(first, second);
+            IGeometry intersect = Intersect(first, second).First();
             return intersect is OwPoint;
         }
 
+        [Obsolete("Use Contains() instead")]
         public bool PartiallyContains(OwLine first, OwPoint second)
         {
             // a point cannot be partially contained on a line 
@@ -54,7 +57,7 @@ namespace Framework.Pipeline.Geometry.Interactors
             return new OwLine(result, P3);
         }
 
-        public IGeometry Intersect(OwLine first, OwPoint second)
+        public IEnumerable<IGeometry> Intersect(OwLine first, OwPoint second)
         {
             //https://stackoverflow.com/questions/17692922/check-is-a-point-x-y-is-between-two-points-drawn-on-a-straight-line
             Vector2 A = first.Start;
@@ -67,10 +70,10 @@ namespace Framework.Pipeline.Geometry.Interactors
 
             if (Math.Abs(d0 - d1) < 0.001)
             {
-                return new OwPoint(C);
+                return new []{ new OwPoint(C) };
             }
 
-            return new OwInvalidGeometry();
+            return new[] { new OwInvalidGeometry() };
         }
 
         public float CalculateDistance(OwLine first, OwPoint second)

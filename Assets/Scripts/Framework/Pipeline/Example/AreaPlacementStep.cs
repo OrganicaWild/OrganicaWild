@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Assets.Scripts.Framework.Pipeline.Example;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using UnityEngine;
@@ -7,16 +8,15 @@ using UnityEngine;
 namespace Framework.Pipeline.Example
 {
  
+    [RootGameWorldObjectProvider]
     public class AreaPlacementStep : IPipelineStep
     {
         public bool IsValidStep(IPipelineStep prev)
         {
             Type prevStepType = prev.GetType();
-            Attribute genericAttribute = Attribute.GetCustomAttribute( prevStepType, typeof(GameWorldStateAttribute));
+            Attribute attribute = Attribute.GetCustomAttribute( prevStepType, typeof(RootGameWorldObjectProvider));
 
-            GameWorldStateAttribute gameWorldAttribute = (GameWorldStateAttribute) genericAttribute;
-
-            return gameWorldAttribute.stateValues.Contains(GameWorldState.HasRoot);
+            return attribute != null;
         }
 
         public GameWorld Apply(GameWorld world)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Framework.Pipeline;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
@@ -36,7 +37,7 @@ namespace Demo.Pipeline
             Assert.IsTrue(boolResult);
 
             //poly line intersection ==> partial line
-            result = PolygonLineInteractor.use().Intersect((OwPolygon) first, (OwLine) second);
+            result = PolygonLineInteractor.use().Intersect((OwPolygon) first, (OwLine) second).First();
             Assert.IsTrue(result is OwLine);
             yield return null;
             
@@ -63,7 +64,7 @@ namespace Demo.Pipeline
             OwCircle circle0 = new OwCircle(positionPoly0, 2f, 20);
             OwCircle circle1 = new OwCircle(Vector2.one * 5f, 2f, 20);
 
-            OwLine path = PolygonPolygonInteractor.use().CalculateShortestPath(circle0, circle1);
+            OwLine path = PolygonPolygonInteractor.Use().CalculateShortestPath(circle0, circle1);
             
             circle0.DrawDebug(Color.yellow, Vector2.zero);
             circle1.DrawDebug(Color.blue, Vector2.zero);

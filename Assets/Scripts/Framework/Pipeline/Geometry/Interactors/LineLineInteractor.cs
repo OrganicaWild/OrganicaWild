@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Framework.Util;
@@ -60,7 +61,7 @@ namespace Framework.Pipeline.Geometry.Interactors
 
             return (crossProduct0 == crossProduct1) && crossProduct0 == Vector3.zero;
         }
-
+        
         public OwLine CalculateShortestPath(OwLine first, OwLine second)
         {
             OwPoint A = new OwPoint(first.Start);
@@ -81,7 +82,7 @@ namespace Framework.Pipeline.Geometry.Interactors
             return all.First();
         }
 
-        public IGeometry Intersect(OwLine first, OwLine second)
+        public IEnumerable<IGeometry> Intersect(OwLine first, OwLine second)
         {
             LineIntersection intersection = LineIntersection.Find(a: Vector2Extensions.Convert(first.Start),
                 Vector2Extensions.Convert(first.End),
@@ -90,10 +91,10 @@ namespace Framework.Pipeline.Geometry.Interactors
 
             if (intersection.Exists && intersection.First == LineLocation.Between && intersection.Second == LineLocation.Between)
             {
-                return new OwPoint(Vector2Extensions.Convert((PointD) intersection.Shared));
+                return new [] { new OwPoint(Vector2Extensions.Convert((PointD) intersection.Shared)) };
             }
 
-            return new OwInvalidGeometry();
+            return new [] { new OwInvalidGeometry() };
         }
 
         public float CalculateDistance(OwLine first, OwLine second)
