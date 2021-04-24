@@ -8,6 +8,7 @@ namespace Demo.Pipeline
     public class DebugPipelineStep : MonoBehaviour
     {
         private GameWorld endWorld;
+        public Material material;
 
         private void Start()
         {
@@ -16,7 +17,10 @@ namespace Demo.Pipeline
             runner.AddStep(new AreaPlacementStep());
             runner.AddStep(new LandmarkPlacer());
             runner.AddStep(new AreaRefinementStep());
+            runner.AddStep(new BorderStep());
             endWorld = runner.Execute();
+            runner.SetThemeApplicator(new ThemeApplicator(material));
+            GameObject world = runner.ApplyTheme();
         }
 
         private void OnDrawGizmos()

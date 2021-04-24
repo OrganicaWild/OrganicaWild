@@ -6,6 +6,8 @@ namespace Framework.Pipeline
     {
         Vector2 GetCentroid();
 
+        void ScaleFromCentroid(Vector2 axis);
+
         void DrawDebug(Color debugColor);
     }
 }

@@ -9,6 +9,11 @@ namespace Framework.Pipeline.Geometry
             return new Vector2(float.PositiveInfinity, float.PositiveInfinity);
         }
 
+        public void ScaleFromCentroid(Vector2 axis)
+        {
+           
+        }
+
         public void DrawDebug(Color debugColor)
         {
             Debug.LogError("Tried drawing Invalid Geometry.");

@@ -17,6 +17,11 @@ namespace Framework.Pipeline.Geometry
             return Position;
         }
 
+        public void ScaleFromCentroid(Vector2 axis)
+        {
+            //do nothing
+        }
+
         public override string ToString()
         {
             return $"{Position}";

@@ -5,8 +5,8 @@ namespace Framework.Pipeline.Geometry
 {
     public class OwLine : IGeometry
     {
-        public Vector2 Start { get; }
-        public Vector2 End { get; }
+        public Vector2 Start { get; private set; }
+        public Vector2 End { get; private set; }
 
         public OwLine(Vector2 start, Vector2 end)
         {
@@ -18,6 +18,19 @@ namespace Framework.Pipeline.Geometry
         {
             //simply returns the middle point of the line
             return End - Start / 2f;
+        }
+
+        public void ScaleFromCentroid(Vector2 axis)
+        {
+            Vector2 centroid = GetCentroid();
+            Start -= centroid;
+            End -= centroid;
+
+            Start *= axis;
+            End *= axis;
+
+            Start += centroid;
+            End += centroid;
         }
 
         public void DrawDebug(Color debugColor)

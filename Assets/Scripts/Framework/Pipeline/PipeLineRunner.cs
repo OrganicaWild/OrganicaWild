@@ -9,6 +9,7 @@ namespace Framework.Pipeline
     {
         private IList<IPipelineStep> executionPipeline;
         private IThemeApplicator themeApplicator;
+        private GameWorld world;
 
         public PipeLineRunner()
         {
@@ -46,13 +47,17 @@ namespace Framework.Pipeline
 
         public GameWorld Execute()
         {
-            GameWorld world = null;
             foreach (IPipelineStep step in executionPipeline)
             {
                 world = step.Apply(world);
             }
 
             return world;
+        }
+
+        public GameObject ApplyTheme()
+        {
+            return themeApplicator.Apply(world);
         }
     }
 }
