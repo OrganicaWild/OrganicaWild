@@ -15,6 +15,7 @@ namespace Demo.Pipeline
         public AreaRefinementStep areaRefinementStep;
         public LandmarkPlacer landmarkPlacer;
         public BorderStep borderStep;
+        public BackGroundNoiseStep backGroundNoiseStep;
 
         public ThemeApplicator themeApplicator;
         private void Start()
@@ -25,6 +26,7 @@ namespace Demo.Pipeline
             runner.AddStep(landmarkPlacer);
             runner.AddStep(areaRefinementStep);
             runner.AddStep(borderStep);
+            runner.AddStep(backGroundNoiseStep);
             endWorld = runner.Execute();
             runner.SetThemeApplicator(themeApplicator);
             GameObject world = runner.ApplyTheme();
@@ -32,7 +34,7 @@ namespace Demo.Pipeline
 
         private void OnDrawGizmos()
         {
-            endWorld?.DrawDebug();
+            //endWorld?.DrawDebug();
         }
     }
 }
