@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Framework.Pipeline.GameWorldObjects;
+using Framework.Util;
 using Habrador_Computational_Geometry;
 using Polybool.Net.Logic;
 using Polybool.Net.Objects;
+using Tektosyne.Geometry;
 using UnityEngine;
 
 namespace Framework.Pipeline.Geometry
@@ -11,11 +14,9 @@ namespace Framework.Pipeline.Geometry
     public class OwPolygon : IGeometry
     {
         public Polygon representation { get; private set; }
-        private List<Vector2> points;
 
         public OwPolygon(IEnumerable<Vector2> points)
         {
-            this.points = points.ToList();
             representation =
                 new Polygon(new List<Region>(new[]
                 {
@@ -28,7 +29,6 @@ namespace Framework.Pipeline.Geometry
 
         public OwPolygon(Polygon polygon)
         {
-            points = new List<Vector2>();
             representation = new Polygon() {Regions = new List<Region>()};
 
             foreach (Region polygonRegion in polygon.Regions)
@@ -38,7 +38,6 @@ namespace Framework.Pipeline.Geometry
                 foreach (Point regionPoint in polygonRegion.Points)
                 {
                     Point point = new Point(regionPoint.X, regionPoint.Y);
-                    points.Add(point);
                     region.Points.Add(point);
                 }
 
@@ -75,29 +74,18 @@ namespace Framework.Pipeline.Geometry
         {
             Vector2 centroid = GetCentroid();
 
-            for (int index = 0; index < points.Count; index++)
+            representation.Regions.ForEach(region => region.Points = region.Points.Select(point =>
             {
-                Vector2 point = points[index];
                 point -= centroid;
                 point *= axis;
                 point += centroid;
-
-                points[index] = point;
-            }
-
-            representation =
-                new Polygon(new List<Region>(new[]
-                {
-                    new Region()
-                    {
-                        Points = points.Select(vector2 => (Point) vector2).ToList()
-                    }
-                }));
+                return point;
+            }).ToList());
         }
 
         public List<Vector2> GetPoints()
         {
-            return points;
+            return representation.Regions.SelectMany(region => region.Points).Select(point => (Vector2) point).ToList();
         }
 
         public List<OwLine> GetLines()
@@ -128,29 +116,53 @@ namespace Framework.Pipeline.Geometry
             return lines;
         }
 
+        /// <summary>
+        /// Returns a viable Triangulation of a Polygon.
+        /// Can be used to draw a polygon with a mesh
+        /// </summary>
+        /// <returns>List of all Vectors. Each consecutive three vectors are a triangle.</returns>
         public List<Vector3> GetTriangulation()
         {
-            representation.Regions.Sort(((region, region1) => region1.Points.Count - region.Points.Count));
-
-            List<Vector2> pp = representation.Regions.First().Points.Select(x => (Vector2) x).ToList();
-            List<MyVector2> myVector2s = pp.Select(point => new MyVector2(point.x, point.y)).ToList();
-
-            HashSet<Triangle2> triangles = _EarClipping.Triangulate(myVector2s);
-
             List<Vector3> result = new List<Vector3>();
+          
+            List<List<MyVector2>> holes = new List<List<MyVector2>>();
 
-            foreach (Triangle2 triangle in triangles)
+            foreach (Region region in representation.Regions)
             {
-                var p1 = new Vector3(triangle.p1.x, triangle.p1.y);
-                var p2 = new Vector3(triangle.p2.x, triangle.p2.y);
-                var p3 = new Vector3(triangle.p3.x, triangle.p3.y);
+                List<MyVector2> points = region.Points.Select(x => new MyVector2((float) x.X, (float) x.Y)).ToList();
 
-                result.Add(p1);
-                result.Add(p2);
-                result.Add(p3);
+                if (!region.IsClockWise())
+                {
+                    //points.Reverse();
+                    List<MyVector2> poly = new List<MyVector2>();
+                    poly.AddRange(points);
+
+                    HashSet<Triangle2> triangles = _EarClipping.Triangulate(poly);
+
+                    foreach (Triangle2 triangle in triangles)
+                    {
+                        Vector3 p1 = new Vector3(triangle.p1.x, triangle.p1.y);
+                        Vector3 p2 = new Vector3(triangle.p2.x, triangle.p2.y);
+                        Vector3 p3 = new Vector3(triangle.p3.x, triangle.p3.y);
+
+                        result.Add(p1);
+                        result.Add(p2);
+                        result.Add(p3);
+                    }
+                    
+                }
             }
 
             return result;
+
+        }
+
+        public OwPolygon GetConvexHull()
+        {
+            PointD[] hullPoints = GeoAlgorithms.ConvexHull(GetPoints().Select(x => new PointD(x.x, x.y)).ToArray());
+            //convex hull algorithm revereses the resulting points, so they have to be revered before creating the new polygon
+            OwPolygon hullPolygon = new OwPolygon(hullPoints.Select(x => new Vector2((float) x.X, (float) x.Y)).Reverse());
+            return hullPolygon;
         }
 
         public void DrawDebug(Color debugColor)

@@ -4,15 +4,17 @@ using Framework.Cellular_Automata;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
+using Framework.Pipeline.ThemeApplicator;
+using Framework.Pipeline.ThemeApplicator.Recipe;
 using Framework.Poisson_Disk_Sampling;
-using Polybool.Net.Objects;
-using Tektosyne.Geometry;
 using UnityEngine;
 
 namespace Framework.Pipeline.Example
 {
-    public class AreaRefinementStep : IPipelineStep
+    public class AreaRefinementStep : MonoBehaviour, IPipelineStep
     {
+        public AreaMeshRecipe playAreaRecipe;
+        
         public bool IsValidStep(IPipelineStep prev)
         {
             return true;
@@ -20,11 +22,10 @@ namespace Framework.Pipeline.Example
 
         public GameWorld Apply(GameWorld world)
         {
-
-            var r = 4f;
+            const float radius = 4f;
             
             //CA
-            List<Vector2> caPoints = PoissonDiskSampling.GeneratePoints(r, 50f, 50f).ToList();
+            List<Vector2> caPoints = PoissonDiskSampling.GeneratePoints(radius, 50f, 50f).ToList();
             NaturalCa naturalCa = new NaturalCa(caPoints.Count());
 
             //add all points as cell with their index
@@ -42,7 +43,7 @@ namespace Framework.Pipeline.Example
                     if (caPoint0 != caPoint1)
                     {
                         float d = (caPoint0 - caPoint1).magnitude;
-                        if (d < r * r/2f)
+                        if (d < radius * radius/2f)
                         {
                             (naturalCa.Cells[index0] as NaturalCaCell)?.AddNeighbour(index1);
 
@@ -81,15 +82,16 @@ namespace Framework.Pipeline.Example
                 {
                     activeCellPositions.Add(naturalCaCell.Position);
 
-                    OwCircle partArea = new OwCircle(naturalCaCell.Position, r, 8);
+                    OwCircle partArea = new OwCircle(naturalCaCell.Position, radius, 8);
                     //segments.Add(partArea.representation);
                     areaPolygon = PolygonPolygonInteractor.Use().Union(areaPolygon, partArea);
 
-                    world.Root.AddChild(new Subsidiary(new OwPoint(naturalCaCell.Position)));
+                    //world.Root.AddChild(new Subsidiary(new OwPoint(naturalCaCell.Position)));
                 }
             }
-
-            Area newGround = new Area(areaPolygon);
+            
+            
+            Area newGround = new Area(areaPolygon, playAreaRecipe);
             
             foreach (IGameWorldObject children in world.Root.GetChildren().ToArray())
             {

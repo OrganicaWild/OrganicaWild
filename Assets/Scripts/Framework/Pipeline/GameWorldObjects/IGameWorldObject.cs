@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Framework.Pipeline.ThemeApplicator.Recipe;
 using UnityEngine;
 
 namespace Framework.Pipeline.GameWorldObjects
@@ -6,6 +7,7 @@ namespace Framework.Pipeline.GameWorldObjects
     public interface IGameWorldObject
     {
         IGeometry Shape { get; set; }
+        IGameWorldObjectRecipe GetRecipe();
 
         IGameWorldObject this[int index] { get; set; }
 

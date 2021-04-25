@@ -1,14 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using Framework.Pipeline.ThemeApplicator.Recipe;
 using UnityEngine;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
-    public class AbstractLeafGameWorldObject : IGameWorldObject
+    public abstract class AbstractLeafGameWorldObject : IGameWorldObject
     {
         public IGeometry Shape { get; set; }
         private IGameWorldObject parent;
-
+        public IGameWorldObjectRecipe recipe;
+        
+        public IGameWorldObjectRecipe GetRecipe()
+        {
+            return recipe;
+        }
         public IGameWorldObject this[int index]
         {
             get => throw new NoChildPolicyException();

@@ -1,6 +1,7 @@
 using System;
 using Framework.Pipeline;
 using Framework.Pipeline.Example;
+using Framework.Pipeline.ThemeApplicator;
 using UnityEngine;
 
 namespace Demo.Pipeline
@@ -8,18 +9,24 @@ namespace Demo.Pipeline
     public class DebugPipelineStep : MonoBehaviour
     {
         private GameWorld endWorld;
-        public Material material;
+        
+        public EmptyStep emptyStep;
+        public AreaPlacementStep areaPlacementStep;
+        public AreaRefinementStep areaRefinementStep;
+        public LandmarkPlacer landmarkPlacer;
+        public BorderStep borderStep;
 
+        public ThemeApplicator themeApplicator;
         private void Start()
         {
             PipeLineRunner runner = new PipeLineRunner();
-            runner.AddStep(new EmptyStep());
-            runner.AddStep(new AreaPlacementStep());
-            runner.AddStep(new LandmarkPlacer());
-            runner.AddStep(new AreaRefinementStep());
-            runner.AddStep(new BorderStep());
+            runner.AddStep(emptyStep);
+            runner.AddStep(areaPlacementStep);
+            runner.AddStep(landmarkPlacer);
+            runner.AddStep(areaRefinementStep);
+            runner.AddStep(borderStep);
             endWorld = runner.Execute();
-            runner.SetThemeApplicator(new ThemeApplicator(material));
+            runner.SetThemeApplicator(themeApplicator);
             GameObject world = runner.ApplyTheme();
         }
 
