@@ -67,6 +67,8 @@ public class MainPathPipelineStep : IPipelineStep
             return;
         }
 
+
+
         for (int i = 0; i < connections.Length; i++)
         {
             Vector2 startPoint = connections[i].GetGlobalPosition() - areaCenter;
@@ -83,7 +85,7 @@ public class MainPathPipelineStep : IPipelineStep
             Vector2 connectionLocation = connection.GetGlobalPosition();
             float xDistance = Mathf.Abs(connectionLocation.x - areaLocation.x);
             float yDistance = Mathf.Abs(connectionLocation.y - areaLocation.y);
-            return xDistance <= HalfAreaSizes.x + 0.05f && yDistance <= HalfAreaSizes.y + 0.05f;
+            return xDistance <= HalfAreaSizes.x + 0.05f && yDistance <= HalfAreaSizes.y;
         }).ToArray();
     }
 }

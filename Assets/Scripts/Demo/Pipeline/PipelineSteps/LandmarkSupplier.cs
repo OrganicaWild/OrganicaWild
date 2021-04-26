@@ -52,8 +52,8 @@ public class LandmarkPipelineStep : IPipelineStep
             float rx = Random.value;
             float ry = Random.value;
             Vector2 position = new Vector2(
-                rx * 0.5f * areaSizes.x - 0.2f,
-                ry * 0.5f * areaSizes.y - 0.2f);
+                rx * 0.3f * areaSizes.x - 0.15f,
+                ry * 0.3f * areaSizes.y - 0.15f);
             landMarkAreas[i].AddChild(new Landmark(new OwPoint(position)));
         }
 

@@ -24,11 +24,7 @@ public class AreaTypeAssignmentStep : IPipelineStep
         rootArea.AddChild(new StartArea(areas.First().Shape));
         for (int i = 1; i < areas.Length - 1; i++)
         {
-            Area area;
-            if (UnityEngine.Random.value <= 0.25f)
-                area = new LandMarkArea(areas[i].Shape);
-            else
-                area = new MiddleArea(areas[i].Shape);
+            Area area = UnityEngine.Random.value <= 0.4f ? new LandMarkArea(areas[i].Shape) : new MiddleArea(areas[i].Shape);
             rootArea.AddChild(area);
         }
         rootArea.AddChild(new EndArea(areas.Last().Shape));

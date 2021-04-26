@@ -81,7 +81,6 @@ namespace Framework.Pipeline.GameWorldObjects
 
         public Vector2 GetLocalPosition()
         {
-            Debug.Log(Shape.GetCentroid());
             return Shape.GetCentroid();
         }
 
