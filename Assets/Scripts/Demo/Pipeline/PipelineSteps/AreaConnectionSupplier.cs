@@ -39,7 +39,7 @@ public class AreaConnectionStep : IPipelineStep
 
         // X Connections
         for (int i = 0; i < XSubdivisions; i++) 
-        for (int j = 1; j < YSubdivisions - 1; j++)
+        for (int j = 1; j < YSubdivisions; j++)
         {
             float xOffset = Random.value * areaSizes.y * 0.7f + 0.15f;
 
@@ -53,7 +53,7 @@ public class AreaConnectionStep : IPipelineStep
         }
 
         // Y Connections
-        for (int i = 1; i < XSubdivisions - 1; i++)
+        for (int i = 1; i < XSubdivisions; i++)
         for (int j = 0; j < YSubdivisions; j++)
         {
             float yOffset = Random.value * areaSizes.y * 0.7f + 0.15f;

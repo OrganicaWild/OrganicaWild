@@ -12,8 +12,8 @@ public class PipelineDemonstrator : MonoBehaviour
     public void Start()
     {
         Vector2 gameWorldSize = new Vector2(200, 100);
-        int xSubdivisions = 5;
-        int ySubdivisions = 4;
+        int xSubdivisions = 7;
+        int ySubdivisions = 5;
         GameWorldSupplierStep gameWorldSupplierStep = new GameWorldSupplierStep(gameWorldSize);
         AreaSupplierStep areaSupplierStep = new AreaSupplierStep(xSubdivisions, ySubdivisions, gameWorldSize);
         AreaTypeAssignmentStep areaTypeAssignmentStep = new AreaTypeAssignmentStep();
