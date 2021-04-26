@@ -41,7 +41,7 @@ namespace Framework.Pipeline.Geometry.Interactors
             return paths.First();
         }
 
-        public IGeometry Intersect(OwPolygon first, OwPoint second)
+        public IEnumerable<IGeometry> Intersect(OwPolygon first, OwPoint second)
         {
             foreach (Region region in first.representation.Regions)
             {
@@ -50,11 +50,11 @@ namespace Framework.Pipeline.Geometry.Interactors
 
                 if (result == PolygonLocation.Inside)
                 {
-                    return second;
+                    return new[] { second };
                 }
             }
 
-            return new OwInvalidGeometry();
+            return new [] { new OwInvalidGeometry() };
         }
 
         public float CalculateDistance(OwPolygon first, OwPoint second)
