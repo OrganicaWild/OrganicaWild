@@ -31,8 +31,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +42,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/organic-pipeline" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -55,19 +62,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EAE584CE-26BC-4022-9C1B-1AA476BFA589/eb/61bb72b5/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/01/df395b1c/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/7e/e5575c5e/Fortran.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07CFA953-D94B-44E4-BB3A-488BEF79100A/15/4b7a2d51/GUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/92/5da3afea/MeshFilter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/998F2491-CDE6-4F39-9B36-14F82C288B4F/7b/907bd5a4/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/60/6446f6a1/Voronoi.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/53/adad0534/IMGUIContainer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E81851A0-DC73-4A79-AFA9-F5B7273162BE/b5/ff21947e/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF151B6A-BB5D-474C-B2C1-CB8906A8B5A4/2c/1e97fec7/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/a0/121cae76/EventDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/e7/59a49be8/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
@@ -75,10 +76,17 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/2e/6e7d0a29/LineIntersection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/7e/e5575c5e/Fortran.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/92/5da3afea/MeshFilter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/998F2491-CDE6-4F39-9B36-14F82C288B4F/7b/907bd5a4/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scenes/OrganicPipeline.unity" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/BackGroundNoiseStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreasPlacedGuarantee.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" />
@@ -120,7 +128,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Editor/PipeLineManagerEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/PathShapeGuarantee.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/PathShapeDefinitionStep.cs" />
@@ -129,6 +136,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaInitStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -138,7 +147,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13303013" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.1329849" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -173,10 +182,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="6652">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="6652" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -232,7 +241,7 @@
       <workItem from="1619599374355" duration="1016000" />
       <workItem from="1619600416743" duration="19797000" />
       <workItem from="1619622861984" duration="1330000" />
-      <workItem from="1619624223194" duration="3747000" />
+      <workItem from="1619624223194" duration="8207000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -521,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619629026592</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="change seed to nullable type">
+      <created>1619629486021</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1619629486021</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,7 +591,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="move graph grammar component to framework" />
     <MESSAGE value="extract GetLocalRotation method" />
     <MESSAGE value="organize assets" />
     <MESSAGE value="rename graph to mission graph and vertex accordingly" />
@@ -600,7 +615,8 @@
     <MESSAGE value="add straight path path shape definition step" />
     <MESSAGE value="fix random seed assignment in pipelinerunner" />
     <MESSAGE value="add CA Init Step" />
-    <option name="LAST_COMMIT_MESSAGE" value="add CA Init Step" />
+    <MESSAGE value="change seed to nullable type" />
+    <option name="LAST_COMMIT_MESSAGE" value="change seed to nullable type" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -628,6 +644,19 @@
           <line>211</line>
           <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\MissionGraph.cs" initialLine="213" containingFunctionPresentation="method 'Traverse'" />
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs</url>
+          <line>83</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\PipeLineSteps\AreaConnectionPlacementStep.cs" initialLine="83" containingFunctionPresentation="method 'Apply'">
+            <startOffsets>
+              <option value="3882" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3883" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
