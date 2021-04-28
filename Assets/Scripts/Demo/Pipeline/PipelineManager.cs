@@ -27,6 +27,11 @@ public class PipelineManager : MonoBehaviour
 
     public void Generate()
     {
+        if (hasError)
+        {
+            return;   
+        }
+        
         List<GameObject> children = new List<GameObject>();
         foreach (Transform child in transform)
         {
@@ -62,7 +67,6 @@ public class PipelineManager : MonoBehaviour
         {
             hasError = true;
             errorText = e.Message;
-            //Debug.LogError(e);
         }
     }
 
