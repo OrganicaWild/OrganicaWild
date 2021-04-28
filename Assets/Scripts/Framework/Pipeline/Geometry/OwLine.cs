@@ -44,5 +44,44 @@ namespace Framework.Pipeline.Geometry
         {
             return (End - Start).magnitude;
         }
+
+        protected bool Equals(OwLine other)
+        {
+            float eps = 0.0001f;
+
+            bool startX = Math.Abs(Start.x - other.Start.x) < eps;
+            bool startY = Math.Abs(Start.y - other.Start.y) < eps;
+            bool endX = Math.Abs(End.x - other.End.x) < eps;
+            bool endY = Math.Abs(End.y - other.End.y) < eps;
+            return startX && startY && endX && endY;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return Equals((OwLine) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Start.GetHashCode() * 397) ^ End.GetHashCode();
+            }
+        }
     }
 }

@@ -68,7 +68,7 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
         }
 
 
-        private class TypedArea : Area
+        public class TypedArea : Area
         {
             private int areaType;
 

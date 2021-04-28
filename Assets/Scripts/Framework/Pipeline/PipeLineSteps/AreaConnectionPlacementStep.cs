@@ -1,0 +1,69 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Framework.Pipeline.PipelineGuarantees;
+using Assets.Scripts.Framework.Pipeline.PipeLineSteps;
+using Framework.Pipeline.GameWorldObjects;
+using Framework.Pipeline.Geometry;
+using Framework.Pipeline.PipelineGuarantees;
+using Framework.Util;
+using UnityEngine;
+using Random = System.Random;
+
+namespace Framework.Pipeline.PipeLineSteps
+{
+    [AreaConnectionsGuarantee]
+    public class AreaConnectionPlacementStep : MonoBehaviour, IPipelineStep
+    {
+        public Random random;
+        public float connectionClosenessToVoronoiVertex;
+        public Type[] RequiredGuarantees => new Type[] {typeof(AreaTypeAssignedGuarantee)};
+
+        public GameWorld Apply(GameWorld world)
+        {
+            List<AreaTypeAssignmentStep.TypedArea> areas =
+                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().ToList();
+
+            HashSet<OwLine> allEdges = new HashSet<OwLine>();
+            Dictionary<OwLine, AreaConnection> placedConnection = new Dictionary<OwLine, AreaConnection>();
+
+            foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
+            {
+                OwPolygon shape = typedArea.Shape as OwPolygon;
+                List<OwLine> lines = shape.GetLines();
+                foreach (OwLine edge in lines)
+                {
+                    //search if we have already added a connection in this line
+                    OwLine edgeWithConnection = allEdges.FirstOrDefault(line =>
+                        line.Equals(edge) || line.Equals(new OwLine(edge.End, edge.Start)));
+                    //if so we do not add a new one but add the reference to this area aswell
+                    if (edgeWithConnection != null)
+                    {
+                        AreaConnection prevPlacedConnection = placedConnection[edgeWithConnection];
+                        typedArea.AddChild(prevPlacedConnection);
+                    }
+                    else
+                    {
+                        //if this edge does not have a connection, we make a new one and place it
+                        Vector2 a = edge.Start;
+                        Vector2 b = edge.End;
+
+                        //connection function based on both vertices
+                        Vector2 connectionPoint = Vector2.Lerp(a, b,
+                            (float) random.NextDouble() * (1f - 2 * connectionClosenessToVoronoiVertex) +
+                            connectionClosenessToVoronoiVertex);
+
+                        AreaConnection connection = new AreaConnection(new OwPoint(connectionPoint), null);
+                        typedArea.AddChild(connection);
+
+                        allEdges.Add(edge);
+                        placedConnection.Add(edge, connection);
+                    }
+                }
+            }
+
+            return world;
+        }
+    }
+}
