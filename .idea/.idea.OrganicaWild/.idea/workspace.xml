@@ -31,15 +31,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionsGuarantee.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionsGuarantee.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/LandmarksPlacedGuaranteeAttribute.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/LandmarksPlacedGuaranteeAttribute.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +84,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator/OwPolygonInterpreter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator/OwPointInterpreter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/as.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/LandmarkPlacer.cs" />
@@ -134,9 +131,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionsGuarantee.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacement.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -146,7 +144,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13329276" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13303013" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -181,10 +179,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="11924">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="20168">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="11924" />
+      <option name="pid" value="20168" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -238,7 +236,7 @@
       <workItem from="1619258908480" duration="12377000" />
       <workItem from="1619335934765" duration="21531000" />
       <workItem from="1619599374355" duration="1016000" />
-      <workItem from="1619600416743" duration="8712000" />
+      <workItem from="1619600416743" duration="12098000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -457,7 +455,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619606134650</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="add Area Connection Placement">
+      <created>1619611754774</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1619611754774</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,7 +516,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="generify Vertex and Graph" />
     <MESSAGE value="visualize graphs" />
     <MESSAGE value="add editor" />
     <MESSAGE value="safe point" />
@@ -536,7 +540,8 @@
     <MESSAGE value="edit some materials" />
     <MESSAGE value="comment area type assignment" />
     <MESSAGE value="indent ThemeApplicator.cs correctly" />
-    <option name="LAST_COMMIT_MESSAGE" value="indent ThemeApplicator.cs correctly" />
+    <MESSAGE value="add Area Connection Placement" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Area Connection Placement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

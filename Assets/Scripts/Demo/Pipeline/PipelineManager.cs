@@ -14,6 +14,7 @@ public class PipelineManager : MonoBehaviour
 
     public AreaTypeAssignmentStep areaTypeAssignmentStep;
     public AreaConnectionPlacementStep areaConnectionPlacementStep;
+    public LandmarkPlacementStep landmarkPlacementStep;
     public int randomSeed;
     private void Start()
     {
@@ -30,6 +31,7 @@ public class PipelineManager : MonoBehaviour
 
         areaTypeAssignmentStep.random = random;
         areaConnectionPlacementStep.random = random;
+        landmarkPlacementStep.random = random;
         
         GameWorldPlacementStep gameWorldPlacementStep = new GameWorldPlacementStep(new Vector2(100, 100), null);
         AreaPlacementStep areaPlacementStep = new AreaPlacementStep(20);
@@ -39,6 +41,7 @@ public class PipelineManager : MonoBehaviour
         pipeLineRunner.AddStep(areaPlacementStep);
         pipeLineRunner.AddStep(areaTypeAssignmentStep);
         pipeLineRunner.AddStep(areaConnectionPlacementStep);
+        pipeLineRunner.AddStep(landmarkPlacementStep);
         GameWorld = pipeLineRunner.Execute();
         pipeLineRunner.SetThemeApplicator(new ThemeApplicator());
         GameObject builtWorld = pipeLineRunner.ApplyTheme();

@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 1028711115}
   - component: {fileID: 1028711117}
   - component: {fileID: 1028711118}
+  - component: {fileID: 1028711119}
   m_Layer: 0
   m_Name: PipelineManagementObject
   m_TagString: Untagged
@@ -237,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaTypeAssignmentStep: {fileID: 1028711117}
   areaConnectionPlacementStep: {fileID: 1028711118}
+  landmarkPlacementStep: {fileID: 1028711119}
   randomSeed: 0
 --- !u!4 &1028711116
 Transform:
@@ -278,6 +280,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionClosenessToVoronoiVertex: 0.3
+--- !u!114 &1028711119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43be25cc3c843c3821322345532d22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landmarkRecipe: {fileID: 0}
+  startLandmarkRecipe: {fileID: 0}
+  endLandmarkRecipe: {fileID: 0}
+  hasLandmarksPercent: 1
+  minLandmarks: 0
+  maxLandmarks: 5
+  maxDistanceFromCenter: 5
+  minDistanceFromCenter: 20
+  freeSpaceInsideAtBorder: 0.5
+  minimumDistanceBetweenLandmarks: 5
+  maxTriesToGuaranteeConstraints: 1000
 --- !u!1 &1491131084
 GameObject:
   m_ObjectHideFlags: 0
