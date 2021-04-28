@@ -28,6 +28,7 @@ namespace Framework.Pipeline
             else
             {
                 Random = new Random(seed);
+                this.Seed = seed;
             }
         }
 

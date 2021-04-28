@@ -43,7 +43,6 @@ public class PipelineManager : MonoBehaviour
         pipeLineRunner.SetThemeApplicator(new ThemeApplicator());
         GameObject builtWorld = pipeLineRunner.ApplyTheme();
         builtWorld.transform.parent = this.transform;
-        randomSeed = 0;
     }
 
     public void Setup()
