@@ -82,7 +82,7 @@ namespace Framework.Pipeline.PipeLineSteps
                         bool isTooClose;
                         int tries = 0;
 
-                        //generate point going out from middle of area into certain direction until point is inside of area (most of the time this is the first point generated)
+                        // passing a function via constructor as we planned seems kinda hard . ngl
                         do
                         {
                             //generate vector with specified length into random direction

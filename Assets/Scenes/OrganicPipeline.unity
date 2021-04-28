@@ -296,13 +296,14 @@ MonoBehaviour:
   startLandmarkRecipe: {fileID: 0}
   endLandmarkRecipe: {fileID: 0}
   hasLandmarksPercent: 1
-  minLandmarks: 0
-  maxLandmarks: 5
+  minLandmarks: 2
+  maxLandmarks: 6
   maxDistanceFromCenter: 5
   minDistanceFromCenter: 20
-  freeSpaceInsideAtBorder: 0.5
+  freeSpaceInsideAtBorder: 0.2
   minimumDistanceBetweenLandmarks: 5
   maxTriesToGuaranteeConstraints: 1000
+  addDebugScaledInnerArea: 0
 --- !u!1 &1491131084
 GameObject:
   m_ObjectHideFlags: 0
