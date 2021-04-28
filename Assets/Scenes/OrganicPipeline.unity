@@ -121,6 +121,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &380551637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 380551638}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &380551638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380551637}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1028711116}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989505673
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +251,6 @@ GameObject:
   - component: {fileID: 1028711119}
   - component: {fileID: 1028711120}
   - component: {fileID: 1028711123}
-  - component: {fileID: 1028711124}
   m_Layer: 0
   m_Name: PipelineManagementObject
   m_TagString: Untagged
@@ -255,7 +284,7 @@ Transform:
   m_LocalPosition: {x: -1000, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1678434125}
+  - {fileID: 380551638}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -303,10 +332,10 @@ MonoBehaviour:
   startLandmarkRecipe: {fileID: 0}
   endLandmarkRecipe: {fileID: 0}
   hasLandmarksPercent: 1
-  minLandmarks: 2
-  maxLandmarks: 6
+  minLandmarks: 0
+  maxLandmarks: 2
   maxDistanceFromCenter: 20
-  minDistanceFromCenter: 9
+  minDistanceFromCenter: 0
   freeSpaceInsideAtBorder: 0.2
   minimumDistanceBetweenLandmarks: 5
   maxTriesToGuaranteeConstraints: 1000
@@ -363,21 +392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06add7a9b1824013a64fa170b07090e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1028711124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028711114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd64115fbf5d4193800ef69a53a90687, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poissonDiskRadius: 2
-  samplesBeforeRejection: 30
-  overlap: 0.145
 --- !u!1 &1491131084
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,33 +484,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1678434124
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1678434125}
-  m_Layer: 0
-  m_Name: New Game Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1678434125
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1678434124}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1028711116}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

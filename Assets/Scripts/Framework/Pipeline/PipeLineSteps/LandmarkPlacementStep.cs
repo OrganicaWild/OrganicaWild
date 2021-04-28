@@ -15,7 +15,6 @@ namespace Framework.Pipeline.PipeLineSteps
     [LandmarksPlacedGuarantee]
     public class LandmarkPlacementStep : PipelineStep
     {
-
         public GameWorldObjectRecipe landmarkRecipe;
         public GameWorldObjectRecipe startLandmarkRecipe;
         public GameWorldObjectRecipe endLandmarkRecipe;
@@ -49,7 +48,7 @@ namespace Framework.Pipeline.PipeLineSteps
                     typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), startLandmarkRecipe));
                     continue;
                 }
-                
+
                 //end area
                 if (typedArea.AreaType == int.MaxValue)
                 {
@@ -57,19 +56,19 @@ namespace Framework.Pipeline.PipeLineSteps
                     typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), endLandmarkRecipe));
                     continue;
                 }
-                
+
                 bool hasLandmark = random.NextDouble() <= hasLandmarksPercent;
 
                 if (hasLandmark)
                 {
                     int numberOfLandmarks = (int) (random.NextDouble() * (maxLandmarks - minLandmarks) + minLandmarks);
                     List<OwPoint> placedPoints = new List<OwPoint>();
-                    
+
                     OwPolygon areaShape = typedArea.Shape as OwPolygon;
                     OwPolygon scaledPolygon = new OwPolygon(areaShape.representation);
                     scaledPolygon.ScaleFromCentroid(new Vector2(1 - freeSpaceInsideAtBorder,
                         1 - freeSpaceInsideAtBorder));
-                    
+
                     if (addDebugScaledInnerArea)
                     {
                         typedArea.AddChild(new Area(scaledPolygon, null));
@@ -80,33 +79,38 @@ namespace Framework.Pipeline.PipeLineSteps
                         OwPoint potentialLandMarkPoint;
                         bool isTooClose;
                         int tries = 0;
+                        bool isInside;
 
                         // passing a function via constructor as we planned seems kinda hard . ngl
                         do
                         {
-                            //generate vector with specified length into random direction
-                            Vector2 fromCentroidPos =
-                                new Vector2((float) (random.NextDouble() * 2 - 1), (float) (random.NextDouble() * 2 - 1)).normalized;
-                            //scale by specified length
-                            float distanceFromCenter =
-                                (float) (random.NextDouble() * (maxDistanceFromCenter - minDistanceFromCenter) +
-                                         minDistanceFromCenter);
-                            fromCentroidPos *= distanceFromCenter;
+                            potentialLandMarkPoint = CreatePotentialLandMarkPoint(typedArea);
 
-                            potentialLandMarkPoint = new OwPoint(typedArea.Shape.GetCentroid() + fromCentroidPos);
-                            
                             //if any of the already added points are too close, consider this points as too close
                             isTooClose = placedPoints.Sum(point =>
                                 ((point.Position - potentialLandMarkPoint.Position).magnitude <
                                  minimumDistanceBetweenLandmarks)
                                     ? 1
                                     : 0) > 0;
-                            
-                            tries++;
-                            
-                        } while ((!PolygonPointInteractor.Use().Contains(scaledPolygon, potentialLandMarkPoint) ||
-                                  isTooClose) && tries < maxTriesToGuaranteeConstraints);
 
+                            tries++;
+
+                            
+                            isInside = PolygonPointInteractor.Use().Contains(scaledPolygon, potentialLandMarkPoint);
+                        } while ((!isInside || isTooClose) && tries < maxTriesToGuaranteeConstraints);
+
+                        // if we are here and the proposed point is still not good we have reached max tries limit
+                        if (!isInside || isTooClose)
+                        {
+                            // search for new point without the distance constraint
+                            do
+                            {
+                                potentialLandMarkPoint = CreatePotentialLandMarkPoint(typedArea);
+                                isInside = PolygonPointInteractor.Use().Contains(scaledPolygon, potentialLandMarkPoint);
+                            } while (!isInside);
+
+                        }
+                        
                         //if tries are reached, show warning and still add point, since we want to guarantee that the point is placed
                         if (tries == maxTriesToGuaranteeConstraints)
                         {
@@ -121,6 +125,23 @@ namespace Framework.Pipeline.PipeLineSteps
             }
 
             return world;
+        }
+
+        private OwPoint CreatePotentialLandMarkPoint(AreaTypeAssignmentStep.TypedArea typedArea)
+        {
+            OwPoint potentialLandMarkPoint;
+            //generate vector with specified length into random direction
+            Vector2 fromCentroidPos =
+                new Vector2((float) (random.NextDouble() * 2 - 1),
+                    (float) (random.NextDouble() * 2 - 1)).normalized;
+            //scale by specified length
+            float distanceFromCenter =
+                (float) (random.NextDouble() * (maxDistanceFromCenter - minDistanceFromCenter) +
+                         minDistanceFromCenter);
+            fromCentroidPos *= distanceFromCenter;
+
+            potentialLandMarkPoint = new OwPoint(typedArea.Shape.GetCentroid() + fromCentroidPos);
+            return potentialLandMarkPoint;
         }
     }
 }
