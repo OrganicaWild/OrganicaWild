@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.Framework.Pipeline.Example;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
@@ -12,10 +13,7 @@ namespace Framework.Pipeline.Example
     {
         public PointPrefabRecipe bigTreePrefabRecipe;
 
-        public bool IsValidStep(IPipelineStep prev)
-        {
-            return true;
-        }
+        public Type[] RequiredGuarantees => new Type[] {};
 
         public GameWorld Apply(GameWorld world)
         {

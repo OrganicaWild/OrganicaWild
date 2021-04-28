@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Framework.Cellular_Automata;
@@ -14,11 +15,8 @@ namespace Framework.Pipeline.Example
     public class AreaRefinementStep : MonoBehaviour, IPipelineStep
     {
         public AreaMeshRecipe playAreaRecipe;
-        
-        public bool IsValidStep(IPipelineStep prev)
-        {
-            return true;
-        }
+
+        public Type[] RequiredGuarantees => new Type[] {};
 
         public GameWorld Apply(GameWorld world)
         {

@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
 
 namespace Framework.Pipeline
 {
     public interface IPipelineStep
     {
-        bool IsValidStep(IPipelineStep prev);
+        Type[] RequiredGuarantees { get; }
         GameWorld Apply(GameWorld world);
     }
 }

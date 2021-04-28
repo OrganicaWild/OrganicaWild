@@ -20,15 +20,7 @@ namespace Framework.Pipeline.Example
     {
         public AreaMeshRecipe playAreaRecipe;
         
-        public bool IsValidStep(IPipelineStep prev)
-        {
-
-            Type prevStepType = prev.GetType();
-            Attribute attribute = Attribute.GetCustomAttribute( prevStepType, typeof(RootGameWorldObjectProvider));
-
-            return attribute != null;
-
-        }
+        public Type[] RequiredGuarantees => new[] {typeof(RootGameWorldObjectProvider)};
 
         public GameWorld Apply(GameWorld world)
         {

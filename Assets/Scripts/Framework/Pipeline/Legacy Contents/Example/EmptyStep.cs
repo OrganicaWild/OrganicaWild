@@ -12,10 +12,7 @@ namespace Framework.Pipeline.Example
     [RootGameWorldObjectProvider]
     public class EmptyStep : MonoBehaviour, IPipelineStep
     {
-        public bool IsValidStep(IPipelineStep prev)
-        {
-            return prev == null;
-        }
+        public Type[] RequiredGuarantees => new Type[] { };
 
         public GameWorld Apply(GameWorld world)
         {

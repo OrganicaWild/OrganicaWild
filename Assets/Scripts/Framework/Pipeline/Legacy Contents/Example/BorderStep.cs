@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Framework.Pipeline.GameWorldObjects;
@@ -11,11 +12,8 @@ namespace Framework.Pipeline.Example
     public class BorderStep : MonoBehaviour, IPipelineStep
     {
         public AreaMeshRecipe backGroundMeshRecipe;
-        
-        public bool IsValidStep(IPipelineStep prev)
-        {
-            return true;
-        }
+
+        public Type[] RequiredGuarantees => new Type[] { };
 
         public GameWorld Apply(GameWorld world)
         {

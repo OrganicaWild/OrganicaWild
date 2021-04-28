@@ -1,3 +1,4 @@
+using System;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
@@ -16,10 +17,7 @@ namespace Framework.Pipeline.Example
         public PointPrefabRecipe noiseRecipe;
         public PointPrefabRecipe noiseRecipe0;
 
-        public bool IsValidStep(IPipelineStep prev)
-        {
-            return true;
-        }
+        public Type[] RequiredGuarantees => new Type[] { };
 
         public GameWorld Apply(GameWorld world)
         {

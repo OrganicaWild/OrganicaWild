@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 namespace Framework.Pipeline
@@ -25,8 +27,9 @@ namespace Framework.Pipeline
 
         public void AddStep(IPipelineStep step)
         {
-            IPipelineStep last = executionPipeline.LastOrDefault();
-            if (step.IsValidStep(last))
+            IPipelineStep previous = executionPipeline.LastOrDefault();
+            Type[] requiredGuarantees = step.RequiredGuarantees;
+            if (requiredGuarantees.All(requiredAttribute => previous?.GetType().GetCustomAttributes().Any(attribute => attribute.GetType() == requiredAttribute) ?? true))
             {
                 executionPipeline.Add(step);
             }
