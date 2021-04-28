@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Framework.Pipeline.ThemeApplicator
 {
-    public class ThemeApplicator :  IThemeApplicator
+    public class ThemeApplicator : IThemeApplicator
     {
         private GameObject root;
 
         public GameObject Apply(GameWorld world)
         {
             root = new GameObject();
-            InterpretLayer(world.Root,0);
+            InterpretLayer(world.Root, 0);
             return root;
         }
 
@@ -22,17 +22,18 @@ namespace Framework.Pipeline.ThemeApplicator
                 if (child.GetRecipe() == null)
                 {
                     childrenWithNoRecipeCount++;
-                     continue;
+                    continue;
                 }
-                
+
                 GameObject cooked = child.GetRecipe().Cook(child);
                 cooked.transform.parent = root.transform;
                 cooked.transform.position += new Vector3(0, 0, -depth);
 
-                InterpretLayer(child, depth+1);
+                InterpretLayer(child, depth + 1);
             }
-            
-            Debug.LogWarning($"{childrenWithNoRecipeCount} IGameWorldObjects cannot be cooked since they have no recipe. You may have forgotten to give them a recipe on creation.");
+
+            Debug.LogWarning(
+                $"Number: {childrenWithNoRecipeCount} IGameWorldObjects cannot be cooked since they have no recipe.");
         }
     }
 }
