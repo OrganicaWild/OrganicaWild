@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Example
 {
-    public class BackGroundNoiseStep : MonoBehaviour, IPipelineStep
+    public class BackGroundNoiseStep : PipelineStep
     {
         public int resolution = 20;
         public int maxSize = 2000;
@@ -17,9 +17,9 @@ namespace Framework.Pipeline.Example
         public PointPrefabRecipe noiseRecipe;
         public PointPrefabRecipe noiseRecipe0;
 
-        public Type[] RequiredGuarantees => new Type[] { };
+        public override Type[] RequiredGuarantees => new Type[] { };
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             if (world.Root[0] is Area backGround)
             {

@@ -1,3 +1,4 @@
+using System;
 using Tektosyne.Geometry;
 using UnityEngine;
 
@@ -50,6 +51,39 @@ namespace Framework.Pipeline.Geometry
         public static implicit operator PointD(OwPoint owPoint)
         {
             return new PointD(owPoint.Position.x, owPoint.Position.y);
+        }
+
+        protected bool Equals(OwPoint other)
+        {
+            float eps = 0.0001f;
+            bool startX = Math.Abs(Position.x - other.Position.x) < eps;
+            bool startY = Math.Abs(Position.y - other.Position.y) < eps;
+            return startX && startY;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return Equals((OwPoint) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Position.GetHashCode();
         }
     }
 }

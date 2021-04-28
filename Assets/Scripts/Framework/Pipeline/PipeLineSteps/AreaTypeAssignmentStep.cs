@@ -13,13 +13,12 @@ using Random = System.Random;
 namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
 {
     [AreaTypeAssignedGuarantee]
-    public class AreaTypeAssignmentStep : MonoBehaviour, IPipelineStep
+    public class AreaTypeAssignmentStep : PipelineStep
     {
-        public Random random;
         public int inBetweenAreaTypes;
-        public Type[] RequiredGuarantees => new Type[] {typeof(AreasPlacedGuarantee)};
+        public override Type[] RequiredGuarantees => new Type[] {typeof(AreasPlacedGuarantee)};
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             //get all areas
             IEnumerable<Area> areas = world.Root.GetAllChildrenOfType<Area>();

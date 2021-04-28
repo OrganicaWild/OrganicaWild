@@ -16,13 +16,13 @@ namespace Framework.Pipeline.Example
 {
 
     [RootGameWorldObjectProvider]
-    public class AreaPlacementStep : MonoBehaviour, IPipelineStep
+    public class AreaPlacementStep : PipelineStep
     {
         public AreaMeshRecipe playAreaRecipe;
         
-        public Type[] RequiredGuarantees => new[] {typeof(RootGameWorldObjectProvider)};
+        public override Type[] RequiredGuarantees => new[] {typeof(RootGameWorldObjectProvider)};
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(15, 50, 50);
 

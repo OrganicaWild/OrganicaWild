@@ -2,7 +2,7 @@ using System;
 
 namespace Framework.Pipeline.PipeLineSteps
 {
-    public class LandmarksPlacedGuaranteeAttribute : Attribute
+    public class LandmarksPlacedGuarantee : Attribute
     {
     }
 }

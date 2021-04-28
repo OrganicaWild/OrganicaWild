@@ -12,13 +12,13 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Example
 {
-    public class AreaRefinementStep : MonoBehaviour, IPipelineStep
+    public class AreaRefinementStep : PipelineStep
     {
         public AreaMeshRecipe playAreaRecipe;
 
-        public Type[] RequiredGuarantees => new Type[] {};
+        public override Type[] RequiredGuarantees => new Type[] {};
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             const float radius = 4f;
             

@@ -11,37 +11,19 @@ public class PipelineManager : MonoBehaviour
     private GameWorld GameWorld { get; set; }
 
     private Random random;
-
-    public AreaTypeAssignmentStep areaTypeAssignmentStep;
-    public AreaConnectionPlacementStep areaConnectionPlacementStep;
-    public LandmarkPlacementStep landmarkPlacementStep;
+    
     public int randomSeed;
     private void Start()
     {
-        if (randomSeed == 0)
-        {
-            int tick = Environment.TickCount;
-            random = new Random(tick);
-            randomSeed = tick;
-        }
-        else
-        {
-            random = new Random(randomSeed);
-        }
+        PipeLineRunner pipeLineRunner = new PipeLineRunner(randomSeed);
+        
+        PipelineStep[] allSteps = GetComponents<PipelineStep>();
 
-        areaTypeAssignmentStep.random = random;
-        areaConnectionPlacementStep.random = random;
-        landmarkPlacementStep.random = random;
+        foreach (PipelineStep step in allSteps)
+        {
+            pipeLineRunner.AddStep(step);
+        }
         
-        GameWorldPlacementStep gameWorldPlacementStep = new GameWorldPlacementStep(new Vector2(100, 100), null);
-        AreaPlacementStep areaPlacementStep = new AreaPlacementStep(20);
-        
-        PipeLineRunner pipeLineRunner = new PipeLineRunner();
-        pipeLineRunner.AddStep(gameWorldPlacementStep);
-        pipeLineRunner.AddStep(areaPlacementStep);
-        pipeLineRunner.AddStep(areaTypeAssignmentStep);
-        pipeLineRunner.AddStep(areaConnectionPlacementStep);
-        pipeLineRunner.AddStep(landmarkPlacementStep);
         GameWorld = pipeLineRunner.Execute();
         pipeLineRunner.SetThemeApplicator(new ThemeApplicator());
         GameObject builtWorld = pipeLineRunner.ApplyTheme();

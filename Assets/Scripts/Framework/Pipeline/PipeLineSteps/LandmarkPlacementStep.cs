@@ -13,9 +13,8 @@ using Random = System.Random;
 namespace Framework.Pipeline.PipeLineSteps
 {
     [LandmarksPlacedGuarantee]
-    public class LandmarkPlacementStep : MonoBehaviour, IPipelineStep
+    public class LandmarkPlacementStep : PipelineStep
     {
-        public Random random;
 
         public GameWorldObjectRecipe landmarkRecipe;
         public GameWorldObjectRecipe startLandmarkRecipe;
@@ -34,9 +33,9 @@ namespace Framework.Pipeline.PipeLineSteps
 
         public bool addDebugScaledInnerArea;
 
-        public Type[] RequiredGuarantees => new Type[] {typeof(AreaConnectionsGuarantee)};
+        public override Type[] RequiredGuarantees => new Type[] {typeof(AreaConnectionsGuarantee)};
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             List<AreaTypeAssignmentStep.TypedArea> areas =
                 world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().ToList();

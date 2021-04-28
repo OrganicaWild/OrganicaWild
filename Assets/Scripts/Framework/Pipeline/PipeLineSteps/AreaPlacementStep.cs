@@ -12,27 +12,27 @@ using UnityEngine;
 namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
 {
     [AreasPlacedGuarantee]
-    public class AreaPlacementStep : IPipelineStep
+    public class AreaPlacementStep :  PipelineStep
     {
-        public float Radius { get; set; }
-        public int SamplesBeforeRejection { get; set; }
+        public float poissonDiskRadius;
+        public int samplesBeforeRejection;
 
-        public Type[] RequiredGuarantees => new[] {typeof(GameWorldPlacedGuarantee), typeof(GameWorldRectangularGuarantee)};
+        public override Type[] RequiredGuarantees => new[] {typeof(GameWorldPlacedGuarantee), typeof(GameWorldRectangularGuarantee)};
 
-        public AreaPlacementStep(float radius, int samplesBeforeRejection = 30)
+        public AreaPlacementStep(float poissonDiskRadius, int samplesBeforeRejection = 30)
         {
-            Radius = radius;
-            SamplesBeforeRejection = samplesBeforeRejection;
+            this.poissonDiskRadius = poissonDiskRadius;
+            this.samplesBeforeRejection = samplesBeforeRejection;
         }
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             // Generate voronoi cells
             List<Vector2> outermostNodes = (world.Root.Shape as OwPolygon)?.GetPoints();
             RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
-            float correctionValue = Radius;
+            float correctionValue = poissonDiskRadius;
             IEnumerable<Vector2> points = PoissonDiskSampling
-                .GeneratePoints(Radius, (float) rect.Width - correctionValue, (float) rect.Height - correctionValue, SamplesBeforeRejection)
+                .GeneratePoints(poissonDiskRadius, (float) rect.Width - correctionValue, (float) rect.Height - correctionValue, samplesBeforeRejection)
                 .Select(point => new Vector2(point.x + correctionValue/2, point.y + correctionValue/2));
             VoronoiResults results = Voronoi.FindAll(points.Select(point => new PointD(point.x, point.y)).ToArray(), rect);
 

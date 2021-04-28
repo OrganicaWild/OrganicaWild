@@ -14,13 +14,15 @@ using Random = System.Random;
 namespace Framework.Pipeline.PipeLineSteps
 {
     [AreaConnectionsGuarantee]
-    public class AreaConnectionPlacementStep : MonoBehaviour, IPipelineStep
+    public class AreaConnectionPlacementStep : PipelineStep
     {
-        public Random random;
         public float connectionClosenessToVoronoiVertex;
-        public Type[] RequiredGuarantees => new Type[] {typeof(AreaTypeAssignedGuarantee)};
 
-        public GameWorld Apply(GameWorld world)
+        public Vector2 maxDimensions;
+        public Vector2 minDimensions;
+        public override Type[] RequiredGuarantees => new Type[] {typeof(AreaTypeAssignedGuarantee)};
+
+        public override GameWorld Apply(GameWorld world)
         {
             List<AreaTypeAssignmentStep.TypedArea> areas =
                 world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().ToList();
@@ -34,6 +36,8 @@ namespace Framework.Pipeline.PipeLineSteps
                 List<OwLine> lines = shape.GetLines();
                 foreach (OwLine edge in lines)
                 {
+                   
+
                     //search if we have already added a connection in this line
                     OwLine edgeWithConnection = allEdges.FirstOrDefault(line =>
                         line.Equals(edge) || line.Equals(new OwLine(edge.End, edge.Start)));
@@ -53,6 +57,14 @@ namespace Framework.Pipeline.PipeLineSteps
                         Vector2 connectionPoint = Vector2.Lerp(a, b,
                             (float) random.NextDouble() * (1f - 2 * connectionClosenessToVoronoiVertex) +
                             connectionClosenessToVoronoiVertex);
+
+                        //min and max Dimensions specify at what dimensions of the board we do not add any connections anymore.
+                        //Mainly used to handle the borders of the map
+                        if (connectionPoint.x < minDimensions.x || connectionPoint.y < minDimensions.y ||
+                            connectionPoint.x > maxDimensions.x || connectionPoint.y > maxDimensions.y)
+                        {
+                            continue;
+                        }
 
                         AreaConnection connection = new AreaConnection(new OwPoint(connectionPoint), null);
                         typedArea.AddChild(connection);

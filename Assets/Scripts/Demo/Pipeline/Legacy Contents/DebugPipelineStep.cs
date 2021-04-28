@@ -20,7 +20,7 @@ namespace Demo.Pipeline
         public ThemeApplicator themeApplicator;
         private void Start()
         {
-            PipeLineRunner runner = new PipeLineRunner();
+            PipeLineRunner runner = new PipeLineRunner(Environment.TickCount);
             runner.AddStep(emptyStep);
             runner.AddStep(areaPlacementStep);
             runner.AddStep(landmarkPlacer);

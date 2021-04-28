@@ -214,9 +214,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1028711116}
   - component: {fileID: 1028711115}
+  - component: {fileID: 1028711122}
+  - component: {fileID: 1028711121}
   - component: {fileID: 1028711117}
   - component: {fileID: 1028711118}
   - component: {fileID: 1028711119}
+  - component: {fileID: 1028711120}
   m_Layer: 0
   m_Name: PipelineManagementObject
   m_TagString: Untagged
@@ -236,9 +239,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8932d16f81da67046b7b5998efe9cf1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameWorldPlacementStep: {fileID: 1028711122}
+  areaPlacementStep: {fileID: 0}
   areaTypeAssignmentStep: {fileID: 1028711117}
   areaConnectionPlacementStep: {fileID: 1028711118}
   landmarkPlacementStep: {fileID: 1028711119}
+  mainPathStep: {fileID: 1028711120}
   randomSeed: 0
 --- !u!4 &1028711116
 Transform:
@@ -280,6 +286,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionClosenessToVoronoiVertex: 0.3
+  maxDimensions: {x: 0, y: 0}
+  minDimensions: {x: 1, y: 1}
 --- !u!114 &1028711119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +312,46 @@ MonoBehaviour:
   minimumDistanceBetweenLandmarks: 5
   maxTriesToGuaranteeConstraints: 1000
   addDebugScaledInnerArea: 0
+--- !u!114 &1028711120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67d125fbfc24e7e97ddca23935b080c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1028711121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34563fbc767dea740a15962186190b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poissonDiskRadius: 20
+  samplesBeforeRejection: 30
+--- !u!114 &1028711122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35bd545b1b81862498b4a59586b356fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dimensions: {x: 100, y: 100}
+  recipe: {fileID: 0}
 --- !u!1 &1491131084
 GameObject:
   m_ObjectHideFlags: 0

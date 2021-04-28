@@ -9,13 +9,13 @@ using UnityEngine;
 namespace Framework.Pipeline.Example
 {
     [RootGameWorldObjectProvider]
-    public class LandmarkPlacer : MonoBehaviour, IPipelineStep
+    public class LandmarkPlacer :  PipelineStep
     {
         public PointPrefabRecipe bigTreePrefabRecipe;
 
-        public Type[] RequiredGuarantees => new Type[] {};
+        public override Type[] RequiredGuarantees => new Type[] {};
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             foreach (IGameWorldObject child in world.Root.GetChildren())
             {

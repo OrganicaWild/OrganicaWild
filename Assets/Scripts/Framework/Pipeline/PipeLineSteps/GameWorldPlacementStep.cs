@@ -14,21 +14,15 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
 {
     [GameWorldPlacedGuarantee]
     [GameWorldRectangularGuarantee]
-    public class GameWorldPlacementStep : IPipelineStep
+    public class GameWorldPlacementStep : PipelineStep
     {
-        public Vector2 Dimensions { get; }
-        public GameWorldObjectRecipe Recipe { get; }
-        public Type[] RequiredGuarantees => new Type[0];
-
-        public GameWorldPlacementStep(Vector2 dimensions, GameWorldObjectRecipe recipe)
+        public Vector2 dimensions;
+        public GameWorldObjectRecipe recipe;
+        public override Type[] RequiredGuarantees => new Type[0];
+        
+        public override GameWorld Apply(GameWorld world)
         {
-            Dimensions = dimensions;
-            Recipe = recipe;
-        }
-
-        public GameWorld Apply(GameWorld world)
-        {
-            return new GameWorld(new Area(new OwRectangle(Vector2.zero, Dimensions), Recipe));
+            return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions), recipe));
         }
     }
 }

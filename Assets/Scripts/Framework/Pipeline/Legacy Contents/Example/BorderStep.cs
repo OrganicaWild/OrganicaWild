@@ -9,13 +9,13 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Example
 {
-    public class BorderStep : MonoBehaviour, IPipelineStep
+    public class BorderStep : PipelineStep
     {
         public AreaMeshRecipe backGroundMeshRecipe;
 
-        public Type[] RequiredGuarantees => new Type[] { };
+        public override Type[] RequiredGuarantees => new Type[] { };
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             IEnumerable<Area> allAreas = world.Root.GetAllChildrenOfType<Area>().ToList();
             Area bigArea = allAreas.First();

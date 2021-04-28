@@ -10,11 +10,11 @@ namespace Framework.Pipeline.Example
 {
 
     [RootGameWorldObjectProvider]
-    public class EmptyStep : MonoBehaviour, IPipelineStep
+    public class EmptyStep : PipelineStep
     {
-        public Type[] RequiredGuarantees => new Type[] { };
+        public override Type[] RequiredGuarantees => new Type[] { };
 
-        public GameWorld Apply(GameWorld world)
+        public override GameWorld Apply(GameWorld world)
         {
             Area root = new Area(new OwSquare(Vector2.zero, 50f), ScriptableObject.CreateInstance<EmptyRecipe>());
             return new GameWorld(root);
