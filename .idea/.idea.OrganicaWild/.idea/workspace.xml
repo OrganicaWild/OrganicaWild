@@ -31,17 +31,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/BackGroundNoiseStep.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/BackGroundNoiseStep.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaTypeAssignedGuarantee.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaTypeAssignedGuarantee.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreasPlacedGuarantee.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreasPlacedGuarantee.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector2Comparer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector2Comparer.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/FloorMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/FloorMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/FloorMaterial1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/FloorMaterial1.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tree0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tree0.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tree1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tree1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/FloorMaterial.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/FloorMaterial.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Legacy Contents/BackgroundRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Legacy Contents/BackgroundRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/AreaMeshRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/AreaMeshRecipe.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/EmptyRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/EmptyRecipe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/EmptyRecipe.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/EmptyRecipe.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/PointPrefabRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/PointPrefabRecipe.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/ThemeApplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/ThemeApplicator.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaPlacementStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,16 +89,22 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EAE584CE-26BC-4022-9C1B-1AA476BFA589/eb/61bb72b5/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/7e/e5575c5e/Fortran.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07CFA953-D94B-44E4-BB3A-488BEF79100A/15/4b7a2d51/GUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/92/5da3afea/MeshFilter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/60/6446f6a1/Voronoi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/TestTriangulation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/53/adad0534/IMGUIContainer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF151B6A-BB5D-474C-B2C1-CB8906A8B5A4/2c/1e97fec7/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/a0/121cae76/EventDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/e7/59a49be8/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
@@ -78,20 +112,9 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/ComputeShaderRunner.cs" />
-      <option value="$PROJECT_DIR$/Assets/ComputeShaderTest.compute" />
-      <option value="$PROJECT_DIR$/Assets/SoftwareRasterizer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LinePointInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/LineLineInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPointInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Triangulator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net/Polybool.Net/Objects/Region.cs" />
       <option value="$PROJECT_DIR$/Assets/TestTriangulation.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net/Polybool.Net/Objects/Point.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator/AreaInterpreter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator/AreaMeshInterpreter.cs" />
@@ -107,9 +130,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator/ThemeApplicator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/ThemeApplicator/Recipes.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/AreaMeshRecipe.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs" />
@@ -122,13 +142,27 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/PointPrefabRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IPipelineStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/EmptyStep.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/EmptyRecipe.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/BackGroundNoiseStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaTypeAssignedGuarantee.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreasPlacedGuarantee.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector2Extensions.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/AreaMeshRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/EmptyRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector2Comparer.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -138,7 +172,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13346419" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13329276" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -173,10 +207,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="27132">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="11924">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="27132" />
+      <option name="pid" value="11924" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -229,6 +263,8 @@
       <workItem from="1619177608133" duration="11127000" />
       <workItem from="1619258908480" duration="12377000" />
       <workItem from="1619335934765" duration="21531000" />
+      <workItem from="1619599374355" duration="1016000" />
+      <workItem from="1619600416743" duration="5162000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -528,6 +564,11 @@
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="DotNet Exception Breakpoints">
+          <properties justMyCode="true" />
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">

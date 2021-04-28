@@ -5,7 +5,7 @@ namespace Framework.Pipeline.GameWorldObjects
     public class Area : AbstractGameWorldObject
     {
       
-        public Area(IGeometry shape, IGameWorldObjectRecipe recipe)
+        public Area(IGeometry shape, GameWorldObjectRecipe recipe)
         {
             this.Shape = shape;
             this.recipe = recipe;

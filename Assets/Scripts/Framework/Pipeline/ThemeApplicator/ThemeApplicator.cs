@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Framework.Pipeline.ThemeApplicator
 {
-    public class ThemeApplicator : MonoBehaviour, IThemeApplicator
+    public class ThemeApplicator :  IThemeApplicator
     {
         private GameObject root;
 
@@ -16,12 +16,13 @@ namespace Framework.Pipeline.ThemeApplicator
 
         private void InterpretLayer(IGameWorldObject parent, float depth)
         {
+            int childrenWithNoRecipeCount = 0;
             foreach (IGameWorldObject child in parent.GetChildren())
             {
                 if (child.GetRecipe() == null)
                 {
-                    Debug.LogError($"{child} IGameWorldObject cannot be cooked since it has no recipe. You may have forgotten to give it a recipe on creation.");
-                    continue;
+                    childrenWithNoRecipeCount++;
+                     continue;
                 }
                 
                 GameObject cooked = child.GetRecipe().Cook(child);
@@ -30,6 +31,8 @@ namespace Framework.Pipeline.ThemeApplicator
 
                 InterpretLayer(child, depth+1);
             }
+            
+            Debug.LogWarning($"{childrenWithNoRecipeCount} IGameWorldObjects cannot be cooked since they have no recipe. You may have forgotten to give them a recipe on creation.");
         }
     }
 }

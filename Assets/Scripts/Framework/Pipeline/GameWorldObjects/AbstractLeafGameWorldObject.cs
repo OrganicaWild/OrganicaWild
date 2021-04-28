@@ -9,12 +9,18 @@ namespace Framework.Pipeline.GameWorldObjects
     {
         public IGeometry Shape { get; set; }
         private IGameWorldObject parent;
-        public IGameWorldObjectRecipe recipe;
+        public GameWorldObjectRecipe recipe;
         
-        public IGameWorldObjectRecipe GetRecipe()
+        public GameWorldObjectRecipe GetRecipe()
         {
             return recipe;
         }
+
+        public void SetRecipe(GameWorldObjectRecipe recipe)
+        {
+            this.recipe = recipe;
+        }
+
         public IGameWorldObject this[int index]
         {
             get => throw new NoChildPolicyException();

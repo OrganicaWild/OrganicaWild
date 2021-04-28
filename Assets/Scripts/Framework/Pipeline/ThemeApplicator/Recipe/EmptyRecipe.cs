@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Framework.Pipeline.ThemeApplicator.Recipe
 {
     [CreateAssetMenu(fileName = "EmptyRecipe", menuName = "Pipeline/EmptyRecipe", order = 0)]
-    public class EmptyRecipe : ScriptableObject , IGameWorldObjectRecipe
+    public class EmptyRecipe :  GameWorldObjectRecipe
     {
-        public GameObject Cook(IGameWorldObject individual)
+        public override GameObject Cook(IGameWorldObject individual)
         {
             return new GameObject();
         }

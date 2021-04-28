@@ -11,6 +11,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
 {
+    [AreasPlacedGuarantee]
     public class AreaPlacementStep : IPipelineStep
     {
         public float Radius { get; set; }

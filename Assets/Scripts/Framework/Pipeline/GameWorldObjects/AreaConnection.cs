@@ -4,7 +4,7 @@ namespace Framework.Pipeline.GameWorldObjects
 {
     public class AreaConnection : AbstractGameWorldObject
     {
-        public AreaConnection(IGeometry shape, IGameWorldObjectRecipe recipe)
+        public AreaConnection(IGeometry shape, GameWorldObjectRecipe recipe)
         {
             this.Shape = shape;
             this.recipe = recipe;

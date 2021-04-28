@@ -17,10 +17,10 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
     public class GameWorldPlacementStep : IPipelineStep
     {
         public Vector2 Dimensions { get; }
-        public IGameWorldObjectRecipe Recipe { get; }
+        public GameWorldObjectRecipe Recipe { get; }
         public Type[] RequiredGuarantees => new Type[0];
 
-        public GameWorldPlacementStep(Vector2 dimensions, IGameWorldObjectRecipe recipe)
+        public GameWorldPlacementStep(Vector2 dimensions, GameWorldObjectRecipe recipe)
         {
             Dimensions = dimensions;
             Recipe = recipe;

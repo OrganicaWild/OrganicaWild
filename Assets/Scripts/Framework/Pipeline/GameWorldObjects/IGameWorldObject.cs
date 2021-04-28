@@ -7,7 +7,9 @@ namespace Framework.Pipeline.GameWorldObjects
     public interface IGameWorldObject
     {
         IGeometry Shape { get; set; }
-        IGameWorldObjectRecipe GetRecipe();
+        GameWorldObjectRecipe GetRecipe();
+
+        void SetRecipe(GameWorldObjectRecipe recipe);
 
         IGameWorldObject this[int index] { get; set; }
 
