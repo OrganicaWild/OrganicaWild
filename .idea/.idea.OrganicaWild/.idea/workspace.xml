@@ -31,11 +31,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaInitStep.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/CaInitiatedGuarantee.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/CaInitiatedGuarantee.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +64,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/53/adad0534/IMGUIContainer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E81851A0-DC73-4A79-AFA9-F5B7273162BE/b5/ff21947e/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF151B6A-BB5D-474C-B2C1-CB8906A8B5A4/2c/1e97fec7/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs" root0="SKIP_HIGHLIGHTING" />
@@ -127,10 +125,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/PathShapeGuarantee.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/PathShapeDefinitionStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CAInitStep.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/CaInitiatedGuarantee.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaInitStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -234,7 +232,7 @@
       <workItem from="1619599374355" duration="1016000" />
       <workItem from="1619600416743" duration="19797000" />
       <workItem from="1619622861984" duration="1330000" />
-      <workItem from="1619624223194" duration="3434000" />
+      <workItem from="1619624223194" duration="3747000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -516,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619624035922</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="add CA Init Step">
+      <created>1619629026592</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1619629026592</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -570,7 +575,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add simple mapping from graph grmamar to shape grammar" />
     <MESSAGE value="move graph grammar component to framework" />
     <MESSAGE value="extract GetLocalRotation method" />
     <MESSAGE value="organize assets" />
@@ -595,7 +599,8 @@
     <MESSAGE value="remove bad scene" />
     <MESSAGE value="add straight path path shape definition step" />
     <MESSAGE value="fix random seed assignment in pipelinerunner" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix random seed assignment in pipelinerunner" />
+    <MESSAGE value="add CA Init Step" />
+    <option name="LAST_COMMIT_MESSAGE" value="add CA Init Step" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -623,32 +628,6 @@
           <line>211</line>
           <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\MissionGraph.cs" initialLine="213" containingFunctionPresentation="method 'Traverse'" />
           <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs</url>
-          <line>49</line>
-          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Demo\Pipeline\PipelineManager.cs" initialLine="49" containingFunctionPresentation="method 'Setup'">
-            <startOffsets>
-              <option value="1181" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1229" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs</url>
-          <line>52</line>
-          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Demo\Pipeline\PipelineManager.cs" initialLine="52" containingFunctionPresentation="method 'Setup'">
-            <startOffsets>
-              <option value="1281" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1337" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

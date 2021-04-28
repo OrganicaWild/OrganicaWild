@@ -16,10 +16,10 @@ namespace Framework.Pipeline
         public Random Random { get; }
         public int Seed { get; }
 
-        public PipeLineRunner(int seed)
+        public PipeLineRunner(int? seed = null)
         {
             executionPipeline = new List<PipelineStep>();
-            if (seed == 0)
+            if (seed == null)
             {
                 int tick = Environment.TickCount;
                 Random = new Random(tick);
@@ -27,8 +27,8 @@ namespace Framework.Pipeline
             }
             else
             {
-                Random = new Random(seed);
-                this.Seed = seed;
+                Random = new Random(seed.Value);
+                this.Seed = seed.Value;
             }
         }
 
