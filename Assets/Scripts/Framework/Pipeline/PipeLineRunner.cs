@@ -53,6 +53,7 @@ namespace Framework.Pipeline
                 throw new IllegalExecutionOrderException();
             }
         }
+        
 
         public void SetThemeApplicator(IThemeApplicator themeApplicator)
         {

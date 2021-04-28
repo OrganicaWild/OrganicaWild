@@ -31,35 +31,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/MainPathStep.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/MainPathStep.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/MainPathsInAreasGuaranteed.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/MainPathsInAreasGuaranteed.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/MinimumSpanningTree.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/MinimumSpanningTree.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/UnionFind.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/UnionFind.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Editor.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Editor/PipeLineManagerEditor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Editor/PipeLineManagerEditor.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Legacy Contents/DebugPipelineStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Legacy Contents/DebugPipelineStep.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IPipelineStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IPipelineStep.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineStep.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaPlacementStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/LandmarksPlacedGuaranteeAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/LandmarksPlacedGuarantee.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/LandmarksPlacedGuaranteeAttribute.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/LandmarksPlacedGuarantee.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +57,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EAE584CE-26BC-4022-9C1B-1AA476BFA589/eb/61bb72b5/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/01/df395b1c/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
@@ -108,7 +87,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/AreaRefinementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Example/BorderStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/EmptyRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/PointPrefabRecipe.cs" />
@@ -143,9 +121,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/UnionFind.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Kruskal.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/MinimumSpanningTree.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Legacy Contents/DebugPipelineStep.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaPlacementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" />
@@ -159,6 +135,9 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Editor/PipeLineManagerEditor.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -260,7 +239,7 @@
       <workItem from="1619258908480" duration="12377000" />
       <workItem from="1619335934765" duration="21531000" />
       <workItem from="1619599374355" duration="1016000" />
-      <workItem from="1619600416743" duration="18083000" />
+      <workItem from="1619600416743" duration="19622000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -500,7 +479,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619615516197</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="add MainPathPlacement and make PipelineStep to MonoBehaviour">
+      <created>1619621203946</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1619621203946</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +540,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="safe point" />
     <MESSAGE value="reimplemented contains and add containedAt" />
     <MESSAGE value="change containedAt to ContainedSubGraph" />
     <MESSAGE value="rework ApplyRule to use the new ContainedSubGraph" />
@@ -579,7 +564,8 @@
     <MESSAGE value="add Area Connection Placement" />
     <MESSAGE value="add landmark placement" />
     <MESSAGE value="change comment in LandmarkPlacementStep.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="change comment in LandmarkPlacementStep.cs" />
+    <MESSAGE value="add MainPathPlacement and make PipelineStep to MonoBehaviour" />
+    <option name="LAST_COMMIT_MESSAGE" value="add MainPathPlacement and make PipelineStep to MonoBehaviour" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

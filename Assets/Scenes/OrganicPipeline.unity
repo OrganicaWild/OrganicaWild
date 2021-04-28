@@ -239,13 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8932d16f81da67046b7b5998efe9cf1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameWorldPlacementStep: {fileID: 1028711122}
-  areaPlacementStep: {fileID: 0}
-  areaTypeAssignmentStep: {fileID: 1028711117}
-  areaConnectionPlacementStep: {fileID: 1028711118}
-  landmarkPlacementStep: {fileID: 1028711119}
-  mainPathStep: {fileID: 1028711120}
-  randomSeed: 0
+  randomSeed: 106262468
 --- !u!4 &1028711116
 Transform:
   m_ObjectHideFlags: 0
@@ -286,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionClosenessToVoronoiVertex: 0.3
-  maxDimensions: {x: 0, y: 0}
+  maxDimensions: {x: 99, y: 99}
   minDimensions: {x: 1, y: 1}
 --- !u!114 &1028711119
 MonoBehaviour:
