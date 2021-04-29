@@ -45,7 +45,12 @@ namespace Framework.Pipeline.PipeLineSteps
                     if (edgeWithConnection != null)
                     {
                         AreaConnection prevPlacedConnection = placedConnection[edgeWithConnection];
-                        typedArea.AddChild(prevPlacedConnection);
+                        AreaConnection twinConnection = new AreaConnection(prevPlacedConnection.Shape, null);
+                        prevPlacedConnection.Twin = twinConnection;
+                        prevPlacedConnection.Target = typedArea;
+                        twinConnection.Target = prevPlacedConnection.GetParent() as Area;
+                        twinConnection.Twin = prevPlacedConnection;
+                        typedArea.AddChild(twinConnection);
                     }
                     else
                     {
