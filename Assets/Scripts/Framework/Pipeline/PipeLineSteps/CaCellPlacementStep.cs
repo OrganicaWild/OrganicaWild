@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
@@ -75,45 +77,59 @@ public class CaCellPlacementStep : PipelineStep
         Epsilon.Eps = epsilon;
 
         PolygonPolygonInteractor interactor = PolygonPolygonInteractor.Use();
-        List<Area> areas = world.Root
+        Area[] areas = world.Root
             .GetAllChildrenOfType<Area>()
-            .ToList();
-        int nSubAreas = 0;
+            .ToArray();
+
         foreach (Area area in areas)
         {
-            // Generate voronoi cells
-            OwPolygon surroundingPolygon = area.Shape as OwPolygon;
-            List<Vector2> outermostNodes = surroundingPolygon?.GetPoints();
-            RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
-            Vector2[] points = PoissonDiskSampling
-                .GeneratePoints(poissonDiskRadius, (float)rect.Width, (float)rect.Height, samplesBeforeRejection)
-                .Select(point => new Vector2(point.x + (float) rect.X, point.y + (float) rect.Y))
-                .ToArray();
-            VoronoiResults results = Voronoi.FindAll(points.Select(point => new PointD(point.x, point.y)).ToArray(), rect);
+            //ParameterizedThreadStart pts = Run;
+            //Thread workerForOneRow = new Thread(pts);
+            //workerForOneRow.Start(area);
 
-            // Convert voronoi cells to areas
-            OwPolygon[] voronoiPolygons = results
-                .VoronoiRegions
-                .Select(region =>
-                    new OwPolygon(region
-                        .Select(point =>
-                            new Vector2((float)point.X, (float)point.Y))
-                        .ToArray()))
-                .ToArray();
-
-            OwPolygon[] subAreaPolygons = voronoiPolygons.Select(voronoiPolygon =>
-            {
-                bool isPartiallyInside = interactor.PartiallyContains(surroundingPolygon, voronoiPolygon);
-                return isPartiallyInside ? interactor.Intersection(voronoiPolygon, surroundingPolygon) : null;
-            }).Where(value => value != null).ToArray();
-            Area[] subAreas = subAreaPolygons.Select(polygon => new Area(polygon, null)).ToArray();
-
-            nSubAreas += subAreas.Length;
-            foreach (Area subArea in subAreas) area.AddChild(subArea);
+            //Run(area);
         }
 
-        Debug.Log($"{nSubAreas} Sub Areas Created");
+        Parallel.ForEach(areas, area => Run(area));
 
         return world;
+    }
+
+    private void Run(object parameter)
+    {
+        Area area = (Area) parameter;
+        PolygonPolygonInteractor interactor = PolygonPolygonInteractor.Use();
+
+        // Generate voronoi cells
+        OwPolygon surroundingPolygon = area.Shape as OwPolygon;
+        List<Vector2> outermostNodes = surroundingPolygon?.GetPoints();
+        RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
+        Vector2[] points = PoissonDiskSampling
+            .GeneratePoints(poissonDiskRadius, (float)rect.Width, (float)rect.Height, samplesBeforeRejection)
+            .Select(point => new Vector2(point.x + (float)rect.X, point.y + (float)rect.Y))
+            .ToArray();
+        VoronoiResults results =
+            Voronoi.FindAll(points.Select(point => new PointD(point.x, point.y)).ToArray(), rect);
+
+        // Convert voronoi cells to areas
+        OwPolygon[] voronoiPolygons = results
+            .VoronoiRegions
+            .Select(region =>
+                new OwPolygon(region
+                    .Select(point =>
+                        new Vector2((float)point.X, (float)point.Y))
+                    .ToArray()))
+            .ToArray();
+
+        OwPolygon[] subAreaPolygons = voronoiPolygons.Select(voronoiPolygon =>
+        {
+            bool isPartiallyInside = interactor.PartiallyContains(surroundingPolygon, voronoiPolygon);
+            return isPartiallyInside ? interactor.Intersection(voronoiPolygon, surroundingPolygon) : null;
+        }).Where(value => value != null).ToArray();
+        Area[] subAreas = subAreaPolygons.Select(polygon => new Area(polygon, null)).ToArray();
+
+
+
+        foreach (Area subArea in subAreas) area.AddChild(subArea);
     }
 }

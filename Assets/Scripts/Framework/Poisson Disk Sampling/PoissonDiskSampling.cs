@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Framework.Poisson_Disk_Sampling
 {
@@ -17,24 +17,28 @@ namespace Framework.Poisson_Disk_Sampling
         /// <returns></returns>
         public static IEnumerable<Vector2> GeneratePoints(float radius, float width, float height, int numSamplesBeforeRejection = 30)
         {
-            Vector2 sampleRegionSize = new Vector2(width, height);
-            float cellSize = radius / Mathf.Sqrt(2);
+            System.Random r = new System.Random();
 
-            int[,] grid = new int[Mathf.CeilToInt(sampleRegionSize.x / cellSize), Mathf.CeilToInt(sampleRegionSize.y / cellSize)];
+            Vector2 sampleRegionSize = new Vector2(width, height);
+            float cellSize = radius / (float) Math.Sqrt(2);
+
+            int[,] grid = new int[(int) Math.Ceiling(sampleRegionSize.x / cellSize), (int) Math.Ceiling(sampleRegionSize.y / cellSize)];
             List<Vector2> points = new List<Vector2>();
             List<Vector2> spawnPoints = new List<Vector2> {sampleRegionSize / 2};
 
             while (spawnPoints.Count > 0)
             {
-                int spawnIndex = Random.Range(0, spawnPoints.Count);
+                int spawnIndex = r.Next(0, spawnPoints.Count);
                 Vector2 spawnCentre = spawnPoints[spawnIndex];
                 bool candidateAccepted = false;
 
                 for (int i = 0; i < numSamplesBeforeRejection; i++)
                 {
-                    float angle = Random.value * Mathf.PI * 2;
-                    Vector2 dir = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle));
-                    Vector2 candidate = spawnCentre + dir * Random.Range(radius, 2 * radius);
+                    double angle = r.NextDouble() * Math.PI * 2;
+                    Vector2 dir = new Vector2((float) Math.Sin(angle), (float) Math.Cos(angle));
+
+                    float scale = (float) r.NextDouble() * radius + radius;
+                    Vector2 candidate = spawnCentre + dir * scale;
                     if (IsValid(candidate, sampleRegionSize, cellSize, radius, points, grid))
                     {
                         points.Add(candidate);
@@ -60,10 +64,10 @@ namespace Framework.Poisson_Disk_Sampling
             {
                 int cellX = (int)(candidate.x / cellSize);
                 int cellY = (int)(candidate.y / cellSize);
-                int searchStartX = Mathf.Max(0, cellX - 2);
-                int searchEndX = Mathf.Min(cellX + 2, grid.GetLength(0) - 1);
-                int searchStartY = Mathf.Max(0, cellY - 2);
-                int searchEndY = Mathf.Min(cellY + 2, grid.GetLength(1) - 1);
+                int searchStartX = Math.Max(0, cellX - 2);
+                int searchEndX = Math.Min(cellX + 2, grid.GetLength(0) - 1);
+                int searchStartY = Math.Max(0, cellY - 2);
+                int searchEndY = Math.Min(cellY + 2, grid.GetLength(1) - 1);
 
                 for (int x = searchStartX; x <= searchEndX; x++)
                 {
