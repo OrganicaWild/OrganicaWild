@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -121,6 +121,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &158245840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 158245841}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &158245841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158245840}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1028711116}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989505673
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +244,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1028711116}
   - component: {fileID: 1028711115}
+  - component: {fileID: 1028711118}
+  - component: {fileID: 1028711117}
+  - component: {fileID: 1028711119}
+  - component: {fileID: 1028711122}
+  - component: {fileID: 1028711121}
+  - component: {fileID: 1028711120}
+  - component: {fileID: 1028711124}
+  - component: {fileID: 1028711123}
   m_Layer: 0
   m_Name: PipelineManagementObject
   m_TagString: Untagged
@@ -233,6 +271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8932d16f81da67046b7b5998efe9cf1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimalDebugColorBrightness: 0.7
+  randomSeed: 1
+  hasError: 0
+  errorText: 
 --- !u!4 &1028711116
 Transform:
   m_ObjectHideFlags: 0
@@ -243,10 +285,130 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1000, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 158245841}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1028711117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34563fbc767dea740a15962186190b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poissonDiskRadius: 30
+  samplesBeforeRejection: 30
+--- !u!114 &1028711118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35bd545b1b81862498b4a59586b356fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dimensions: {x: 200, y: 100}
+  recipe: {fileID: 0}
+--- !u!114 &1028711119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa3d9f31d2349efa169f1254095c0f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inBetweenAreaTypes: 2
+--- !u!114 &1028711120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67d125fbfc24e7e97ddca23935b080c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1028711121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43be25cc3c843c3821322345532d22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landmarkRecipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+  startLandmarkRecipe: {fileID: 11400000, guid: 13bcc454f57c7824fab560befc5d9494,
+    type: 2}
+  endLandmarkRecipe: {fileID: 11400000, guid: 684b3354facd3cc4396c74d38944241a, type: 2}
+  hasLandmarksPercent: 1
+  minLandmarks: 1
+  maxLandmarks: 10
+  maxDistanceFromCenter: 15
+  minDistanceFromCenter: 1
+  freeSpaceInsideAtBorder: 0
+  minimumDistanceBetweenLandmarks: 4
+  maxTriesToGuaranteeConstraints: 40
+  addDebugScaledInnerArea: 0
+--- !u!114 &1028711122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a633f36aeaa4509a128430480b6a722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectionClosenessToVoronoiVertex: 1
+  maxDimensions: {x: 199, y: 99}
+  minDimensions: {x: 1, y: 1}
+--- !u!114 &1028711123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a59b8aab219c047a28b2f905fc1dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poissonDiskRadius: 1
+  samplesBeforeRejection: 3
+--- !u!114 &1028711124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06add7a9b1824013a64fa170b07090e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1491131084
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,17 +16,19 @@ namespace Framework.Pipeline
             Root = root;
         }
 
-        public void DrawDebug()
+        public void DrawDebug(float minBrightness)
         {
-            DrawDebugGameWorldElement(0, Root, debugColors);
+            DrawDebugGameWorldElement(0, Root, debugColors, minBrightness);
         }
 
         private static void DrawDebugGameWorldElement(int depth, IGameWorldObject gameWorldObject,
-            Dictionary<int, Color> colors)
+            Dictionary<int, Color> colors, float minBrightness)
         {
+
+            RemoveTooDarkColors(colors, minBrightness);
             if (!colors.ContainsKey(depth))
             {
-                colors.Add(depth, new Color(Random.value, Random.value, Random.value));
+                colors.Add(depth, GenerateColor(minBrightness));
             }
 
             IGameWorldObject parent = gameWorldObject.GetParent();
@@ -34,7 +36,26 @@ namespace Framework.Pipeline
 
             foreach (IGameWorldObject child in gameWorldObject.GetChildren())
             {
-                DrawDebugGameWorldElement(depth+1, child, colors);
+                DrawDebugGameWorldElement(depth+1, child, colors, minBrightness);
+            }
+        }
+
+        private static Color GenerateColor(float minBrightness)
+        {
+            Color color;
+            do
+            {
+                color = new Color(Random.value, Random.value, Random.value);
+            } while (color.grayscale < minBrightness);
+
+            return color;
+        }
+
+        private static void RemoveTooDarkColors(Dictionary<int, Color> colors, float minBrightness)
+        {
+            foreach (KeyValuePair<int, Color> keyValuePair in colors)
+            {
+                if (keyValuePair.Value.grayscale < minBrightness) colors.Remove(keyValuePair.Key);
             }
         }
     }

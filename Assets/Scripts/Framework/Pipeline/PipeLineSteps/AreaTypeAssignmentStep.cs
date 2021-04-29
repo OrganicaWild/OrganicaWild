@@ -78,7 +78,7 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
             }
 
             /// <summary>
-            /// Specifces a special area with a type specifier as an int.
+            /// Specifies a special area with a type specifier as an int.
             /// </summary>
             /// <param name="shape"></param>
             /// <param name="recipe"></param>

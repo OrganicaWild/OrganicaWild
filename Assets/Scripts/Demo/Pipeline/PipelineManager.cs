@@ -12,6 +12,8 @@ public class PipelineManager : MonoBehaviour
 {
     private GameWorld GameWorld { get; set; }
 
+    public float minimalDebugColorBrightness = 0.3f;
+
     public int randomSeed;
 
     private PipeLineRunner pipeLineRunner;
@@ -78,7 +80,7 @@ public class PipelineManager : MonoBehaviour
     {
         if (GameWorld != null)
         {
-            GameWorld.DrawDebug();
+            GameWorld.DrawDebug(minimalDebugColorBrightness);
         }
     }
 }
