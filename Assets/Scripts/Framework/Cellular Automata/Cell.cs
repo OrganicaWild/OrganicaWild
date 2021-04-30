@@ -10,6 +10,10 @@
         CurrentState = state;
     }
 
+    public Cell()
+    {
+    }
+
     public void CalculateUpdate()
     {
         NextState = Network.UpdateRules[CurrentState].ApplyTo(this);

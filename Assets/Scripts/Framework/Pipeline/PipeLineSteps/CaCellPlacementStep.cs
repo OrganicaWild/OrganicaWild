@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
@@ -13,7 +12,7 @@ using Polybool.Net.Objects;
 using Tektosyne.Geometry;
 using UnityEngine;
 
-public class CaCellPlacementStep : PipelineStep
+public abstract class CaCellPlacementStep<CellState> : PipelineStep
 {
     [Range(float.Epsilon, 99999f)]
     public float poissonDiskRadius;
@@ -24,117 +23,41 @@ public class CaCellPlacementStep : PipelineStep
 
     public override GameWorld Apply(GameWorld world)
     {
-        return ApplyWithManyVoronoiDiagrams(world);
-    }
-
-    [Obsolete("Is slow. Consider Using ApplyWithManyVoronoiDiagrams() instead.")]
-    private GameWorld ApplyWithOneVoronoiDiagram(GameWorld world)
-    {
         Epsilon.Eps = epsilon;
 
-        // Generate voronoi cells
-        OwPolygon surroundingPolygon = world.Root.Shape as OwPolygon;
-        List<Vector2> outermostNodes = surroundingPolygon?.GetPoints();
-        RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
-        Vector2[] points = PoissonDiskSampling
-            .GeneratePoints(poissonDiskRadius, (float)rect.Width, (float)rect.Height, samplesBeforeRejection)
-            .Select(point => new Vector2(point.x, point.y))
-            .ToArray();
-        VoronoiResults results = Voronoi.FindAll(points.Select(point => new PointD(point.x, point.y)).ToArray(), rect);
-
-        // Convert voronoi cells to areas
-        OwPolygon[] voronoiPolygons = results
-            .VoronoiRegions
-            .Select(region =>
-                new OwPolygon(region
-                    .Select(point =>
-                        new Vector2((float)point.X, (float)point.Y))
-                    .ToArray()))
-            .ToArray();
-
-        PolygonPolygonInteractor interactor = PolygonPolygonInteractor.Use();
-        List<Area> areas = world.Root
-            .GetAllChildrenOfType<Area>()
-            .ToList();
-        foreach (Area area in areas)
-        {
-            OwPolygon[] subAreaPolygons = voronoiPolygons.Select(voronoiPolygon =>
-            {
-                bool isPartiallyInside = interactor.PartiallyContains(surroundingPolygon, voronoiPolygon);
-                return isPartiallyInside ? interactor.Intersection(voronoiPolygon, surroundingPolygon) : null;
-            }).Where(value => value != null).ToArray();
-            Area[] subAreas = subAreaPolygons.Select(polygon => new Area(polygon, null)).ToArray();
-
-
-            foreach (Area subArea in subAreas) area.AddChild(subArea);
-        }
-
-        return world;
-    }
-
-    private GameWorld ApplyWithManyVoronoiDiagrams(GameWorld world)
-    {
-        Epsilon.Eps = epsilon;
-
-        PolygonPolygonInteractor interactor = PolygonPolygonInteractor.Use();
         Area[] areas = world.Root
             .GetAllChildrenOfType<Area>()
             .ToArray();
 
-        foreach (Area area in areas)
-        {
-            //ParameterizedThreadStart pts = Run;
-            //Thread workerForOneRow = new Thread(pts);
-            //workerForOneRow.Start(area);
-
-            //Run(area);
-        }
-
-        Parallel.ForEach(areas, area => Run(new ParameterStruct {world = world, area = area}));
+        Parallel.ForEach(areas, area => Run(area));
 
         return world;
     }
 
-
-    /// <summary>
-    /// This whole struct is only here for debugging reasons, in the end I only want to pass the area.
-    /// TODO: Remove struct
-    /// </summary>
-    struct ParameterStruct
-    {
-        public GameWorld world;
-        public Area area;
-    }
-
     private void Run(object parameter)
     {
-        ParameterStruct ps = (ParameterStruct) parameter;
 
-        Area area = ps.area;
-        OwPolygon areaPolygon = (OwPolygon) area.Shape;
+        Area parentArea = (Area) parameter;
+        OwPolygon areaPolygon = (OwPolygon) parentArea.Shape;
         PolygonPolygonInteractor interactor = PolygonPolygonInteractor.Use();
 
         // Generate voronoi results
-        OwPolygon surroundingPolygon = area.Shape as OwPolygon;
+        OwPolygon surroundingPolygon = parentArea.Shape as OwPolygon;
         List<Vector2> outermostNodes = surroundingPolygon?.GetPoints();
         RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
         Vector2[] points = PoissonDiskSampling
             .GeneratePoints(poissonDiskRadius, (float)rect.Width, (float)rect.Height, samplesBeforeRejection)
             .Select(point => new Vector2(point.x + (float)rect.X, point.y + (float)rect.Y))
             .ToArray();
-        VoronoiResults results =
+        VoronoiResults voronoiResults =
             Voronoi.FindAll(points.Select(point => new PointD(point.x, point.y)).ToArray(), rect);
 
-        // Create Subdivisions
-        Subdivision delaunySubdivision = results.ToDelaunySubdivision();
-        VoronoiResults.SubdivisionMap voronoiSubdivision = results.ToVoronoiSubdivision();
-
-        // Get Nodes in the center of the potential subareas
-        PointD[] nodes = delaunySubdivision.Nodes.ToArray();
+        // Create Subdivision
+        VoronoiResults.SubdivisionMap voronoiSubdivision = voronoiResults.ToVoronoiSubdivision();
 
         // Map these potential subareas to their nodes
-        Dictionary<PointD, Area> areaMapping = new Dictionary<PointD, Area>(delaunySubdivision.NodeCount);
-        for (int i = 0; i < nodes.Length; i++)
+        Dictionary<Vector2, Area> areas = new Dictionary<Vector2, Area>(voronoiResults.VoronoiRegions.Length);
+        for (int i = 0; i < voronoiResults.VoronoiRegions.Length; i++)
         {
             SubdivisionFace face = voronoiSubdivision.ToFace(i);
             IEnumerable<Vector2> polygonVertices = face.OuterEdge.CyclePolygon.Select(point => new Vector2((float)point.X, (float)point.Y));
@@ -142,46 +65,44 @@ public class CaCellPlacementStep : PipelineStep
             OwPolygon clippedPolygon = interactor.Intersection(subAreaPolygon, areaPolygon);
             if (clippedPolygon.representation.Regions.Count == 0) continue;
             Area subArea = new Area(clippedPolygon);
-            areaMapping.Add(nodes[i], subArea);
+            Vector2 center = clippedPolygon.GetCentroid();
+            areas.Add(center, subArea);
         }
 
         // Map neighboring nodes to each other
-        Dictionary<PointD, IList<PointD>> neighborMapping = new Dictionary<PointD, IList<PointD>>(delaunySubdivision.NodeCount);
-        foreach (KeyValuePair<PointD, Area> mapping in areaMapping)
+        VoronoiResults delaunyResults = Voronoi.FindAll(areas.Keys.Select(key => new PointD(key.x, key.y)).ToArray());
+        Subdivision delaunySubdivision = delaunyResults.ToDelaunySubdivision();
+        
+        Dictionary<Vector2, IEnumerable<Vector2>> neighborhoods = new Dictionary<Vector2, IEnumerable<Vector2>>(delaunySubdivision.NodeCount);
+        foreach (KeyValuePair<Vector2, Area> area in areas)
         {
-            IList<PointD> suspectedNeighbors = delaunySubdivision.GetNeighbors(mapping.Key);
+            PointD point = new PointD(area.Key.x, area.Key.y);
+            IList<PointD> suspectedNeighbors = delaunySubdivision.GetNeighbors(point);
             IList<PointD> actualNeighbors = new List<PointD>(suspectedNeighbors.Count);
             foreach (PointD suspectedNeighbor in suspectedNeighbors)
             {
-                if (areaMapping.ContainsKey(suspectedNeighbor)) actualNeighbors.Add(suspectedNeighbor);
+                if (areas.ContainsKey(new Vector2((float) suspectedNeighbor.X, (float)suspectedNeighbor.Y))) actualNeighbors.Add(suspectedNeighbor);
             }
-            neighborMapping.Add(mapping.Key, actualNeighbors);
+            neighborhoods.Add(area.Key, actualNeighbors.Select(neighbor => new Vector2((float) neighbor.X, (float)neighbor.Y)));
         }
 
-
-        // The following code was written solely for debugging purposes.
-        // TODO: Remove the next two foreach loops
-        // Add nodes in the first center of the subareas to the subareas. They are the first centers of the subareas because we may have clipped these subareas and thus relocated their actual centers.
-        foreach (KeyValuePair<PointD, Area> mapping in areaMapping)
+        // Make the actual cells
+        Dictionary<Vector2, AreaCell<CellState>> cells = new Dictionary<Vector2, AreaCell<CellState>>(areas.Count);
+        foreach (KeyValuePair<Vector2, Area> area in areas)
         {
-            Vector2 center = new Vector2((float) mapping.Key.X, (float) mapping.Key.Y);
-            mapping.Value.AddChild(new Subsidiary(new OwPoint(center), null));
-            area.AddChild(mapping.Value);
+            AreaCell<CellState> areaCell = new AreaCell<CellState>(area.Value.Shape, new Cell<CellState>());
+            cells.Add(area.Key, areaCell);
+            parentArea.AddChild(areaCell);
         }
 
-        // Add lines between these former centers
-        foreach (KeyValuePair<PointD, IList<PointD>> mapping in neighborMapping)
+        // Assign neighbors
+        foreach (KeyValuePair<Vector2, AreaCell<CellState>> cell in cells)
         {
-            Vector2 start = new Vector2((float)mapping.Key.X, (float)mapping.Key.Y);
-            foreach (PointD neighbor in mapping.Value)
-            {
-                Vector2 end = new Vector2((float)neighbor.X, (float)neighbor.Y);
-                OwLine line = new OwLine(start, end);
-                MainPath path = new MainPath(line);
-                ps.world.Root.AddChild(path);
-            }
+            IEnumerable<Vector2> neighborhood = neighborhoods[cell.Key];
+            IEnumerable<Cell<CellState>> neighbors = cells.Where(c => neighborhood.Contains(c.Key)).Select(mapping => mapping.Value.Cell);
+            cell.Value.Cell.Neighbors = neighbors.ToArray();
         }
-
-        // TODO: Create CA Cells and CA Networks
+        
+        new CellNetwork<CellState>(cells.Select(areaCell => areaCell.Value.Cell));
     }
 }

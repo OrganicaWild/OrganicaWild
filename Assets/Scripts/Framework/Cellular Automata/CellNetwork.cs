@@ -6,7 +6,7 @@ public class CellNetwork<CellState>
 
     public Dictionary<CellState, IUpdateRule<CellState>> UpdateRules { get; set; }
 
-    public CellNetwork(Cell<CellState>[] cells)
+    public CellNetwork(IEnumerable<Cell<CellState>> cells)
     {
         foreach (Cell<CellState> cell in cells)
         {
@@ -14,7 +14,7 @@ public class CellNetwork<CellState>
         }
     }
 
-    public CellNetwork(Cell<CellState>[] cells, Dictionary<CellState, IUpdateRule<CellState>> updateRules)
+    public CellNetwork(IEnumerable<Cell<CellState>> cells, Dictionary<CellState, IUpdateRule<CellState>> updateRules)
     {
         foreach (Cell<CellState> cell in cells)
         {

@@ -31,7 +31,6 @@ namespace Framework.Pipeline
                 colors.Add(depth, GenerateColor(minBrightness));
             }
 
-            IGameWorldObject parent = gameWorldObject.GetParent();
             gameWorldObject.Shape.DrawDebug(colors[depth]);
 
             foreach (IGameWorldObject child in gameWorldObject.GetChildren())
