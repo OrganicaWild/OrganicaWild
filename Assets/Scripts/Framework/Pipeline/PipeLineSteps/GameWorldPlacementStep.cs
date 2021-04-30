@@ -18,7 +18,7 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
     [GameWorldRectangularGuarantee]
     public class GameWorldPlacementStep : PipelineStep
     {
-        public Vector2 dimensions;
+        [SerializeField] public Vector2 dimensions;
         public GameWorldObjectRecipe recipe;
 
         public override Type[] RequiredGuarantees => new Type[0];

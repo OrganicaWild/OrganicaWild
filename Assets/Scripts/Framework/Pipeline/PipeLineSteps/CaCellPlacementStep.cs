@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Assets.Scripts.Framework.Cellular_Automata.Polymorphic;
 using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
@@ -12,11 +13,11 @@ using Polybool.Net.Objects;
 using Tektosyne.Geometry;
 using UnityEngine;
 
-public abstract class CaCellPlacementStep<CellState> : PipelineStep
+public class CaCellPlacementStep : PipelineStep
 {
     [Range(float.Epsilon, 99999f)]
-    public float poissonDiskRadius;
-    public int samplesBeforeRejection;
+    public float poissonDiskRadius = 3;
+    public int samplesBeforeRejection = 3;
     public decimal epsilon = 0.0000000000000001m;
 
     public override Type[] RequiredGuarantees => new[] { typeof(PathShapeGuarantee) };
@@ -87,22 +88,22 @@ public abstract class CaCellPlacementStep<CellState> : PipelineStep
         }
 
         // Make the actual cells
-        Dictionary<Vector2, AreaCell<CellState>> cells = new Dictionary<Vector2, AreaCell<CellState>>(areas.Count);
+        Dictionary<Vector2, PolymorphicAreaCell> cells = new Dictionary<Vector2, PolymorphicAreaCell>(areas.Count);
         foreach (KeyValuePair<Vector2, Area> area in areas)
         {
-            AreaCell<CellState> areaCell = new AreaCell<CellState>(area.Value.Shape, new Cell<CellState>());
+            PolymorphicAreaCell areaCell = new PolymorphicAreaCell(area.Value.Shape, new PolymorphicCell());
             cells.Add(area.Key, areaCell);
             parentArea.AddChild(areaCell);
         }
 
         // Assign neighbors
-        foreach (KeyValuePair<Vector2, AreaCell<CellState>> cell in cells)
+        foreach (KeyValuePair<Vector2, PolymorphicAreaCell> cell in cells)
         {
             IEnumerable<Vector2> neighborhood = neighborhoods[cell.Key];
-            IEnumerable<Cell<CellState>> neighbors = cells.Where(c => neighborhood.Contains(c.Key)).Select(mapping => mapping.Value.Cell);
+            IEnumerable<PolymorphicCell> neighbors = cells.Where(c => neighborhood.Contains(c.Key)).Select(mapping => mapping.Value.Cell);
             cell.Value.Cell.Neighbors = neighbors.ToArray();
         }
         
-        new CellNetwork<CellState>(cells.Select(areaCell => areaCell.Value.Cell));
+        new PolymorphicCellNetwork(cells.Select(areaCell => areaCell.Value.Cell));
     }
 }
