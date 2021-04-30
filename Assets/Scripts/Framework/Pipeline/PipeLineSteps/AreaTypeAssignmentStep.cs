@@ -37,8 +37,8 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
             world.Root.RemoveChild(startArea);
             world.Root.RemoveChild(endArea);
 
-            TypedArea startTypedArea = new TypedArea(startArea.Shape, null, -1);
-            TypedArea endTypedArea = new TypedArea(endArea.Shape, null, int.MaxValue);
+            TypedArea startTypedArea = new TypedArea(startArea.Shape, "startArea", -1);
+            TypedArea endTypedArea = new TypedArea(endArea.Shape, "endArea", int.MaxValue);
             
             //landmarks used for debugging
             //startTypedArea.AddChild(new Landmark(new OwPoint(startTypedArea.Shape.GetCentroid() + Vector2.one), null));
@@ -58,7 +58,7 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
                 world.Root.RemoveChild(area);
 
                 int type = (int) Math.Floor(random.NextDouble() * (inBetweenAreaTypes));
-                TypedArea typedArea = new TypedArea(area.Shape, null, type);
+                TypedArea typedArea = new TypedArea(area.Shape, $"area{type}", type);
 
                 world.Root.AddChild(typedArea);
             }
@@ -88,7 +88,7 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
             ///                     1 = Type2,
             ///                     etc..
             /// </param>
-            public TypedArea(IGeometry shape, GameWorldObjectRecipe recipe, int areaType) : base(shape, recipe)
+            public TypedArea(IGeometry shape, string type, int areaType) : base(shape, type)
             {
                 this.areaType = areaType;
             }

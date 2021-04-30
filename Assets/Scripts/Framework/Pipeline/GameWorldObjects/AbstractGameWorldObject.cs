@@ -7,20 +7,17 @@ namespace Framework.Pipeline.GameWorldObjects
 {
     public abstract class AbstractGameWorldObject : IGameWorldObject
     {
+        public string Type { get; set; }
         public IGeometry Shape { get; set; }
-        private IGameWorldObject parent;
-        public GameWorldObjectRecipe recipe;
         
-        public GameWorldObjectRecipe GetRecipe()
-        {
-            return recipe;
-        }
+        private IGameWorldObject parent;
 
-        public void SetRecipe(GameWorldObjectRecipe recipe)
+        public AbstractGameWorldObject(IGeometry shape, string type = null)
         {
-            this.recipe = recipe;
+            this.Shape = shape;
+            this.Type = type; 
+            children = new List<IGameWorldObject>();
         }
-
 
         public IGameWorldObject this[int index]
         {
@@ -29,12 +26,8 @@ namespace Framework.Pipeline.GameWorldObjects
         }
 
         private readonly IList<IGameWorldObject> children;
-
-        public AbstractGameWorldObject()
-        {
-            children = new List<IGameWorldObject>();
-        }
-
+        
+        
         public void AddChild(IGameWorldObject child)
         {
             if (child != null && !children.Contains(child))

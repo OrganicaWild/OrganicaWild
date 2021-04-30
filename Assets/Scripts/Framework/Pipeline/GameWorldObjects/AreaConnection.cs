@@ -7,11 +7,10 @@ namespace Framework.Pipeline.GameWorldObjects
 
         public AreaConnection Twin { get; set; }
         public Area Target { get; set; }
-        
-        public AreaConnection(IGeometry shape, GameWorldObjectRecipe recipe)
+
+
+        public AreaConnection(IGeometry shape, string type = null) : base(shape, type)
         {
-            this.Shape = shape;
-            this.recipe = recipe;
         }
     }
 }

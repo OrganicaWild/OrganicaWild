@@ -25,7 +25,7 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
         
         public override GameWorld Apply(GameWorld world)
         {
-            return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions), recipe));
+            return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions)));
         }
     }
 }

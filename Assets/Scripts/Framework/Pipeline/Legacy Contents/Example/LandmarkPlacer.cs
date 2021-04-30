@@ -19,7 +19,7 @@ namespace Framework.Pipeline.Example
         {
             foreach (IGameWorldObject child in world.Root.GetChildren())
             {
-                child.AddChild(new Landmark(new OwPoint(child.Shape.GetCentroid()), bigTreePrefabRecipe));
+                child.AddChild(new Landmark(new OwPoint(child.Shape.GetCentroid())));
             }
 
             return world;

@@ -4,10 +4,8 @@ namespace Framework.Pipeline.GameWorldObjects
 {
     public class Subsidiary : AbstractLeafGameWorldObject
     {
-        public Subsidiary(IGeometry shape, GameWorldObjectRecipe recipe)
+        public Subsidiary(IGeometry shape, string type = null) : base(shape, type)
         {
-            this.Shape = shape;
-            this.recipe = recipe;
         }
     }
 }

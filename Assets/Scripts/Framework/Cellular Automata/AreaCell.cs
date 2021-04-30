@@ -6,7 +6,7 @@ public class AreaCell<CellState> : Area
 {
     public Cell<CellState> Cell { get; set; }
 
-    public AreaCell(IGeometry shape, Cell<CellState> cell, GameWorldObjectRecipe recipe = null) : base(shape, recipe)
+    public AreaCell(IGeometry shape, Cell<CellState> cell, string type = null) : base(shape, type)
     {
         Cell = cell;
     }

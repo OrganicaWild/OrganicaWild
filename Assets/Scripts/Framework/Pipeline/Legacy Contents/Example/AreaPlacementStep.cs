@@ -30,7 +30,7 @@ namespace Framework.Pipeline.Example
 
             foreach (Vector2 vector2 in points)
             {
-                Area smallArea = new Area(new OwCircle(vector2, 5, Random.Range(5, 20)), playAreaRecipe);
+                Area smallArea = new Area(new OwCircle(vector2, 5, Random.Range(5, 20)));
                 if (PolygonPolygonInteractor.Use().Contains(bigArea.Shape as OwPolygon, smallArea.Shape as OwPolygon))
                 {
                     world.Root.AddChild(smallArea);

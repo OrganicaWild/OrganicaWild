@@ -7,20 +7,17 @@ namespace Framework.Pipeline.GameWorldObjects
 {
     public abstract class AbstractLeafGameWorldObject : IGameWorldObject
     {
+        public string Type { get; set; }
         public IGeometry Shape { get; set; }
-        private IGameWorldObject parent;
-        public GameWorldObjectRecipe recipe;
         
-        public GameWorldObjectRecipe GetRecipe()
+        private IGameWorldObject parent;
+        
+        public AbstractLeafGameWorldObject(IGeometry shape, string type = null)
         {
-            return recipe;
+            this.Shape = shape;
+            this.Type = type;
         }
-
-        public void SetRecipe(GameWorldObjectRecipe recipe)
-        {
-            this.recipe = recipe;
-        }
-
+        
         public IGameWorldObject this[int index]
         {
             get => throw new NoChildPolicyException();

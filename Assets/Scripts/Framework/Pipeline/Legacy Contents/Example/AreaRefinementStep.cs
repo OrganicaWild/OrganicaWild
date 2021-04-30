@@ -89,7 +89,7 @@ namespace Framework.Pipeline.Example
             }
             
             
-            Area newGround = new Area(areaPolygon, playAreaRecipe);
+            Area newGround = new Area(areaPolygon);
             
             foreach (IGameWorldObject children in world.Root.GetChildren().ToArray())
             {

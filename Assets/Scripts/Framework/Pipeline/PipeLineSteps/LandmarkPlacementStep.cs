@@ -15,10 +15,6 @@ namespace Framework.Pipeline.PipeLineSteps
     [LandmarksPlacedGuarantee]
     public class LandmarkPlacementStep : PipelineStep
     {
-        public GameWorldObjectRecipe landmarkRecipe;
-        public GameWorldObjectRecipe startLandmarkRecipe;
-        public GameWorldObjectRecipe endLandmarkRecipe;
-
         [Range(0, 1)] public float hasLandmarksPercent;
         public int minLandmarks;
         public int maxLandmarks;
@@ -45,7 +41,7 @@ namespace Framework.Pipeline.PipeLineSteps
                 if (typedArea.AreaType == -1)
                 {
                     //add landmark at centroid
-                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), startLandmarkRecipe));
+                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid())));
                     continue;
                 }
 
@@ -53,7 +49,7 @@ namespace Framework.Pipeline.PipeLineSteps
                 if (typedArea.AreaType == int.MaxValue)
                 {
                     //add landmark at centroid
-                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), endLandmarkRecipe));
+                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid())));
                     continue;
                 }
 
@@ -118,7 +114,7 @@ namespace Framework.Pipeline.PipeLineSteps
                         }
 
                         //add landmark
-                        typedArea.AddChild(new Landmark(potentialLandMarkPoint, landmarkRecipe));
+                        typedArea.AddChild(new Landmark(potentialLandMarkPoint));
                         placedPoints.Add(potentialLandMarkPoint);
                     }
                 }

@@ -16,7 +16,7 @@ namespace Framework.Pipeline.Example
 
         public override GameWorld Apply(GameWorld world)
         {
-            Area root = new Area(new OwSquare(Vector2.zero, 50f), ScriptableObject.CreateInstance<EmptyRecipe>());
+            Area root = new Area(new OwSquare(Vector2.zero, 50f));
             return new GameWorld(root);
         }
     }

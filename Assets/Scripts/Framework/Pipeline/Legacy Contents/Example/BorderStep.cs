@@ -25,7 +25,7 @@ namespace Framework.Pipeline.Example
             outerPolygon.ScaleFromCentroid(new Vector2(2f, 2f));
 
             OwPolygon hullPolygon = outerPolygon.GetConvexHull();
-            Area outerArea = new Area(hullPolygon, backGroundMeshRecipe);
+            Area outerArea = new Area(hullPolygon);
             
             foreach (Area area in allAreas.ToList())
             {

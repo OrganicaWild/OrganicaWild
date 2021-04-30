@@ -44,7 +44,7 @@ namespace Framework.Pipeline.Example
                                     OwPoint noise = new OwPoint(noisePoint.Position + point);
                                     if (!PolygonPointInteractor.Use().Contains(innerArea.Shape as OwPolygon, noise))
                                     {
-                                        backGround.AddChild(new Subsidiary(noise, noiseRecipe));
+                                        backGround.AddChild(new Subsidiary(noise));
                                     }
                                  
                                 }
@@ -62,7 +62,7 @@ namespace Framework.Pipeline.Example
                                     OwPoint noise = new OwPoint(noisePoint.Position + point);
                                     if (!PolygonPointInteractor.Use().Contains(innerArea.Shape as OwPolygon, noise))
                                     {
-                                        backGround.AddChild(new Subsidiary(noise, noiseRecipe0));
+                                        backGround.AddChild(new Subsidiary(noise));
                                     }
                                  
                                 }

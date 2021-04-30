@@ -16,7 +16,7 @@ public class PipelineManager : MonoBehaviour
 
     public int randomSeed;
 
-    private PipeLineRunner pipeLineRunner;
+    public PipeLineRunner pipeLineRunner;
 
     public bool hasError;
     public string errorText;
@@ -41,10 +41,18 @@ public class PipelineManager : MonoBehaviour
         }
         children.ForEach(DestroyImmediate);
         
+        
         GameWorld = pipeLineRunner.Execute();
-        pipeLineRunner.SetThemeApplicator(new ThemeApplicator());
-        GameObject builtWorld = pipeLineRunner.ApplyTheme();
-        builtWorld.transform.parent = this.transform;
+        
+        //only apply theme if there is a ThemeApplicator as a Component
+        ThemeApplicator themeApplicator = GetComponent<ThemeApplicator>();
+        if (themeApplicator != null)
+        {
+            pipeLineRunner.SetThemeApplicator(themeApplicator);
+            GameObject builtWorld = pipeLineRunner.ApplyTheme();
+            builtWorld.transform.parent = this.transform;
+        }
+        
     }
 
     public void Setup()
@@ -53,7 +61,6 @@ public class PipelineManager : MonoBehaviour
         randomSeed = pipeLineRunner.Seed;
 
         PipelineStep[] allSteps = GetComponents<PipelineStep>();
-
         try
         {
             foreach (PipelineStep step in allSteps)

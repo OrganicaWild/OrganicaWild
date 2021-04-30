@@ -1,15 +1,22 @@
 using System.Collections.Generic;
 using Framework.Pipeline.ThemeApplicator.Recipe;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
     public interface IGameWorldObject
     {
-        IGeometry Shape { get; set; }
-        GameWorldObjectRecipe GetRecipe();
+        /// <summary>
+        /// String identifier for what type of IGameWorldObject this is.
+        /// This is used in the ThemeApplicator to set a recipe for this Type.
+        /// </summary>
+        string Type { get; set; }
 
-        void SetRecipe(GameWorldObjectRecipe recipe);
+        /// <summary>
+        /// IGeometry Instance defining the geometric shape of this IGameWorldObject.
+        /// </summary>
+        IGeometry Shape { get; set; }
 
         IGameWorldObject this[int index] { get; set; }
 

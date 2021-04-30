@@ -5,11 +5,8 @@ namespace Framework.Pipeline.GameWorldObjects
 {
     public class Landmark : AbstractLeafGameWorldObject
     {
-        
-        public Landmark(IGeometry shape, GameWorldObjectRecipe landmarkPrefabRecipe)
+        public Landmark(IGeometry shape, string type = null) : base(shape, type)
         {
-            this.Shape = shape;
-            this.recipe = landmarkPrefabRecipe;
         }
     }
 }
