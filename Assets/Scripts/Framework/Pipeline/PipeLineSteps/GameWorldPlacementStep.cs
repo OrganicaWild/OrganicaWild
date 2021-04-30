@@ -7,6 +7,7 @@ using Assets.Scripts.Framework.Pipeline.PipelineGuarantees;
 using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
+using Framework.Pipeline.Geometry.Interactors;
 using Framework.Pipeline.ThemeApplicator.Recipe;
 using UnityEngine;
 using Object = System.Object;
@@ -20,13 +21,11 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
         public Vector2 dimensions;
         public GameWorldObjectRecipe recipe;
 
-        //public MonoBehaviour generator;
         public override Type[] RequiredGuarantees => new Type[0];
         
         public override GameWorld Apply(GameWorld world)
         {
             return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions), recipe));
-            //return new GameWorld(new Area((generator as IPolygonGenerator)?.Generate(), recipe));
         }
     }
 }
