@@ -6,7 +6,7 @@ public class AreaByteCell : Area
 {
     public ByteCell Cell { get; set; }
 
-    public AreaByteCell(IGeometry shape, ByteCell cell, GameWorldObjectRecipe recipe = null) : base(shape, recipe)
+    public AreaByteCell(IGeometry shape, ByteCell cell, string type = null) : base(shape, type)
     {
         Cell = cell;
     }

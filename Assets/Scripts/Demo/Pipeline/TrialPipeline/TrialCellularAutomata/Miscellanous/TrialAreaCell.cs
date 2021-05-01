@@ -8,7 +8,7 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
     {
         public TrialCell Cell { get; set; }
 
-        public TrialAreaCell(IGeometry shape, TrialCell cell, GameWorldObjectRecipe recipe = null) : base(shape, recipe)
+        public TrialAreaCell(IGeometry shape, TrialCell cell, string type = null) : base(shape, type)
         {
             Cell = cell;
         }
