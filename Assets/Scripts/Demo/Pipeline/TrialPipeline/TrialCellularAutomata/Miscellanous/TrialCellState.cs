@@ -1,12 +1,9 @@
-﻿using Assets.Scripts.Framework.Cellular_Automata.Polymorphic;
+﻿using System;
 
-namespace Assets.Scripts.Demo.Pipeline.TrialPipeline
+namespace Assets.Scripts.Framework.Cellular_Automata.Polymorphic
 {
-    public class TrialCellState : PolymorphicCellState
-    {
-        public DemoCellState state;
-    }
-    public enum DemoCellState : uint
+    [Serializable]
+    public enum TrialCellState : uint
     {
         Random = 0,
         Landmark = 1001,

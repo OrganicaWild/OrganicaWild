@@ -2,7 +2,7 @@
 
 public class PolymorphicCell
 {
-    public PolymorphicCellState CurrentState { get; set; }
+    public object CurrentState { get; set; }
     public PolymorphicCell[] Neighbors { get; set; }
     private PolymorphicCellState NextState { get; set; }
     public PolymorphicCellNetwork Network { get; set; }

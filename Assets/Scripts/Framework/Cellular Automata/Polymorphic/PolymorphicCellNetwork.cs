@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Demo.Pipeline.TrialPipeline;
 
 namespace Assets.Scripts.Framework.Cellular_Automata.Polymorphic
 {
@@ -6,7 +7,7 @@ namespace Assets.Scripts.Framework.Cellular_Automata.Polymorphic
     {
         public PolymorphicCell[] Cells { get; }
 
-        public Dictionary<PolymorphicCellState, IPolymorphicUpdateRule> UpdateRules { get; set; }
+        public Dictionary<object, IPolymorphicUpdateRule> UpdateRules { get; set; }
 
         public PolymorphicCellNetwork(IEnumerable<PolymorphicCell> cells)
         {
