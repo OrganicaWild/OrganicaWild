@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -121,6 +121,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &970591205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970591206}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970591206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970591205}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1028711116}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989505673
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,36 +234,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &992813844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 992813845}
-  m_Layer: 0
-  m_Name: New Game Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &992813845
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992813844}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1028711116}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1028711114
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,10 +249,11 @@ GameObject:
   - component: {fileID: 1028711119}
   - component: {fileID: 1028711122}
   - component: {fileID: 1028711121}
-  - component: {fileID: 1028711120}
+  - component: {fileID: 1028711125}
   - component: {fileID: 1028711124}
   - component: {fileID: 1028711123}
-  - component: {fileID: 1028711125}
+  - component: {fileID: 1028711120}
+  - component: {fileID: 1028711126}
   m_Layer: 0
   m_Name: PipelineManagementObject
   m_TagString: Untagged
@@ -287,8 +288,7 @@ Transform:
   m_LocalPosition: {x: -1000, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 992813845}
-  - {fileID: 1235481264}
+  - {fileID: 970591206}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dimensions: {x: 200, y: 100}
+  recipe: {fileID: 0}
 --- !u!114 &1028711119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,9 +342,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028711114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67d125fbfc24e7e97ddca23935b080c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1155f74173dbf9e46803977233af5729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialLandmarkAreaCellState: 0
+  initialPathAreaCellState: 1002
+  weightings:
+  - state: 1003
+    weight: 4
+  - state: 2002
+    weight: 1
 --- !u!114 &1028711121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43be25cc3c843c3821322345532d22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  landmarkRecipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+  startLandmarkRecipe: {fileID: 11400000, guid: 13bcc454f57c7824fab560befc5d9494,
+    type: 2}
+  endLandmarkRecipe: {fileID: 11400000, guid: 684b3354facd3cc4396c74d38944241a, type: 2}
   hasLandmarksPercent: 1
   minLandmarks: 1
   maxLandmarks: 10
@@ -389,7 +401,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028711114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920f6c1d36b5c7d4a93d779898fa7ce9, type: 3}
+  m_Script: {fileID: 11500000, guid: 20a59b8aab219c047a28b2f905fc1dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poissonDiskRadius: 3
@@ -415,48 +427,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028711114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16809d27e804320bb778a083fa34c22, type: 3}
+  m_Script: {fileID: 11500000, guid: c67d125fbfc24e7e97ddca23935b080c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipes:
-  - name: startArea
-    recipe: {fileID: 0}
-  - name: endArea
-    recipe: {fileID: 0}
-  - name: area0
-    recipe: {fileID: 0}
-  - name: area1
-    recipe: {fileID: 0}
---- !u!1 &1235481263
-GameObject:
+--- !u!114 &1028711126
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1235481264}
-  m_Layer: 0
-  m_Name: New Game Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1235481264
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235481263}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1028711116}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a0c636303450e42a079febd0a9d2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapping:
+  - state: 1003
+    rule: {fileID: 11400000, guid: cbfe7bd9cb8466943977f434f268852a, type: 2}
+  - state: 1002
+    rule: {fileID: 11400000, guid: 4cfd2a952fd746e4ab8360e671f1b8ed, type: 2}
+  - state: 2002
+    rule: {fileID: 11400000, guid: 4cfd2a952fd746e4ab8360e671f1b8ed, type: 2}
 --- !u!1 &1491131084
 GameObject:
   m_ObjectHideFlags: 0
