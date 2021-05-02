@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Framework.Pipeline.GameWorldObjects;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Framework.Pipeline
 {
@@ -9,7 +11,7 @@ namespace Framework.Pipeline
     {
         public IGameWorldObject Root { get; }
         
-        private readonly Dictionary<int, Color> debugColors = new Dictionary<int, Color>();
+        private readonly Dictionary<int, Dictionary<Type, Color>> debugColors = new Dictionary<int, Dictionary<Type, Color>>();
 
         public GameWorld(IGameWorldObject root)
         {
@@ -22,16 +24,21 @@ namespace Framework.Pipeline
         }
 
         private static void DrawDebugGameWorldElement(int depth, IGameWorldObject gameWorldObject,
-            Dictionary<int, Color> colors, float minBrightness)
+            Dictionary<int, Dictionary<Type, Color>> colors, float minBrightness)
         {
 
             RemoveTooDarkColors(colors, minBrightness);
             if (!colors.ContainsKey(depth))
             {
-                colors.Add(depth, GenerateColor(minBrightness));
+                colors.Add(depth,new Dictionary<Type, Color>());
+            }
+            
+            if (!colors[depth].ContainsKey(gameWorldObject.GetType()))
+            {
+                colors[depth].Add(gameWorldObject.GetType(), GenerateColor(minBrightness));
             }
 
-            gameWorldObject.Shape.DrawDebug(colors[depth]);
+            gameWorldObject.Shape.DrawDebug(colors[depth][gameWorldObject.GetType()]);
 
             foreach (IGameWorldObject child in gameWorldObject.GetChildren())
             {
@@ -50,11 +57,14 @@ namespace Framework.Pipeline
             return color;
         }
 
-        private static void RemoveTooDarkColors(Dictionary<int, Color> colors, float minBrightness)
+        private static void RemoveTooDarkColors(Dictionary<int, Dictionary<Type, Color>> colors, float minBrightness)
         {
-            foreach (KeyValuePair<int, Color> keyValuePair in colors)
+            foreach (KeyValuePair<int, Dictionary<Type, Color>> keyValuePair in colors)
             {
-                if (keyValuePair.Value.grayscale < minBrightness) colors.Remove(keyValuePair.Key);
+                foreach (KeyValuePair<Type, Color> typeColorCombination  in keyValuePair.Value)
+                {
+                    if (typeColorCombination.Value.grayscale < minBrightness) keyValuePair.Value.Remove(typeColorCombination.Key);
+                }
             }
         }
     }
