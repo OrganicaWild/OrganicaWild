@@ -121,36 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &746382551
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 746382552}
-  m_Layer: 0
-  m_Name: New Game Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &746382552
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746382551}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1028711116}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989505673
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +260,7 @@ Transform:
   m_LocalPosition: {x: -1000, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 746382552}
+  - {fileID: 1345661054}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -468,6 +438,24 @@ MonoBehaviour:
     recipe: {fileID: 0}
   - name: area1
     recipe: {fileID: 0}
+  - name: landmarkPair4
+    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+  - name: landmarkPair2
+    recipe: {fileID: 11400000, guid: 36e3c4988c5a4a44896fcc82de6837bf, type: 2}
+  - name: landmarkPair0
+    recipe: {fileID: 0}
+  - name: landmarkPair5
+    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+  - name: landmarkPair3
+    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+  - name: landmarkPair6
+    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+  - name: landmarkPair1
+    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+  - name: landmarkPair7
+    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+  - name: landmarkPair8
+    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
 --- !u!114 &1028711128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f143a8cef2999fd4f90e8c0f5659f310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  landMarkIsAreaPercentage: 0.895
+  landMarkIsAreaPercentage: 1
   areaXTimes: 2
   maxCircleSize: 4
   minCircleSize: 3
@@ -489,6 +477,36 @@ MonoBehaviour:
   sizeP: 8
   rejectionP: 2
   safetyMaxTries: 1000
+--- !u!1 &1345661053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1345661054}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1345661054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345661053}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1028711116}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1491131084
 GameObject:
   m_ObjectHideFlags: 0

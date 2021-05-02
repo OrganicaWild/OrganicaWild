@@ -92,6 +92,8 @@ namespace Framework.Pipeline.ThemeApplicator
             int childrenWithNoRecipeCount = 0;
             foreach (IGameWorldObject child in parent.GetChildren())
             {
+                childrenWithNoRecipeCount += InterpretLayer(child, depth + 1);
+                
                 //children that do not have a type are expected to not be drawn and do not show a warning
                 if (child.Type == null)
                 {
@@ -107,8 +109,6 @@ namespace Framework.Pipeline.ThemeApplicator
                 GameObject cooked = cookbook[child.Type].Cook(child);
                 cooked.transform.parent = root.transform;
                 cooked.transform.position += new Vector3(0, 0, -depth);
-
-                return childrenWithNoRecipeCount + InterpretLayer(child, depth + 1);
             }
 
             return childrenWithNoRecipeCount;

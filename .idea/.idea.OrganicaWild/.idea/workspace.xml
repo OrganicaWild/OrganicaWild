@@ -34,6 +34,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/LandmarkAreaStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LandmarkAreaStep.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +72,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07CFA953-D94B-44E4-BB3A-488BEF79100A/15/4b7a2d51/GUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/60/6446f6a1/Voronoi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/LandmarkAreaStep.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/53/adad0534/IMGUIContainer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF151B6A-BB5D-474C-B2C1-CB8906A8B5A4/2c/1e97fec7/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
@@ -127,7 +129,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Miscellanous/TrialAreaCell.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/Byte/AreaCell.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/Polymorphic/PolymorphicAreaCell.cs" />
@@ -141,6 +142,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" />
       <option value="$PROJECT_DIR$/Assets/LandmarkAreaStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -150,7 +152,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13282442" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.1326053" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -246,7 +248,7 @@
       <workItem from="1619622861984" duration="1330000" />
       <workItem from="1619624223194" duration="10818000" />
       <workItem from="1619763344458" duration="12563000" />
-      <workItem from="1619943680594" duration="8390000" />
+      <workItem from="1619943680594" duration="9991000" />
     </task>
     <task id="LOCAL-00001" summary="restructre">
       <created>1604263216246</created>
@@ -577,7 +579,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619950433738</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="make resulting landmark area be inside of other area most of the time">
+      <created>1619952169178</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1619952169178</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -631,7 +640,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="modify shortestPath to be faster" />
     <MESSAGE value="remove feature/adapted position in child, because the operations in the interactor cannot use this position" />
     <MESSAGE value="add AreaRefinementStep.cs with CA and polygon Union to create big area" />
     <MESSAGE value="add get children by type method" />
@@ -656,7 +664,8 @@
     <MESSAGE value="add landmark area placement step to test polygon clipping" />
     <MESSAGE value="adapt landmark area step" />
     <MESSAGE value="add drawDebug based on depth and type" />
-    <option name="LAST_COMMIT_MESSAGE" value="add drawDebug based on depth and type" />
+    <MESSAGE value="make resulting landmark area be inside of other area most of the time" />
+    <option name="LAST_COMMIT_MESSAGE" value="make resulting landmark area be inside of other area most of the time" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -684,6 +693,45 @@
           <line>211</line>
           <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\MissionGraph.cs" initialLine="213" containingFunctionPresentation="method 'Traverse'" />
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs</url>
+          <line>107</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\ThemeApplicator\ThemeApplicator.cs" initialLine="106" containingFunctionPresentation="method 'InterpretLayer'">
+            <startOffsets>
+              <option value="3361" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3414" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs</url>
+          <line>37</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\ThemeApplicator\ThemeApplicator.cs" initialLine="37" containingFunctionPresentation="method 'Apply'">
+            <startOffsets>
+              <option value="1160" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1172" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs</url>
+          <line>92</line>
+          <properties documentPath="C:\Users\cvoegele\Development\OrganicaWild\Assets\Scripts\Framework\Pipeline\ThemeApplicator\ThemeApplicator.cs" initialLine="92" containingFunctionPresentation="method 'InterpretLayer'">
+            <startOffsets>
+              <option value="2816" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2872" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

@@ -11,6 +11,7 @@ using Framework.Pipeline.PipelineGuarantees;
 using Framework.Pipeline.PipeLineSteps;
 using Framework.Poisson_Disk_Sampling;
 using Framework.Util;
+using Polybool.Net.Objects;
 using UnityEngine;
 
 [LandmarksPlacedGuarantee]
@@ -25,11 +26,15 @@ public class LandmarkAreaStep : PipelineStep
     public int sizeP;
     public int rejectionP;
     public int safetyMaxTries;
+    
+    public decimal epsilon = 0.0000000000000001m;
 
     public override Type[] RequiredGuarantees => new Type[] {typeof(LandmarksPlacedGuarantee)};
 
     public override GameWorld Apply(GameWorld world)
     {
+        Epsilon.Eps = epsilon;
+        
         IEnumerable<AreaTypeAssignmentStep.TypedArea> areas =
             world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>();
 
@@ -69,6 +74,7 @@ public class LandmarkAreaStep : PipelineStep
                 }
                 
                 chosenLandmark.Shape = movedCircle;
+                chosenLandmark.Type = $"landmarkPair{i}";
                 areasWithLandmarks.Remove(chosenArea);
             }
         }
