@@ -15,9 +15,8 @@ using UnityEngine;
 
 [LandmarksPlacedGuarantee]
 public class LandmarkAreaStep : PipelineStep
-{
-    [Range(0,1)]
-    public float landMarkIsAreaPercentage;
+{ 
+    [Range(0, 1)] public float landMarkIsAreaPercentage;
     public int areaXTimes = 2;
     public int maxCircleSize;
     public int minCircleSize;
@@ -25,6 +24,7 @@ public class LandmarkAreaStep : PipelineStep
     public int radiusP;
     public int sizeP;
     public int rejectionP;
+    public int safetyMaxTries;
 
     public override Type[] RequiredGuarantees => new Type[] {typeof(LandmarksPlacedGuarantee)};
 
@@ -42,31 +42,52 @@ public class LandmarkAreaStep : PipelineStep
         for (int i = 0; i < pairs; i++)
         {
             //create unique Landmark
-            IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(radiusP, sizeP, sizeP, rejectionP);
-            OwPolygon baseCircle = new OwCircle(Vector2.zero, 1f, 20);
-            
-            foreach (Vector2 point in points)
-            {
-                int circleSize = (int) (random.NextDouble() * (maxCircleSize - minCircleSize) + minCircleSize);
-                OwCircle circle = new OwCircle(point, circleSize, circleResolution);
-                baseCircle = PolygonPolygonInteractor.Use().Union(baseCircle, circle);
-            }
+            OwPolygon uniqueShape = GetUniqueShape();
 
             for (int j = 0; j < areaXTimes; j++)
             {
-               AreaTypeAssignmentStep.TypedArea chosenArea = areasWithLandmarks[(int) (random.NextDouble() * (areasWithLandmarks.Count - 1))];
-               areasWithLandmarks.Remove(chosenArea);
-               IEnumerable<Landmark> allLandmarksInArea = chosenArea.GetAllChildrenOfType<Landmark>();
-               Landmark chosenLandmark = allLandmarksInArea.Skip((int) (random.NextDouble()) * (allLandmarksInArea.Count()))
-                   .First();
-               Vector2 landmarkPos = chosenLandmark.Shape.GetCentroid();
-               OwPolygon movedCircle  = new OwPolygon(baseCircle.representation);
-               movedCircle.MovePolygon(chosenLandmark.Shape.GetCentroid());
-               chosenLandmark.Shape = movedCircle;
-               
+                OwPolygon movedCircle;
+                Landmark chosenLandmark;
+                AreaTypeAssignmentStep.TypedArea chosenArea;
+                int tries = 0;
+                do
+                {
+                    tries++;
+                    chosenArea =
+                        areasWithLandmarks[(int) (random.NextDouble() * (areasWithLandmarks.Count - 1))];
+                    IEnumerable<Landmark> allLandmarksInArea = chosenArea.GetAllChildrenOfType<Landmark>();
+                    chosenLandmark = allLandmarksInArea.Skip((int) (random.NextDouble()) * (allLandmarksInArea.Count()))
+                        .First();
+                    Vector2 landmarkPos = chosenLandmark.Shape.GetCentroid();
+                    movedCircle = new OwPolygon(uniqueShape.representation);
+                    movedCircle.MovePolygon(chosenLandmark.Shape.GetCentroid());
+                } while (!PolygonPolygonInteractor.Use().Contains(chosenArea.Shape as OwPolygon, movedCircle) && tries <= safetyMaxTries);
+
+                if (tries == safetyMaxTries)
+                {
+                    Debug.LogError("Max tries where reached when trying to place an area that is inside of outer area");
+                }
+                
+                chosenLandmark.Shape = movedCircle;
+                areasWithLandmarks.Remove(chosenArea);
             }
         }
-        
+
         return world;
+    }
+
+    private OwPolygon GetUniqueShape()
+    {
+        IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(radiusP, sizeP, sizeP, rejectionP);
+        OwPolygon baseCircle = new OwCircle(Vector2.zero, 1f, 20);
+
+        foreach (Vector2 point in points)
+        {
+            int circleSize = (int) (random.NextDouble() * (maxCircleSize - minCircleSize) + minCircleSize);
+            OwCircle circle = new OwCircle(point, circleSize, circleResolution);
+            baseCircle = PolygonPolygonInteractor.Use().Union(baseCircle, circle);
+        }
+
+        return baseCircle;
     }
 }
