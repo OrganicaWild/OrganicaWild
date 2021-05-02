@@ -8,30 +8,21 @@ namespace Framework.Util
     {
         public static GameObject GenerateMeshFromPolygon(OwPolygon polygon, Material material)
         {
-            var triangles = polygon.GetTriangulation();
-
-            GameObject gameObject = new GameObject();
-            gameObject.AddComponent(typeof(MeshFilter));
-            gameObject.AddComponent(typeof(MeshRenderer));
-
-            gameObject.GetComponent<MeshRenderer>().material = material;
-
-            Mesh mesh = new Mesh();
-            gameObject.GetComponent<MeshFilter>().mesh = mesh;
-            List<Vector2> points = polygon.GetPoints();
-            mesh.vertices = triangles.ToArray();
+            List<Mesh> meshes = polygon.GetTriangulation();
+            GameObject root = new GameObject("Meshholder");
             
-
-            List<int> indices = new List<int>();
-            
-            
-            for (int i = 0; i < triangles.Count; i++)
+            int i = 0;
+            foreach (Mesh mesh in meshes)
             {
-                indices.Add(i);
+                GameObject meshGameObject = new GameObject($"mesh{i++}");
+                meshGameObject.AddComponent(typeof(MeshFilter));
+                meshGameObject.AddComponent(typeof(MeshRenderer));
+                meshGameObject.GetComponent<MeshRenderer>().material = material;
+                meshGameObject.GetComponent<MeshFilter>().mesh = mesh;
+                meshGameObject.transform.parent = root.transform;
             }
             
-            mesh.triangles = indices.ToArray();
-            return gameObject;
+            return root;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Util;
+using g3;
 using Habrador_Computational_Geometry;
 using Polybool.Net.Logic;
 using Polybool.Net.Objects;
@@ -132,52 +133,26 @@ namespace Framework.Pipeline.Geometry
         /// Can be used to draw a polygon with a mesh
         /// </summary>
         /// <returns>List of all Vectors. Each consecutive three vectors are a triangle.</returns>
-        public List<Vector3> GetTriangulation()
+        public List<Mesh> GetTriangulation()
         {
-            List<Vector3> result = new List<Vector3>();
-          
-            List<List<MyVector2>> holes = new List<List<MyVector2>>();
+            List<Mesh> result = new List<Mesh>();
 
             foreach (Region region in representation.Regions)
             {
-                List<MyVector2> points = region.Points.Select(x => new MyVector2((float) x.X, (float) x.Y)).ToList();
-                // points.Sort((p0, p1) =>
-                // {
-                //     if (Math.Abs(p0.x - p1.x) < 0.0001)
-                //     {
-                //         return (int) (p1.y - p0.y);
-                //     }
-                //
-                //     return (int) (p1.x - p0.x);
-                // });
+                List<Vector2d> points = region.Points.Select(x => new Vector2d((float) x.X, (float) x.Y)).ToList();
 
-                if (region.IsClockWise())
-                {
-                    points.Reverse();
-                   
-                    
-                } 
-                
-                List<MyVector2> poly = new List<MyVector2>();
-                poly.AddRange(points);
+                TriangulatedPolygonGenerator triangulator = new TriangulatedPolygonGenerator();
+                triangulator.Polygon = new GeneralPolygon2d();
+                Polygon2d polygon2d = new Polygon2d(points);
+                triangulator.Polygon.Outer = polygon2d;
+                MeshGenerator mesh = triangulator.Generate();
+                Mesh unityMesh = new Mesh();
+                mesh.MakeMesh(unityMesh);
 
-                HashSet<Triangle2> triangles = _EarClipping.Triangulate(poly, null, false);
-                //triangles = VisibleEdgesTriangulationAlgorithm.TriangulatePoints(new HashSet<MyVector2>(poly));
-
-                foreach (Triangle2 triangle in triangles)
-                {
-                    Vector3 p1 = new Vector3(triangle.p1.x, triangle.p1.y);
-                    Vector3 p2 = new Vector3(triangle.p2.x, triangle.p2.y);
-                    Vector3 p3 = new Vector3(triangle.p3.x, triangle.p3.y);
-
-                    result.Add(p1);
-                    result.Add(p2);
-                    result.Add(p3);
-                }
+                result.Add(unityMesh);
             }
 
             return result;
-
         }
 
         public OwPolygon GetConvexHull()
