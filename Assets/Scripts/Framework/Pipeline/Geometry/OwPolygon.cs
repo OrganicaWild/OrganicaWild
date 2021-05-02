@@ -1,11 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Framework.Pipeline.GameWorldObjects;
-using Framework.Util;
 using g3;
-using Habrador_Computational_Geometry;
-using Polybool.Net.Logic;
 using Polybool.Net.Objects;
 using Tektosyne.Geometry;
 using UnityEngine;
