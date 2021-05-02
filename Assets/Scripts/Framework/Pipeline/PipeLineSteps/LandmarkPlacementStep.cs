@@ -22,6 +22,7 @@ namespace Framework.Pipeline.PipeLineSteps
         public int maxDistanceFromCenter;
         public int minDistanceFromCenter;
 
+        [Range(0,1)]
         public float freeSpaceInsideAtBorder;
         public float minimumDistanceBetweenLandmarks;
         public int maxTriesToGuaranteeConstraints;

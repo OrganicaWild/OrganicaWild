@@ -1,5 +1,7 @@
 using Tektosyne.Geometry;
 using UnityEngine;
+using Random = System.Random;
+
 
 namespace Framework.Util
 {
@@ -13,6 +15,14 @@ namespace Framework.Util
         public static Vector2 Convert(PointD pointD)
         {
             return new Vector2((float) pointD.X, (float) pointD.Y);
+        }
+
+        public static Vector2 GetRandomNormalizedVector(Random random)
+        {
+            float x = (float) random.NextDouble() - 0.5f;
+            float y = (float) random.NextDouble() - 0.5f;
+
+            return new Vector2(x, y).normalized;
         }
     }
 }

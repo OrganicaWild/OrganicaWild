@@ -83,6 +83,17 @@ namespace Framework.Pipeline.Geometry
             }).ToList());
         }
 
+        public void MovePolygon(Vector2 moveTo)
+        {
+            Vector2 translate = moveTo - GetCentroid();
+            
+            representation.Regions.ForEach(region => region.Points = region.Points.Select(point =>
+            {
+                point += translate;
+                return point;
+            }).ToList());
+        }
+
         public List<Vector2> GetPoints()
         {
             return representation.Regions.SelectMany(region => region.Points).Select(point => (Vector2) point).ToList();

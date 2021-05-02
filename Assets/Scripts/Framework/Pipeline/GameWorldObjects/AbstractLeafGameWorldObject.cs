@@ -49,6 +49,11 @@ namespace Framework.Pipeline.GameWorldObjects
             return Enumerable.Empty<T>();
         }
 
+        public bool HasAnyChildrenOfType<T>()
+        {
+            return false;
+        }
+
         public void ClearChildren()
         {
             throw new NoChildPolicyException();

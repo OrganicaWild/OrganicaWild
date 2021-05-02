@@ -30,6 +30,8 @@ namespace Framework.Pipeline.GameWorldObjects
 
         IEnumerable<T> GetAllChildrenOfType<T>();
 
+        bool HasAnyChildrenOfType<T>();
+
         void ClearChildren();
 
         int GetChildCount();

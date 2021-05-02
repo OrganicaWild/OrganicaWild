@@ -61,6 +61,11 @@ namespace Framework.Pipeline.GameWorldObjects
             return children.Where(child => child is T).Select(x => x is T ? (T) x : default);
         }
 
+        public bool HasAnyChildrenOfType<T>()
+        {
+            return children.Select(child => child is T).Any();
+        }
+
         public void ClearChildren()
         {
             children.Clear();
