@@ -32,13 +32,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LandmarkAreaStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkAreaStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LandmarkAreaStep.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkAreaStep.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/OrganicRecipes/EndAreaRecipe.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/OrganicRecipes/EndAreaRecipe.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Steps/TrialCaCellInitialisationStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Steps/TrialCaCellInitialisationStep.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +81,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/a0/121cae76/EventDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/e7/59a49be8/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/2e/6e7d0a29/LineIntersection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/7e/e5575c5e/Fortran.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkAreaStep.cs" root0="FORCE_HIGHLIGHTING" />
@@ -149,8 +144,8 @@
       <option value="$PROJECT_DIR$/Assets/CaCellMergingStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Steps/TrialCaCellInitialisationStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -256,14 +251,7 @@
       <workItem from="1619622861984" duration="1330000" />
       <workItem from="1619624223194" duration="10818000" />
       <workItem from="1619763344458" duration="12563000" />
-      <workItem from="1619943680594" duration="16586000" />
-    </task>
-    <task id="LOCAL-00001" summary="restructre">
-      <created>1604263216246</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1604263216246</updated>
+      <workItem from="1619943680594" duration="17343000" />
     </task>
     <task id="LOCAL-00002" summary="add base graph and vertex class">
       <created>1605874125378</created>
@@ -601,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619953931903</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="add cell merging step and fix PolygonLineInteractor.cs">
+      <created>1619962391878</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1619962391878</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -655,7 +650,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add AreaRefinementStep.cs with CA and polygon Union to create big area" />
     <MESSAGE value="add get children by type method" />
     <MESSAGE value="add recipe structure for IGameWorldObjects" />
     <MESSAGE value="add Area Type Assignment" />
@@ -680,7 +674,8 @@
     <MESSAGE value="add drawDebug based on depth and type" />
     <MESSAGE value="make resulting landmark area be inside of other area most of the time" />
     <MESSAGE value="fix ThemeApplicator.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix ThemeApplicator.cs" />
+    <MESSAGE value="add cell merging step and fix PolygonLineInteractor.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="add cell merging step and fix PolygonLineInteractor.cs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

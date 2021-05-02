@@ -40,17 +40,8 @@ namespace Framework.Pipeline.Geometry.Interactors
             }
 
             return true;
-
-            // IEnumerable<IGeometry> intersectionLines = Intersect(first, second);
-            //
-            // if (intersectionLines.Count() != 1) return false;
-            //
-            // OwLine intersectionLine = intersectionLines.First() as OwLine;
-            // return intersectionLine != null
-            //        && (intersectionLine.Start == second.Start && intersectionLine.End == second.End
-            //            || intersectionLine.Start == second.End && intersectionLine.End == second.Start);
         }
-
+ 
         public bool PartiallyContains(OwPolygon first, OwLine second)
         {
             //if either the start or end are inside. The line is for sure partially contained
@@ -73,10 +64,6 @@ namespace Framework.Pipeline.Geometry.Interactors
             }
 
             return intersections > 0 && intersections % 2 == 0;
-            // IEnumerable<IGeometry> intersectionLines = Intersect(first, second);
-            //
-            // bool isPartiallyContained = intersectionLines.Any(intersection => !(intersection is OwInvalidGeometry));
-            // return isPartiallyContained;
         }
 
         public OwLine CalculateShortestPath(OwPolygon first, OwLine second)
