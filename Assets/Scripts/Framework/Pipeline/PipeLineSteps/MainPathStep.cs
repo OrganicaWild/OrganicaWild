@@ -22,12 +22,12 @@ namespace Framework.Pipeline.PipeLineSteps
 
             foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
             {
-                List<OwPoint> landmarks = typedArea.GetAllChildrenOfType<Landmark>().Select(x => x.Shape as OwPoint)
+                List<OwPoint> landmarks = typedArea.GetAllChildrenOfType<Landmark>().Select(x => new OwPoint(x.Shape.GetCentroid()))
                     .ToList();
                 IEnumerable<OwPoint> connections =
-                    typedArea.GetAllChildrenOfType<AreaConnection>().Select(x => x.Shape as OwPoint);
+                    typedArea.GetAllChildrenOfType<AreaConnection>().Select(x => new OwPoint(x.Shape.GetCentroid()));
 
-                if (landmarks.Count > 0)
+                if (landmarks.Any())
                 {
                     List<OwPoint> points = new List<OwPoint>();
                     points.AddRange(landmarks);

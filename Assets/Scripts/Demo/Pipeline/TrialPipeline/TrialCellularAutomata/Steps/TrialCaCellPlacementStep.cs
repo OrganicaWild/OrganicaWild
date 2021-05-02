@@ -42,8 +42,15 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
 
             Area parentArea = (Area) parameter;
             OwPolygon areaPolygon = (OwPolygon) parentArea.Shape;
-            // TODO: Add more polygons to the clipping polygons
-            IEnumerable<OwPolygon> clippingPolygons = new[] { areaPolygon };
+
+            IEnumerable<OwPolygon> allPolygonAreas = parentArea.GetAllChildrenOfType<Landmark>().Where(x => x.Shape is OwPolygon).Select(area => area.Shape as OwPolygon);
+           
+            //polygons, where the voronoi should be inside of 
+            List<OwPolygon> clippingPolygons = new List<OwPolygon>() {areaPolygon};
+            
+            //polygons where the voronoi should NOT be inside of
+            List<OwPolygon> cuttingPolygons = new List<OwPolygon>();
+            cuttingPolygons.AddRange(allPolygonAreas);
 
             // Generate voronoi results
             OwPolygon surroundingPolygon = parentArea.Shape as OwPolygon;
@@ -67,6 +74,7 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
                 IEnumerable<Vector2> polygonVertices = face.OuterEdge.CyclePolygon.Select(point => new Vector2((float)point.X, (float)point.Y));
                 OwPolygon subAreaPolygon = new OwPolygon(polygonVertices);
                 OwPolygon clippedPolygon = Clip(subAreaPolygon, clippingPolygons);
+                clippedPolygon = Cut(clippedPolygon, cuttingPolygons);
                 if (clippedPolygon.representation.Regions.Count == 0) continue;
                 Area subArea = new Area(clippedPolygon);
                 Vector2 center = clippedPolygon.GetCentroid();
@@ -115,6 +123,17 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
             foreach (OwPolygon clippingPolygon in clippingPolygons)
             {
                 polygon = PolygonPolygonInteractor.Use().Intersection(polygon, clippingPolygon);
+                if (polygon.representation.Regions.Count == 0) return polygon;
+            }
+
+            return polygon;
+        }
+        
+        private OwPolygon Cut(OwPolygon polygon, IEnumerable<OwPolygon> cuttingPolygons)
+        {
+            foreach (OwPolygon cuttingPolygon in cuttingPolygons)
+            {
+                polygon = PolygonPolygonInteractor.Use().Difference(polygon, cuttingPolygon);
                 if (polygon.representation.Regions.Count == 0) return polygon;
             }
 
