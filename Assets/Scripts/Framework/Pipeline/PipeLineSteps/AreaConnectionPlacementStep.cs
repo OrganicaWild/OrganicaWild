@@ -16,6 +16,7 @@ namespace Framework.Pipeline.PipeLineSteps
     [AreaConnectionsGuarantee]
     public class AreaConnectionPlacementStep : PipelineStep
     {
+        [Range(0, 0.5f)]
         public float connectionClosenessToVoronoiVertex;
 
         public Vector2 maxDimensions;

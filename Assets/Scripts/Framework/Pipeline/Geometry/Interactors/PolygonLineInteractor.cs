@@ -7,7 +7,6 @@ namespace Framework.Pipeline.Geometry.Interactors
 {
     public class PolygonLineInteractor : IGeometryInteractor<OwPolygon, OwLine>
     {
-        
         private static PolygonLineInteractor instance;
 
         private PolygonLineInteractor()
@@ -18,29 +17,72 @@ namespace Framework.Pipeline.Geometry.Interactors
         {
             return instance ?? (instance = new PolygonLineInteractor());
         }
-        
+
         public bool Contains(OwPolygon first, OwLine second)
         {
-            IEnumerable<IGeometry> intersectionLines = Intersect(first, second);
+            //if start or end is not inside, the line is for sure not inside
+            if (!PolygonPointInteractor.Use().Contains(first, new OwPoint(second.Start)) ||
+                !PolygonPointInteractor.Use().Contains(first, new OwPoint(second.End)))
+            {
+                return false;
+            }
 
-            if (intersectionLines.Count() != 1) return false;
+            //if concave polygon check that the line is not intersecting with any edges
+            List<OwLine> polyLines = first.GetLines();
+            bool isIntersecting = false;
+            foreach (OwLine edge in polyLines)
+            {
+                isIntersecting |= LineLineInteractor.Use().Intersect(edge, second).Any(i => !(i is OwInvalidGeometry));
+                if (isIntersecting)
+                {
+                    return false;
+                }
+            }
 
-            OwLine intersectionLine = intersectionLines.First() as OwLine;
-            return intersectionLine != null
-                   && (intersectionLine.Start == second.Start && intersectionLine.End == second.End
-                       || intersectionLine.Start == second.End && intersectionLine.End == second.Start);
+            return true;
+
+            // IEnumerable<IGeometry> intersectionLines = Intersect(first, second);
+            //
+            // if (intersectionLines.Count() != 1) return false;
+            //
+            // OwLine intersectionLine = intersectionLines.First() as OwLine;
+            // return intersectionLine != null
+            //        && (intersectionLine.Start == second.Start && intersectionLine.End == second.End
+            //            || intersectionLine.Start == second.End && intersectionLine.End == second.Start);
         }
 
         public bool PartiallyContains(OwPolygon first, OwLine second)
         {
-            IEnumerable<IGeometry> intersectionLines = Intersect(first, second);
+            //if either the start or end are inside. The line is for sure partially contained
+            if (PolygonPointInteractor.Use().Contains(first, new OwPoint(second.Start)) ||
+                PolygonPointInteractor.Use().Contains(first, new OwPoint(second.End)))
+            {
+                return true;
+            }
 
-            return intersectionLines.Count() != 0;
+            List<OwLine> polyLines = first.GetLines();
+            int intersections = 0;
+            foreach (OwLine edge in polyLines)
+            {
+                bool isIntersecting =
+                    LineLineInteractor.Use().Intersect(edge, second).Any(i => !(i is OwInvalidGeometry));
+                if (isIntersecting)
+                {
+                    intersections++;
+                }
+            }
+
+            return intersections > 0 && intersections % 2 == 0;
+            // IEnumerable<IGeometry> intersectionLines = Intersect(first, second);
+            //
+            // bool isPartiallyContained = intersectionLines.Any(intersection => !(intersection is OwInvalidGeometry));
+            // return isPartiallyContained;
         }
 
         public OwLine CalculateShortestPath(OwPolygon first, OwLine second)
         {
-            OwLine shortest = new OwLine(new Vector2(float.MinValue, float.MinValue), new Vector2(float.MaxValue, float.MaxValue));
+            OwLine shortest = new OwLine(new Vector2(float.MinValue, float.MinValue),
+                new Vector2(float.MaxValue, float.MaxValue));
 
             foreach (OwLine polygonLine in first.GetLines())
             {
@@ -56,15 +98,15 @@ namespace Framework.Pipeline.Geometry.Interactors
 
         public IEnumerable<IGeometry> Intersect(OwPolygon first, OwLine second)
         {
-            OwPolygon extrudedSecond = new OwPolygon(new [] { second.Start, second.End, second.End + Vector2.one });
+            OwPolygon extrudedSecond = new OwPolygon(new[] {second.Start, second.End, second.End + Vector2.one});
             OwPolygon intersectionPolygon = PolygonPolygonInteractor.Use().Intersection(first, extrudedSecond);
-            
-            if (intersectionPolygon.representation.IsEmpty()) return new []{ new OwInvalidGeometry() };
+
+            if (intersectionPolygon.representation.IsEmpty()) return new[] {new OwInvalidGeometry()};
 
             IEnumerable<OwLine> intersectingLines = CalculateIntersectingLines(second, intersectionPolygon);
 
-            if (intersectingLines.Any()) return intersectingLines; 
-            return new[] { new OwInvalidGeometry() };
+            if (intersectingLines.Any()) return intersectingLines;
+            return new[] {new OwInvalidGeometry()};
         }
 
         public float CalculateDistance(OwPolygon first, OwLine second)

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa81e0b636604e529d2346a08bad6cab, type: 3}
   m_Name: EndAreaRecipe
   m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 5525cbfd6583887418f67f25b106256c, type: 2}
+  meshMaterial: {fileID: 2100000, guid: 00762f9489175e8489d082ff63e5b043, type: 2}

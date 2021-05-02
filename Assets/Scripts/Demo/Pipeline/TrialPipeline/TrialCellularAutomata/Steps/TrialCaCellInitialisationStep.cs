@@ -7,6 +7,7 @@ using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
+using Polybool.Net.Objects;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Demo.Pipeline.TrialPipeLine

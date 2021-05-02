@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 1028711124}
   - component: {fileID: 1028711123}
   - component: {fileID: 1028711120}
+  - component: {fileID: 1028711129}
   - component: {fileID: 1028711126}
   - component: {fileID: 1028711127}
   m_Layer: 0
@@ -260,7 +261,7 @@ Transform:
   m_LocalPosition: {x: -1000, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1345661054}
+  - {fileID: 1816078374}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -322,8 +323,6 @@ MonoBehaviour:
   weightings:
   - state: 1003
     weight: 4
-  - state: 2002
-    weight: 1
 --- !u!114 &1028711121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a633f36aeaa4509a128430480b6a722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectionClosenessToVoronoiVertex: 1
+  connectionClosenessToVoronoiVertex: 0.5
   maxDimensions: {x: 199, y: 99}
   minDimensions: {x: 1, y: 1}
 --- !u!114 &1028711123
@@ -407,16 +406,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028711114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70a0c636303450e42a079febd0a9d2b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 817ea858149effb4f8f99adf0dc3264e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapping:
-  - state: 1003
-    rule: {fileID: 11400000, guid: cbfe7bd9cb8466943977f434f268852a, type: 2}
-  - state: 1002
-    rule: {fileID: 11400000, guid: 4cfd2a952fd746e4ab8360e671f1b8ed, type: 2}
-  - state: 2002
-    rule: {fileID: 11400000, guid: 4cfd2a952fd746e4ab8360e671f1b8ed, type: 2}
 --- !u!114 &1028711127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,23 +431,27 @@ MonoBehaviour:
   - name: area1
     recipe: {fileID: 0}
   - name: landmarkPair4
-    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+    recipe: {fileID: 0}
   - name: landmarkPair2
-    recipe: {fileID: 11400000, guid: 36e3c4988c5a4a44896fcc82de6837bf, type: 2}
+    recipe: {fileID: 0}
   - name: landmarkPair0
     recipe: {fileID: 0}
   - name: landmarkPair5
-    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+    recipe: {fileID: 0}
   - name: landmarkPair3
-    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+    recipe: {fileID: 0}
   - name: landmarkPair6
-    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+    recipe: {fileID: 0}
   - name: landmarkPair1
-    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+    recipe: {fileID: 0}
   - name: landmarkPair7
-    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+    recipe: {fileID: 0}
   - name: landmarkPair8
-    recipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+    recipe: {fileID: 0}
+  - name: 1002
+    recipe: {fileID: 0}
+  - name: 1003
+    recipe: {fileID: 0}
 --- !u!114 &1028711128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,36 +473,21 @@ MonoBehaviour:
   sizeP: 8
   rejectionP: 2
   safetyMaxTries: 1000
---- !u!1 &1345661053
-GameObject:
+--- !u!114 &1028711129
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1345661054}
-  m_Layer: 0
-  m_Name: New Game Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1345661054
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345661053}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1028711116}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1028711114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a0c636303450e42a079febd0a9d2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapping:
+  - state: 1002
+    rule: {fileID: 11400000, guid: cbfe7bd9cb8466943977f434f268852a, type: 2}
 --- !u!1 &1491131084
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,3 +580,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1816078373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1816078374}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1816078374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816078373}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1028711116}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
