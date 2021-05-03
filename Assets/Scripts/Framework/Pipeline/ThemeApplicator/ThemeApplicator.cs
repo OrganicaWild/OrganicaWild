@@ -18,10 +18,12 @@ namespace Framework.Pipeline.ThemeApplicator
         private bool hasWarning = false;
         public float layerDistance;
         public Vector3 positionOfWorld;
+        private PipelineManager manager;
         public bool HasWarning => hasWarning;
 
         public GameObject Apply(GameWorld world)
         {
+           manager = GetComponent<PipelineManager>();
             MakeCookBook();
             root = new GameObject();
             
@@ -43,7 +45,7 @@ namespace Framework.Pipeline.ThemeApplicator
 
         public void FindAllTypes()
         {
-            PipelineManager manager = GetComponent<PipelineManager>();
+           manager = GetComponent<PipelineManager>();
 
             if (manager != null)
             {
@@ -114,6 +116,7 @@ namespace Framework.Pipeline.ThemeApplicator
                     continue;
                 }
 
+                cookbook[child.Type].random = manager.pipeLineRunner.Random;
                 GameObject cooked = cookbook[child.Type].Cook(child);
                 cooked.transform.parent = root.transform;
                 cooked.transform.position += new Vector3(0, 0, depth * layerDistance);

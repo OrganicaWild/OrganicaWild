@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Framework.Util
 {
@@ -34,6 +35,15 @@ namespace Framework.Util
         private static float IsPointOnRightSideOfLine(Vector3 a, Vector3 b, Vector3 x)
         {
             return (x.x - a.x) * (b.z - a.z) - (x.z - a.z) * (b.x - b.y);
+        }
+        
+        public static Vector3 GetRandomNormalizedVector(Random random)
+        {
+            float x = (float) random.NextDouble() - 0.5f;
+            float y = (float) random.NextDouble() - 0.5f;
+            float z = (float) random.NextDouble() - 0.5f;
+
+            return new Vector3(x, y, z).normalized;
         }
     }
 }

@@ -37,14 +37,14 @@ public class BackGroundAreaRecipe : GameWorldObjectRecipe
 
         Vector2 middle = areaShape.GetCentroid();
 
-        IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(prefabRadius, 100, 100).Select(p => (p + middle) - new Vector2(50,50));
+        IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(prefabRadius, 100, 100, 30, random).Select(p => (p + middle) - new Vector2(50,50));
 
         foreach (Vector2 point in points)
         {
             if (PolygonPointInteractor.Use().Contains(areaShape, new OwPoint(point)))
             {
                 GameObject prefab =
-                    backGroundObjectsPrefab[(int) (Random.value * (backGroundObjectsPrefab.Count()))];
+                    backGroundObjectsPrefab[(int) (random.NextDouble() * (backGroundObjectsPrefab.Count()))];
                 GameObject instantiated = Instantiate(prefab, new Vector3(point.x, 0, point.y), Quaternion.identity);
                 instantiated.transform.parent = mesh.transform;
             }
