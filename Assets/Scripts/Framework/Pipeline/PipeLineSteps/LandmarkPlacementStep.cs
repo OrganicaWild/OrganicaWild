@@ -6,7 +6,6 @@ using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
 using Framework.Pipeline.PipelineGuarantees;
-using Framework.Pipeline.ThemeApplicator.Recipe;
 using UnityEngine;
 using Random = System.Random;
 

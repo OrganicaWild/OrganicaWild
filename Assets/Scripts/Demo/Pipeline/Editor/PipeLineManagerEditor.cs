@@ -19,15 +19,25 @@ namespace Demo.Pipeline.Editor
                 EditorGUILayout.HelpBox(manager.errorText, MessageType.Error);
             }
 
-            if (GUILayout.Button("Generate New"))
+            if (GUILayout.Button("Generate with new seed"))
             {
-                manager.Setup();
-                manager.Generate();
-                
+                manager.seed = new System.Random().Next();
+                Generate(manager);
             }
 
-            manager.randomSeed = EditorGUILayout.IntField("Random Seed", manager.randomSeed, new GUILayoutOption[0]);
+            if (GUILayout.Button("Generate with set seed"))
+            {
+                Generate(manager);
+            }
 
+            manager.seed = EditorGUILayout.IntField("Seed", manager.seed, new GUILayoutOption[0]);
+
+        }
+
+        private void Generate(PipelineManager manager)
+        {
+            manager.Setup();
+            manager.Generate();
         }
     }
 }

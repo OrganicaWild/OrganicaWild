@@ -12,6 +12,7 @@ using Framework.Poisson_Disk_Sampling;
 using Polybool.Net.Objects;
 using Tektosyne.Geometry;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
 {
@@ -32,15 +33,33 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
                 .GetAllChildrenOfType<Area>()
                 .ToArray();
 
-            Parallel.ForEach(areas, area => Run(area));
+            RunParameterDTO[] parameters = new RunParameterDTO[areas.Length];
+            for (var i = 0; i < areas.Length; i++)
+            {
+                parameters[i].area = areas[i];
+                parameters[i].random = new Random(random.Next());
+            }
+
+            Parallel.For(0, areas.Length, i =>
+            {
+                Run(parameters[i]);
+            });
 
             return world;
         }
 
+        struct RunParameterDTO
+        {
+            public Area area;
+            public Random random;
+        }
+
         private void Run(object parameter)
         {
+            RunParameterDTO dto = (RunParameterDTO) parameter;
 
-            Area parentArea = (Area) parameter;
+            Area parentArea = dto.area;
+            Random localRandom = dto.random;
             OwPolygon areaPolygon = (OwPolygon) parentArea.Shape;
 
             IEnumerable<OwPolygon> allPolygonAreas = parentArea.GetAllChildrenOfType<Landmark>().Where(x => x.Shape is OwPolygon).Select(area => area.Shape as OwPolygon);
@@ -57,7 +76,7 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
             List<Vector2> outermostNodes = surroundingPolygon?.GetPoints();
             RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
             Vector2[] points = PoissonDiskSampling
-                .GeneratePoints(poissonDiskRadius, (float)rect.Width, (float)rect.Height, samplesBeforeRejection)
+                .GeneratePoints(poissonDiskRadius, (float)rect.Width, (float)rect.Height, samplesBeforeRejection, localRandom)
                 .Select(point => new Vector2(point.x + (float)rect.X, point.y + (float)rect.Y))
                 .ToArray();
             VoronoiResults voronoiResults =
