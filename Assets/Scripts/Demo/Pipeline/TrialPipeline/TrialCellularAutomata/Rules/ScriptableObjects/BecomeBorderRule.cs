@@ -16,7 +16,7 @@ public class BorderRule : TrialUpdateRule
         int pathNeighbours = cell.Neighbors.Sum(n => n.CurrentState == TrialCellState.Path ? 1 : 0);
         int backgroundNeighbours = cell.Neighbors.Sum(n => n.CurrentState == TrialCellState.Background ? 1 : 0);
 
-        if (pathNeighbours >= 2 && backgroundNeighbours >= 2)
+        if (pathNeighbours >= maxPathNeighbours && backgroundNeighbours >= maxBackGroundNeighbours)
         {
            return TrialCellState.PathBackgroundBorder;
         }

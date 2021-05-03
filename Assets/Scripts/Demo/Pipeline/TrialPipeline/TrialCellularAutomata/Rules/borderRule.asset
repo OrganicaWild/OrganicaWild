@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: borderRule
   m_EditorClassIdentifier: Assembly-CSharp::BorderRule
+  maxPathNeighbours: 2
+  maxBackGroundNeighbours: 2

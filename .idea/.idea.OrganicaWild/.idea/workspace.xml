@@ -35,6 +35,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/ScriptableObjects/BecomeBorderRule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/ScriptableObjects/BecomeBorderRule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/borderRule.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/borderRule.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/borderRule.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/borderRule.asset.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,8 +145,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Steps/TrialCaCellRuleApplicationStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Miscellanous/TrialCellNetwork.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/ScriptableObjects/BecomeBorderRule.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/ScriptableObjects/BecomeBorderRule.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -250,13 +254,6 @@
       <workItem from="1619763344458" duration="12563000" />
       <workItem from="1619943680594" duration="31481000" />
       <workItem from="1620024208583" duration="4342000" />
-    </task>
-    <task id="LOCAL-00003" summary="add working version">
-      <created>1606043194133</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1606043194133</updated>
     </task>
     <task id="LOCAL-00004" summary="add simple demo with visualization">
       <created>1606051561427</created>
@@ -594,7 +591,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619964042209</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="finalise merge">
+      <created>1620033029380</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1620033029380</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,7 +617,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="fix/triangulation" />
+                        <option value="feature/organic-pipeline" />
                       </list>
                     </value>
                   </entry>
@@ -629,6 +633,11 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="feature/organic-pipeline" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="feature/first-pipeline" />
@@ -648,7 +657,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add recipe structure for IGameWorldObjects" />
     <MESSAGE value="add Area Type Assignment" />
     <MESSAGE value="edit some materials" />
     <MESSAGE value="comment area type assignment" />
@@ -673,7 +681,8 @@
     <MESSAGE value="fix ThemeApplicator.cs" />
     <MESSAGE value="add cell merging step and fix PolygonLineInteractor.cs" />
     <MESSAGE value="remove old impl comments PolygonLineInteractor.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove old impl comments PolygonLineInteractor.cs" />
+    <MESSAGE value="finalise merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="finalise merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
