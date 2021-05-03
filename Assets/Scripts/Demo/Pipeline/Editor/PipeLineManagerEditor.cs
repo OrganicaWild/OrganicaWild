@@ -21,12 +21,18 @@ namespace Demo.Pipeline.Editor
 
             if (GUILayout.Button("Generate New"))
             {
-                manager.Setup();
+                manager.seed = new System.Random().Next();
+                manager.Setup();    
                 manager.Generate();
-                
             }
 
-            manager.randomSeed = EditorGUILayout.IntField("Random Seed", manager.randomSeed, new GUILayoutOption[0]);
+            if (GUILayout.Button("Regenerate"))
+            {
+                manager.Setup();
+                manager.Generate();
+            }
+
+            manager.seed = EditorGUILayout.IntField("Seed", manager.seed, new GUILayoutOption[0]);
 
         }
     }

@@ -63,7 +63,6 @@ public class LandmarkAreaStep : PipelineStep
                     IEnumerable<Landmark> allLandmarksInArea = chosenArea.GetAllChildrenOfType<Landmark>();
                     chosenLandmark = allLandmarksInArea.Skip((int) (random.NextDouble()) * (allLandmarksInArea.Count()))
                         .First();
-                    Vector2 landmarkPos = chosenLandmark.Shape.GetCentroid();
                     movedCircle = new OwPolygon(uniqueShape.representation);
                     movedCircle.MovePolygon(chosenLandmark.Shape.GetCentroid());
                 } while (!PolygonPolygonInteractor.Use().Contains(chosenArea.Shape as OwPolygon, movedCircle) && tries <= safetyMaxTries);
@@ -84,7 +83,7 @@ public class LandmarkAreaStep : PipelineStep
 
     private OwPolygon GetUniqueShape()
     {
-        IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(radiusP, sizeP, sizeP, rejectionP);
+        IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(radiusP, sizeP, sizeP, rejectionP, random);
         OwPolygon baseCircle = new OwCircle(Vector2.zero, 1f, 20);
 
         foreach (Vector2 point in points)

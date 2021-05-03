@@ -14,7 +14,7 @@ public class PipelineManager : MonoBehaviour
 
     public float minimalDebugColorBrightness = 0.3f;
 
-    public int randomSeed;
+    public int seed;
 
     public PipeLineRunner pipeLineRunner;
 
@@ -57,8 +57,8 @@ public class PipelineManager : MonoBehaviour
 
     public void Setup()
     {
-        pipeLineRunner = new PipeLineRunner(randomSeed);
-        randomSeed = pipeLineRunner.Seed;
+        pipeLineRunner = new PipeLineRunner(seed);
+        seed = pipeLineRunner.Seed;
 
         PipelineStep[] allSteps = GetComponents<PipelineStep>();
         try

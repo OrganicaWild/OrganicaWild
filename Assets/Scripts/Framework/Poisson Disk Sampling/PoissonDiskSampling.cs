@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Framework.Poisson_Disk_Sampling
 {
     public static class PoissonDiskSampling
     {
-
         /// <summary>
         /// Generates Points on a plane. Around these points you can draw circles that do not intersect with a given radius.
         /// </summary>
@@ -14,10 +14,11 @@ namespace Framework.Poisson_Disk_Sampling
         /// <param name="width">width of the plane</param>
         /// <param name="height">height of the plane</param>
         /// <param name="numSamplesBeforeRejection">the minimal number of times this function tries to find new points near each found point</param>
+        /// <param name="random">optional parameter to determine randomness</param>
         /// <returns></returns>
-        public static IEnumerable<Vector2> GeneratePoints(float radius, float width, float height, int numSamplesBeforeRejection = 30)
+        public static IEnumerable<Vector2> GeneratePoints(float radius, float width, float height, int numSamplesBeforeRejection = 30, Random random = null)
         {
-            System.Random r = new System.Random();
+            random = random ?? new Random();
 
             Vector2 sampleRegionSize = new Vector2(width, height);
             float cellSize = radius / (float) Math.Sqrt(2);
@@ -28,16 +29,16 @@ namespace Framework.Poisson_Disk_Sampling
 
             while (spawnPoints.Count > 0)
             {
-                int spawnIndex = r.Next(0, spawnPoints.Count);
+                int spawnIndex = random.Next(0, spawnPoints.Count);
                 Vector2 spawnCentre = spawnPoints[spawnIndex];
                 bool candidateAccepted = false;
 
                 for (int i = 0; i < numSamplesBeforeRejection; i++)
                 {
-                    double angle = r.NextDouble() * Math.PI * 2;
+                    double angle = random.NextDouble() * Math.PI * 2;
                     Vector2 dir = new Vector2((float) Math.Sin(angle), (float) Math.Cos(angle));
 
-                    float scale = (float) r.NextDouble() * radius + radius;
+                    float scale = (float) random.NextDouble() * radius + radius;
                     Vector2 candidate = spawnCentre + dir * scale;
                     if (IsValid(candidate, sampleRegionSize, cellSize, radius, points, grid))
                     {
