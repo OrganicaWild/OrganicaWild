@@ -34,15 +34,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
+      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/OrganicRecipes/BackgroundArea.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/OrganicRecipes/BackgroundArea.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Debugging.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp/mesh_generators/TriangulatedPolygonGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp/mesh_generators/TriangulatedPolygonGenerator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +52,7 @@
         <entry key="$PROJECT_DIR$" value="feature/organic-pipeline" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -86,6 +83,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/fd/1539f524/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E81851A0-DC73-4A79-AFA9-F5B7273162BE/b5/ff21947e/Random.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/BackGroundAreaRecipe.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/a0/121cae76/EventDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
@@ -151,8 +149,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/BackGroundAreaRecipe.cs" />
-      <option value="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp/mesh_generators/TriangulatedPolygonGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp/mesh_generators/TriangulatedPolygonGenerator.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -260,13 +258,6 @@
       <workItem from="1619763344458" duration="12563000" />
       <workItem from="1619943680594" duration="31481000" />
       <workItem from="1620024208583" duration="4342000" />
-    </task>
-    <task id="LOCAL-00005" summary="generify Vertex and Graph">
-      <created>1606053817282</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1606053817282</updated>
     </task>
     <task id="LOCAL-00006" summary="visualize graphs">
       <created>1606069093042</created>
@@ -604,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620034066579</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="add noise to border and background">
+      <created>1620045030547</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1620045030547</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,7 +621,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="feature/organic-pipeline" />
+                        <option value="origin/feature/organic-pipeline" />
                       </list>
                     </value>
                   </entry>
@@ -663,7 +661,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="edit some materials" />
     <MESSAGE value="comment area type assignment" />
     <MESSAGE value="indent ThemeApplicator.cs correctly" />
     <MESSAGE value="add Area Connection Placement" />
@@ -688,7 +685,8 @@
     <MESSAGE value="remove old impl comments PolygonLineInteractor.cs" />
     <MESSAGE value="finalise merge" />
     <MESSAGE value="readd border rule to ca" />
-    <option name="LAST_COMMIT_MESSAGE" value="readd border rule to ca" />
+    <MESSAGE value="add noise to border and background" />
+    <option name="LAST_COMMIT_MESSAGE" value="add noise to border and background" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
