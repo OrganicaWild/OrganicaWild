@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa81e0b636604e529d2346a08bad6cab, type: 3}
-  m_Name: BackgroundArea
+  m_Name: PairedAreaFloor
   m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: c94ce1f5da03c524f95f242b1a055e5c, type: 2}
+  meshMaterial: {fileID: 2100000, guid: 2189ba92ac7e130449e67d6bdc957143, type: 2}

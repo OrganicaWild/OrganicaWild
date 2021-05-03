@@ -14,7 +14,7 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
             OwPoint point = individual.Shape as OwPoint;
             GameObject instantiate = Instantiate(landmarkPrefab);
             instantiate.transform.position =
-                landmarkPrefab.transform.position + new Vector3(point.Position.x, point.Position.y);
+                landmarkPrefab.transform.position + new Vector3(point.Position.x, 0,-point.Position.y);
             instantiate.transform.rotation = landmarkPrefab.transform.rotation;
 
             float scale = Random.value / 5f;

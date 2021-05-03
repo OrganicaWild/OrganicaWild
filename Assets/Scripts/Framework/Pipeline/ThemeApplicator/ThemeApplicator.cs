@@ -17,12 +17,14 @@ namespace Framework.Pipeline.ThemeApplicator
         private string warningText;
         private bool hasWarning = false;
         public float layerDistance;
+        public Vector3 positionOfWorld;
         public bool HasWarning => hasWarning;
 
         public GameObject Apply(GameWorld world)
         {
             MakeCookBook();
             root = new GameObject();
+            
             int childrenWithNoRecipeCount = InterpretLayer(world.Root, 0);
             
             if (childrenWithNoRecipeCount > 0)

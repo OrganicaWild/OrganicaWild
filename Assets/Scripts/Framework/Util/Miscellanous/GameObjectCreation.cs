@@ -14,6 +14,7 @@ namespace Framework.Util
             int i = 0;
             foreach (Mesh mesh in meshes)
             {
+
                 GameObject meshGameObject = new GameObject($"mesh{i++}");
                 meshGameObject.AddComponent(typeof(MeshFilter));
                 meshGameObject.AddComponent(typeof(MeshRenderer));
