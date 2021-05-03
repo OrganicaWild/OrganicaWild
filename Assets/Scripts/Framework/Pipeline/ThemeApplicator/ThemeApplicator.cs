@@ -101,6 +101,11 @@ namespace Framework.Pipeline.ThemeApplicator
                     continue;
                 }
 
+                if (!cookbook.ContainsKey(child.Type))
+                {
+                    Debug.LogError($"The cook book does not contain a recipe for {child.Type}.");
+                }
+
                 if (cookbook[child.Type] == null)
                 {
                     childrenWithNoRecipeCount++;
