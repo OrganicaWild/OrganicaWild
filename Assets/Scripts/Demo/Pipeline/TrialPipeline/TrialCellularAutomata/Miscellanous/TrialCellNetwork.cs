@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Framework.Cellular_Automata.Polymorphic;
 
 namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
@@ -11,6 +12,8 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata
 
         public TrialCellNetwork(IEnumerable<TrialCell> cells)
         {
+            Cells = cells.ToArray();
+            
             foreach (TrialCell cell in cells)
             {
                 cell.Network = this;

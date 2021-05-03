@@ -14,9 +14,6 @@ namespace Framework.Pipeline.Example
         public int maxSize = 2000;
         public float threshHold = 0.2f;
 
-        public PointPrefabRecipe noiseRecipe;
-        public PointPrefabRecipe noiseRecipe0;
-
         public override Type[] RequiredGuarantees => new Type[] { };
 
         public override GameWorld Apply(GameWorld world)
@@ -38,13 +35,13 @@ namespace Framework.Pipeline.Example
                             OwPoint noisePoint = new OwPoint(new Vector2(xPos, yPos) * maxSize);
                             if (PolygonPointInteractor.Use().Contains(backGround.Shape as OwPolygon, noisePoint))
                             {
-                                var points =  PoissonDiskSampling.GeneratePoints(0.8f, 10, 10, 1);
+                                var points =  PoissonDiskSampling.GeneratePoints(0.8f, 100, 100, 1);
                                 foreach (Vector2 point in points)
                                 {
                                     OwPoint noise = new OwPoint(noisePoint.Position + point);
                                     if (!PolygonPointInteractor.Use().Contains(innerArea.Shape as OwPolygon, noise))
                                     {
-                                        backGround.AddChild(new Subsidiary(noise));
+                                        backGround.AddChild(new Subsidiary(noise, "flowerNoise"));
                                     }
                                  
                                 }
@@ -56,13 +53,13 @@ namespace Framework.Pipeline.Example
                             OwPoint noisePoint = new OwPoint(new Vector2(xPos, yPos) * maxSize);
                             if (PolygonPointInteractor.Use().Contains(backGround.Shape as OwPolygon, noisePoint))
                             {
-                                var points =  PoissonDiskSampling.GeneratePoints(0.8f, 10, 10, 1);
+                                var points =  PoissonDiskSampling.GeneratePoints(0.8f, 100, 100, 1);
                                 foreach (Vector2 point in points)
                                 {
                                     OwPoint noise = new OwPoint(noisePoint.Position + point);
                                     if (!PolygonPointInteractor.Use().Contains(innerArea.Shape as OwPolygon, noise))
                                     {
-                                        backGround.AddChild(new Subsidiary(noise));
+                                        backGround.AddChild(new Subsidiary(noise, "treeNoise"));
                                     }
                                  
                                 }

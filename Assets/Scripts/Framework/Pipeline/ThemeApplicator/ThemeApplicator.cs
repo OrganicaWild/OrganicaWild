@@ -16,6 +16,7 @@ namespace Framework.Pipeline.ThemeApplicator
 
         private string warningText;
         private bool hasWarning = false;
+        public float layerDistance;
         public bool HasWarning => hasWarning;
 
         public GameObject Apply(GameWorld world)
@@ -108,7 +109,7 @@ namespace Framework.Pipeline.ThemeApplicator
 
                 GameObject cooked = cookbook[child.Type].Cook(child);
                 cooked.transform.parent = root.transform;
-                cooked.transform.position += new Vector3(0, 0, -depth);
+                cooked.transform.position += new Vector3(0, 0, depth * layerDistance);
             }
 
             return childrenWithNoRecipeCount;

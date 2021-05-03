@@ -10,7 +10,7 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeline.TrialCellularAutomata.Steps
 {
     public class TrialCaCellRuleApplicationStep : PipelineStep
     {
-        private int iterations = 0;
+        public int iterations = 0;
         public UpdateRuleMapping[] mapping;
         
         public override Type[] RequiredGuarantees => new Type[0];

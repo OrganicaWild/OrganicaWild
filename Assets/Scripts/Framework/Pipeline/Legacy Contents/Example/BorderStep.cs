@@ -11,26 +11,24 @@ namespace Framework.Pipeline.Example
 {
     public class BorderStep : PipelineStep
     {
-        public AreaMeshRecipe backGroundMeshRecipe;
-
+        
         public override Type[] RequiredGuarantees => new Type[] { };
 
         public override GameWorld Apply(GameWorld world)
         {
-            IEnumerable<Area> allAreas = world.Root.GetAllChildrenOfType<Area>().ToList();
-            Area bigArea = allAreas.First();
+           
 
-            OwPolygon areaPolygon = bigArea.Shape as OwPolygon;
+            OwPolygon areaPolygon = world.Root.Shape as OwPolygon;
             OwPolygon outerPolygon = new OwPolygon(areaPolygon.representation);
             outerPolygon.ScaleFromCentroid(new Vector2(2f, 2f));
 
             OwPolygon hullPolygon = outerPolygon.GetConvexHull();
-            Area outerArea = new Area(hullPolygon);
+            Area outerArea = new Area(hullPolygon, "background");
             
-            foreach (Area area in allAreas.ToList())
+            foreach (IGameWorldObject child in world.Root.GetChildren().ToList())
             {
-                world.Root.RemoveChild(area);
-                outerArea.AddChild(area);
+                world.Root.RemoveChild(child);
+                outerArea.AddChild(child);
             }
             
             world.Root.AddChild(outerArea);
