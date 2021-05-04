@@ -114,7 +114,7 @@ namespace Framework.Pipeline.PipeLineSteps
                         }
 
                         //add landmark
-                        typedArea.AddChild(new Landmark(potentialLandMarkPoint));
+                        typedArea.AddChild(new Landmark(potentialLandMarkPoint, "genericLandmark"));
                         placedPoints.Add(potentialLandMarkPoint);
                     }
                 }

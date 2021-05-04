@@ -55,14 +55,14 @@ public class LandmarkAreaStep : PipelineStep
                 Landmark chosenLandmark;
                 AreaTypeAssignmentStep.TypedArea chosenArea;
                 int tries = 0;
+                List<Landmark> allLandmarksInArea;
                 do
                 {
                     tries++;
                     chosenArea =
-                        areasWithLandmarks[(int) (random.NextDouble() * (areasWithLandmarks.Count - 1))];
-                    IEnumerable<Landmark> allLandmarksInArea = chosenArea.GetAllChildrenOfType<Landmark>();
-                    chosenLandmark = allLandmarksInArea.Skip((int) (random.NextDouble()) * (allLandmarksInArea.Count()))
-                        .First();
+                        areasWithLandmarks[(int) (random.NextDouble() * (areasWithLandmarks.Count - 1))]; 
+                    allLandmarksInArea = chosenArea.GetAllChildrenOfType<Landmark>().ToList();
+                    chosenLandmark = allLandmarksInArea[(int) (random.NextDouble()) * (allLandmarksInArea.Count())];
                     movedCircle = new OwPolygon(uniqueShape.representation);
                     movedCircle.MovePolygon(chosenLandmark.Shape.GetCentroid());
                 } while (!PolygonPolygonInteractor.Use().Contains(chosenArea.Shape as OwPolygon, movedCircle) && tries <= safetyMaxTries);
@@ -75,6 +75,17 @@ public class LandmarkAreaStep : PipelineStep
                 chosenLandmark.Shape = movedCircle;
                 chosenLandmark.Type = $"landmarkPair{i}";
                 areasWithLandmarks.Remove(chosenArea);
+                
+                //remove chosen landmark from list, so that is is not checked against in below loop
+                allLandmarksInArea.Remove(chosenLandmark);
+
+                foreach (Landmark otherLandmark in allLandmarksInArea)
+                {
+                    if (PolygonPointInteractor.Use().Contains(movedCircle, otherLandmark.Shape as OwPoint))
+                    {
+                        chosenArea.RemoveChild(otherLandmark);
+                    }
+                }
             }
         }
 
