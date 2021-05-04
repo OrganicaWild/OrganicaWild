@@ -35,7 +35,7 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
             mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
             
             float[,] noiseMap =
-                PerlinNoise.GenerateNoiseMap(Environment.TickCount, size.x, size.y, 20, 6, 2, 1, Vector2.zero);
+                PerlinNoise.GenerateNoiseMap(random, size.x, size.y, 20, 6, 2, 1, Vector2.zero);
             Vector2 center = individual.Shape.GetCentroid();
 
             Vector2 start = center - size / 2;

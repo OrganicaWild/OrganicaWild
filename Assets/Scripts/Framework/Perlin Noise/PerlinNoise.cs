@@ -5,7 +5,14 @@ public class PerlinNoise
     public static float[,] GenerateNoiseMap(int seed, int mapWidth, int mapHeight, float scale, int octaves,
         float persistence, float lacunarity, Vector2 offset)
     {
-        Random prng = new Random(seed);
+        Random random = new Random(seed);
+        return GenerateNoiseMap(random, mapWidth, mapHeight, scale, octaves, persistence, lacunarity, offset);
+    }
+    
+    public static float[,] GenerateNoiseMap(Random random, int mapWidth, int mapHeight, float scale, int octaves,
+        float persistence, float lacunarity, Vector2 offset)
+    {
+        Random prng = random;
         Vector2[] octaveOffsets = new Vector2[octaves];
         for (int i = 0; i < octaves; i++)
         {
