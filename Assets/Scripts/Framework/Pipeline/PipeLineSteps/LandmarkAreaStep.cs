@@ -39,7 +39,7 @@ public class LandmarkAreaStep : PipelineStep
             world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>();
 
         List<AreaTypeAssignmentStep.TypedArea> areasWithLandmarks =
-            areas.Where(area => area.HasAnyChildrenOfType<Landmark>()).ToList();
+            areas.Where(area => area.HasAnyChildrenOfType<Landmark>() && area.Type != "start" && area.Type != "end").ToList();
         int areasWithLandmarksSum = (int) (areasWithLandmarks.Count() * landMarkIsAreaPercentage);
         int pairs = areasWithLandmarksSum / 2;
 

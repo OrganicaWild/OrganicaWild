@@ -34,7 +34,9 @@ namespace Assets.Scripts.Framework.Pipeline.PipeLineSteps
             world.Root.RemoveChild(endArea);
 
             TypedArea startTypedArea = new TypedArea(startArea.Shape, "startArea", -1);
+            startTypedArea.Type = "start";
             TypedArea endTypedArea = new TypedArea(endArea.Shape, "endArea", int.MaxValue);
+            endTypedArea.Type = "end";
             
             //landmarks used for debugging
             //startTypedArea.AddChild(new Landmark(new OwPoint(startTypedArea.Shape.GetCentroid() + Vector2.one), null));
