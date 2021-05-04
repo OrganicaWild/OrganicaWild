@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f2d857ebec4dccb3704e18fa50c823, type: 3}
   m_Name: GenericLandmarkPrefab
   m_EditorClassIdentifier: 
-  landmarkPrefab: {fileID: 149218, guid: fc05c8bfad7df5a4abe568aca7403b9e, type: 3}
+  landmarkPrefabs:
+  - {fileID: 3778682633861357730, guid: a5a01801ab4c97d46a7b6f97c5b13d50, type: 3}
+  - {fileID: 6698292433620196076, guid: 5163812787245d64da24668d953181cc, type: 3}
+  - {fileID: 1542214643487133949, guid: 637162b888d88194cb404bcffb42573a, type: 3}
+  minScale: {x: 3, y: 3, z: 3}
+  maxScale: {x: 8, y: 8, z: 8}
