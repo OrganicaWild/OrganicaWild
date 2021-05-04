@@ -57,6 +57,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveMouse"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7d025453-65c2-4f78-9c57-e70be99cedb1"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -125,6 +133,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb10c6c1-cac1-47ea-a775-c573e9c813e1"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -133,7 +152,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             ""id"": ""dd42a97e-c688-4479-83b4-99a2dadabdba"",
             ""actions"": [
                 {
-                    ""name"": ""MoveView"",
+                    ""name"": ""Mouse"",
                     ""type"": ""PassThrough"",
                     ""id"": ""05843a08-497d-49ee-adf0-1b2ceca83e79"",
                     ""expectedControlType"": """",
@@ -145,11 +164,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ef69f369-e84d-441b-b854-4e6752c67618"",
-                    ""path"": ""<Mouse>/position"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MoveView"",
+                    ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -165,9 +184,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_CharacterControls_Backward = m_CharacterControls.FindAction("Backward", throwIfNotFound: true);
         m_CharacterControls_Right = m_CharacterControls.FindAction("Right", throwIfNotFound: true);
         m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
+        m_CharacterControls_MoveMouse = m_CharacterControls.FindAction("MoveMouse", throwIfNotFound: true);
         // CameraControls
         m_CameraControls = asset.FindActionMap("CameraControls", throwIfNotFound: true);
-        m_CameraControls_MoveView = m_CameraControls.FindAction("MoveView", throwIfNotFound: true);
+        m_CameraControls_Mouse = m_CameraControls.FindAction("Mouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -222,6 +242,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_CharacterControls_Backward;
     private readonly InputAction m_CharacterControls_Right;
     private readonly InputAction m_CharacterControls_Run;
+    private readonly InputAction m_CharacterControls_MoveMouse;
     public struct CharacterControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -231,6 +252,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Backward => m_Wrapper.m_CharacterControls_Backward;
         public InputAction @Right => m_Wrapper.m_CharacterControls_Right;
         public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
+        public InputAction @MoveMouse => m_Wrapper.m_CharacterControls_MoveMouse;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -255,6 +277,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Run.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnRun;
+                @MoveMouse.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMoveMouse;
+                @MoveMouse.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMoveMouse;
+                @MoveMouse.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMoveMouse;
             }
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -274,6 +299,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @MoveMouse.started += instance.OnMoveMouse;
+                @MoveMouse.performed += instance.OnMoveMouse;
+                @MoveMouse.canceled += instance.OnMoveMouse;
             }
         }
     }
@@ -282,12 +310,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     // CameraControls
     private readonly InputActionMap m_CameraControls;
     private ICameraControlsActions m_CameraControlsActionsCallbackInterface;
-    private readonly InputAction m_CameraControls_MoveView;
+    private readonly InputAction m_CameraControls_Mouse;
     public struct CameraControlsActions
     {
         private @PlayerInput m_Wrapper;
         public CameraControlsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MoveView => m_Wrapper.m_CameraControls_MoveView;
+        public InputAction @Mouse => m_Wrapper.m_CameraControls_Mouse;
         public InputActionMap Get() { return m_Wrapper.m_CameraControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -297,16 +325,16 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_CameraControlsActionsCallbackInterface != null)
             {
-                @MoveView.started -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnMoveView;
-                @MoveView.performed -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnMoveView;
-                @MoveView.canceled -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnMoveView;
+                @Mouse.started -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnMouse;
+                @Mouse.performed -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnMouse;
+                @Mouse.canceled -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnMouse;
             }
             m_Wrapper.m_CameraControlsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @MoveView.started += instance.OnMoveView;
-                @MoveView.performed += instance.OnMoveView;
-                @MoveView.canceled += instance.OnMoveView;
+                @Mouse.started += instance.OnMouse;
+                @Mouse.performed += instance.OnMouse;
+                @Mouse.canceled += instance.OnMouse;
             }
         }
     }
@@ -318,9 +346,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnBackward(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnMoveMouse(InputAction.CallbackContext context);
     }
     public interface ICameraControlsActions
     {
-        void OnMoveView(InputAction.CallbackContext context);
+        void OnMouse(InputAction.CallbackContext context);
     }
 }

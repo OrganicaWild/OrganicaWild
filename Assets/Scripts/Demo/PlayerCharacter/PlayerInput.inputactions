@@ -44,6 +44,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MoveMouse",
+                    "type": "PassThrough",
+                    "id": "7d025453-65c2-4f78-9c57-e70be99cedb1",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -112,6 +120,17 @@
                     "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb10c6c1-cac1-47ea-a775-c573e9c813e1",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -120,7 +139,7 @@
             "id": "dd42a97e-c688-4479-83b4-99a2dadabdba",
             "actions": [
                 {
-                    "name": "MoveView",
+                    "name": "Mouse",
                     "type": "PassThrough",
                     "id": "05843a08-497d-49ee-adf0-1b2ceca83e79",
                     "expectedControlType": "",
@@ -132,11 +151,11 @@
                 {
                     "name": "",
                     "id": "ef69f369-e84d-441b-b854-4e6752c67618",
-                    "path": "<Mouse>/position",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveView",
+                    "action": "Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

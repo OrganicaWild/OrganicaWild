@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CatMovement : MonoBehaviour
 {
-    Animator animator;
+    public CharacterController characterController;
+    private Animator animator;
 
     private int isWalkingHash;
     private int isRunningHash;
@@ -48,6 +47,7 @@ public class CatMovement : MonoBehaviour
             ResetTimeSinceLatestInput();
             RunPressed = ctx.ReadValueAsButton();
         };
+
     }
 
     void Start()

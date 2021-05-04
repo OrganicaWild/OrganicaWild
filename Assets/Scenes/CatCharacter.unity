@@ -511,7 +511,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253246356}
-  m_LocalRotation: {x: -0.00018797444, y: 0.95541227, z: -0.29527465, w: -0.00060822384}
+  m_LocalRotation: {x: -0.0002478254, y: 0.9554121, z: -0.2952746, w: -0.000801882}
   m_LocalPosition: {x: -0.000000034969112, y: 0.2, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -618,7 +618,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279951776}
-  m_LocalRotation: {x: -0.00018797442, y: 0.9554122, z: -0.29527462, w: -0.0006082239}
+  m_LocalRotation: {x: -0.00024782534, y: 0.9554121, z: -0.29527456, w: -0.000801882}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -762,6 +762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 611426522}
   - component: {fileID: 611426521}
+  - component: {fileID: 611426523}
   m_Layer: 0
   m_Name: CM FreeLook1
   m_TagString: Untagged
@@ -810,7 +811,7 @@ MonoBehaviour:
     m_MaxSpeed: 2
     m_AccelTime: 0.2
     m_DecelTime: 0.1
-    m_InputAxisName: 
+    m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: 0
@@ -831,10 +832,10 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 0
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: 
+    m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -887,6 +888,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &611426523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611426520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIndex: -1
+  XYAxis: {fileID: 5290867678425276711, guid: e81ba2a5aec1f1c49a2be8b4c6050d65, type: 3}
+  ZAxis: {fileID: 0}
 --- !u!1 &750752035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,7 +1408,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 37c02f731d85b5f4996b1efd92bcf710, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2785,6 +2801,7 @@ GameObject:
   - component: {fileID: 4551798590417212315}
   - component: {fileID: 4497409205547769633}
   - component: {fileID: 4556816810746073710}
+  - component: {fileID: 4556816810746073711}
   m_Layer: 0
   m_Name: Nimble_cat
   m_TagString: Untagged
@@ -2804,6 +2821,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ffa510f624cf54590c1d79016454fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+--- !u!114 &4556816810746073711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4556816810746073709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0703f6817ea86704aa46ac18925e2ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freelook: {fileID: 611426521}
 --- !u!1 &4556881520971155839
 GameObject:
   m_ObjectHideFlags: 0
