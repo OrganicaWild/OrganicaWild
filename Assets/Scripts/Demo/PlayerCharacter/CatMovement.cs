@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CatMovement : MonoBehaviour
 {
     public CharacterController characterController;
-    private Animator animator;
+    public float speed = 1f;
+    public float turnSmoothTime = 0.1f;
+    private float turnSmoothVelocity; 
+    public Animator animator;
 
     private int isWalkingHash;
     private int isRunningHash;
@@ -12,11 +16,28 @@ public class CatMovement : MonoBehaviour
     private PlayerInput input;
     
     private Vector2Int CurrentMovement { get; set; }
+    private Vector3 CurrentMovementToVector3 => new Vector3(-CurrentMovement.x, 0f, -CurrentMovement.y);
     private bool MovementPressed => CurrentMovement.magnitude != 0f;
     private bool RunPressed { get; set; }
 
     private float TimeSinceLatestInput { get; set; } = 0f;
 
+    private bool IsWalking
+    {
+        //get;
+        //set;
+        get => animator.GetBool(isWalkingHash);
+        set => animator.SetBool(isWalkingHash, value);
+    }
+
+    private bool IsRunning
+    {
+        //get;
+        //set;
+        get => animator.GetBool(isRunningHash);
+        set => animator.SetBool(isRunningHash, value);
+    }
+ 
     void Awake()
     {
         input = new PlayerInput();
@@ -52,7 +73,6 @@ public class CatMovement : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
         isWalkingHash = Animator.StringToHash("IsWalking");
         isRunningHash = Animator.StringToHash("IsRunning");
         timeSincePreviousInputHash = Animator.StringToHash("TimeSincePreviousInput");
@@ -66,19 +86,43 @@ public class CatMovement : MonoBehaviour
 
     private void PassTimeSincePreviousInput()
     {
-        animator.SetFloat(timeSincePreviousInputHash, TimeSinceLatestInput += Time.deltaTime);
+        if (animator != null) animator.SetFloat(timeSincePreviousInputHash, TimeSinceLatestInput += Time.deltaTime);
     }
 
     void HandleMovement()
     {
-        bool isRunning = animator.GetBool(isRunningHash);
-        bool isWalking = animator.GetBool(isWalkingHash);
+        bool isRunning = IsRunning;
+        bool isWalking = IsWalking;
 
-        if (MovementPressed && !isWalking) animator.SetBool(isWalkingHash, true);
-        if (!MovementPressed && isWalking) animator.SetBool(isWalkingHash, false);
+        if (MovementPressed && !isWalking) IsWalking = true;
+        if (!MovementPressed && isWalking) IsWalking = false;
 
-        if (MovementPressed && RunPressed && !isRunning) animator.SetBool(isRunningHash, true);
-        if (!(MovementPressed || RunPressed) && isRunning) animator.SetBool(isRunningHash, false);
+        if (MovementPressed && RunPressed && !isRunning) IsRunning = true;
+        if (!(MovementPressed || RunPressed) && isRunning) IsRunning = false;
+
+        if (isWalking)
+        {
+            Vector3 direction = CurrentMovementToVector3.normalized;
+            characterController.Move(direction * speed * Time.deltaTime);
+
+            // TODO: figure out what's wrong with this
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, GetTargetAngle(), ref turnSmoothVelocity,
+                turnSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+    }
+
+    private float GetTargetAngle()
+    {
+        if (CurrentMovement == Vector2.up) return 270;
+        if (CurrentMovement == Vector2.up + Vector2.right) return 315;
+        if (CurrentMovement == Vector2.right) return 0;
+        if (CurrentMovement == Vector2.right + Vector2.down) return 45;
+        if (CurrentMovement == Vector2.down) return 90;
+        if (CurrentMovement == Vector2.down + Vector2.left) return 135;
+        if (CurrentMovement == Vector2.left) return 180;
+        return 225;
     }
 
     void OnEnable()
