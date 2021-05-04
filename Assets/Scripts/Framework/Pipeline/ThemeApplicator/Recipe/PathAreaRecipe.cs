@@ -1,15 +1,23 @@
 using System;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
+using Framework.Pipeline.Geometry.Interactors;
 using Framework.Util;
 using Tektosyne.Geometry;
 using UnityEngine;
 
 namespace Framework.Pipeline.ThemeApplicator.Recipe
 {
+    [CreateAssetMenu(fileName = "PathAreaRecipe", menuName = "Pipeline/PathAreaRecipe", order = 0)]
     public class PathAreaRecipe : GameWorldObjectRecipe
     {
-        private Material material;
+        public float minScale;
+        public float maxScale;
+        public GameObject[] prefabs;
+        public Vector2Int size;
+        public Vector2 distance;
+        public Material material;
+
         public override GameObject Cook(IGameWorldObject individual)
         {
             OwPolygon areaShape = individual.Shape as OwPolygon;
@@ -24,8 +32,44 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 mesh = new GameObject();
             }
 
-            return mesh;
+            mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+            
+            float[,] noiseMap =
+                PerlinNoise.GenerateNoiseMap(Environment.TickCount, size.x, size.y, 20, 6, 2, 1, Vector2.zero);
+            Vector2 center = individual.Shape.GetCentroid();
 
+            Vector2 start = center - size / 2;
+            Vector2 xStep = new Vector2(distance.x, 0);
+            Vector2 yStep = new Vector2(0, distance.y);
+
+            for (int x = 0; x < size.x; x++)
+            {
+                for (int y = 0; y < size.y; y++)
+                {
+                    float noiseValue = noiseMap[x, y];
+                    
+                    Vector2 pos = start + x * xStep + y * yStep;
+                    Vector2 offset = (Vector2Extensions.GetRandomNormalizedVector(random) - new Vector2(0.5f, 0.5f)) / distance;
+                    pos += offset;
+
+                    bool isContained =
+                        PolygonPointInteractor.Use().Contains(areaShape, new OwPoint(pos));
+
+                    if (isContained && noiseValue > 0.5)
+                    {
+                        float scale = (float) (random.NextDouble() * (maxScale - minScale) + minScale);
+                        Vector3 worldPos = new Vector3(pos.x, 0, pos.y);
+
+                        GameObject instantiated =
+                            Instantiate(prefabs[(int) (random.NextDouble() * prefabs.Length)],
+                                worldPos, Quaternion.identity);
+                        instantiated.transform.parent = mesh.transform;
+                        instantiated.transform.localScale = new Vector3(scale, scale, scale);
+                    }
+                }
+            }
+
+            return mesh;
         }
     }
 }
