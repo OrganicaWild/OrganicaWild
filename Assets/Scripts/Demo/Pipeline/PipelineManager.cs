@@ -20,11 +20,15 @@ public class PipelineManager : MonoBehaviour
 
     public bool hasError;
     public string errorText;
+    public bool startOnStartup = false;
 
     private void Start()
     {
-        Setup();
-        Generate();
+        if (startOnStartup)
+        {
+            Setup();
+            Generate();
+        }
     }
 
     public void Generate()

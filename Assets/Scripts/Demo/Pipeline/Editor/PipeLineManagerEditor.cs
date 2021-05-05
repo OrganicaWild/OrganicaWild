@@ -30,7 +30,8 @@ namespace Demo.Pipeline.Editor
                 Generate(manager);
             }
 
-            manager.seed = EditorGUILayout.IntField("Seed", manager.seed, new GUILayoutOption[0]);
+            manager.seed = EditorGUILayout.IntField("Seed", manager.seed);
+            manager.startOnStartup = EditorGUILayout.Toggle("Regenerate On Startup",manager.startOnStartup);
 
         }
 
