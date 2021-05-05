@@ -35,3 +35,5 @@ MonoBehaviour:
   - {fileID: 199114, guid: ace40d2a4a1290f4f96f01a7e4ecd7f7, type: 3}
   - {fileID: 108756, guid: 2d521608fcf07c346b5e2ed4049aa717, type: 3}
   - {fileID: 174596, guid: 41dcf1459594f434a8a9bae6ae03eab0, type: 3}
+  toSpawn: {fileID: 7384222070259804014, guid: 957b0ae0626045541924f98223a5f881, type: 3}
+  secondsToSpawn: 5

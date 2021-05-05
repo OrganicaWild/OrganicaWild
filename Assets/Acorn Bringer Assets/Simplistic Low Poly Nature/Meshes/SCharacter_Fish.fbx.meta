@@ -1,0 +1,282 @@
+fileFormatVersion: 2
+guid: 9c690660684b5494c88ac61e360783d1
+timeCreated: 1496597778
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bones_And_Cons
+    100002: Fish_Model
+    100004: Head_Con
+    100006: Head_Jnt
+    100008: Jaw_Jnt
+    100010: L_Arm_Con
+    100012: L_Fin_Jnt1
+    100014: L_Fin_Jnt2
+    100016: Lip_Jnt
+    100018: Mouth_Con
+    100020: Nose_Jnt
+    100022: R_Arm_Con
+    100024: R_Fin_Jnt1
+    100026: R_Fin_Jnt2
+    100028: Root_Con
+    100030: Root_Jnt
+    100032: //RootNode
+    100034: Spine_Con1
+    100036: Spine_Con2
+    100038: Spine_Jnt1
+    100040: Tail_Con
+    100042: Tail_Jnt1
+    100044: Tail_Jnt2
+    100046: Tail_Jnt3
+    400000: Bones_And_Cons
+    400002: Fish_Model
+    400004: Head_Con
+    400006: Head_Jnt
+    400008: Jaw_Jnt
+    400010: L_Arm_Con
+    400012: L_Fin_Jnt1
+    400014: L_Fin_Jnt2
+    400016: Lip_Jnt
+    400018: Mouth_Con
+    400020: Nose_Jnt
+    400022: R_Arm_Con
+    400024: R_Fin_Jnt1
+    400026: R_Fin_Jnt2
+    400028: Root_Con
+    400030: Root_Jnt
+    400032: //RootNode
+    400034: Spine_Con1
+    400036: Spine_Con2
+    400038: Spine_Jnt1
+    400040: Tail_Con
+    400042: Tail_Jnt1
+    400044: Tail_Jnt2
+    400046: Tail_Jnt3
+    4300000: Fish_Model
+    7400000: SFish_Bind_Anim
+    7400002: SFish_Swim_Anim
+    9500000: //RootNode
+    13700000: Fish_Model
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: SFish_Bind_Anim
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 4
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bones_And_Cons
+        weight: 1
+      - path: Bones_And_Cons/Root_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con1
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con1/Tail_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2/Head_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2/Head_Con/Mouth_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2/L_Arm_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2/R_Arm_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/L_Fin_Jnt1
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/L_Fin_Jnt1/L_Fin_Jnt2
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/R_Fin_Jnt1
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/R_Fin_Jnt1/R_Fin_Jnt2
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1/Head_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1/Head_Jnt/Jaw_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1/Head_Jnt/Jaw_Jnt/Lip_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1/Head_Jnt/Nose_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Tail_Jnt1
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2/Tail_Jnt3
+        weight: 1
+      - path: Fish_Model
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SFish_Swim_Anim
+      takeName: Take 001
+      firstFrame: 6
+      lastFrame: 45
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bones_And_Cons
+        weight: 1
+      - path: Bones_And_Cons/Root_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con1
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con1/Tail_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2/Head_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2/Head_Con/Mouth_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2/L_Arm_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Con/Spine_Con2/R_Arm_Con
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/L_Fin_Jnt1
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/L_Fin_Jnt1/L_Fin_Jnt2
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/R_Fin_Jnt1
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/R_Fin_Jnt1/R_Fin_Jnt2
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1/Head_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1/Head_Jnt/Jaw_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1/Head_Jnt/Jaw_Jnt/Lip_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Spine_Jnt1/Head_Jnt/Nose_Jnt
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Tail_Jnt1
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2
+        weight: 1
+      - path: Bones_And_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2/Tail_Jnt3
+        weight: 1
+      - path: Fish_Model
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -299,7 +299,7 @@ MonoBehaviour:
   - name: end
     recipe: {fileID: 0}
   - name: genericLandmark
-    recipe: {fileID: 11400000, guid: ce4ce85b137644701a2800f54c08a827, type: 2}
+    recipe: {fileID: 0}
   - name: world
     recipe: {fileID: 11400000, guid: c0c815b6ef86e3844b00739807f8c876, type: 2}
   layerDistance: 0.2

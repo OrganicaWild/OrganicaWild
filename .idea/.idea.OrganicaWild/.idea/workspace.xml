@@ -33,9 +33,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,21 +60,26 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Demo/Pipeline/PipelineManagementObject.prefab" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/19/15aae096/GeoAlgorithms.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EAE584CE-26BC-4022-9C1B-1AA476BFA589/eb/61bb72b5/Random.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scenes/PipelineTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/01/df395b1c/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Util/Polygon Generators/IPolygonGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Util/Polygon Generators/RectangleGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07CFA953-D94B-44E4-BB3A-488BEF79100A/15/4b7a2d51/GUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ConnectedAreaTrigger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/BrokenVector/LowPolyRockPack/Prefabs/Rock Type3 01.prefab" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/60/6446f6a1/Voronoi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/53/adad0534/IMGUIContainer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/OutsideBorderRecipe.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF151B6A-BB5D-474C-B2C1-CB8906A8B5A4/2c/1e97fec7/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/fd/1539f524/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
@@ -85,6 +88,7 @@
     <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/a0/121cae76/EventDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scenes/PipelineTest.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/e7/59a49be8/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
@@ -93,23 +97,19 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkAreaStep.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/92/5da3afea/MeshFilter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/998F2491-CDE6-4F39-9B36-14F82C288B4F/7b/907bd5a4/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/OutsideBorderRecipe.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/ScriptableObjects/BecomeBorderRule.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FAA55637-FCC1-4BBF-B146-E6835A4641D9/c6/1681d94f/Collider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/db/654a394f/VoronoiResults.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Demo/Pipeline/PipelineManagementObject.prefab" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/AreaCell.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Miscellanous/TrialAreaCell.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/Byte/AreaCell.cs" />
@@ -144,14 +144,18 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PairedAreaRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPointInteractor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/PolygonWithHoleInteractions.cs" />
       <option value="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp/math/Vector2d.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/OutsideBorderRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PairedAreaFlowerRingRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
       <option value="$PROJECT_DIR$/Assets/ConnectedAreaTrigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PairedAreaFlowerRingRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/BrokenVector/LowPolyRockPack/Prefabs/Rock Type3 01.prefab" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -196,10 +200,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="21884">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="21884" />
+      <option name="pid" />
       <option name="selectedOptions">
         <list />
       </option>
@@ -260,49 +264,7 @@
       <workItem from="1619943680594" duration="31481000" />
       <workItem from="1620024208583" duration="4342000" />
       <workItem from="1620155183423" duration="1558000" />
-      <workItem from="1620202010911" duration="17635000" />
-    </task>
-    <task id="LOCAL-00010" summary="change containedAt to ContainedSubGraph">
-      <created>1606225551265</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1606225551265</updated>
-    </task>
-    <task id="LOCAL-00011" summary="rework ApplyRule to use the new ContainedSubGraph">
-      <created>1606229143643</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1606229143643</updated>
-    </task>
-    <task id="LOCAL-00012" summary="add correct rules for dorman example">
-      <created>1606243029793</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1606243029793</updated>
-    </task>
-    <task id="LOCAL-00013" summary="add sphape grammar bas">
-      <created>1606319256946</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1606319256946</updated>
-    </task>
-    <task id="LOCAL-00014" summary="add simple mapping from graph grmamar to shape grammar">
-      <created>1606382829410</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1606382829410</updated>
-    </task>
-    <task id="LOCAL-00015" summary="move graph grammar component to framework">
-      <created>1606387352786</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1606387352786</updated>
+      <workItem from="1620202010911" duration="21950000" />
     </task>
     <task id="LOCAL-00016" summary="extract GetLocalRotation method">
       <created>1606387923007</created>
@@ -605,7 +567,49 @@
       <option name="project" value="LOCAL" />
       <updated>1620220485629</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="add connected area trigger">
+      <created>1620227134644</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1620227134644</updated>
+    </task>
+    <task id="LOCAL-00060" summary="add pipeline runner prefab">
+      <created>1620227178287</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1620227178287</updated>
+    </task>
+    <task id="LOCAL-00061" summary="fix ConnectedAreaTrigger.cs">
+      <created>1620237007858</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1620237007858</updated>
+    </task>
+    <task id="LOCAL-00062" summary="add colliders to prefabs">
+      <created>1620238836893</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1620238836893</updated>
+    </task>
+    <task id="LOCAL-00063" summary="add colliders to prefabs">
+      <created>1620239008031</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1620239008031</updated>
+    </task>
+    <task id="LOCAL-00064" summary="add colliders and fix ConnectedAreaTrigger.cs">
+      <created>1620239782811</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1620239782811</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +628,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/feature/organic-pipeline" />
+                        <option value="feature/first-game" />
                       </list>
                     </value>
                   </entry>
@@ -664,12 +668,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="change comment in LandmarkPlacementStep.cs" />
-    <MESSAGE value="add MainPathPlacement and make PipelineStep to MonoBehaviour" />
-    <MESSAGE value="add editor script to pipelineManager" />
-    <MESSAGE value="add if pipeline has configuration error it cannot be started" />
-    <MESSAGE value="remove bad scene" />
-    <MESSAGE value="add straight path path shape definition step" />
     <MESSAGE value="fix random seed assignment in pipelinerunner" />
     <MESSAGE value="add CA Init Step" />
     <MESSAGE value="change seed to nullable type" />
@@ -689,7 +687,13 @@
     <MESSAGE value="change Triangulation of Polygon to care about holes" />
     <MESSAGE value="add outside border recipe" />
     <MESSAGE value="add new paired area recipe" />
-    <option name="LAST_COMMIT_MESSAGE" value="add new paired area recipe" />
+    <MESSAGE value="add connected area trigger" />
+    <MESSAGE value="add pipeline runner prefab" />
+    <MESSAGE value="add cat into game" />
+    <MESSAGE value="fix ConnectedAreaTrigger.cs" />
+    <MESSAGE value="add colliders to prefabs" />
+    <MESSAGE value="add colliders and fix ConnectedAreaTrigger.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="add colliders and fix ConnectedAreaTrigger.cs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

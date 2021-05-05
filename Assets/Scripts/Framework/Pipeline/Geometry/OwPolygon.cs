@@ -124,6 +124,23 @@ namespace Framework.Pipeline.Geometry
             return lines;
         }
 
+        public Rect GetBoundingBox()
+        {
+            float minX = Single.MaxValue;
+            float maxX = Single.MinValue;
+            float minY = Single.MaxValue;
+            float maxY = Single.MinValue;
+            
+            foreach (Vector2 point in GetPoints())
+            {
+                minX = Mathf.Min(minX, point.x);
+                minY = Mathf.Min(minY, point.y); 
+                maxX = Mathf.Max(maxX, point.x);
+                maxY = Mathf.Max(maxY, point.y);
+            }
+
+            return new Rect(new Vector2(minX, minY), new Vector2(maxX - minX, maxY - minY));
+        }
      
 
         public OwPolygon GetConvexHull()

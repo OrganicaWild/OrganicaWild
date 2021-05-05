@@ -19,6 +19,8 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
         public float staticScaleFactor;
         public GameObject[] prefabs;
         public GameObject[] centerPiecePrefabs;
+        public GameObject toSpawn;
+        public float secondsToSpawn;
         
         public override GameObject Cook(IGameWorldObject individual)
         {
@@ -35,6 +37,23 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
             }
 
             mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+
+            Vector2 center2d = individual.Shape.GetCentroid();
+            Vector3 center3d = new Vector3(center2d.x, 0, center2d.y);
+            
+            //create trigger area
+            Rect boundingBox = areaShape.GetBoundingBox();
+            BoxCollider collider = mesh.AddComponent<BoxCollider>();
+            collider.isTrigger = true;
+            collider.center = ((Vector3)boundingBox.center) + new Vector3(0,0,-10);
+            collider.size = new Vector3(boundingBox.width, boundingBox.height, 20);
+
+            ConnectedAreaTrigger connectedAreaTrigger = mesh.AddComponent<ConnectedAreaTrigger>();
+            string groupString = $"{individual.Type.Last()}";
+            connectedAreaTrigger.partOfGroupX = int.Parse(groupString);
+            connectedAreaTrigger.toSpawn = toSpawn;
+            connectedAreaTrigger.spawnPoint = new Vector3(boundingBox.center.x, 2, boundingBox.center.y);
+            connectedAreaTrigger.secondsToWait = secondsToSpawn;
 
             Random lRandom = new Random(individual.Type.Sum(c => c) + areaShape.GetPoints().Sum(p => (int) Mathf.Floor((p - areaShape.GetCentroid()).magnitude)));
             float radiusPerRing = (maxRadius - minRadius) / rings;
