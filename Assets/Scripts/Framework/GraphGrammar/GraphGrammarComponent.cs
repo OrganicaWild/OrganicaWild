@@ -19,13 +19,13 @@ namespace Framework.GraphGrammar
         /// Create the graphs for the rules via the Organica Wild > Create Graph Grammar Rule menu entry.
         /// </summary>
         public List<EditorGrammarRule> rules = new List<EditorGrammarRule>();
-        
+
         /// <summary>
         /// Initial graph
         /// Create the graph via the via the Organica Wild > Create Graph Grammar Rule menu entry
         /// </summary>
         public EditorMissionGraph mother;
-        
+
         private List<GrammarRule> internalRules;
         private MissionGraph internalMother;
         private GraphGrammar grammar;
@@ -58,7 +58,7 @@ namespace Framework.GraphGrammar
                     new List<DrawableMissionVertex.Branch>(),
                     dictionary);
         }
-        
+
         public void ApplyOneRule()
         {
             grammar.ApplyOneRule();
@@ -76,7 +76,7 @@ namespace Framework.GraphGrammar
                     new List<DrawableMissionVertex.Branch>(),
                     dictionary);
         }
-        
+
         public MissionGraph GetLevel()
         {
             return grammar.GetLevel();
@@ -115,9 +115,11 @@ namespace Framework.GraphGrammar
                     Gizmos.DrawLine(position.parent, position.tPosition);
 
                     GUIStyle guiStyle = new GUIStyle {fontSize = 30, fontStyle = FontStyle.Bold};
-
+                    
+                    #if UNITY_EDITOR
                     Handles.Label(position.tPosition, $"{position.t.Type}", guiStyle);
                     dict.Add(position.t, position.tPosition);
+                    #endif
                 }
             }
         }

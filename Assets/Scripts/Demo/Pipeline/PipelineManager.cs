@@ -23,8 +23,8 @@ public class PipelineManager : MonoBehaviour
 
     private void Start()
     {
-        // Setup();
-        // Generate();
+        Setup();
+        Generate();
     }
 
     public void Generate()

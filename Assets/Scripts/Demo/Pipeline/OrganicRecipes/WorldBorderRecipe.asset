@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6dc7f4c6f83f44a81bcc4d6a70436c, type: 3}
   m_Name: WorldBorderRecipe
   m_EditorClassIdentifier: 
-  borderScale: {x: 2, y: 2}
+  borderScale: {x: 1.2, y: 1.2}
   borderMaterial: {fileID: 2100000, guid: c94ce1f5da03c524f95f242b1a055e5c, type: 2}
   backGroundObjectsPrefab:
   - {fileID: 117604, guid: 9469bb1d3aa88ca40aa4079e96a27f8e, type: 3}
