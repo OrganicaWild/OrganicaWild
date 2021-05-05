@@ -820,8 +820,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 392647898}
-  speed: 0.12
-  turnSmoothTime: 0
+  defaultWalkingSpeed: 0.2
+  defaultRunningSpeed: 0.4
+  turnSmoothTime: 0.3
+  acceleration: 3
+  timeUntilSleep: 3
+  timeToWakeUp: 2.1
   animator: {fileID: 849109349}
 --- !u!1 &402729770
 GameObject:
@@ -889,7 +893,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402729770}
-  m_LocalRotation: {x: 0.000000020652951, y: 0.9402716, z: -0.34042525, w: 0.000000057044485}
+  m_LocalRotation: {x: 0.000000008937978, y: 0.9402716, z: -0.34042525, w: 0.000000024687143}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2797,7 +2801,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476947089}
-  m_LocalRotation: {x: 0.000000008035321, y: 0.952017, z: -0.30604526, w: 0.000000024995526}
+  m_LocalRotation: {x: 0.000000018567185, y: 0.952017, z: -0.30604526, w: 0.00000005775706}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
