@@ -23,12 +23,18 @@ namespace Framework.Pipeline.ThemeApplicator
 
         public GameObject Apply(GameWorld world)
         {
-           manager = GetComponent<PipelineManager>();
+            manager = GetComponent<PipelineManager>();
             MakeCookBook();
             root = new GameObject();
-            
-            int childrenWithNoRecipeCount = InterpretLayer(world.Root, 0);
-            
+
+            if (cookbook.ContainsKey(world.Root.Type))
+            {
+                GameObject cooked = CookGameWorldObject(0,world.Root);
+                cooked.transform.parent = root.transform;
+            }
+
+            int childrenWithNoRecipeCount = InterpretLayer(world.Root, 1);
+
             if (childrenWithNoRecipeCount > 0)
             {
                 hasWarning = true;
@@ -39,13 +45,13 @@ namespace Framework.Pipeline.ThemeApplicator
             {
                 hasWarning = false;
             }
-            
+
             return root;
         }
 
         public void FindAllTypes()
         {
-           manager = GetComponent<PipelineManager>();
+            manager = GetComponent<PipelineManager>();
 
             if (manager != null)
             {
@@ -56,6 +62,17 @@ namespace Framework.Pipeline.ThemeApplicator
                 }
 
                 GameWorld exampleGameWorld = manager.pipeLineRunner.Execute();
+
+                if (exampleGameWorld.Root.Type != null)
+                {
+                    TypeRecipeCombination combination = new TypeRecipeCombination(exampleGameWorld.Root.Type);
+
+                    if (!recipes.Contains(combination))
+                    {
+                        recipes.Add(combination);
+                    }
+                }
+
                 FindTypeInLayer(exampleGameWorld.Root);
             }
             else
@@ -98,7 +115,7 @@ namespace Framework.Pipeline.ThemeApplicator
             foreach (IGameWorldObject child in parent.GetChildren())
             {
                 childrenWithNoRecipeCount += InterpretLayer(child, depth + 1);
-                
+
                 //children that do not have a type are expected to not be drawn and do not show a warning
                 if (child.Type == null)
                 {
@@ -116,13 +133,19 @@ namespace Framework.Pipeline.ThemeApplicator
                     continue;
                 }
 
-                cookbook[child.Type].random = manager.pipeLineRunner.Random;
-                GameObject cooked = cookbook[child.Type].Cook(child);
-                cooked.transform.parent = root.transform;
-                cooked.transform.position += new Vector3(0, 0, depth * layerDistance);
+                GameObject cooked = CookGameWorldObject(depth, child);
             }
 
             return childrenWithNoRecipeCount;
+        }
+
+        private GameObject CookGameWorldObject(float depth, IGameWorldObject child)
+        {
+            cookbook[child.Type].random = manager.pipeLineRunner.Random;
+            GameObject cooked = cookbook[child.Type].Cook(child);
+            cooked.transform.parent = root.transform;
+            cooked.transform.position += new Vector3(0, 0, depth * layerDistance);
+            return cooked;
         }
 
         public string GetWarning()

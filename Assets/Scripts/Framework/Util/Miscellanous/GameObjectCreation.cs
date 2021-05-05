@@ -12,9 +12,9 @@ namespace Framework.Util
 {
     public class GameObjectCreation
     {
-        public static GameObject GenerateMeshFromPolygon(OwPolygon polygon, Material material)
+        public static GameObject CombineMeshesFromPolygon(OwPolygon polygon, Material material)
         {
-            List<Mesh> meshes = GetTriangulation(polygon);
+            List<Mesh> meshes = GetMeshesFromPolygon(polygon);
             GameObject root = new GameObject("Meshholder");
 
             int i = 0;
@@ -36,58 +36,27 @@ namespace Framework.Util
         /// Can be used to draw a polygon with a mesh
         /// </summary>
         /// <returns>List of all Vectors. Each consecutive three vectors are a triangle.</returns>
-        public static List<Mesh> GetTriangulation(OwPolygon owpolygon)
+        public static List<Mesh> GetMeshesFromPolygon(OwPolygon owpolygon)
         {
             List<Mesh> result = new List<Mesh>();
-            List<Region> regionsToBeMeshed = new List<Region>(owpolygon.representation.Regions);
 
-            List<Polygon2d> polysToMesh = owpolygon.representation.Regions.Select(region =>
-                new Polygon2d(region.Points.Select(x => new Vector2d((float) x.X, (float) x.Y)))).ToList();
-            
-            //sort descending area
-            polysToMesh.Sort((f,s) => (int) (s.Area - f.Area));
+            List<GeneralPolygon2d> polysToMesh = owpolygon.Getg3Polygon();
 
-            while (polysToMesh.Any())
+            foreach (GeneralPolygon2d generalPolygon2d in polysToMesh)
             {
-                Polygon2d polyToMesh = polysToMesh.First();
-                
-                TriangulatedPolygonGenerator triangulator = new TriangulatedPolygonGenerator
+                TriangulatedPolygonGenerator triangulatedPolygonGenerator = new TriangulatedPolygonGenerator
                 {
-                    Polygon = new GeneralPolygon2d()
+                    Polygon = generalPolygon2d
                 };
-                Polygon2d outer = new Polygon2d(polyToMesh);
-                triangulator.Polygon.Outer = outer;
-
-                foreach (Polygon2d possibleHole in polysToMesh.ToList())
-                {
-                    //Try add hole
-                    try
-                    {
-                        //all holes must be reversed
-                        possibleHole.Reverse();
-                        triangulator.Polygon.AddHole(possibleHole, true, true);
-                        //if it is a hole remove it from the rest of polygons to be meshed
-                        polysToMesh.Remove(possibleHole);
-                    }
-                    catch (Exception e)
-                    {
-                        //if it is is not a hole reverse back the polygon
-                        Console.WriteLine(e);
-                        possibleHole.Reverse();
-                    }
-                }
                 
-                triangulator.Clockwise = true;
-                MeshGenerator mesh = triangulator.Generate();
+                triangulatedPolygonGenerator.Clockwise = true;
+                MeshGenerator mesh = triangulatedPolygonGenerator.Generate();
                 Mesh unityMesh = new Mesh();
                 mesh.MakeMesh(unityMesh);
 
                 result.Add(unityMesh);
-
-                //remove region after it is meshed
-                polysToMesh.Remove(polyToMesh);
             }
-
+            
             return result;
         }
     }

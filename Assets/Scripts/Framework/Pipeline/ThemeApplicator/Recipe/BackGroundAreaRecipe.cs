@@ -25,7 +25,7 @@ public class BackGroundAreaRecipe : GameWorldObjectRecipe
         GameObject mesh;
         try
         {
-            mesh = GameObjectCreation.GenerateMeshFromPolygon(areaShape, backgroundFloorMaterial);
+            mesh = GameObjectCreation.CombineMeshesFromPolygon(areaShape, backgroundFloorMaterial);
         }
         catch (Exception e)
         {

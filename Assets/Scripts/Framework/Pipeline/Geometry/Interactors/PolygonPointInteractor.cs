@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using g3;
 using Polybool.Net.Objects;
 using Tektosyne.Geometry;
 
@@ -48,7 +49,6 @@ namespace Framework.Pipeline.Geometry.Interactors
             {
                 PolygonLocation singleResult = GeoAlgorithms.PointInPolygon(second,
                     region.Points.Select(point => (PointD) point).ToArray());
-
                 if (singleResult == PolygonLocation.Inside)
                 {
                     result.Add(new OwPoint(second.Position));

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using g3;
@@ -131,6 +132,47 @@ namespace Framework.Pipeline.Geometry
             //convex hull algorithm revereses the resulting points, so they have to be revered before creating the new polygon
             OwPolygon hullPolygon = new OwPolygon(hullPoints.Select(x => new Vector2((float) x.X, (float) x.Y)).Reverse());
             return hullPolygon;
+        }
+
+        public List<GeneralPolygon2d> Getg3Polygon()
+        {
+            List<GeneralPolygon2d> result = new List<GeneralPolygon2d>();
+            
+            List<GeneralPolygon2d> polysToMesh = representation.Regions.Select(region =>
+                new GeneralPolygon2d(new Polygon2d(region.Points.Select(x => new Vector2d((float) x.X, (float) x.Y))))).ToList();
+            
+            //sort descending area
+            polysToMesh.Sort((f,s) => (int) (s.Area - f.Area));
+
+            while (polysToMesh.Any())
+            {
+                GeneralPolygon2d polyToMesh = polysToMesh.First();
+
+                foreach (GeneralPolygon2d possibleHole in polysToMesh.ToList())
+                {
+                    //Try add hole
+                    try
+                    {
+                        //all holes must be reversed
+                        possibleHole.Outer.Reverse();
+                        polyToMesh.AddHole(possibleHole.Outer, true, true);
+                        //if it is a hole remove it from the rest of polygons to be meshed
+                        polysToMesh.Remove(possibleHole);
+                    }
+                    catch (Exception e)
+                    {
+                        //if it is is not a hole reverse back the polygon
+                        Console.WriteLine(e);
+                        possibleHole.Outer.Reverse();
+                    }
+                }
+
+                //remove region after it is meshed
+                polysToMesh.Remove(polyToMesh);
+                result.Add(polyToMesh);
+            }
+
+            return result;
         }
 
         public void DrawDebug(Color debugColor)

@@ -24,7 +24,7 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
             GameObject mesh;
             try
             {
-                mesh = GameObjectCreation.GenerateMeshFromPolygon(areaShape, material);
+                mesh = GameObjectCreation.CombineMeshesFromPolygon(areaShape, material);
             }
             catch (Exception e)
             {
