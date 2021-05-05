@@ -123,33 +123,7 @@ namespace Framework.Pipeline.Geometry
             return lines;
         }
 
-        /// <summary>
-        /// Returns a viable Triangulation of a Polygon.
-        /// Can be used to draw a polygon with a mesh
-        /// </summary>
-        /// <returns>List of all Vectors. Each consecutive three vectors are a triangle.</returns>
-        public List<Mesh> GetTriangulation()
-        {
-            List<Mesh> result = new List<Mesh>();
-
-            foreach (Region region in representation.Regions)
-            {
-                List<Vector2d> points = region.Points.Select(x => new Vector2d((float) x.X, (float) x.Y)).Reverse().ToList();
-
-                TriangulatedPolygonGenerator triangulator = new TriangulatedPolygonGenerator();
-                triangulator.Polygon = new GeneralPolygon2d();
-                Polygon2d polygon2d = new Polygon2d(points);
-                triangulator.Polygon.Outer = polygon2d;
-                triangulator.Clockwise = true;
-                MeshGenerator mesh = triangulator.Generate();
-                Mesh unityMesh = new Mesh();
-                mesh.MakeMesh(unityMesh);
-
-                result.Add(unityMesh);
-            }
-
-            return result;
-        }
+     
 
         public OwPolygon GetConvexHull()
         {
