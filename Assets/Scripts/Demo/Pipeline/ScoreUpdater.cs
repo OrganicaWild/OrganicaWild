@@ -1,4 +1,5 @@
-﻿using Demo.Pipeline;
+﻿using System;
+using Demo.Pipeline;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class ScoreUpdater : MonoBehaviour
             int totalAreas = GameManager.Get().uniqueAreasAmount;
             int foundAreas = GameManager.Get().foundAreas;
 
-            scoreText.text = $"Gebiete gefunden: {foundAreas}/{totalAreas}";
+            scoreText.text = $"{foundAreas} von {totalAreas} einzigartige Gebiete gefunden";
             prevScore = foundAreas;
         }
     }
