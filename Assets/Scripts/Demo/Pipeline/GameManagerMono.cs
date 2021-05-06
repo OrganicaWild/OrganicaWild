@@ -8,6 +8,17 @@ namespace Demo
     public class GameManagerMono : MonoBehaviour
     {
         public Text clearedLevelText;
+
+        public GameObject pipelineManagerObject;
+
+        private void Start()
+        {
+            PipelineManager manager = pipelineManagerObject.GetComponent<PipelineManager>();
+            manager.seed = Environment.TickCount;
+            manager.Setup();
+            manager.Generate();
+        }
+
         private void Update()
         {
             if (GameManager.Get().foundAreas == GameManager.Get().uniqueAreasAmount)

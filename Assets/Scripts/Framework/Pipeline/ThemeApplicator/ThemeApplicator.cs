@@ -23,7 +23,7 @@ namespace Framework.Pipeline.ThemeApplicator
 
         public GameObject Apply(GameWorld world)
         {
-            manager = GetComponent<PipelineManager>();
+            this.manager = GetComponent<PipelineManager>();
             MakeCookBook();
             root = new GameObject();
 

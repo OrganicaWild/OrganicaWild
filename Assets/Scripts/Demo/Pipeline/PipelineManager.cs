@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Assets.Scripts.Framework.Pipeline.PipeLineSteps;
 using Framework.Pipeline;
 using Framework.Pipeline.PipeLineSteps;
@@ -20,46 +22,36 @@ public class PipelineManager : MonoBehaviour
 
     public bool hasError { get; set; }
     public string errorText { get; set; }
-    [SerializeField]
-    public bool startOnStartup;
-
-    private void Start()
-    {
-        if (startOnStartup)
-        {
-            Setup();
-            Generate();
-        }
-    }
+    [SerializeField] public bool startOnStartup;
+    private GameObject builtWorld;
+    private ThemeApplicator themeApplicator;
 
     public void Generate()
     {
         if (hasError)
         {
-            return;   
+            return;
         }
-        
+
         List<GameObject> children = new List<GameObject>();
         foreach (Transform child in transform)
         {
             children.Add(child.gameObject);
         }
+
         children.ForEach(DestroyImmediate);
-        
-        
+
+        themeApplicator = GetComponent<ThemeApplicator>();
         GameWorld = pipeLineRunner.Execute();
-        
-        //only apply theme if there is a ThemeApplicator as a Component
-        ThemeApplicator themeApplicator = GetComponent<ThemeApplicator>();
         if (themeApplicator != null)
         {
+            //only apply theme if there is a ThemeApplicator as a Component
             pipeLineRunner.SetThemeApplicator(themeApplicator);
-            GameObject builtWorld = pipeLineRunner.ApplyTheme();
+            builtWorld = pipeLineRunner.ApplyTheme();
             builtWorld.transform.parent = this.transform;
         }
-        
     }
-
+    
     public void Setup()
     {
         pipeLineRunner = new PipeLineRunner(seed);

@@ -86,7 +86,7 @@ namespace Assets.Scripts.Demo.Pipeline.TrialPipeLine
 
         private void SetRandomState(TrialAreaCell areaCell)
         {
-            float r = Random.value;
+            float r = (float) random.NextDouble();
             foreach (TrialStateRangeMapping mapping in Mappings.Where(mapping => mapping.Minimum <= r && r <= mapping.Maximum))
             {
                 areaCell.Cell.CurrentState = mapping.State;
