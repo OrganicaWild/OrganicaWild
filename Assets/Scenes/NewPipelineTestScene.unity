@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimalDebugColorBrightness: 0.7
-  seed: 1140982385
+  seed: 208375092
   hasError: 0
   errorText: 
   startOnStartup: 0
@@ -455,7 +455,7 @@ MonoBehaviour:
     recipe: {fileID: 11400000, guid: 140465bd4e8ad2e4ba98de3cd289dfb8, type: 2}
   - name: Goal
     recipe: {fileID: 0}
-  layerDistance: 0.2
+  layerDistance: 0
   positionOfWorld: {x: 0, y: 0, z: 0}
 --- !u!114 &6099828077066956246
 MonoBehaviour:
