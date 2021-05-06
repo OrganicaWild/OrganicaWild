@@ -33,11 +33,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" afterDir="false" />
-    </list>
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -263,13 +259,6 @@
       <workItem from="1620202010911" duration="21950000" />
       <workItem from="1620247926603" duration="1150000" />
       <workItem from="1620289149460" duration="745000" />
-    </task>
-    <task id="LOCAL-00020" summary="add actual rooms to prefabs">
-      <created>1606461622021</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1606461622021</updated>
     </task>
     <task id="LOCAL-00021" summary="add PolygonPolygonInteractor.cs">
       <created>1618857692874</created>
@@ -607,7 +596,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620246456238</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="merge newest character movement changes">
+      <created>1620292123090</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1620292123090</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="change seed to nullable type" />
     <MESSAGE value="add references to Area Connection" />
     <MESSAGE value="change Area Cell Implementations to type" />
     <MESSAGE value="add landmark area placement step to test polygon clipping" />
@@ -691,7 +686,8 @@
     <MESSAGE value="add colliders and fix ConnectedAreaTrigger.cs" />
     <MESSAGE value="move editor things into editor folder so the project can be built" />
     <MESSAGE value="add generation flag" />
-    <option name="LAST_COMMIT_MESSAGE" value="add generation flag" />
+    <MESSAGE value="merge newest character movement changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge newest character movement changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
