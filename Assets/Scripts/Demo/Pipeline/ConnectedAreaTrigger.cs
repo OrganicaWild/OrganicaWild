@@ -23,15 +23,14 @@ public class ConnectedAreaTrigger : MonoBehaviour
             groupsActivated.Add(partOfGroupX, false);
         }
     }
-    
+
     private void OnTriggerStay(Collider other)
     {
         timeSinceActivated += Time.deltaTime;
-        Debug.Log("waiting");
         if (timeSinceActivated > secondsToWait && !groupsActivated[partOfGroupX])
         {
             groupsActivated[partOfGroupX] = true;
-            Instantiate(toSpawn, spawnPoint, Quaternion.identity); 
+            Instantiate(toSpawn, spawnPoint, Quaternion.identity);
             GameManager.Get().foundAreas++;
         }
     }
@@ -45,6 +44,11 @@ public class ConnectedAreaTrigger : MonoBehaviour
         }
     }
 
+    public static void SetAllToFalse()
+    {
+        groupsActivated.Clear();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1f, 0, 0, .5f);
@@ -53,5 +57,4 @@ public class ConnectedAreaTrigger : MonoBehaviour
             Gizmos.DrawCube(spawnPoint, Vector3.one);
         }
     }
-
 }

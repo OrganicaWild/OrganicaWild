@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Demo.Pipeline;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace Demo
         private void Start()
         {
             PipelineManager manager = pipelineManagerObject.GetComponent<PipelineManager>();
+            ConnectedAreaTrigger.SetAllToFalse();
             manager.seed = Environment.TickCount;
             manager.Setup();
             manager.Generate();
