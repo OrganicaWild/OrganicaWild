@@ -41,7 +41,7 @@ namespace Framework.Pipeline.PipeLineSteps
                 if (typedArea.AreaType == -1)
                 {
                     //add landmark at centroid
-                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid())));
+                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), "Spawn"));
                     continue;
                 }
 
@@ -49,7 +49,7 @@ namespace Framework.Pipeline.PipeLineSteps
                 if (typedArea.AreaType == int.MaxValue)
                 {
                     //add landmark at centroid
-                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid())));
+                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), "Goal"));
                     continue;
                 }
 
