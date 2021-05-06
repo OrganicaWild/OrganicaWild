@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc85148143ca5349afe8d2cb061d23a, type: 3}
   m_Name: PlayerAndCameraRecipe
   m_EditorClassIdentifier: 
-  cameraAndPlayerRig: {fileID: 7008049005090017132, guid: 68b262523ecea5a4f9c6e6ca33773a73,
+  cameraAndPlayerRig: {fileID: 3135639967098339637, guid: 68b262523ecea5a4f9c6e6ca33773a73,
     type: 3}
   basePosition: {x: 0, y: 5, z: 0}
