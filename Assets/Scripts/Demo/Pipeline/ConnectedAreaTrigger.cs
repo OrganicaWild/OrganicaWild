@@ -32,7 +32,7 @@ public class ConnectedAreaTrigger : MonoBehaviour
         {
             groupsActivated[partOfGroupX] = true;
             Instantiate(toSpawn, spawnPoint, Quaternion.identity); 
-            GameManager.Get().IncreasePoints(10);
+            GameManager.Get().foundAreas++;
         }
     }
 

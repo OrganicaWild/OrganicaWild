@@ -12,15 +12,16 @@ public class PipelineManager : MonoBehaviour
 {
     private GameWorld GameWorld { get; set; }
 
-    public float minimalDebugColorBrightness = 0.3f;
+    private float minimalDebugColorBrightness = 0.3f;
 
-    public int seed;
+    public int seed { get; set; }
 
     public PipeLineRunner pipeLineRunner;
 
-    public bool hasError;
-    public string errorText;
-    public bool startOnStartup = false;
+    public bool hasError { get; set; }
+    public string errorText { get; set; }
+    [SerializeField]
+    public bool startOnStartup;
 
     private void Start()
     {

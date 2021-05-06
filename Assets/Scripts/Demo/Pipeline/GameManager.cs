@@ -13,17 +13,13 @@
         {
             if (instance == null)
             {
-                return new GameManager();
+                return instance = new GameManager();
             }
 
             return instance;
         }
-    
-        public int points = 0;
-
-        public void IncreasePoints(int amount)
-        {
-            points += amount;
-        }
+        
+        public int uniqueAreasAmount;
+        public int foundAreas;
     }
 }

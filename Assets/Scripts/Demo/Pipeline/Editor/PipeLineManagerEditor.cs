@@ -12,7 +12,7 @@ namespace Demo.Pipeline.Editor
         {
             PipelineManager manager = (PipelineManager) target;
             
-            //DrawDefaultInspector();
+           
 
             if (manager.hasError)
             {
@@ -31,8 +31,7 @@ namespace Demo.Pipeline.Editor
             }
 
             manager.seed = EditorGUILayout.IntField("Seed", manager.seed);
-            manager.startOnStartup = EditorGUILayout.Toggle("Regenerate On Startup",manager.startOnStartup);
-
+            DrawDefaultInspector();
         }
 
         private void Generate(PipelineManager manager)

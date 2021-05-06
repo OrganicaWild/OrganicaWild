@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Framework.Pipeline.PipeLineSteps;
+using Demo.Pipeline;
 using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
@@ -42,6 +43,8 @@ public class LandmarkAreaStep : PipelineStep
             areas.Where(area => area.HasAnyChildrenOfType<Landmark>() && area.Type != "start" && area.Type != "end").ToList();
         int areasWithLandmarksSum = (int) (areasWithLandmarks.Count() * landMarkIsAreaPercentage);
         int pairs = areasWithLandmarksSum / 2;
+
+        GameManager.Get().uniqueAreasAmount = pairs;
 
         //create pairs / triples / quadruples etc..
         for (int i = 0; i < pairs; i++)
