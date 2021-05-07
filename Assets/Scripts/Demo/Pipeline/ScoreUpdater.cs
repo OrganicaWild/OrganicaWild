@@ -16,7 +16,7 @@ public class ScoreUpdater : MonoBehaviour
             int totalAreas = GameManager.Get().uniqueAreasAmount;
             int foundAreas = GameManager.Get().foundAreas;
 
-            scoreText.text = $"{foundAreas} von {totalAreas} einzigartige Gebietsarten gefunden";
+            scoreText.text = $"{foundAreas} von {totalAreas} einzigartigen Gebietsarten gefunden";
             prevScore = foundAreas;
         }
     }

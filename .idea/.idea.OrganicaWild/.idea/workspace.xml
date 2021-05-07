@@ -33,9 +33,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adapt start and end shape">
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="change text">
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +78,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/OutsideBorderRecipe.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/cvoegele/Development/OrganicaWild/ProjectSettings/GraphicsSettings.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkAreaStep.cs" root0="FORCE_HIGHLIGHTING" />
@@ -130,12 +130,12 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/LoadSceneOnTriggerEnter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipeWithArea.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PlayerAndCameraRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -249,13 +249,6 @@
       <workItem from="1620202010911" duration="21950000" />
       <workItem from="1620247926603" duration="1150000" />
       <workItem from="1620289149460" duration="745000" />
-    </task>
-    <task id="LOCAL-00026" summary="add get children by type method">
-      <created>1619003923076</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1619003923076</updated>
     </task>
     <task id="LOCAL-00027" summary="add recipe structure for IGameWorldObjects">
       <created>1619375117204</created>
@@ -593,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620374310234</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="change text">
+      <created>1620374663293</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1620374663293</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +652,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="make resulting landmark area be inside of other area most of the time" />
     <MESSAGE value="fix ThemeApplicator.cs" />
     <MESSAGE value="add cell merging step and fix PolygonLineInteractor.cs" />
     <MESSAGE value="remove old impl comments PolygonLineInteractor.cs" />
@@ -677,7 +676,8 @@
     <MESSAGE value="add startscene and end loading new level with new seed" />
     <MESSAGE value="fix issue, where you could only collect all spawns in first round of game" />
     <MESSAGE value="adapt start and end shape" />
-    <option name="LAST_COMMIT_MESSAGE" value="adapt start and end shape" />
+    <MESSAGE value="change text" />
+    <option name="LAST_COMMIT_MESSAGE" value="change text" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
