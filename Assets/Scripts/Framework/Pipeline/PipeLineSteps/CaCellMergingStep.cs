@@ -17,7 +17,7 @@ public class CaCellMergingStep : PipelineStep
     public override Type[] RequiredGuarantees => new Type[0];
     public override GameWorld Apply(GameWorld world)
     {
-        Epsilon.Eps = 0.0000000001m;
+        Epsilon.Eps = 0.000000000001m;
         
         IEnumerable<AreaTypeAssignmentStep.TypedArea> typedAreas = world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>();
      
