@@ -33,18 +33,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipeWithArea.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipeWithArea.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/OrganicRecipes/PlayerAndCameraRecipe.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/OrganicRecipes/PlayerAndCameraRecipe.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PlayerAndCameraRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PlayerAndCameraRecipe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Debugging.meta" beforeDir="false" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adapt start and end shape">
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +67,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07F6E0B0-0231-40E9-8D90-4A8F7BDE0092/30/3363e6f1/Vector2Int.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/ScriptableObjects/BecomeBorderRule.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" root0="FORCE_HIGHLIGHTING" />
@@ -257,13 +249,6 @@
       <workItem from="1620202010911" duration="21950000" />
       <workItem from="1620247926603" duration="1150000" />
       <workItem from="1620289149460" duration="745000" />
-    </task>
-    <task id="LOCAL-00025" summary="add AreaRefinementStep.cs with CA and polygon Union to create big area">
-      <created>1619003323962</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1619003323962</updated>
     </task>
     <task id="LOCAL-00026" summary="add get children by type method">
       <created>1619003923076</created>
@@ -601,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620301561141</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="adapt start and end shape">
+      <created>1620374310233</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1620374310234</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +652,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add drawDebug based on depth and type" />
     <MESSAGE value="make resulting landmark area be inside of other area most of the time" />
     <MESSAGE value="fix ThemeApplicator.cs" />
     <MESSAGE value="add cell merging step and fix PolygonLineInteractor.cs" />
@@ -685,7 +676,8 @@
     <MESSAGE value="add scoreboard" />
     <MESSAGE value="add startscene and end loading new level with new seed" />
     <MESSAGE value="fix issue, where you could only collect all spawns in first round of game" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix issue, where you could only collect all spawns in first round of game" />
+    <MESSAGE value="adapt start and end shape" />
+    <option name="LAST_COMMIT_MESSAGE" value="adapt start and end shape" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

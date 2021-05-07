@@ -132,6 +132,7 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -561,6 +562,29 @@ PlayerSettings:
   ps4attribEyeToEyeDistanceSettingVR: 0
   ps4IncludedModules: []
   ps4attribVROutputEnabled: 0
+  ps5ParamFilePath: 
+  ps5VideoOutPixelFormat: 0
+  ps5VideoOutInitialWidth: 1920
+  ps5VideoOutOutputMode: 1
+  ps5BackgroundImagePath: 
+  ps5StartupImagePath: 
+  ps5Pic2Path: 
+  ps5StartupImagesFolder: 
+  ps5IconImagesFolder: 
+  ps5SaveDataImagePath: 
+  ps5SdkOverride: 
+  ps5BGMPath: 
+  ps5ShareOverlayImagePath: 
+  ps5NPConfigZipPath: 
+  ps5Passcode: bEWRK5RhRXdCdG5nG5azdNMK66MuCV6G
+  ps5UseResolutionFallback: 0
+  ps5UseAudio3dBackend: 0
+  ps5ScriptOptimizationLevel: 2
+  ps5Audio3dVirtualSpeakerCount: 14
+  ps5UpdateReferencePackage: 
+  ps5disableAutoHideSplash: 0
+  ps5OperatingSystemCanDisableSplashScreen: 0
+  ps5IncludedModules: []
   monoEnv: 
   splashScreenBackgroundSourceLandscape: {fileID: 0}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
