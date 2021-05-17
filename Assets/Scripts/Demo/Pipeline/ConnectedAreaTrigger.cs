@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Demo.Pipeline;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider))]
 public class ConnectedAreaTrigger : MonoBehaviour
@@ -15,6 +16,7 @@ public class ConnectedAreaTrigger : MonoBehaviour
     public float secondsToWait;
     private float timeSinceActivated;
     private bool spawnedThing;
+    public Image progressCircleImage;
 
     private void Start()
     {
@@ -26,9 +28,14 @@ public class ConnectedAreaTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        var fillPercent = timeSinceActivated / secondsToWait;
+        Debug.Log(fillPercent);
+        progressCircleImage.fillAmount = fillPercent;
         timeSinceActivated += Time.deltaTime;
+        
         if (timeSinceActivated > secondsToWait && !groupsActivated[partOfGroupX])
         {
+            progressCircleImage.fillAmount = 0;
             groupsActivated[partOfGroupX] = true;
             Instantiate(toSpawn, spawnPoint, Quaternion.identity);
             GameManager.Get().foundAreas++;
@@ -37,11 +44,17 @@ public class ConnectedAreaTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        progressCircleImage.fillAmount = 0;
         if (timeSinceActivated < secondsToWait)
-        {
+        { 
             groupsActivated[partOfGroupX] = false;
             timeSinceActivated = 0;
         }
+    }
+
+    public void SetImage(Image image)
+    {
+        this.progressCircleImage = image;
     }
 
     public static void SetAllToFalse()

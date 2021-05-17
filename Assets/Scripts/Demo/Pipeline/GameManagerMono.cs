@@ -11,6 +11,7 @@ namespace Demo
         public Text clearedLevelText;
 
         public GameObject pipelineManagerObject;
+        public Image progressCircleImage;
 
         private void Start()
         {
@@ -19,6 +20,13 @@ namespace Demo
             manager.seed = Environment.TickCount;
             manager.Setup();
             manager.Generate();
+            
+            //assign progress canvas/image to every trigger
+            ConnectedAreaTrigger[] triggers = pipelineManagerObject.GetComponentsInChildren<ConnectedAreaTrigger>();
+            foreach (ConnectedAreaTrigger trigger in triggers)
+            {
+                trigger.progressCircleImage = progressCircleImage;
+            }
         }
 
         private void Update()
