@@ -13,11 +13,11 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
 
         public override GameObject Cook(IGameWorldObject individual)
         {
-            OwPoint point = individual.Shape as OwPoint;
+            Vector2 point = individual.Shape.GetCentroid();
             GameObject landmarkPrefab = landmarkPrefabs[(int) (random.NextDouble() * (landmarkPrefabs.Length))];
             GameObject instantiate = Instantiate(landmarkPrefab);
             instantiate.transform.position =
-                landmarkPrefab.transform.position + new Vector3(point.Position.x, 0,point.Position.y);
+                landmarkPrefab.transform.position + new Vector3(point.x, 0,point.y);
             instantiate.transform.rotation = landmarkPrefab.transform.rotation ;
             Vector3 scale = Vector3.Lerp(minScale, maxScale, (float) random.NextDouble());
             instantiate.transform.localScale = scale;

@@ -37,11 +37,16 @@ namespace Framework.Pipeline.PipeLineSteps
 
             foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
             {
+                Vector2 rectangleSize = new Vector2(5, 5);
+                OwCircle circle0 = new OwCircle(typedArea.Shape.GetCentroid(), 5f, 8);
+                OwCircle circle1 = new OwCircle(typedArea.Shape.GetCentroid()+ new Vector2(2,2), 5f, 8);
+                OwPolygon result = PolygonPolygonInteractor.Use().Union(circle0, circle1);
+                
                 //start Area
                 if (typedArea.AreaType == -1)
                 {
                     //add landmark at centroid
-                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), "Spawn"));
+                    typedArea.AddChild(new Landmark(result, "Spawn"));
                     continue;
                 }
 
@@ -49,7 +54,7 @@ namespace Framework.Pipeline.PipeLineSteps
                 if (typedArea.AreaType == int.MaxValue)
                 {
                     //add landmark at centroid
-                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), "Goal"));
+                    typedArea.AddChild(new Landmark(result, "Goal"));
                     continue;
                 }
 
