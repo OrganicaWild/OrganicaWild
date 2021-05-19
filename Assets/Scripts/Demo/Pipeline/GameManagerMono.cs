@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using Demo.Pipeline;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 namespace Demo
 {
     public class GameManagerMono : MonoBehaviour
     {
-        public Text clearedLevelText;
+        public GameObject clearedLevelText;
 
         public GameObject pipelineManagerObject;
         public Image progressCircleImage;
@@ -33,7 +34,7 @@ namespace Demo
         {
             if (GameManager.Get().foundAreas == GameManager.Get().uniqueAreasAmount)
             {
-                clearedLevelText.text = "Du hast alle Gebiete gefunden. Gehe zum Ausgang!";
+                clearedLevelText.SetActive(true);
             }
         }
     }
