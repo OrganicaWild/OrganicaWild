@@ -33,11 +33,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" afterDir="false" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/BorderMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BorderMaterial.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/FloorMaterial0.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/FloorMaterial0.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/FloorMaterial1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/FloorMaterial1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/PariedAreaFloor.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/PariedAreaFloor.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +89,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkAreaStep.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/cvoegele/Development/OrganicaWild/ProjectSettings/ProjectSettings.asset" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -113,7 +117,6 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/PolygonWithHoleInteractions.cs" />
       <option value="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp/math/Vector2d.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/OutsideBorderRecipe.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
       <option value="$PROJECT_DIR$/Assets/ConnectedAreaTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PairedAreaFlowerRingRecipe.cs" />
@@ -139,6 +142,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -254,13 +258,7 @@
       <workItem from="1620289149460" duration="745000" />
       <workItem from="1620316630892" duration="882000" />
       <workItem from="1621258360154" duration="2516000" />
-    </task>
-    <task id="LOCAL-00027" summary="add recipe structure for IGameWorldObjects">
-      <created>1619375117204</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1619375117204</updated>
+      <workItem from="1621590421733" duration="97000" />
     </task>
     <task id="LOCAL-00028" summary="add Area Type Assignment">
       <created>1619605790082</created>
@@ -598,7 +596,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621258386951</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="add background to ui text">
+      <created>1621428400667</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1621428400668</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -657,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fix ThemeApplicator.cs" />
     <MESSAGE value="add cell merging step and fix PolygonLineInteractor.cs" />
     <MESSAGE value="remove old impl comments PolygonLineInteractor.cs" />
     <MESSAGE value="finalise merge" />
@@ -682,7 +686,8 @@
     <MESSAGE value="fix issue, where you could only collect all spawns in first round of game" />
     <MESSAGE value="fix aspect ratio because of text" />
     <MESSAGE value="adjust hitboxes on tress" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjust hitboxes on tress" />
+    <MESSAGE value="add background to ui text" />
+    <option name="LAST_COMMIT_MESSAGE" value="add background to ui text" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

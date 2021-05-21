@@ -52,7 +52,7 @@ namespace Framework.Util
                 triangulatedPolygonGenerator.Clockwise = true;
                 MeshGenerator mesh = triangulatedPolygonGenerator.Generate();
                 Mesh unityMesh = new Mesh();
-                mesh.MakeMesh(unityMesh);
+                mesh.MakeMesh(unityMesh, true);
 
                 result.Add(unityMesh);
             }

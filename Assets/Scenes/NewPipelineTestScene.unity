@@ -1002,6 +1002,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799333, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: poissonDiskRadius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799334, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: dimensions.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799334, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: dimensions.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: safetyMaxTries
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799354, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: maxDimensions.x
+      value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799354, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: maxDimensions.y
+      value: 49
+      objectReference: {fileID: 0}
     - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: recipes.Array.data[22].recipe
       value: 
