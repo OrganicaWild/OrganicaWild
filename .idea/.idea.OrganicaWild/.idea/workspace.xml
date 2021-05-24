@@ -33,15 +33,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="change floor material to lit">
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/BackgroundMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BackgroundMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/BorderMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BorderMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/FloorMaterial0.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/FloorMaterial0.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/MapMapterial.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/MapMapterial.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/PariedAreaFloor.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/PariedAreaFloor.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Bush_1_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Bush_1_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Bush_1_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Bush_1_2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/FallenTree_1_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/FallenTree_1_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/FallenTree_1_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/FallenTree_1_2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Grass_1_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Grass_1_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Grass_1_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Grass_1_2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Grass_2_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Grass_2_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Plant_1_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Plant_1_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Tree_1_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Tree_1_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Tree_1_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Tree_1_2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +77,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07F6E0B0-0231-40E9-8D90-4A8F7BDE0092/30/3363e6f1/Vector2Int.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/ScriptableObjects/BecomeBorderRule.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/RotateByTime.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/PlayerCharacter/RotateByTime.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Util/Polygon Generators/RectangleGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" root0="FORCE_HIGHLIGHTING" />
@@ -138,10 +142,10 @@
       <option value="$PROJECT_DIR$/Assets/LoadScene.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/LoadSceneOnTriggerEnter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" />
       <option value="$PROJECT_DIR$/Assets/RotateByTime.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -257,14 +261,8 @@
       <workItem from="1620289149460" duration="745000" />
       <workItem from="1620316630892" duration="882000" />
       <workItem from="1621258360154" duration="2516000" />
-      <workItem from="1621590421733" duration="1819000" />
-    </task>
-    <task id="LOCAL-00029" summary="edit some materials">
-      <created>1619605805960</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1619605805960</updated>
+      <workItem from="1621590421733" duration="1893000" />
+      <workItem from="1621594441188" duration="510000" />
     </task>
     <task id="LOCAL-00030" summary="comment area type assignment">
       <created>1619605939755</created>
@@ -602,7 +600,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621590811671</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="change lightning">
+      <created>1621594340718</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1621594340718</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -661,7 +666,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="remove old impl comments PolygonLineInteractor.cs" />
     <MESSAGE value="finalise merge" />
     <MESSAGE value="readd border rule to ca" />
     <MESSAGE value="add noise to border and background" />
@@ -686,7 +690,8 @@
     <MESSAGE value="adjust hitboxes on tress" />
     <MESSAGE value="add background to ui text" />
     <MESSAGE value="change floor material to lit" />
-    <option name="LAST_COMMIT_MESSAGE" value="change floor material to lit" />
+    <MESSAGE value="change lightning" />
+    <option name="LAST_COMMIT_MESSAGE" value="change lightning" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
