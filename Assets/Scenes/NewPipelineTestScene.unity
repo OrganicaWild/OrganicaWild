@@ -1061,8 +1061,24 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: sizeP
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: radiusP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: maxCircleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: minCircleSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: safetyMaxTries
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799354, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: maxDimensions.x
