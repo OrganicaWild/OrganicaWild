@@ -29,7 +29,7 @@ public class ConnectedAreaTrigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         var fillPercent = timeSinceActivated / secondsToWait;
-        Debug.Log(fillPercent);
+      
         progressCircleImage.fillAmount = fillPercent;
         timeSinceActivated += Time.deltaTime;
         
