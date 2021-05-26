@@ -33,9 +33,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="remove z-fighting and flip of game world">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" afterDir="false" />
-    </list>
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="remove debug print statement in ConnectedAreaTrigger.cs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,6 +75,7 @@
     <setting file="mock:///Users/cvoegele/Development/OrganicaWild/Assets/FreeVegetation-LowPolyNature/FreeVegetation/Prefabs/Bush_1_1.prefab" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkAreaStep.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/LoadSceneOnTriggerEnter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -256,14 +255,7 @@
       <workItem from="1620316630892" duration="882000" />
       <workItem from="1621258360154" duration="2516000" />
       <workItem from="1621590421733" duration="1893000" />
-      <workItem from="1621594441188" duration="23513000" />
-    </task>
-    <task id="LOCAL-00033" summary="add landmark placement">
-      <created>1619615095917</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1619615095917</updated>
+      <workItem from="1621594441188" duration="24131000" />
     </task>
     <task id="LOCAL-00034" summary="change comment in LandmarkPlacementStep.cs">
       <created>1619615516197</created>
@@ -601,7 +593,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622019971832</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="remove debug print statement in ConnectedAreaTrigger.cs">
+      <created>1622020015031</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1622020015031</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +659,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="merge organica-recipes into feature/organic-pipeline" />
     <MESSAGE value="change Triangulation of Polygon to care about holes" />
     <MESSAGE value="add outside border recipe" />
     <MESSAGE value="add new paired area recipe" />
@@ -685,7 +683,8 @@
     <MESSAGE value="remove LOD on grass" />
     <MESSAGE value="change pipeline parameters for connected areas" />
     <MESSAGE value="remove z-fighting and flip of game world" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove z-fighting and flip of game world" />
+    <MESSAGE value="remove debug print statement in ConnectedAreaTrigger.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove debug print statement in ConnectedAreaTrigger.cs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

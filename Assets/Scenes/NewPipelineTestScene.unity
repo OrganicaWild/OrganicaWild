@@ -1098,7 +1098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: layerDistance.y
-      value: 1
+      value: 0.00001
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: positionOfWorld.y
