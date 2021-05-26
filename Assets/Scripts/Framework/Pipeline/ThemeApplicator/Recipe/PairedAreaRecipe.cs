@@ -44,8 +44,6 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 mesh = new GameObject();
             }
 
-            mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
-
             //create random seed based on polygon shape
             OwPolygon shape = individual.Shape as OwPolygon;
             Vector2 centroid = individual.Shape.GetCentroid();
@@ -90,11 +88,10 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 {
                     //first one is centerpiece
                     Vector2 vector2 = points[i];
-                    Vector3 worldPos = new Vector3(vector2.x, 0, vector2.y);
 
                     GameObject instantiated =
-                        Instantiate(centerPieces[(int) (lRandom.NextDouble() * centerPieces.Length)],
-                            worldPos, Quaternion.identity);
+                        GameObjectCreation.InstantiatePrefab(centerPieces[(int) (lRandom.NextDouble() * centerPieces.Length)],
+                            vector2);
                     instantiated.transform.parent = mesh.transform;
                 }
                 else
@@ -112,10 +109,10 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                         
                         foreach (Vector2 flowerPatchPoint in flowerPatchPoints)
                         {
-                            Vector3 worldPos = new Vector3(flowerPatchPoint.x, 0, flowerPatchPoint.y);
+                            //Vector3 worldPos = new Vector3(flowerPatchPoint.x, flowerPatchPoint.y);
                             GameObject instantiated =
-                                Instantiate(vegetationPrefabs[(int) (lRandom.NextDouble() * vegetationPrefabs.Length)],
-                                    worldPos, Quaternion.identity);
+                                GameObjectCreation.InstantiatePrefab(vegetationPrefabs[(int) (lRandom.NextDouble() * vegetationPrefabs.Length)],
+                                    flowerPatchPoint);
                             instantiated.transform.parent = flowerPatch.transform;
                         }
 
@@ -124,11 +121,11 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                     else
                     {
                         Vector2 vector2 = points[i];
-                        Vector3 worldPos = new Vector3(vector2.x, 0, vector2.y);
+                        //Vector3 worldPos = new Vector3(vector2.x, vector2.y);
 
                         GameObject instantiated =
-                            Instantiate(trees[(int) (lRandom.NextDouble() * trees.Length)],
-                                worldPos, Quaternion.identity);
+                            GameObjectCreation.InstantiatePrefab(trees[(int) (lRandom.NextDouble() * trees.Length)],
+                                vector2);
                         instantiated.transform.parent = mesh.transform;
                     }
 

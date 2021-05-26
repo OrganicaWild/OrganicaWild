@@ -1054,23 +1054,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799334, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: dimensions.x
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799334, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: dimensions.y
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: sizeP
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: radiusP
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: rejectionP
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: maxCircleSize
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799344, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: minCircleSize
@@ -1082,16 +1086,86 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799354, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: maxDimensions.x
-      value: 49
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799354, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: maxDimensions.y
-      value: 49
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: flipYAndZ
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: layerDistance.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: positionOfWorld.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.size
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[23].name
+      value: landmarkPair12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[24].name
+      value: landmarkPair14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[25].name
+      value: landmarkPair15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[26].name
+      value: landmarkPair11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[27].name
+      value: landmarkPair13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[28].name
+      value: landmarkPair10
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: recipes.Array.data[22].recipe
       value: 
       objectReference: {fileID: 11400000, guid: b12ed2e6368b7408687971c968137b53,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[23].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: d5b3db0046e03b84eab7a33919fa2afe,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[24].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: d5b3db0046e03b84eab7a33919fa2afe,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[25].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: d5b3db0046e03b84eab7a33919fa2afe,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[26].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: d5b3db0046e03b84eab7a33919fa2afe,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[27].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: d5b3db0046e03b84eab7a33919fa2afe,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[28].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: d5b3db0046e03b84eab7a33919fa2afe,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}

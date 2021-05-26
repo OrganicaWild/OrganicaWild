@@ -35,9 +35,7 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 Console.WriteLine(e);
                 mesh = new GameObject();
             }
-
-            mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
-
+            
             Vector2 center2d = individual.Shape.GetCentroid();
             Vector3 center3d = new Vector3(center2d.x, 0, center2d.y);
             
@@ -45,8 +43,8 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
             Rect boundingBox = areaShape.GetBoundingBox();
             BoxCollider collider = mesh.AddComponent<BoxCollider>();
             collider.isTrigger = true;
-            collider.center = ((Vector3)boundingBox.center) + new Vector3(0,0,-10);
-            collider.size = new Vector3(boundingBox.width, boundingBox.height, 20);
+            collider.center = (new Vector3(boundingBox.center.x, 0, boundingBox.center.y));
+            collider.size = new Vector3(boundingBox.width, 20,boundingBox.height);
 
             ConnectedAreaTrigger connectedAreaTrigger = mesh.AddComponent<ConnectedAreaTrigger>();
             string groupString = $"{individual.Type.Last()}";
@@ -67,24 +65,22 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 foreach (Vector2 point in circle.GetPoints())
                 {
                     Vector2 offset = (Vector2Extensions.GetRandomNormalizedVector(lRandom) - new Vector2(0.5f, 0.5f)) / (maxRadius - i * radiusPerRing);
-                    Vector2 vector2 = point;
-                    vector2 += offset;
+                    Vector2 position = point;
+                    position += offset;
 
-                    Vector3 worldPos = new Vector3(vector2.x, 0, vector2.y);
-
-                    var prefab = prefabs[(int) (lRandom.NextDouble() * prefabs.Length)];
+                    GameObject prefab = prefabs[(int) (lRandom.NextDouble() * prefabs.Length)];
                     GameObject instantiated =
-                        Instantiate(prefab,
-                            worldPos, Quaternion.identity);
+                        GameObjectCreation.InstantiatePrefab(prefab,
+                            position);
                     instantiated.transform.parent = mesh.transform;
                     instantiated.transform.localScale = prefab.transform.localScale * scale;
                 }
             }
 
-            Vector3 center = new Vector3(areaShape.GetCentroid().x, 0, areaShape.GetCentroid().y);
+            //Vector3 center = new Vector3(areaShape.GetCentroid().x, areaShape.GetCentroid().y);
             GameObject centerPiece =
-                Instantiate(centerPiecePrefabs[(int) (lRandom.NextDouble() * centerPiecePrefabs.Length)],
-                   center , Quaternion.identity);
+                GameObjectCreation.InstantiatePrefab(centerPiecePrefabs[(int) (lRandom.NextDouble() * centerPiecePrefabs.Length)],
+                   areaShape.GetCentroid());
             centerPiece.transform.parent = mesh.transform;
 
             return mesh;

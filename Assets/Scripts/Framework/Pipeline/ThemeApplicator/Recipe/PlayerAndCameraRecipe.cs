@@ -29,11 +29,12 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                     Console.WriteLine(e);
                     mesh = new GameObject();
                 }
-                mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+               
                 Vector2 pos2d = poly.GetCentroid();
                 //move camera to position;
-                Vector3 pos3d = new Vector3(pos2d.x, 0, pos2d.y);
-                GameObject instantiated = Instantiate(cameraAndPlayerRig, basePosition + pos3d, Quaternion.identity);
+                Vector3 pos3d = new Vector3(pos2d.x,  pos2d.y);
+                GameObject instantiated = GameObjectCreation.InstantiatePrefab (cameraAndPlayerRig, pos2d);
+                instantiated.transform.position += basePosition;
                 instantiated.transform.parent = mesh.transform;
                 return mesh;
             }

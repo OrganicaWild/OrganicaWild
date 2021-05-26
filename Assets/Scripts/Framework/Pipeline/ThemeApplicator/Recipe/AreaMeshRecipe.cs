@@ -25,7 +25,6 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 mesh = new GameObject();
             }
             
-            mesh.transform.localRotation = Quaternion.Euler(new Vector3(90f, 0,0));
             return mesh;
         }
     }

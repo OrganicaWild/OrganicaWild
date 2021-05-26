@@ -1,17 +1,15 @@
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using Framework.Pipeline.Geometry;
-using Framework.Pipeline.Geometry.Interactors;
 using g3;
-using Polybool.Net.Objects;
 using UnityEngine;
 
 namespace Framework.Util
 {
     public class GameObjectCreation
     {
+
+        public static bool YtoZ = false;
+        
         public static GameObject CombineMeshesFromPolygon(OwPolygon polygon, Material material)
         {
             List<Mesh> meshes = GetMeshesFromPolygon(polygon);
@@ -52,12 +50,39 @@ namespace Framework.Util
                 triangulatedPolygonGenerator.Clockwise = true;
                 MeshGenerator mesh = triangulatedPolygonGenerator.Generate();
                 Mesh unityMesh = new Mesh();
-                mesh.MakeMesh(unityMesh, true);
+                mesh.MakeMesh(unityMesh);
+                Vector3[] vertices = unityMesh.vertices;
+                Vector3[] normals = unityMesh.normals;
+
+                if (YtoZ)
+                {
+                    for (int index = 0; index < vertices.Length; index++)
+                    {
+                        Vector3 vertex = vertices[index];
+                        vertices[index] = new Vector3(vertex.x, 0, vertex.y);
+                    }
+
+                    /*for (int i = 0; i < normals.Length; i++)
+                    {
+                        normals[i] = new Vector3(0, 1, 0);
+                    }*/
+                }
+                
+                unityMesh.vertices = vertices;
+                unityMesh.RecalculateNormals();
+                unityMesh.RecalculateBounds();
 
                 result.Add(unityMesh);
             }
             
             return result;
+        }
+
+
+        public static GameObject InstantiatePrefab(GameObject prefab, Vector2 position)
+        {
+            Vector3 worldPosition = new Vector3(position.x, YtoZ ? 0 : position.y, YtoZ ? position.y : 0);
+            return Object.Instantiate(prefab, worldPosition, Quaternion.identity);
         }
     }
 }

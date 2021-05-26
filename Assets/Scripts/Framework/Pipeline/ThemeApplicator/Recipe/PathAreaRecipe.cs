@@ -32,8 +32,6 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 mesh = new GameObject();
             }
 
-            mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
-            
             float[,] noiseMap =
                 PerlinNoise.GenerateNoiseMap(random, size.x, size.y, 20, 6, 2, 1, Vector2.zero);
             Vector2 center = individual.Shape.GetCentroid();
@@ -58,11 +56,10 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                     if (isContained && noiseValue > 0.5)
                     {
                         float scale = (float) (random.NextDouble() * (maxScale - minScale) + minScale);
-                        Vector3 worldPos = new Vector3(pos.x, 0, pos.y);
-
+                        
                         GameObject instantiated =
-                            Instantiate(prefabs[(int) (random.NextDouble() * prefabs.Length)],
-                                worldPos, Quaternion.identity);
+                            GameObjectCreation.InstantiatePrefab(prefabs[(int) (random.NextDouble() * prefabs.Length)],
+                                pos);
                         instantiated.transform.parent = mesh.transform;
                         instantiated.transform.localScale = new Vector3(scale, scale, scale);
                     }

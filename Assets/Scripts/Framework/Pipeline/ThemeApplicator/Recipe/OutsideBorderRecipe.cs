@@ -37,8 +37,6 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 Console.WriteLine(e);
                 mesh = new GameObject();
             }
-        
-            mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0,0));
 
             Vector2 middle = outerWorldPerimeter.GetCentroid();
             List<GeneralPolygon2d> g3Polygon = outerWorldPerimeter.Getg3Polygon();
@@ -59,7 +57,7 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                     {
                         GameObject prefab =
                             backGroundObjectsPrefab[(int) (random.NextDouble() * (backGroundObjectsPrefab.Count()))];
-                        GameObject instantiated = Instantiate(prefab, new Vector3(point.x, 0, point.y), Quaternion.identity);
+                        GameObject instantiated = GameObjectCreation.InstantiatePrefab(prefab, point);
                         instantiated.transform.parent = mesh.transform;
                     }
                 }

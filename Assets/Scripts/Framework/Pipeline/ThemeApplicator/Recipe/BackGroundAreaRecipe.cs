@@ -32,8 +32,6 @@ public class BackGroundAreaRecipe : GameWorldObjectRecipe
             Console.WriteLine(e);
             mesh = new GameObject();
         }
-        
-        mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0,0));
 
         Vector2 middle = areaShape.GetCentroid();
 
@@ -45,7 +43,7 @@ public class BackGroundAreaRecipe : GameWorldObjectRecipe
             {
                 GameObject prefab =
                     backGroundObjectsPrefab[(int) (random.NextDouble() * (backGroundObjectsPrefab.Count()))];
-                GameObject instantiated = Instantiate(prefab, new Vector3(point.x, 0, point.y), Quaternion.identity);
+                GameObject instantiated = GameObjectCreation.InstantiatePrefab(prefab, point);
                 instantiated.transform.parent = mesh.transform;
             }
         }

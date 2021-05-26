@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraAndPlayerRig: {fileID: 3135639967098339637, guid: 68b262523ecea5a4f9c6e6ca33773a73,
     type: 3}
-  basePosition: {x: 0, y: 5, z: -5}
+  basePosition: {x: 0, y: 5, z: 0}
   meshMaterial: {fileID: 2100000, guid: 00762f9489175e8489d082ff63e5b043, type: 2}

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.ThemeApplicator.Recipe;
+using Framework.Util;
 using UnityEngine;
 
 namespace Framework.Pipeline.ThemeApplicator
@@ -16,23 +17,29 @@ namespace Framework.Pipeline.ThemeApplicator
 
         private string warningText;
         private bool hasWarning = false;
-        public float layerDistance;
+        
+        public Vector3 layerDistance;
         public Vector3 positionOfWorld;
         private PipelineManager manager;
+        public bool flipYAndZ;
         public bool HasWarning => hasWarning;
+        private int alreadyCooked;
+        
 
         public GameObject Apply(GameWorld world)
         {
             this.manager = GetComponent<PipelineManager>();
             MakeCookBook();
             root = new GameObject();
-
+            GameObjectCreation.YtoZ = flipYAndZ;
+            alreadyCooked = 0;
+            
             if (cookbook.ContainsKey(world.Root.Type))
             {
                 GameObject cooked = CookGameWorldObject(0,world.Root);
                 cooked.transform.parent = root.transform;
             }
-
+            
             int childrenWithNoRecipeCount = InterpretLayer(world.Root, 1);
 
             if (childrenWithNoRecipeCount > 0)
@@ -46,6 +53,7 @@ namespace Framework.Pipeline.ThemeApplicator
                 hasWarning = false;
             }
 
+            //root.transform.localRotation = Quaternion.Euler(90f,0,0);
             return root;
         }
 
@@ -144,7 +152,8 @@ namespace Framework.Pipeline.ThemeApplicator
             cookbook[child.Type].random = manager.pipeLineRunner.Random;
             GameObject cooked = cookbook[child.Type].Cook(child);
             cooked.transform.parent = root.transform;
-            cooked.transform.position += new Vector3(0, 0, depth * layerDistance);
+            cooked.transform.position += alreadyCooked * layerDistance;
+            alreadyCooked++;
             return cooked;
         }
 

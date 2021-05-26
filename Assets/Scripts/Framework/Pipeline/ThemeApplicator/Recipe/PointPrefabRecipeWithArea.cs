@@ -29,12 +29,10 @@ namespace Framework.Pipeline.ThemeApplicator.Recipe
                 Console.WriteLine(e);
                 mesh = new GameObject();
             }
-            mesh.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+           
             Vector2 point = individual.Shape.GetCentroid();
             GameObject landmarkPrefab = landmarkPrefabs[(int) (random.NextDouble() * (landmarkPrefabs.Length))];
-            GameObject instantiate = Instantiate(landmarkPrefab);
-            instantiate.transform.position =
-                landmarkPrefab.transform.position + new Vector3(point.x, 0,point.y);
+            GameObject instantiate = GameObjectCreation.InstantiatePrefab(landmarkPrefab, point);
             instantiate.transform.rotation = landmarkPrefab.transform.rotation ;
             Vector3 scale = Vector3.Lerp(minScale, maxScale, (float) random.NextDouble());
             instantiate.transform.localScale = scale;
