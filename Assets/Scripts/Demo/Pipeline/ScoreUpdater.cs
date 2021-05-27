@@ -11,10 +11,10 @@ public class ScoreUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (prevScore != GameManager.Get().foundAreas)
+        if (prevScore != GameManager.foundAreas)
         {
-            int totalAreas = GameManager.Get().uniqueAreasAmount;
-            int foundAreas = GameManager.Get().foundAreas;
+            int totalAreas = GameManager.uniqueAreasAmount;
+            int foundAreas = GameManager.foundAreas;
 
             scoreText.text = $"{foundAreas} von {totalAreas} einzigartigen Gebietsarten gefunden";
             prevScore = foundAreas;

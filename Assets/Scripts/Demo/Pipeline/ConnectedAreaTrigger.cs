@@ -38,7 +38,7 @@ public class ConnectedAreaTrigger : MonoBehaviour
             progressCircleImage.fillAmount = 0;
             groupsActivated[partOfGroupX] = true;
             Instantiate(toSpawn, spawnPoint, Quaternion.identity);
-            GameManager.Get().foundAreas++;
+            GameManager.foundAreas++;
         }
     }
 

@@ -6,8 +6,8 @@ public class LoadSceneOnTriggerEnter : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.Get().foundAreas = 0;
-        GameManager.Get().uniqueAreasAmount = 0;
+        GameManager.foundAreas = 0;
+        GameManager.uniqueAreasAmount = 0;
         SceneManager.LoadScene("StartScene");
     }
 }

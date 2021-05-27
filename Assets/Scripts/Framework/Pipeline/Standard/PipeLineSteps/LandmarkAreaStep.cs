@@ -42,7 +42,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             int areasWithLandmarksSum = (int) (areasWithLandmarks.Count() * landMarkIsAreaPercentage);
             int pairs = areasWithLandmarksSum / 2;
 
-            GameManager.Get().uniqueAreasAmount = pairs;
+            GameManager.uniqueAreasAmount = pairs;
 
             //create pairs / triples / quadruples etc..
             for (int pair = 0; pair < pairs; pair++)
