@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.ThemeApplicator.Recipe;
 using Framework.Util;
@@ -10,38 +12,74 @@ namespace Framework.Pipeline.ThemeApplicator
     public class ThemeApplicator : MonoBehaviour, IThemeApplicator
     {
         private GameObject root;
-
         public List<TypeRecipeCombination> recipes;
-
         private Dictionary<string, GameWorldObjectRecipe> cookbook;
 
         private string warningText;
         private bool hasWarning = false;
-        
+
         public Vector3 layerDistance;
         public Vector3 positionOfWorld;
         private PipelineManager manager;
         public bool flipYAndZ;
         public bool HasWarning => hasWarning;
         private int alreadyCooked;
-        
 
-        public GameObject Apply(GameWorld world)
+        private void Start()
         {
-            this.manager = GetComponent<PipelineManager>();
+            manager = GetComponent<PipelineManager>();
+        }
+
+        public IEnumerator ApplyTheme(GameWorld world)
+        {
             MakeCookBook();
-            root = new GameObject();
+
+            root = new GameObject("WorldRoot");
+            root.transform.parent = transform;
+
             GameObjectCreation.YtoZ = flipYAndZ;
             alreadyCooked = 0;
-            
-            if (cookbook.ContainsKey(world.Root.Type))
-            {
-                GameObject cooked = CookGameWorldObject(0,world.Root);
-                cooked.transform.parent = root.transform;
-            }
-            
-            int childrenWithNoRecipeCount = InterpretLayer(world.Root, 1);
 
+            //cook each GameObject with its given recipe
+            Queue<Tuple<IGameWorldObject, Transform>> cookingQueue = new Queue<Tuple<IGameWorldObject, Transform>>();
+            int childrenWithNoRecipeCount = 0;
+
+            //start queue
+            cookingQueue.Enqueue(new Tuple<IGameWorldObject, Transform>(world.Root, root.transform));
+
+            while (cookingQueue.Any())
+            {
+                yield return null;
+                (IGameWorldObject next, Transform parentTransform) = cookingQueue.Dequeue();
+
+                if (next.Type != null)
+                {
+                    if (!cookbook.ContainsKey(next.Type) || cookbook[next.Type] == null)
+                    {
+                        childrenWithNoRecipeCount++;
+                        Debug.LogWarning($"The cook book does not contain a recipe for {next.Type}.");
+                    }
+                    else
+                    {
+                        //cook object
+                        GameObject cooked = CookGameWorldObject(next);
+                        cooked.transform.parent = parentTransform;
+                        parentTransform = cooked.transform;
+                        alreadyCooked++;
+                    }
+                }
+
+                foreach (IGameWorldObject child in next.GetChildren())
+                {
+                    cookingQueue.Enqueue(new Tuple<IGameWorldObject, Transform>(child, parentTransform));
+                }
+            }
+
+            yield return null;
+
+            //int childrenWithNoRecipeCount = InterpretLayer(world.Root, 1);
+
+            //set warning
             if (childrenWithNoRecipeCount > 0)
             {
                 hasWarning = true;
@@ -52,12 +90,14 @@ namespace Framework.Pipeline.ThemeApplicator
             {
                 hasWarning = false;
             }
-
-            //root.transform.localRotation = Quaternion.Euler(90f,0,0);
-            return root;
         }
 
-        public void FindAllTypes()
+        public void StartFindAllTypes()
+        {
+            StartCoroutine(FindAllTypes());
+        }
+
+        private IEnumerator FindAllTypes()
         {
             manager = GetComponent<PipelineManager>();
 
@@ -69,41 +109,41 @@ namespace Framework.Pipeline.ThemeApplicator
                     recipes = new List<TypeRecipeCombination>();
                 }
 
-                GameWorld exampleGameWorld = manager.pipeLineRunner.Execute();
+                GameWorld exampleGameWorld = null;
+                yield return StartCoroutine(manager.pipeLineRunner.Execute(gameWorld => exampleGameWorld = gameWorld));
 
-                if (exampleGameWorld.Root.Type != null)
+                //stop if root is null
+                if (exampleGameWorld.Root == null)
                 {
-                    TypeRecipeCombination combination = new TypeRecipeCombination(exampleGameWorld.Root.Type);
+                    yield break;
+                }
+
+                //BFS through tree to find all types
+                Stack<IGameWorldObject> childrenToTest = new Stack<IGameWorldObject>();
+                childrenToTest.Push(exampleGameWorld.Root);
+
+                while (childrenToTest.Any())
+                {
+                    IGameWorldObject top = childrenToTest.Pop();
+                    TypeRecipeCombination combination = new TypeRecipeCombination(top.Type);
 
                     if (!recipes.Contains(combination))
                     {
                         recipes.Add(combination);
                     }
-                }
 
-                FindTypeInLayer(exampleGameWorld.Root);
+
+                    foreach (IGameWorldObject child in top.GetChildren())
+                    {
+                        childrenToTest.Push(child);
+                    }
+
+                    yield return null;
+                }
             }
             else
             {
                 throw new Exception("This Object also needs a PipelineManager");
-            }
-        }
-
-        private void FindTypeInLayer(IGameWorldObject parent)
-        {
-            foreach (IGameWorldObject child in parent.GetChildren())
-            {
-                if (child.Type != null)
-                {
-                    TypeRecipeCombination combination = new TypeRecipeCombination(child.Type);
-
-                    if (!recipes.Contains(combination))
-                    {
-                        recipes.Add(combination);
-                    }
-                }
-
-                FindTypeInLayer(child);
             }
         }
 
@@ -117,37 +157,7 @@ namespace Framework.Pipeline.ThemeApplicator
             }
         }
 
-        private int InterpretLayer(IGameWorldObject parent, float depth)
-        {
-            int childrenWithNoRecipeCount = 0;
-            foreach (IGameWorldObject child in parent.GetChildren())
-            {
-                childrenWithNoRecipeCount += InterpretLayer(child, depth + 1);
-
-                //children that do not have a type are expected to not be drawn and do not show a warning
-                if (child.Type == null)
-                {
-                    continue;
-                }
-
-                if (!cookbook.ContainsKey(child.Type))
-                {
-                    Debug.LogError($"The cook book does not contain a recipe for {child.Type}.");
-                }
-
-                if (cookbook[child.Type] == null)
-                {
-                    childrenWithNoRecipeCount++;
-                    continue;
-                }
-
-                GameObject cooked = CookGameWorldObject(depth, child);
-            }
-
-            return childrenWithNoRecipeCount;
-        }
-
-        private GameObject CookGameWorldObject(float depth, IGameWorldObject child)
+        private GameObject CookGameWorldObject(IGameWorldObject child)
         {
             cookbook[child.Type].random = manager.pipeLineRunner.Random;
             GameObject cooked = cookbook[child.Type].Cook(child);

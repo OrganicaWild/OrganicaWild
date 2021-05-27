@@ -9,7 +9,7 @@ namespace Demo.Pipeline
     public class DebugPipelineStep : MonoBehaviour
     {
         private GameWorld endWorld;
-        
+
         public EmptyStep emptyStep;
         public AreaPlacementStep areaPlacementStep;
         public AreaRefinementStep areaRefinementStep;
@@ -18,6 +18,7 @@ namespace Demo.Pipeline
         public BackGroundNoiseStep backGroundNoiseStep;
 
         public ThemeApplicator themeApplicator;
+
         private void Start()
         {
             PipeLineRunner runner = new PipeLineRunner(Environment.TickCount);
@@ -27,9 +28,11 @@ namespace Demo.Pipeline
             runner.AddStep(areaRefinementStep);
             runner.AddStep(borderStep);
             runner.AddStep(backGroundNoiseStep);
-            endWorld = runner.Execute();
+
+            StartCoroutine(runner.Execute(gameWorld => endWorld = gameWorld));
+            //runner.Execute();
             runner.SetThemeApplicator(themeApplicator);
-            GameObject world = runner.ApplyTheme();
+            //GameObject world = runner.ApplyTheme();
         }
 
         private void OnDrawGizmos()

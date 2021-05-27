@@ -20,36 +20,43 @@ public class PipelineManager : MonoBehaviour
 
     public PipeLineRunner pipeLineRunner;
 
-    public bool hasError { get; set; }
-    public string errorText { get; set; }
+    public bool hasError { get; private set; }
+    public string errorText { get; private set; }
     [SerializeField] public bool startOnStartup;
     private GameObject builtWorld;
     private ThemeApplicator themeApplicator;
 
-    public void Generate()
+    public IEnumerator Generate()
     {
         if (hasError)
         {
-            return;
+            yield break;
         }
 
+        //clean up old level
         List<GameObject> children = new List<GameObject>();
         foreach (Transform child in transform)
         {
             children.Add(child.gameObject);
         }
 
-        children.ForEach(DestroyImmediate);
-
-        themeApplicator = GetComponent<ThemeApplicator>();
-        GameWorld = pipeLineRunner.Execute();
-        if (themeApplicator != null)
+        foreach (GameObject child in children)
         {
-            //only apply theme if there is a ThemeApplicator as a Component
-            pipeLineRunner.SetThemeApplicator(themeApplicator);
-            builtWorld = pipeLineRunner.ApplyTheme();
-            builtWorld.transform.parent = this.transform;
+            DestroyImmediate(child);
+            yield return null;
         }
+        
+        yield return StartCoroutine(pipeLineRunner.Execute(gameWorld => GameWorld = gameWorld));
+        
+        //only apply theme if there is a ThemeApplicator as a Component
+        themeApplicator = GetComponent<ThemeApplicator>();
+        if (themeApplicator == null)
+        {
+            yield break;
+        }
+        
+        //apply theme
+        yield return StartCoroutine(themeApplicator.ApplyTheme(GameWorld));
     }
     
     public void Setup()

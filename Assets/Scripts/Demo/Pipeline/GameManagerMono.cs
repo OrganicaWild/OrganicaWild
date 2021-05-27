@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Demo.Pipeline;
 using UnityEngine;
@@ -14,13 +15,13 @@ namespace Demo
         public GameObject pipelineManagerObject;
         public Image progressCircleImage;
 
-        private void Start()
+        private IEnumerator Start()
         {
             PipelineManager manager = pipelineManagerObject.GetComponent<PipelineManager>();
             ConnectedAreaTrigger.SetAllToFalse();
             manager.seed = Environment.TickCount;
             manager.Setup();
-            manager.Generate();
+            yield return StartCoroutine(manager.Generate());
             
             //assign progress canvas/image to every trigger
             ConnectedAreaTrigger[] triggers = pipelineManagerObject.GetComponentsInChildren<ConnectedAreaTrigger>();

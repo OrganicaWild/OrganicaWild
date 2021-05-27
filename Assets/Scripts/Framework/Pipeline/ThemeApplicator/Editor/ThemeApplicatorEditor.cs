@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using Framework.Pipeline.GameWorldObjects;
-using Framework.Pipeline.ThemeApplicator.Recipe;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Framework.Pipeline.ThemeApplicator.Editor
 {
@@ -23,7 +18,7 @@ namespace Framework.Pipeline.ThemeApplicator.Editor
             
             if (GUILayout.Button("Find All Types"))
             {
-                applicator.FindAllTypes();
+               applicator.StartFindAllTypes();
             }
             
             DrawDefaultInspector();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +12,7 @@ namespace Framework.Pipeline
     {
         private readonly IList<PipelineStep> executionPipeline;
         private IThemeApplicator themeApplicator;
-        private GameWorld world;
+        public GameWorld World { get; private set; }
 
         public Random Random { get; }
         public int Seed { get; }
@@ -44,7 +45,9 @@ namespace Framework.Pipeline
         {
             PipelineStep previous = executionPipeline.LastOrDefault();
             Type[] requiredGuarantees = step.RequiredGuarantees;
-            if (requiredGuarantees.All(requiredAttribute => previous?.GetType().GetCustomAttributes().Any(attribute => attribute.GetType() == requiredAttribute) ?? true))
+            if (requiredGuarantees.All(requiredAttribute =>
+                previous?.GetType().GetCustomAttributes().Any(attribute => attribute.GetType() == requiredAttribute) ??
+                true))
             {
                 executionPipeline.Add(step);
                 step.random = Random;
@@ -54,7 +57,7 @@ namespace Framework.Pipeline
                 throw new IllegalExecutionOrderException();
             }
         }
-        
+
 
         public void SetThemeApplicator(IThemeApplicator themeApplicator)
         {
@@ -64,17 +67,15 @@ namespace Framework.Pipeline
             }
         }
 
-        public GameWorld Execute()
+        public IEnumerator Execute(Action<GameWorld> callback)
         {
-            
-            foreach (PipelineStep step in executionPipeline) world = step.Apply(world);
+            foreach (PipelineStep step in executionPipeline)
+            {
+                yield return null;
+                World = step.Apply(World);
+            }
 
-            return world;
-        }
-
-        public GameObject ApplyTheme()
-        {
-            return themeApplicator.Apply(world);
+            callback(World);
         }
     }
 }

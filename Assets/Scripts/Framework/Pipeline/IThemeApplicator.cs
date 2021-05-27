@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Framework.Pipeline
 {
     public interface IThemeApplicator
     {
-        GameObject Apply(GameWorld world);
+        IEnumerator ApplyTheme(GameWorld world);
     }
 }

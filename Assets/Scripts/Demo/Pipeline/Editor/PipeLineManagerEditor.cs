@@ -12,8 +12,6 @@ namespace Demo.Pipeline.Editor
         {
             PipelineManager manager = (PipelineManager) target;
             
-           
-
             if (manager.hasError)
             {
                 EditorGUILayout.HelpBox(manager.errorText, MessageType.Error);
@@ -37,7 +35,7 @@ namespace Demo.Pipeline.Editor
         private void Generate(PipelineManager manager)
         {
             manager.Setup();
-            manager.Generate();
+            manager.StartCoroutine(manager.Generate());
         }
     }
 }
