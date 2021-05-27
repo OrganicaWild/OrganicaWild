@@ -1,26 +1,29 @@
-﻿public class Cell<CellState>
+﻿namespace Framework.Cellular_Automata.Generic
 {
-    public CellState CurrentState { get; set; }
-    public Cell<CellState>[] Neighbors { get; set; }
-    private CellState NextState { get; set; }
-    public CellNetwork<CellState> Network { get; set; }
-
-    public Cell(CellState state)
+    public class Cell<CellState>
     {
-        CurrentState = state;
-    }
+        public CellState CurrentState { get; set; }
+        public Cell<CellState>[] Neighbors { get; set; }
+        private CellState NextState { get; set; }
+        public CellNetwork<CellState> Network { get; set; }
 
-    public Cell()
-    {
-    }
+        public Cell(CellState state)
+        {
+            CurrentState = state;
+        }
 
-    public void CalculateUpdate()
-    {
-        NextState = Network.UpdateRules[CurrentState].ApplyTo(this);
-    }
+        public Cell()
+        {
+        }
 
-    public void ExecuteUpdate()
-    {
-        CurrentState = NextState;
+        public void CalculateUpdate()
+        {
+            NextState = Network.UpdateRules[CurrentState].ApplyTo(this);
+        }
+
+        public void ExecuteUpdate()
+        {
+            CurrentState = NextState;
+        }
     }
 }

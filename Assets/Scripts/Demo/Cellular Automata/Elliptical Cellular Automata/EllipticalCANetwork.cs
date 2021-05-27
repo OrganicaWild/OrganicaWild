@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Demo.CellularAutomata;
 using Framework.Cellular_Automata;
+using Framework.Cellular_Automata.Legacy;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 

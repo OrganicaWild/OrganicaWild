@@ -1,6 +1,7 @@
-﻿using Assets.Scripts.Framework.Cellular_Automata.Polymorphic;
-
-public interface IPolymorphicUpdateRule
+﻿namespace Framework.Cellular_Automata.Polymorphic
 {
-    PolymorphicCellState ApplyTo(PolymorphicCell cell);
+    public interface IPolymorphicUpdateRule
+    {
+        PolymorphicCellState ApplyTo(PolymorphicCell cell);
+    }
 }

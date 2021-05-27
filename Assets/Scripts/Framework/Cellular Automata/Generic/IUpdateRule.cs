@@ -1,4 +1,7 @@
-﻿public interface IUpdateRule<CellState>
+﻿namespace Framework.Cellular_Automata.Generic
 {
-    CellState ApplyTo(Cell<CellState> cell);
+    public interface IUpdateRule<CellState>
+    {
+        CellState ApplyTo(Cell<CellState> cell);
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework.Cellular_Automata;
+using Framework.Cellular_Automata.Legacy;
 using UnityEngine;
 
 namespace Demo.Cellular_Automata

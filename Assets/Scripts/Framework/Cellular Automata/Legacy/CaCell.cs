@@ -1,4 +1,4 @@
-﻿namespace Framework.Cellular_Automata
+﻿namespace Framework.Cellular_Automata.Legacy
 {
     public abstract class CaCell
     {

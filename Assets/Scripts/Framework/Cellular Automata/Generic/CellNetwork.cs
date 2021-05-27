@@ -1,34 +1,37 @@
 ﻿using System.Collections.Generic;
 
-public class CellNetwork<CellState>
+namespace Framework.Cellular_Automata.Generic
 {
-    public Cell<CellState>[] Cells { get; }
-
-    public Dictionary<CellState, IUpdateRule<CellState>> UpdateRules { get; set; }
-
-    public CellNetwork(IEnumerable<Cell<CellState>> cells)
+    public class CellNetwork<CellState>
     {
-        foreach (Cell<CellState> cell in cells)
+        public Cell<CellState>[] Cells { get; }
+
+        public Dictionary<CellState, IUpdateRule<CellState>> UpdateRules { get; set; }
+
+        public CellNetwork(IEnumerable<Cell<CellState>> cells)
         {
-            cell.Network = this;
+            foreach (Cell<CellState> cell in cells)
+            {
+                cell.Network = this;
+            }
         }
-    }
 
-    public CellNetwork(IEnumerable<Cell<CellState>> cells, Dictionary<CellState, IUpdateRule<CellState>> updateRules)
-    {
-        foreach (Cell<CellState> cell in cells)
+        public CellNetwork(IEnumerable<Cell<CellState>> cells, Dictionary<CellState, IUpdateRule<CellState>> updateRules)
         {
-            cell.Network = this;
+            foreach (Cell<CellState> cell in cells)
+            {
+                cell.Network = this;
+            }
         }
-    }
 
-    public void Run(int iterations)
-    {
-        for (int i = 0; i < iterations; i++)
+        public void Run(int iterations)
         {
-            foreach (Cell<CellState> cell in Cells) cell.CalculateUpdate();
+            for (int i = 0; i < iterations; i++)
+            {
+                foreach (Cell<CellState> cell in Cells) cell.CalculateUpdate();
 
-            foreach (Cell<CellState> cell in Cells) cell.ExecuteUpdate();
+                foreach (Cell<CellState> cell in Cells) cell.ExecuteUpdate();
+            }
         }
     }
 }

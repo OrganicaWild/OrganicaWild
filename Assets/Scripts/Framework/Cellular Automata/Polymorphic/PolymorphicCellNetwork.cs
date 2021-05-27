@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.Demo.Pipeline.TrialPipeline;
+using Framework.Cellular_Automata.Generic;
 
-namespace Assets.Scripts.Framework.Cellular_Automata.Polymorphic
+namespace Framework.Cellular_Automata.Polymorphic
 {
     public class PolymorphicCellNetwork
     {

@@ -1,4 +1,3 @@
-using Framework.Pipeline.ThemeApplicator.Recipe;
 using UnityEngine;
 
 namespace Framework.Pipeline.GameWorldObjects

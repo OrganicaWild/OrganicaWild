@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Demo.Pipeline;
+using Framework.Pipeline.Standard;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
 
-namespace Demo
+namespace Demo.Pipeline
 {
     public class GameManagerMono : MonoBehaviour
     {
@@ -17,9 +15,9 @@ namespace Demo
 
         private IEnumerator Start()
         {
-            PipelineManager manager = pipelineManagerObject.GetComponent<PipelineManager>();
+            StandardPipelineManager manager = pipelineManagerObject.GetComponent<StandardPipelineManager>();
             ConnectedAreaTrigger.SetAllToFalse();
-            manager.seed = Environment.TickCount;
+            manager.Seed = Environment.TickCount;
             manager.Setup();
             yield return StartCoroutine(manager.Generate());
             

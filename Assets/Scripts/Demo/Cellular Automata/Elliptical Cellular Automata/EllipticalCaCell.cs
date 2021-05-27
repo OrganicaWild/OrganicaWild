@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Demo.CellularAutomata;
 using Framework.Cellular_Automata;
+using Framework.Cellular_Automata.Legacy;
 using UnityEngine;
 
 namespace Demo.Cellular_Automata.Elliptical_Cellular_Automata

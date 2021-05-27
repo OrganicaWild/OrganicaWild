@@ -1,28 +1,29 @@
-﻿using Assets.Scripts.Framework.Cellular_Automata.Polymorphic;
-
-public class PolymorphicCell
+﻿namespace Framework.Cellular_Automata.Polymorphic
 {
-    public object CurrentState { get; set; }
-    public PolymorphicCell[] Neighbors { get; set; }
-    private PolymorphicCellState NextState { get; set; }
-    public PolymorphicCellNetwork Network { get; set; }
-
-    public PolymorphicCell(PolymorphicCellState state)
+    public class PolymorphicCell
     {
-        CurrentState = state;
-    }
+        public object CurrentState { get; set; }
+        public PolymorphicCell[] Neighbors { get; set; }
+        private PolymorphicCellState NextState { get; set; }
+        public PolymorphicCellNetwork Network { get; set; }
 
-    public PolymorphicCell()
-    {
-    }
+        public PolymorphicCell(PolymorphicCellState state)
+        {
+            CurrentState = state;
+        }
 
-    public void CalculateUpdate()
-    {
-        NextState = Network.UpdateRules[CurrentState].ApplyTo(this);
-    }
+        public PolymorphicCell()
+        {
+        }
 
-    public void ExecuteUpdate()
-    {
-        CurrentState = NextState;
+        public void CalculateUpdate()
+        {
+            NextState = Network.UpdateRules[CurrentState].ApplyTo(this);
+        }
+
+        public void ExecuteUpdate()
+        {
+            CurrentState = NextState;
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿public interface IByteUpdateRule
+﻿namespace Framework.Cellular_Automata.Byte
 {
-    byte ApplyTo(ByteCell cell);
+    public interface IByteUpdateRule
+    {
+        byte ApplyTo(ByteCell cell);
+    }
 }

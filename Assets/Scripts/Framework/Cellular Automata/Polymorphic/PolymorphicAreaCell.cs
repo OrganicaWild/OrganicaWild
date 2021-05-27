@@ -1,13 +1,15 @@
 ﻿using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
-using Framework.Pipeline.ThemeApplicator.Recipe;
 
-public class PolymorphicAreaCell : Area
+namespace Framework.Cellular_Automata.Polymorphic
 {
-    public PolymorphicCell Cell { get; set; }
-
-    public PolymorphicAreaCell(IGeometry shape, PolymorphicCell cell, string type = null) : base(shape, type)
+    public class PolymorphicAreaCell : Area
     {
-        Cell = cell;
+        public PolymorphicCell Cell { get; set; }
+
+        public PolymorphicAreaCell(IGeometry shape, PolymorphicCell cell, string type = null) : base(shape, type)
+        {
+            Cell = cell;
+        }
     }
 }
