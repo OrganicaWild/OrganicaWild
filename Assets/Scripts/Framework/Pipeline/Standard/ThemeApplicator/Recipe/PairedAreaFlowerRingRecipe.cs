@@ -47,7 +47,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
             collider.size = new Vector3(boundingBox.width, 20,boundingBox.height);
 
             ConnectedAreaTrigger connectedAreaTrigger = mesh.AddComponent<ConnectedAreaTrigger>();
-            string groupString = $"{individual.Type.Last()}";
+            string groupString  = individual.Type.Replace("landmarkPair", "");
             connectedAreaTrigger.partOfGroupX = int.Parse(groupString);
             connectedAreaTrigger.toSpawn = toSpawn;
             connectedAreaTrigger.spawnPoint = new Vector3(boundingBox.center.x, 2, boundingBox.center.y);

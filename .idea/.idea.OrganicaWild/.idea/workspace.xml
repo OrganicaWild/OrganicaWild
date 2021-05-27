@@ -33,17 +33,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="refactor folder structure">
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="unify GameManager.cs">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/LoadSceneOnTriggerEnter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/LoadSceneOnTriggerEnter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/Recipe/PairedAreaFlowerRingRecipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/Recipe/PairedAreaFlowerRingRecipe.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +77,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1AC5F07D-268A-4976-9515-B60FB04F4104/b5/4a8cd83e/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/PlayerCharacter/RotateByTime.cs" root0="FORCE_HIGHLIGHTING" />
@@ -97,7 +92,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/Recipe/PlayerAndCameraRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/Recipe/PointPrefabRecipe.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/Recipe/PointPrefabRecipeWithArea.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/AreaConnectionPlacementStep.cs" />
@@ -148,6 +142,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/Recipe/PairedAreaFlowerRingRecipe.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -265,14 +260,7 @@
       <workItem from="1621258360154" duration="2516000" />
       <workItem from="1621590421733" duration="1893000" />
       <workItem from="1621594441188" duration="24620000" />
-      <workItem from="1622106041258" duration="11038000" />
-    </task>
-    <task id="LOCAL-00037" summary="add if pipeline has configuration error it cannot be started">
-      <created>1619622829170</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1619622829170</updated>
+      <workItem from="1622106041258" duration="17848000" />
     </task>
     <task id="LOCAL-00038" summary="remove bad scene">
       <created>1619622986762</created>
@@ -610,7 +598,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622119385545</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="unify GameManager.cs">
+      <created>1622119666565</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1622119666565</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -669,7 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add connected area trigger" />
     <MESSAGE value="add pipeline runner prefab" />
     <MESSAGE value="add cat into game" />
     <MESSAGE value="fix ConnectedAreaTrigger.cs" />
@@ -694,7 +688,8 @@
     <MESSAGE value="scene changes" />
     <MESSAGE value="add coroutines for creation of world" />
     <MESSAGE value="refactor folder structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor folder structure" />
+    <MESSAGE value="unify GameManager.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="unify GameManager.cs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -722,6 +717,19 @@
           <line>211</line>
           <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\MissionGraph.cs" initialLine="213" containingFunctionPresentation="method 'Traverse'" />
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs</url>
+          <line>50</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" initialLine="50" containingFunctionPresentation="method 'Apply'">
+            <startOffsets>
+              <option value="1835" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1928" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

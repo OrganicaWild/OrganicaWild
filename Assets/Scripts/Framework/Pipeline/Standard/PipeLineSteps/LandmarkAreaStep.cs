@@ -40,7 +40,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 areas.Where(area => area.HasAnyChildrenOfType<Landmark>() && area.Type != "start" && area.Type != "end")
                     .ToList();
             int areasWithLandmarksSum = (int) (areasWithLandmarks.Count() * landMarkIsAreaPercentage);
-            int pairs = areasWithLandmarksSum / 2;
+            int pairs = areasWithLandmarksSum / areaXTimes;
 
             GameManager.uniqueAreasAmount = pairs;
 
@@ -49,14 +49,14 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             {
                 //create unique Landmark
                 AreaTypeAssignmentStep.TypedArea[] chosenAreas = GetConnectedChosenAreas(areasWithLandmarks);
-                bool[] isInside = new bool[areaXTimes];
                 Landmark[] chosenLandmarks = new Landmark[areaXTimes];
                 OwPolygon[] movedCircle = new OwPolygon[areaXTimes];
 
-                for (int index = 0; index < chosenLandmarks.Length; index++)
+                for (int index = 0; index < areaXTimes; index++)
                 {
                     List<Landmark> allLandmarksInArea = chosenAreas[index].GetAllChildrenOfType<Landmark>().ToList();
-                    chosenLandmarks[index] =  allLandmarksInArea[(int) (random.NextDouble()) * (allLandmarksInArea.Count())];;
+                    chosenLandmarks[index] =
+                        allLandmarksInArea[(int) (random.NextDouble() * allLandmarksInArea.Count())];
                 }
 
                 OwPolygon uniqueShape = GetUniqueShape(chosenAreas, chosenLandmarks);
@@ -66,8 +66,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     movedCircle[index] = new OwPolygon(uniqueShape.representation);
                     movedCircle[index].MovePolygon(chosenLandmarks[index].Shape.GetCentroid());
                 }
-            
-            
+
                 /*bool shapeFits = false;
             int shapeTries = 0;
             OwPolygon uniqueShape = GetUniqueShape();
@@ -128,9 +127,12 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
                     foreach (Landmark otherLandmark in allLandmarksInArea)
                     {
-                        if (PolygonPointInteractor.Use().Contains(movedCircleI, otherLandmark.Shape as OwPoint))
+                        if (otherLandmark.Shape is OwPoint)
                         {
-                            chosenAreas[index].RemoveChild(otherLandmark);
+                            if (PolygonPointInteractor.Use().Contains(movedCircleI, otherLandmark.Shape as OwPoint))
+                            {
+                                chosenAreas[index].RemoveChild(otherLandmark);
+                            }
                         }
                     }
                 }
@@ -149,8 +151,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 {
                     areaIndices[i] = (int) (random.NextDouble() * (areasWithLandmarks.Count - 1));
                 }
-           
-            } while (areaIndices.Distinct().Count() == areaIndices.Length);
+            } while (areaIndices.Distinct().Count() != areaIndices.Length);
 
             AreaTypeAssignmentStep.TypedArea[] chosenAreas = new AreaTypeAssignmentStep.TypedArea[]
                 {areasWithLandmarks[areaIndices[0]], areasWithLandmarks[areaIndices[1]]};
@@ -169,15 +170,15 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 baseCircle = PolygonPolygonInteractor.Use().Union(baseCircle, circle);
 
                 //bool[] inside = new bool[areaXTimes];
-           
-            
+
+
                 //if all areas can contain this point at given landmark, move forward with this shape
                 /*if (inside.All(x => x))
             {*/
                 //baseCircle = newCircle;
                 /*}*/
             }
-        
+
             /*for (int i = 0; i < areaXTimes; i++)
         {
             Vector2 landmarkPos = chosenLandmarks[i].Shape.GetCentroid();

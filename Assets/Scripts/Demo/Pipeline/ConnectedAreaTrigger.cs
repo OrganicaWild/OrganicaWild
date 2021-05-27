@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Demo.Pipeline;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,10 +30,10 @@ public class ConnectedAreaTrigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         var fillPercent = timeSinceActivated / secondsToWait;
-      
+
         progressCircleImage.fillAmount = fillPercent;
         timeSinceActivated += Time.deltaTime;
-        
+
         if (timeSinceActivated > secondsToWait && !groupsActivated[partOfGroupX])
         {
             progressCircleImage.fillAmount = 0;
@@ -46,7 +47,7 @@ public class ConnectedAreaTrigger : MonoBehaviour
     {
         progressCircleImage.fillAmount = 0;
         if (timeSinceActivated < secondsToWait)
-        { 
+        {
             groupsActivated[partOfGroupX] = false;
             timeSinceActivated = 0;
         }
@@ -54,7 +55,7 @@ public class ConnectedAreaTrigger : MonoBehaviour
 
     public void SetImage(Image image)
     {
-        this.progressCircleImage = image;
+        progressCircleImage = image;
     }
 
     public static void SetAllToFalse()
@@ -68,6 +69,9 @@ public class ConnectedAreaTrigger : MonoBehaviour
         if (spawnPoint != Vector3.zero)
         {
             Gizmos.DrawCube(spawnPoint, Vector3.one);
+#if UNITY_EDITOR
+            Handles.Label(spawnPoint + new Vector3(0, 1, 0), $"{partOfGroupX}", new GUIStyle() {fontSize = 32});
+#endif
         }
     }
 }
