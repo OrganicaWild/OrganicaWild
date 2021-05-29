@@ -33,10 +33,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="fix generation in editor after coroutine has been added">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator.meta" beforeDir="false" />
-    </list>
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="restructure asset store assets" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,6 +72,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1AC5F07D-268A-4976-9515-B60FB04F4104/b5/4a8cd83e/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator.meta" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" root0="FORCE_HIGHLIGHTING" />
@@ -259,13 +257,6 @@
       <workItem from="1621594441188" duration="24620000" />
       <workItem from="1622106041258" duration="17927000" />
       <workItem from="1622277276863" duration="5812000" />
-    </task>
-    <task id="LOCAL-00040" summary="fix random seed assignment in pipelinerunner">
-      <created>1619624035922</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1619624035922</updated>
     </task>
     <task id="LOCAL-00041" summary="add CA Init Step">
       <created>1619629026592</created>
@@ -603,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622285444757</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="restructure asset store assets">
+      <created>1622294338297</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1622294338297</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,7 +665,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fix ConnectedAreaTrigger.cs" />
     <MESSAGE value="add colliders to prefabs" />
     <MESSAGE value="add colliders and fix ConnectedAreaTrigger.cs" />
     <MESSAGE value="move editor things into editor folder so the project can be built" />
@@ -692,7 +689,8 @@
     <MESSAGE value="unify GameManager.cs" />
     <MESSAGE value="fix Connected Flower areas being not there twice" />
     <MESSAGE value="fix generation in editor after coroutine has been added" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix generation in editor after coroutine has been added" />
+    <MESSAGE value="restructure asset store assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="restructure asset store assets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
