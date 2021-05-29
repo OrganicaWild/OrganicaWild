@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UnityEngine;
 using Random = System.Random;
 
 namespace Framework.Pipeline.Standard
@@ -58,6 +59,18 @@ namespace Framework.Pipeline.Standard
             }
 
             callback(world);
+        }
+
+        public GameWorld ExecuteBlocking()
+        {
+            GameWorld world = null;
+            
+            foreach (PipelineStep step in executionPipeline)
+            {
+                world = step.Apply(world);
+            }
+
+            return world;
         }
     }
 }

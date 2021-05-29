@@ -145,16 +145,30 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             List<AreaTypeAssignmentStep.TypedArea> areasWithLandmarks)
         {
             int[] areaIndices = new int[areaXTimes];
-            do
+            
+            if (areasWithLandmarks.Count == areaXTimes)
             {
                 for (int i = 0; i < areaXTimes; i++)
                 {
-                    areaIndices[i] = (int) (random.NextDouble() * (areasWithLandmarks.Count - 1));
+                    areaIndices[i] = i;
                 }
-            } while (areaIndices.Distinct().Count() != areaIndices.Length);
+            }
+            else
+            {
+                do
+                {
+                    for (int i = 0; i < areaXTimes; i++)
+                    {
+                        areaIndices[i] = (int) (random.NextDouble() * (areasWithLandmarks.Count - 1));
+                    }
+                } while (areaIndices.Distinct().Count() != areaIndices.Length);
+            }
 
-            AreaTypeAssignmentStep.TypedArea[] chosenAreas = new AreaTypeAssignmentStep.TypedArea[]
-                {areasWithLandmarks[areaIndices[0]], areasWithLandmarks[areaIndices[1]]};
+            AreaTypeAssignmentStep.TypedArea[] chosenAreas = new AreaTypeAssignmentStep.TypedArea[areaXTimes];
+            for (int i = 0; i < areaXTimes; i++)
+            {
+                chosenAreas[i] = areasWithLandmarks[areaIndices[i]];
+            }
             return chosenAreas;
         }
 

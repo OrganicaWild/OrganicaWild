@@ -21,7 +21,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
 
         public Vector3 layerDistance;
         public Vector3 positionOfWorld;
-        private StandardPipelineManager manager;
+        public StandardPipelineManager manager;
         public bool flipYAndZ;
         public bool HasWarning => hasWarning;
         private int alreadyCooked;
@@ -77,9 +77,64 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
             }
 
             yield return null;
+            
+            //set warning
+            if (childrenWithNoRecipeCount > 0)
+            {
+                hasWarning = true;
+                warningText =
+                    $"Number: {childrenWithNoRecipeCount} IGameWorldObjects with specified Type cannot be cooked since they have no recipe.";
+            }
+            else
+            {
+                hasWarning = false;
+            }
+        }
+        
+         public void ApplyThemeBlocking(GameWorld world)
+        {
+            MakeCookBook();
 
-            //int childrenWithNoRecipeCount = InterpretLayer(world.Root, 1);
+            root = new GameObject("WorldRoot");
+            root.transform.parent = transform;
 
+            GameObjectCreation.YtoZ = flipYAndZ;
+            alreadyCooked = 0;
+
+            //cook each GameObject with its given recipe
+            Queue<Tuple<IGameWorldObject, Transform>> cookingQueue = new Queue<Tuple<IGameWorldObject, Transform>>();
+            int childrenWithNoRecipeCount = 0;
+
+            //start queue
+            cookingQueue.Enqueue(new Tuple<IGameWorldObject, Transform>(world.Root, root.transform));
+
+            while (cookingQueue.Any())
+            {
+                (IGameWorldObject next, Transform parentTransform) = cookingQueue.Dequeue();
+
+                if (next.Type != null)
+                {
+                    if (!cookbook.ContainsKey(next.Type) || cookbook[next.Type] == null)
+                    {
+                        childrenWithNoRecipeCount++;
+                        Debug.LogWarning($"The cook book does not contain a recipe for {next.Type}.");
+                    }
+                    else
+                    {
+                        //cook object
+                        GameObject cooked = CookGameWorldObject(next);
+                        cooked.transform.parent = parentTransform;
+                        parentTransform = cooked.transform;
+                        alreadyCooked++;
+                    }
+                }
+
+                foreach (IGameWorldObject child in next.GetChildren())
+                {
+                    cookingQueue.Enqueue(new Tuple<IGameWorldObject, Transform>(child, parentTransform));
+                }
+            }
+            
             //set warning
             if (childrenWithNoRecipeCount > 0)
             {

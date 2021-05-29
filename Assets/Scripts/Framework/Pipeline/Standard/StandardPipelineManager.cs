@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Framework.Pipeline.Standard.ThemeApplicator;
+using Unity.EditorCoroutines.Editor;
+using UnityEditor;
 using UnityEngine;
 
 namespace Framework.Pipeline.Standard
@@ -26,7 +28,7 @@ namespace Framework.Pipeline.Standard
             {
                 yield break;
             }
-
+            
             //clean up old level
             List<GameObject> children = new List<GameObject>();
             foreach (Transform child in transform)
@@ -39,9 +41,16 @@ namespace Framework.Pipeline.Standard
                 DestroyImmediate(child);
                 yield return null;
             }
-        
-            yield return StartCoroutine(standardPipelineRunner.Execute(gameWorld => GameWorld = gameWorld));
-        
+            
+            if (Application.isPlaying)
+            {
+                yield return StartCoroutine(standardPipelineRunner.Execute(gameWorld => GameWorld = gameWorld));
+            }
+            else
+            {
+                GameWorld = standardPipelineRunner.ExecuteBlocking();
+            }
+            
             //only apply theme if there is a ThemeApplicator as a Component
             standardThemeApplicator = GetComponent<StandardThemeApplicator>();
             if (standardThemeApplicator == null)
@@ -51,8 +60,41 @@ namespace Framework.Pipeline.Standard
         
             //apply theme
             yield return StartCoroutine(standardThemeApplicator.ApplyTheme(GameWorld));
-        }
-    
+        } 
+        
+        public void GenerateBlocking()
+        {
+            if (HasError)
+            {
+                return;
+            }
+            
+            //clean up old level
+            List<GameObject> children = new List<GameObject>();
+            foreach (Transform child in transform)
+            {
+                children.Add(child.gameObject);
+            }
+
+            foreach (GameObject child in children)
+            {
+                DestroyImmediate(child);
+            }
+            
+            GameWorld = standardPipelineRunner.ExecuteBlocking();
+            
+            //only apply theme if there is a ThemeApplicator as a Component
+            standardThemeApplicator = GetComponent<StandardThemeApplicator>();
+            if (standardThemeApplicator == null)
+            {
+              return;
+            }
+        
+            //apply theme
+            standardThemeApplicator.manager = this;
+            standardThemeApplicator.ApplyThemeBlocking(GameWorld);
+        } 
+        
         public void Setup()
         {
             standardPipelineRunner = new StandardPipelineRunner(Seed);

@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,7 +20,7 @@ namespace Framework.Pipeline.Standard.Editor
 
             if (GUILayout.Button("Generate with new seed"))
             {
-                manager.Seed = new System.Random().Next();
+                manager.Seed = Environment.TickCount;
                 Generate(manager);
             }
 
@@ -33,7 +36,17 @@ namespace Framework.Pipeline.Standard.Editor
         private void Generate(StandardPipelineManager manager)
         {
             manager.Setup();
-            manager.StartCoroutine(manager.Generate());
+            if (Application.isPlaying)
+            {
+                manager.StartCoroutine(manager.Generate());
+            }
+            else
+            {
+                manager.GenerateBlocking();
+            }
+         
         }
+
+    
     }
 }
