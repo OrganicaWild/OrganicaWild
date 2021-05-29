@@ -33,7 +33,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="restructure asset store assets" />
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="move prefabs out of scripts folder" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,7 +76,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/PlayerCharacter/RotateByTime.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Util/Polygon Generators/IPolygonGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Util/Polygon Generators/RectangleGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" root0="FORCE_HIGHLIGHTING" />
@@ -257,13 +256,6 @@
       <workItem from="1621594441188" duration="24620000" />
       <workItem from="1622106041258" duration="17927000" />
       <workItem from="1622277276863" duration="5812000" />
-    </task>
-    <task id="LOCAL-00041" summary="add CA Init Step">
-      <created>1619629026592</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1619629026592</updated>
     </task>
     <task id="LOCAL-00042" summary="change seed to nullable type">
       <created>1619629486021</created>
@@ -601,7 +593,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622294338297</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="move prefabs out of scripts folder">
+      <created>1622294723154</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1622294723154</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -665,7 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add colliders to prefabs" />
     <MESSAGE value="add colliders and fix ConnectedAreaTrigger.cs" />
     <MESSAGE value="move editor things into editor folder so the project can be built" />
     <MESSAGE value="add generation flag" />
@@ -690,7 +688,8 @@
     <MESSAGE value="fix Connected Flower areas being not there twice" />
     <MESSAGE value="fix generation in editor after coroutine has been added" />
     <MESSAGE value="restructure asset store assets" />
-    <option name="LAST_COMMIT_MESSAGE" value="restructure asset store assets" />
+    <MESSAGE value="move prefabs out of scripts folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="move prefabs out of scripts folder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
