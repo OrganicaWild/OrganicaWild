@@ -33,15 +33,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="">
+    <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="fix generation in editor after coroutine has been added">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/Editor/StandardPipelineManagerEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/Editor/StandardPipelineManagerEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/NewPipelineTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/StandardThemeApplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/StandardThemeApplicator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +48,7 @@
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="feature/player-character" />
+        <entry key="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp" value="98134012f2239b19d7b2988f0e6fdb8667b32cd2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -83,6 +80,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/Recipe/OutsideBorderRecipe.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/Recipe/PlayerAndCameraRecipe.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/99258562-0D64-4271-98DD-F3A0E1467733/fd/541a793d/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/LoadSceneOnTriggerEnter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -92,7 +90,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/AreaConnectionPlacementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/AreaPlacementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/AreaTypeAssignmentStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/CaCellMergingStep.cs" />
@@ -141,8 +138,9 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/StandardThemeApplicator.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/Editor/StandardPipelineManagerEditor.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/PipeLineSteps/LandmarkAreaStep.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -152,12 +150,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13286713" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13254036" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="XThreadsFramesViewSplitterKey" value="0.30525032" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.36024845" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -261,14 +259,7 @@
       <workItem from="1621590421733" duration="1893000" />
       <workItem from="1621594441188" duration="24620000" />
       <workItem from="1622106041258" duration="17927000" />
-      <workItem from="1622277276863" duration="4123000" />
-    </task>
-    <task id="LOCAL-00039" summary="add straight path path shape definition step">
-      <created>1619623362600</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1619623362600</updated>
+      <workItem from="1622277276863" duration="5812000" />
     </task>
     <task id="LOCAL-00040" summary="fix random seed assignment in pipelinerunner">
       <created>1619624035922</created>
@@ -606,7 +597,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622126572614</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="fix generation in editor after coroutine has been added">
+      <created>1622285444757</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1622285444757</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -620,6 +618,11 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -665,7 +668,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add cat into game" />
     <MESSAGE value="fix ConnectedAreaTrigger.cs" />
     <MESSAGE value="add colliders to prefabs" />
     <MESSAGE value="add colliders and fix ConnectedAreaTrigger.cs" />
@@ -690,7 +692,8 @@
     <MESSAGE value="refactor folder structure" />
     <MESSAGE value="unify GameManager.cs" />
     <MESSAGE value="fix Connected Flower areas being not there twice" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix Connected Flower areas being not there twice" />
+    <MESSAGE value="fix generation in editor after coroutine has been added" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix generation in editor after coroutine has been added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -721,32 +724,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs</url>
-          <line>26</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" initialLine="24" containingFunctionPresentation="method 'Generate'">
-            <startOffsets>
-              <option value="807" />
-            </startOffsets>
-            <endOffsets>
-              <option value="820" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs</url>
-          <line>32</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" initialLine="30" containingFunctionPresentation="method 'Generate'">
-            <startOffsets>
-              <option value="936" />
-            </startOffsets>
-            <endOffsets>
-              <option value="987" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs</url>
           <line>129</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" initialLine="128" containingFunctionPresentation="method 'OnDrawGizmos'">
             <startOffsets>
@@ -757,110 +734,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs</url>
-          <line>46</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" initialLine="46" containingFunctionPresentation="method 'Generate'">
-            <startOffsets>
-              <option value="1366" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1449" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs</url>
-          <line>50</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" initialLine="50" containingFunctionPresentation="method 'Generate'">
-            <startOffsets>
-              <option value="1523" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1564" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/Editor/StandardPipelineManagerEditor.cs</url>
-          <line>44</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/Editor/StandardPipelineManagerEditor.cs" initialLine="44" containingFunctionPresentation="method 'Generate'">
-            <startOffsets>
-              <option value="1280" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1280" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs</url>
-          <line>61</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" initialLine="61" containingFunctionPresentation="method 'Generate'">
-            <startOffsets>
-              <option value="1900" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1975" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs</url>
-          <line>56</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" initialLine="56" containingFunctionPresentation="method 'Execute'">
-            <startOffsets>
-              <option value="1721" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1739" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs</url>
-          <line>57</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" initialLine="57" containingFunctionPresentation="method 'Execute'">
-            <startOffsets>
-              <option value="1756" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1782" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs</url>
-          <line>60</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineRunner.cs" initialLine="60" containingFunctionPresentation="method 'Execute'">
-            <startOffsets>
-              <option value="1810" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1826" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/StandardThemeApplicator.cs</url>
-          <line>217</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/ThemeApplicator/StandardThemeApplicator.cs" initialLine="217" containingFunctionPresentation="method 'CookGameWorldObject'">
-            <startOffsets>
-              <option value="7472" />
-            </startOffsets>
-            <endOffsets>
-              <option value="7540" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

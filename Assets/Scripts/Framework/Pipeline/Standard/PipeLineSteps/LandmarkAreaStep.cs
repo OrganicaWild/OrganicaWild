@@ -55,8 +55,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 for (int index = 0; index < areaXTimes; index++)
                 {
                     List<Landmark> allLandmarksInArea = chosenAreas[index].GetAllChildrenOfType<Landmark>().ToList();
+                    int ind = (int) (random.NextDouble() * (allLandmarksInArea.Count - 1));
                     chosenLandmarks[index] =
-                        allLandmarksInArea[(int) (random.NextDouble() * allLandmarksInArea.Count())];
+                        allLandmarksInArea[ind];
                 }
 
                 OwPolygon uniqueShape = GetUniqueShape(chosenAreas, chosenLandmarks);
@@ -66,53 +67,6 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     movedCircle[index] = new OwPolygon(uniqueShape.representation);
                     movedCircle[index].MovePolygon(chosenLandmarks[index].Shape.GetCentroid());
                 }
-
-                /*bool shapeFits = false;
-            int shapeTries = 0;
-            OwPolygon uniqueShape = GetUniqueShape();
-
-            do
-            {
-                tries = 0;
-                //check if unique shape fits into area
-                do
-                {
-                    //test for each chosen area a random landmark and check if it fits
-                    for (int index = 0; index < chosenAreas.Length; index++)
-                    {
-                        AreaTypeAssignmentStep.TypedArea chosenArea = chosenAreas[index];
-
-                        chosenLandmarks[index] =
-                           
-                        movedCircle[index] = new OwPolygon(uniqueShape.representation);
-                        movedCircle[index].MovePolygon(chosenLandmarks[index].Shape.GetCentroid());
-
-                        if (PolygonPolygonInteractor.Use().Contains(chosenArea.Shape as OwPolygon, movedCircle[index]))
-                        {
-                            isInside[index] = true;
-                        }
-                    }
-
-                    tries++;
-                } while (isInside.All(inside => inside) && tries < safetyMaxTries);
-
-                //if this shape did not fit inside after trying safetyMaxTries time, then try a new shape
-                shapeTries++;
-
-                if (tries >= safetyMaxTries)
-                {
-                    uniqueShape = GetUniqueShape();
-                }
-                else
-                {
-                    shapeFits = true;
-                }
-            } while (!shapeFits && shapeTries < safetyMaxTries);
-
-            if (shapeTries >= safetyMaxTries)
-            {
-                Debug.LogError("Max tries where reached when trying to place an area that is inside of outer area");
-            }*/
 
                 for (int index = 0; index < areaXTimes; index++)
                 {
@@ -145,7 +99,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             List<AreaTypeAssignmentStep.TypedArea> areasWithLandmarks)
         {
             int[] areaIndices = new int[areaXTimes];
-            
+
             if (areasWithLandmarks.Count == areaXTimes)
             {
                 for (int i = 0; i < areaXTimes; i++)
@@ -169,6 +123,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             {
                 chosenAreas[i] = areasWithLandmarks[areaIndices[i]];
             }
+
             return chosenAreas;
         }
 
@@ -193,13 +148,13 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 /*}*/
             }
 
-            /*for (int i = 0; i < areaXTimes; i++)
-        {
-            Vector2 landmarkPos = chosenLandmarks[i].Shape.GetCentroid();
-            baseCircle.MovePolygon(landmarkPos);
-            baseCircle = PolygonPolygonInteractor.Use()
-                .Intersection(chosenAreas[i].Shape as OwPolygon, baseCircle);
-        }*/
+            for (int i = 0; i < areaXTimes; i++)
+            {
+                Vector2 landmarkPos = chosenLandmarks[i].Shape.GetCentroid();
+                baseCircle.MovePolygon(landmarkPos);
+                baseCircle = PolygonPolygonInteractor.Use()
+                    .Intersection(chosenAreas[i].Shape as OwPolygon, baseCircle);
+            }
 
             return baseCircle;
         }

@@ -1084,6 +1084,10 @@ PrefabInstance:
       propertyPath: safetyMaxTries
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799353, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: hasLandmarksPercent
+      value: 0.357
+      objectReference: {fileID: 0}
     - target: {fileID: 7017204873799354, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: maxDimensions.x
       value: 99
