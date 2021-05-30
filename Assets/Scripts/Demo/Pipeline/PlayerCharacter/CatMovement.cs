@@ -1,4 +1,5 @@
 ﻿using System;
+using Demo.Pipeline;
 using UnityEngine;
 
 public class CatMovement : MonoBehaviour
@@ -83,8 +84,11 @@ public class CatMovement : MonoBehaviour
 
     void Update()
     {
-        HandleSleep();
-        HandleMovement();
+        if (GameManager._GameHasStarted)
+        {
+            HandleSleep();
+            HandleMovement();
+        }
     }
 
     private void HandleSleep()

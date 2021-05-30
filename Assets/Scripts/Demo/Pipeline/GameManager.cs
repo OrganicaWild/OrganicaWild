@@ -15,7 +15,8 @@ namespace Demo.Pipeline
 
         public static int uniqueAreasAmount;
         public static int foundAreas;
-        
+        public static bool _GameHasStarted;
+
         private IEnumerator Start()
         {
             StandardPipelineManager manager = pipelineManagerObject.GetComponent<StandardPipelineManager>();
@@ -30,13 +31,18 @@ namespace Demo.Pipeline
             {
                 trigger.progressCircleImage = progressCircleImage;
             }
+
+            _GameHasStarted = true;
         }
 
         private void Update()
         {
-            if (foundAreas == uniqueAreasAmount)
+            if (_GameHasStarted)
             {
-                clearedLevelText.SetActive(true);
+                if (foundAreas == uniqueAreasAmount)
+                {
+                    clearedLevelText.SetActive(true);
+                }
             }
         }
     }
