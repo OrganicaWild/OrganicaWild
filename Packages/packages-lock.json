@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "ch.i4ds.geometry3sharp": {
+      "version": "https://github.com/OrganicaWild/geometry3Sharp.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "cbf5197a27ecda7b7748142543228b775525ac6d"
+    },
+    "ch.i4ds.polyboolnet": {
+      "version": "https://github.com/OrganicaWild/PolyBool.Net.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f234d720e85c38274c0ea6e5a5d1d9b3e29cf2dd"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

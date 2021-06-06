@@ -62,19 +62,20 @@ namespace Framework.Pipeline.Geometry.Interactors
 
         public OwPolygon Union(OwPolygon first, OwPolygon second)
         {
-            PolySegments segments0 = Polybool.Net.Logic.PolyBool.Segments(first.representation);
-            PolySegments segments1 = Polybool.Net.Logic.PolyBool.Segments(second.representation);
-
-            CombinedPolySegments combined = Polybool.Net.Logic.PolyBool.Combine(segments0, segments1);
-
-            List<Segment> result = SegmentSelector.Union(combined.Combined);
-            List<Region> x =  Polybool.Net.Logic.PolyBool.SegmentChainer(result);
-
-            return new OwPolygon(new Polygon(x));
-
-            // Polygon union = SegmentSelector.Union(first.representation, second.representation);
+            //after import of polybool as a unity package, the segment chainer ended up being internal
+            // PolySegments segments0 = Polybool.Net.Logic.PolyBool.Segments(first.representation);
+            // PolySegments segments1 = Polybool.Net.Logic.PolyBool.Segments(second.representation);
             //
-            // return new OwPolygon(union);
+            // CombinedPolySegments combined = Polybool.Net.Logic.PolyBool.Combine(segments0, segments1);
+            //
+            // List<Segment> result = SegmentSelector.Union(combined.Combined);
+            // List<Region> x =  Polybool.Net.Logic.PolyBool.SegmentChainer(result);
+            //
+            // return new OwPolygon(new Polygon(x));
+
+            Polygon union = SegmentSelector.Union(first.representation, second.representation);
+            
+            return new OwPolygon(union);
         }
 
         public OwPolygon Intersection(OwPolygon first, OwPolygon second)
