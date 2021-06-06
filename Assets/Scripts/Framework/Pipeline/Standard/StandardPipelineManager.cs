@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Framework.Pipeline.Standard.ThemeApplicator;
-using Unity.EditorCoroutines.Editor;
-using UnityEditor;
 using UnityEngine;
 
 namespace Framework.Pipeline.Standard

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc85148143ca5349afe8d2cb061d23a, type: 3}
+  m_Name: GreenPlayerAndCameraRecipe
+  m_EditorClassIdentifier: 
+  cameraAndPlayerRig: {fileID: 3135639967098339637, guid: 68b262523ecea5a4f9c6e6ca33773a73,
+    type: 3}
+  basePosition: {x: 0, y: 5, z: 0}
+  meshMaterial: {fileID: 2100000, guid: 00762f9489175e8489d082ff63e5b043, type: 2}

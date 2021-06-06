@@ -36,16 +36,40 @@
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Pipeline/floorMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Pipeline/floorMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/CameraAndPlayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/CameraAndPlayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/Area0Recipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/Area0Recipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/Area1Recipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/Area1Recipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/BackgroundRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/BackgroundRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/BorderAreaClutteredRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/BorderAreaClutteredRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/BorderRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/BorderRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/EndAreaPrefab.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/EndAreaPrefab.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/EndAreaRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/EndAreaRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/GenericLandmarkPrefab.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/GenericLandmarkPrefab.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/PairedAreaFloor.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/PairedAreaFloor.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/PairedAreaFlowerRingRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/PairedAreaFlowerRingRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/PairedAreaRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/PairedAreaRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/PlayerAndCameraRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/PlayerAndCameraRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/StartAreaeRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/StartAreaeRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/WalkableGroundRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/WalkableGroundRecipe.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/WorldBorderRecipe.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Demo/Pipeline/OrganicRecipes/WorldBorderRecipe.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Pipeline/NewPipelineTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Pipeline/NewPipelineTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PlayerCharacter/CatMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PlayerCharacter/CatMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PlayerCharacter/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PlayerCharacter/PlayerInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,8 +127,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaCellMergingStep.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonLineInteractor.cs" />
       <option value="$PROJECT_DIR$/Assets/Plugins/geometry3Sharp/math/Vector2d.cs" />
       <option value="$PROJECT_DIR$/Assets/geometry3Sharp/mesh_generators/MeshGenerators.cs" />
@@ -154,6 +176,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PlayerCharacter/CatMovement.cs" />
       <option value="$PROJECT_DIR$/Assets/ActivatorUponGameStart.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ActivateAllChildrenUponGameManagerStart.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
@@ -268,14 +292,9 @@
       <workItem from="1620316630892" duration="882000" />
       <workItem from="1621258360154" duration="3686000" />
       <workItem from="1622367261307" duration="2186000" />
-      <workItem from="1622376632910" duration="789000" />
-    </task>
-    <task id="LOCAL-00028" summary="add Area Type Assignment">
-      <created>1619605790082</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1619605790082</updated>
+      <workItem from="1622376632910" duration="897000" />
+      <workItem from="1622439169535" duration="2535000" />
+      <workItem from="1623009820947" duration="1422000" />
     </task>
     <task id="LOCAL-00029" summary="edit some materials">
       <created>1619605805960</created>
@@ -613,7 +632,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621261549058</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="fix score issue">
+      <created>1622377521926</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1622377521926</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -672,7 +698,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add cell merging step and fix PolygonLineInteractor.cs" />
     <MESSAGE value="remove old impl comments PolygonLineInteractor.cs" />
     <MESSAGE value="finalise merge" />
     <MESSAGE value="readd border rule to ca" />
@@ -697,7 +722,8 @@
     <MESSAGE value="fix aspect ratio because of text" />
     <MESSAGE value="adjust hitboxes on tress" />
     <MESSAGE value="add progress indicator" />
-    <option name="LAST_COMMIT_MESSAGE" value="add progress indicator" />
+    <MESSAGE value="fix score issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix score issue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -13,6 +13,8 @@ namespace Framework.Pipeline
         
         private readonly Dictionary<int, Dictionary<Type, Color>> debugColors = new Dictionary<int, Dictionary<Type, Color>>();
 
+        private static int maxDepth;
+        
         public GameWorld(IGameWorldObject root)
         {
             Root = root;
@@ -43,6 +45,21 @@ namespace Framework.Pipeline
             foreach (IGameWorldObject child in gameWorldObject.GetChildren())
             {
                 DrawDebugGameWorldElement(depth+1, child, colors, minBrightness);
+            }
+        }
+        
+        private static void DrawDebugGameWorldElementNoDraw(int depth, IGameWorldObject gameWorldObject )
+        {
+            if (depth > maxDepth)
+            {
+                maxDepth = depth;
+            }
+            //gameWorldObject.Shape.DrawDebug(colors[depth][gameWorldObject.GetType()]);
+
+            foreach (IGameWorldObject child in gameWorldObject.GetChildren())
+            {
+                DrawDebugGameWorldElementNoDraw(depth+1, child);
+              
             }
         }
 

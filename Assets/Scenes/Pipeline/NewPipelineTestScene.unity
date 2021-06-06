@@ -1096,8 +1096,16 @@ PrefabInstance:
       propertyPath: maxDimensions.y
       value: 99
       objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799355, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: poissonDiskRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: flipYAndZ
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
@@ -1137,9 +1145,29 @@ PrefabInstance:
       value: landmarkPair10
       objectReference: {fileID: 0}
     - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[1].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: 42a3034513329254ca063c49cfd91ca7,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[2].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: 568b77de0cebb4c2fb57ab3af0fa4835,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[3].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: 4e57e65928ca5064786ee9ffc63d25f4,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
+      propertyPath: recipes.Array.data[20].recipe
+      value: 
+      objectReference: {fileID: 11400000, guid: c0c815b6ef86e3844b00739807f8c876,
+        type: 2}
+    - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: recipes.Array.data[22].recipe
       value: 
-      objectReference: {fileID: 11400000, guid: b12ed2e6368b7408687971c968137b53,
+      objectReference: {fileID: 11400000, guid: 0962c7406f967c24e82203b074529048,
         type: 2}
     - target: {fileID: 7017204873799359, guid: c861e81feb9206d4fb8d04c66e6c09ac, type: 3}
       propertyPath: recipes.Array.data[23].recipe
