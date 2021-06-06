@@ -1,6 +1,3 @@
 [submodule "Assets/Scripts/PolyBool.Net"]
 	path = Assets/Scripts/PolyBool.Net
 	url = git@github.com:OrganicaWild/PolyBool.Net.git
-[submodule "Assets/Submodules/geometry3Sharp"]
-	path = Assets/Submodules/geometry3Sharp
-	url = git@github.com:OrganicaWild/geometry3Sharp.git
