@@ -3,8 +3,7 @@
   <component name="ContentModelUserStore">
     <attachedFolders />
     <explicitIncludes>
-      <Path>Library/PackageCache/ch.i4ds.geometry3sharp@cbf5197a27</Path>
-      <Path>Library/PackageCache/ch.i4ds.polyboolnet@f234d720e8</Path>
+      <Path>Assets</Path>
       <Path>Library/PackageCache/com.unity.cinemachine@2.6.4</Path>
       <Path>Library/PackageCache/com.unity.collab-proxy@1.2.16</Path>
       <Path>Library/PackageCache/com.unity.editorcoroutines@1.0.0</Path>
@@ -15,7 +14,6 @@
       <Path>Library/PackageCache/com.unity.test-framework@1.1.24</Path>
       <Path>Library/PackageCache/com.unity.textmeshpro@2.1.4</Path>
       <Path>Library/PackageCache/com.unity.timeline@1.2.18</Path>
-      <Path>Packages</Path>
       <Path>ProjectSettings</Path>
     </explicitIncludes>
     <explicitExcludes>

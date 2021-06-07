@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Pipeline/StartScene.unity
+    path: Packages/ch.i4ds.organicawild/Demo/SamplesPipeline/StartScene.unity
     guid: 8fbcf6d25b055de498822079ff9af023
   - enabled: 1
-    path: Assets/Scenes/Pipeline/NewPipelineTestScene.unity
+    path: Packages/ch.i4ds.organicawild/Demo/SamplesPipeline/PipelineDemo.unity
     guid: 7a98ac0a84b1d6c48b2462beed3b0377
   m_configObjects: {}

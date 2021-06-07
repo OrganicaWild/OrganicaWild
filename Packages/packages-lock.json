@@ -1,18 +1,13 @@
 {
   "dependencies": {
-    "ch.i4ds.geometry3sharp": {
-      "version": "https://github.com/OrganicaWild/geometry3Sharp.git",
+    "ch.i4ds.organicawild": {
+      "version": "file:ch.i4ds.organicawild",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "cbf5197a27ecda7b7748142543228b775525ac6d"
-    },
-    "ch.i4ds.polyboolnet": {
-      "version": "https://github.com/OrganicaWild/PolyBool.Net.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "f234d720e85c38274c0ea6e5a5d1d9b3e29cf2dd"
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.inputsystem": "1.0.2",
+        "com.unity.cinemachine": "2.6.4"
+      }
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "ch.i4ds.geometry3sharp": "https://github.com/OrganicaWild/geometry3Sharp.git",
-    "ch.i4ds.polyboolnet": "https://github.com/OrganicaWild/PolyBool.Net.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.cinemachine": "2.6.4",
     "com.unity.collab-proxy": "1.2.16",
