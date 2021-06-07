@@ -1,0 +1,15 @@
+{
+    "name": "ch.i4ds.Framework",
+    "references": [
+        "GUID:daca5a0d082af5f45a9040a90e9e7dc7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,399 @@
+fileFormatVersion: 2
+guid: d3dfb551f587bf148b9902d66279308b
+timeCreated: 1496597778
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bird2_Model
+    100002: Bones_and_Cons
+    100004: Global_Con
+    100006: Head_Con
+    100008: Head_Jnt
+    100010: L_Foot_Jnt
+    100012: L_Hip_Jnt
+    100014: L_Knee_Jnt
+    100016: L_Leg_Con
+    100018: L_Leg_Ik
+    100020: L_Wing_Con
+    100022: L_Wing_Jnt1
+    100024: L_Wing_Jnt2
+    100026: Nose_Jnt
+    100028: R_Foot_Jnt
+    100030: R_Hip_Jnt
+    100032: R_Knee_Jnt
+    100034: R_Leg_Con
+    100036: R_Leg_Ik
+    100038: R_Wing_Jnt1
+    100040: R_Wing_Jnt2
+    100042: R_Wink_Con
+    100044: Root_Con
+    100046: Root_Jnt
+    100048: //RootNode
+    100050: Spine_Jnt
+    100052: Tail_Con
+    100054: Tail_Jnt1
+    100056: Tail_Jnt2
+    400000: Bird2_Model
+    400002: Bones_and_Cons
+    400004: Global_Con
+    400006: Head_Con
+    400008: Head_Jnt
+    400010: L_Foot_Jnt
+    400012: L_Hip_Jnt
+    400014: L_Knee_Jnt
+    400016: L_Leg_Con
+    400018: L_Leg_Ik
+    400020: L_Wing_Con
+    400022: L_Wing_Jnt1
+    400024: L_Wing_Jnt2
+    400026: Nose_Jnt
+    400028: R_Foot_Jnt
+    400030: R_Hip_Jnt
+    400032: R_Knee_Jnt
+    400034: R_Leg_Con
+    400036: R_Leg_Ik
+    400038: R_Wing_Jnt1
+    400040: R_Wing_Jnt2
+    400042: R_Wink_Con
+    400044: Root_Con
+    400046: Root_Jnt
+    400048: //RootNode
+    400050: Spine_Jnt
+    400052: Tail_Con
+    400054: Tail_Jnt1
+    400056: Tail_Jnt2
+    4300000: Bird2_Model
+    7400000: SBird2_Bind_Anim
+    7400002: SBird2_Peck_Anim
+    7400004: SBird2_Look_Anim
+    9500000: //RootNode
+    13700000: Bird2_Model
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: SBird2_Bind_Anim
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 4
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bird2_Model
+        weight: 1
+      - path: Bones_and_Cons
+        weight: 1
+      - path: Bones_and_Cons/Global_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con/L_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con/R_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Head_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/L_Wing_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/R_Wink_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt/L_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt/L_Knee_Jnt/L_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt/R_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt/R_Knee_Jnt/R_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/Head_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/Head_Jnt/Nose_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/L_Wing_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/L_Wing_Jnt1/L_Wing_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/R_Wing_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/R_Wing_Jnt1/R_Wing_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SBird2_Peck_Anim
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bird2_Model
+        weight: 1
+      - path: Bones_and_Cons
+        weight: 1
+      - path: Bones_and_Cons/Global_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con/L_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con/R_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Head_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/L_Wing_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/R_Wink_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt/L_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt/L_Knee_Jnt/L_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt/R_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt/R_Knee_Jnt/R_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/Head_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/Head_Jnt/Nose_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/L_Wing_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/L_Wing_Jnt1/L_Wing_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/R_Wing_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/R_Wing_Jnt1/R_Wing_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SBird2_Look_Anim
+      takeName: Take 001
+      firstFrame: 32
+      lastFrame: 97
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bird2_Model
+        weight: 1
+      - path: Bones_and_Cons
+        weight: 1
+      - path: Bones_and_Cons/Global_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con/L_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con/R_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Head_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/L_Wing_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/R_Wink_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt/L_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/L_Hip_Jnt/L_Knee_Jnt/L_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt/R_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/R_Hip_Jnt/R_Knee_Jnt/R_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/Head_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/Head_Jnt/Nose_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/L_Wing_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/L_Wing_Jnt1/L_Wing_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/R_Wing_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt/R_Wing_Jnt1/R_Wing_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

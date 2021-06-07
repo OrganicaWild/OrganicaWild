@@ -1,0 +1,18 @@
+{
+    "name": "ch.i4ds.demo",
+    "references": [
+        "GUID:9eecc1942b19526489dfedd091280404",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:4307f53044263cf4b835bd812fc161a4",
+        "GUID:daca5a0d082af5f45a9040a90e9e7dc7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

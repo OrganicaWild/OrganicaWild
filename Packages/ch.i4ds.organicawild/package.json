@@ -1,0 +1,26 @@
+{
+  "name": "ch.i4ds.organicawild",
+  "version": "0.0.1",
+  "displayName": "Organcica Wild",
+  "description": "Organica Wild as a Package\n\nCreate beatiful organica generated terrain with this amazing Unity Package.\nTo use any of demo's select the correct Samples.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "keywords": [
+    "keyword1",
+    "keyword2",
+    "keyword3"
+  ],
+  "author": {
+    "name": "Unity",
+    "email": "unity@example.com",
+    "url": "https://www.unity3d.com"
+  },
+  "dependencies": {
+    "com.unity.inputsystem": "1.0.2",
+    "com.unity.cinemachine": "2.6.4"
+  },
+  "type": "library"
+}
