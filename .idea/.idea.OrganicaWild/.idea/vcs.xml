@@ -4,6 +4,8 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Scripts/PolyBool.Net" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Packages" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Packages/ch.i4ds.organicawild" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Packages/ch.i4ds.organicawild/External/PolyBool.Net" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Packages/ch.i4ds.organicawild/External/geometry3Sharp" vcs="Git" />
   </component>
