@@ -1,0 +1,503 @@
+fileFormatVersion: 2
+guid: 265ee6fac4cc17345b23403e90e2ba45
+timeCreated: 1496597777
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bones_and_Cons
+    100002: Global_Con
+    100004: Head_Con
+    100006: L_Arm_Con
+    100008: L_Arm_Ik
+    100010: L_Elbow_Jnt
+    100012: L_Foot_Jnt
+    100014: L_Hand_Jnt
+    100016: L_Hip_Jnt
+    100018: L_Knee_Jnt
+    100020: L_Leg_Con
+    100022: L_Leg_Ik
+    100024: L_Shoulder_Jnt
+    100026: Neck_Jnt
+    100028: Nose_Jnt
+    100030: R_Arm_Con
+    100032: R_Arm_Ik
+    100034: R_Elbow_Jnt
+    100036: R_Foot_Jnt
+    100038: R_Hand_Jnt
+    100040: R_Hip_Jnt
+    100042: R_Knee_Jnt
+    100044: R_Leg_Con
+    100046: R_Leg_Ik
+    100048: R_Shoulder_Jnt
+    100050: Root_Con
+    100052: Root_Jnt
+    100054: //RootNode
+    100056: Spine_Con1
+    100058: Spine_Con2
+    100060: Spine_con3
+    100062: Spine_Jnt1
+    100064: Spine_Jnt2
+    100066: Spine_Jnt3
+    100068: Squirrel_Model
+    100070: Tail_Con1
+    100072: Tail_Con2
+    100074: Tail_Con3
+    100076: Tail_Jnt1
+    100078: Tail_Jnt2
+    100080: Tail_Jnt3
+    100082: Tail_Jnt4
+    400000: Bones_and_Cons
+    400002: Global_Con
+    400004: Head_Con
+    400006: L_Arm_Con
+    400008: L_Arm_Ik
+    400010: L_Elbow_Jnt
+    400012: L_Foot_Jnt
+    400014: L_Hand_Jnt
+    400016: L_Hip_Jnt
+    400018: L_Knee_Jnt
+    400020: L_Leg_Con
+    400022: L_Leg_Ik
+    400024: L_Shoulder_Jnt
+    400026: Neck_Jnt
+    400028: Nose_Jnt
+    400030: R_Arm_Con
+    400032: R_Arm_Ik
+    400034: R_Elbow_Jnt
+    400036: R_Foot_Jnt
+    400038: R_Hand_Jnt
+    400040: R_Hip_Jnt
+    400042: R_Knee_Jnt
+    400044: R_Leg_Con
+    400046: R_Leg_Ik
+    400048: R_Shoulder_Jnt
+    400050: Root_Con
+    400052: Root_Jnt
+    400054: //RootNode
+    400056: Spine_Con1
+    400058: Spine_Con2
+    400060: Spine_con3
+    400062: Spine_Jnt1
+    400064: Spine_Jnt2
+    400066: Spine_Jnt3
+    400068: Squirrel_Model
+    400070: Tail_Con1
+    400072: Tail_Con2
+    400074: Tail_Con3
+    400076: Tail_Jnt1
+    400078: Tail_Jnt2
+    400080: Tail_Jnt3
+    400082: Tail_Jnt4
+    4300000: Squirrel_Model
+    7400000: SSquirrel_Bind_Anim
+    7400002: SSquirrel_Eat_Anim
+    7400004: SSquirrel_Jump_Anim
+    9500000: //RootNode
+    13700000: Squirrel_Model
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: SSquirrel_Bind_Anim
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 4
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bones_and_Cons
+        weight: 1
+      - path: Bones_and_Cons/Global_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Arm_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Arm_Con/L_Arm_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con/L_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Arm_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Arm_Con/R_Arm_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con/R_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2/Spine_con3
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2/Spine_con3/Head_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1/Tail_Con2
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1/Tail_Con2/Tail_Con3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt/L_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt/L_Knee_Jnt/L_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt/R_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt/R_Knee_Jnt/R_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt/L_Elbow_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt/L_Elbow_Jnt/L_Hand_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/Neck_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/Neck_Jnt/Nose_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt/R_Elbow_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt/R_Elbow_Jnt/R_Hand_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2/Tail_Jnt3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2/Tail_Jnt3/Tail_Jnt4
+        weight: 1
+      - path: Squirrel_Model
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SSquirrel_Eat_Anim
+      takeName: Take 001
+      firstFrame: 7
+      lastFrame: 62
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bones_and_Cons
+        weight: 1
+      - path: Bones_and_Cons/Global_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Arm_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Arm_Con/L_Arm_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con/L_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Arm_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Arm_Con/R_Arm_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con/R_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2/Spine_con3
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2/Spine_con3/Head_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1/Tail_Con2
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1/Tail_Con2/Tail_Con3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt/L_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt/L_Knee_Jnt/L_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt/R_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt/R_Knee_Jnt/R_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt/L_Elbow_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt/L_Elbow_Jnt/L_Hand_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/Neck_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/Neck_Jnt/Nose_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt/R_Elbow_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt/R_Elbow_Jnt/R_Hand_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2/Tail_Jnt3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2/Tail_Jnt3/Tail_Jnt4
+        weight: 1
+      - path: Squirrel_Model
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: SSquirrel_Jump_Anim
+      takeName: Take 001
+      firstFrame: 64
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bones_and_Cons
+        weight: 1
+      - path: Bones_and_Cons/Global_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Arm_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Arm_Con/L_Arm_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/L_Leg_Con/L_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Arm_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Arm_Con/R_Arm_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/R_Leg_Con/R_Leg_Ik
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2/Spine_con3
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Spine_Con1/Spine_Con2/Spine_con3/Head_Con
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1/Tail_Con2
+        weight: 1
+      - path: Bones_and_Cons/Global_Con/Root_Con/Tail_Con1/Tail_Con2/Tail_Con3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt/L_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/L_Hip_Jnt/L_Knee_Jnt/L_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt/R_Knee_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/R_Hip_Jnt/R_Knee_Jnt/R_Foot_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt/L_Elbow_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/L_Shoulder_Jnt/L_Elbow_Jnt/L_Hand_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/Neck_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/Neck_Jnt/Nose_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt/R_Elbow_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Spine_Jnt1/Spine_Jnt2/Spine_Jnt3/R_Shoulder_Jnt/R_Elbow_Jnt/R_Hand_Jnt
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2/Tail_Jnt3
+        weight: 1
+      - path: Bones_and_Cons/Root_Jnt/Tail_Jnt1/Tail_Jnt2/Tail_Jnt3/Tail_Jnt4
+        weight: 1
+      - path: Squirrel_Model
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

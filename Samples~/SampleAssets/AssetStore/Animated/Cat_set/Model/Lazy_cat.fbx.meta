@@ -1,0 +1,240 @@
+fileFormatVersion: 2
+guid: e19ab5ca9c26f254c8fe15550239ff5f
+timeCreated: 1550584803
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: shustrilo4_6:BackA_M
+    100004: shustrilo4_6:backAnkle_L
+    100006: shustrilo4_6:backAnkle_R
+    100008: shustrilo4_6:BackB_M
+    100010: shustrilo4_6:backBall_L
+    100012: shustrilo4_6:backBall_R
+    100014: shustrilo4_6:backHip_L
+    100016: shustrilo4_6:backHip_R
+    100018: shustrilo4_6:backKnee_L
+    100020: shustrilo4_6:backKnee_R
+    100022: shustrilo4_6:bn_L_d
+    100024: shustrilo4_6:bn_L_up
+    100026: shustrilo4_6:bn_R_d
+    100028: shustrilo4_6:bn_R_up
+    100030: shustrilo4_6:Chest_M
+    100032: shustrilo4_6:Ear_L
+    100034: shustrilo4_6:Ear_R
+    100036: shustrilo4_6:EarEnd_L
+    100038: shustrilo4_6:EarEnd_R
+    100040: shustrilo4_6:Eye1_L
+    100042: shustrilo4_6:Eye1_R
+    100044: shustrilo4_6:Eye_L
+    100046: shustrilo4_6:eye_L007
+    100048: shustrilo4_6:Eye_L_d
+    100050: shustrilo4_6:Eye_L_up
+    100052: shustrilo4_6:Eye_R
+    100054: shustrilo4_6:eye_R006
+    100056: shustrilo4_6:Eye_R_d
+    100058: shustrilo4_6:Eye_R_up
+    100060: shustrilo4_6:frontAnkle_L
+    100062: shustrilo4_6:frontAnkle_R
+    100064: shustrilo4_6:frontBall_L
+    100066: shustrilo4_6:frontBall_R
+    100068: shustrilo4_6:frontHip_L
+    100070: shustrilo4_6:frontHip_R
+    100072: shustrilo4_6:frontKnee_L
+    100074: shustrilo4_6:frontKnee_R
+    100076: shustrilo4_6:full_lazy002
+    100078: shustrilo4_6:Hair_M
+    100080: shustrilo4_6:Head_M
+    100082: shustrilo4_6:Jaw_M
+    100084: shustrilo4_6:JawEnd_M
+    100086: shustrilo4_6:Neck_M
+    100088: shustrilo4_6:NeckPart1_M
+    100090: shustrilo4_6:NeckPart2_M
+    100092: shustrilo4_6:Root_M
+    100094: shustrilo4_6:Rump_L
+    100096: shustrilo4_6:Rump_R
+    100098: shustrilo4_6:Scapula_L
+    100100: shustrilo4_6:Scapula_R
+    100102: shustrilo4_6:Tail0_M
+    100104: shustrilo4_6:Tail1_M
+    100106: shustrilo4_6:Tail2_M
+    100108: shustrilo4_6:Tail3_M
+    100110: shustrilo4_6:Tail4_M
+    100112: shustrilo4_6:Tail5_M
+    100114: shustrilo4_6:Tail6_M
+    400000: //RootNode
+    400002: shustrilo4_6:BackA_M
+    400004: shustrilo4_6:backAnkle_L
+    400006: shustrilo4_6:backAnkle_R
+    400008: shustrilo4_6:BackB_M
+    400010: shustrilo4_6:backBall_L
+    400012: shustrilo4_6:backBall_R
+    400014: shustrilo4_6:backHip_L
+    400016: shustrilo4_6:backHip_R
+    400018: shustrilo4_6:backKnee_L
+    400020: shustrilo4_6:backKnee_R
+    400022: shustrilo4_6:bn_L_d
+    400024: shustrilo4_6:bn_L_up
+    400026: shustrilo4_6:bn_R_d
+    400028: shustrilo4_6:bn_R_up
+    400030: shustrilo4_6:Chest_M
+    400032: shustrilo4_6:Ear_L
+    400034: shustrilo4_6:Ear_R
+    400036: shustrilo4_6:EarEnd_L
+    400038: shustrilo4_6:EarEnd_R
+    400040: shustrilo4_6:Eye1_L
+    400042: shustrilo4_6:Eye1_R
+    400044: shustrilo4_6:Eye_L
+    400046: shustrilo4_6:eye_L007
+    400048: shustrilo4_6:Eye_L_d
+    400050: shustrilo4_6:Eye_L_up
+    400052: shustrilo4_6:Eye_R
+    400054: shustrilo4_6:eye_R006
+    400056: shustrilo4_6:Eye_R_d
+    400058: shustrilo4_6:Eye_R_up
+    400060: shustrilo4_6:frontAnkle_L
+    400062: shustrilo4_6:frontAnkle_R
+    400064: shustrilo4_6:frontBall_L
+    400066: shustrilo4_6:frontBall_R
+    400068: shustrilo4_6:frontHip_L
+    400070: shustrilo4_6:frontHip_R
+    400072: shustrilo4_6:frontKnee_L
+    400074: shustrilo4_6:frontKnee_R
+    400076: shustrilo4_6:full_lazy002
+    400078: shustrilo4_6:Hair_M
+    400080: shustrilo4_6:Head_M
+    400082: shustrilo4_6:Jaw_M
+    400084: shustrilo4_6:JawEnd_M
+    400086: shustrilo4_6:Neck_M
+    400088: shustrilo4_6:NeckPart1_M
+    400090: shustrilo4_6:NeckPart2_M
+    400092: shustrilo4_6:Root_M
+    400094: shustrilo4_6:Rump_L
+    400096: shustrilo4_6:Rump_R
+    400098: shustrilo4_6:Scapula_L
+    400100: shustrilo4_6:Scapula_R
+    400102: shustrilo4_6:Tail0_M
+    400104: shustrilo4_6:Tail1_M
+    400106: shustrilo4_6:Tail2_M
+    400108: shustrilo4_6:Tail3_M
+    400110: shustrilo4_6:Tail4_M
+    400112: shustrilo4_6:Tail5_M
+    400114: shustrilo4_6:Tail6_M
+    2100000: lambert2
+    4300000: shustrilo4_6:full_lazy002
+    4300002: shustrilo4_6:eye_L007
+    4300004: shustrilo4_6:eye_R006
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: shustrilo4_6:eye_L007
+    13700002: shustrilo4_6:eye_R006
+    13700004: shustrilo4_6:full_lazy002
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 1200
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
