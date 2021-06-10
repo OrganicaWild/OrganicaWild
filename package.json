@@ -23,6 +23,14 @@
     "com.unity.cinemachine": "2.6.4"
   },
   "type": "library",
+  "files": [
+		"*.md",
+		"*.meta",
+		"*.asmdef",
+		"Samples~",
+		"Demo",
+		"Framework"
+	],
   "samples": [
         {
             "displayName": "CellularAutomataSamples",
