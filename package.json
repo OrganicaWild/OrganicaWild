@@ -22,5 +22,12 @@
     "com.unity.inputsystem": "1.0.2",
     "com.unity.cinemachine": "2.6.4"
   },
-  "type": "library"
+  "type": "library",
+  "samples": [
+        {
+            "displayName": "CellularAutomataSamples",
+            "description": "Contains Samples for how to use the Cellular Automata Interface",
+            "path": "Samples~/SamplesCellularAutomata"
+        }
+   ]
 }
