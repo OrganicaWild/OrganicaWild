@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Packages/ch.i4ds.organicawild/Demo/SamplesPipeline/Pipeline/PlayerCharacter/PlayerInput.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Packages/ch.i4ds.organicawild/Samples/SamplesPipeline/Pipeline/PlayerCharacter/PlayerInput.inputactions'
 
 using System;
 using System.Collections;
