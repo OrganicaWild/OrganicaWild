@@ -1,7 +1,7 @@
 {
   "name": "ch.i4ds.organicawild",
   "version": "0.0.1",
-  "displayName": "Organcica Wild",
+  "displayName": "Organica Wild",
   "description": "Organica Wild as a Package\n\nCreate beatiful organica generated terrain with this amazing Unity Package.\nTo use any of demo's select the correct Samples.",
   "unity": "2019.1",
   "unityRelease": "0b5",
