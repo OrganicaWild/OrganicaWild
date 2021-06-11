@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54e1f7bcf5b48a7bf314223b5ae2343, type: 3}
+  m_Name: SnowyEnd
+  m_EditorClassIdentifier: 
+  landmarkPrefabs:
+  - {fileID: 7979063288454640889, guid: 4651f7502275c0e439aa6d5be5ff40c5, type: 3}
+  minScale: {x: 1, y: 1, z: 1}
+  maxScale: {x: 1, y: 1, z: 1}
+  meshMaterial: {fileID: 2100000, guid: e625246dcfae5214d965e4a6d460dde9, type: 2}

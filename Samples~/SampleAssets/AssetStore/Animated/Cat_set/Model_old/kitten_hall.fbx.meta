@@ -1,0 +1,182 @@
+fileFormatVersion: 2
+guid: 3ebf8c12edfad34499dd87d73c92bf6f
+timeCreated: 1550580612
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: center
+    100002: head
+    100004: head_top
+    100006: jaw
+    100008: jaw_last
+    100010: kitten
+    100012: Kitten_bones
+    100014: //RootNode
+    100016: l_eail_last
+    100018: l_eair
+    100020: l_eye
+    100022: l_eye_close
+    100024: l_eye_nub
+    100026: l_hand_1
+    100028: l_hand_2
+    100030: l_hand_3
+    100032: l_hand_4
+    100034: l_leg_1
+    100036: l_leg_2
+    100038: l_leg_3
+    100040: l_leg_4
+    100042: l_leg_5
+    100044: l_mouth
+    100046: r_eair
+    100048: r_eair_last
+    100050: r_eye
+    100052: r_eye_close
+    100054: r_eye_nub
+    100056: r_hand_1
+    100058: r_hand_2
+    100060: r_hand_3
+    100062: r_hand_4
+    100064: r_leg_1
+    100066: r_leg_2
+    100068: r_leg_3
+    100070: r_leg_4
+    100072: r_leg_5
+    100074: r_mouth
+    100076: spine_1
+    100078: spine_2
+    100080: tail_1
+    100082: tail_2
+    100084: tail_3
+    100086: tail_4
+    100088: tail_5
+    400000: center
+    400002: head
+    400004: head_top
+    400006: jaw
+    400008: jaw_last
+    400010: kitten
+    400012: Kitten_bones
+    400014: //RootNode
+    400016: l_eail_last
+    400018: l_eair
+    400020: l_eye
+    400022: l_eye_close
+    400024: l_eye_nub
+    400026: l_hand_1
+    400028: l_hand_2
+    400030: l_hand_3
+    400032: l_hand_4
+    400034: l_leg_1
+    400036: l_leg_2
+    400038: l_leg_3
+    400040: l_leg_4
+    400042: l_leg_5
+    400044: l_mouth
+    400046: r_eair
+    400048: r_eair_last
+    400050: r_eye
+    400052: r_eye_close
+    400054: r_eye_nub
+    400056: r_hand_1
+    400058: r_hand_2
+    400060: r_hand_3
+    400062: r_hand_4
+    400064: r_leg_1
+    400066: r_leg_2
+    400068: r_leg_3
+    400070: r_leg_4
+    400072: r_leg_5
+    400074: r_mouth
+    400076: spine_1
+    400078: spine_2
+    400080: tail_1
+    400082: tail_2
+    400084: tail_3
+    400086: tail_4
+    400088: tail_5
+    2100000: lambert3
+    4300000: kitten
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: kitten
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

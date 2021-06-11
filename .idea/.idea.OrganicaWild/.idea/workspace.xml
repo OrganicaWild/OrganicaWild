@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -31,18 +34,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCANetwork.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCAState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCaCell.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCaMapGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MultivariateOptimizationScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MultivariateOptimizationScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ShapeGrammarScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ShapeGrammarScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PdsGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PdsGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,93 +43,106 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/player-character" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Packages/ch.i4ds.organicawild" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/356F1DDB-1D52-4AD5-9C7A-2C95775BB38E/65/4dd34234/CallbackEventHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/69/6aa67097/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/356F1DDB-1D52-4AD5-9C7A-2C95775BB38E/24/1d7e27bd/IMGUIContainer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1FE7A3C0-284A-456B-9681-B7A93141C89A/09/8652299a/SerializedProperty.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1FE7A3C0-284A-456B-9681-B7A93141C89A/c9/ec58cd75/InspectorElement.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/7a/c11e4210/Matrix4x4.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/f2/0f1f2397/IEquatable`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/02/7683d80c/MemoryStream.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9B926ACD-10D4-48DA-9AA3-641E61A8737F/51/bcabb118/MyAlgorithmRunner.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCaMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1FE7A3C0-284A-456B-9681-B7A93141C89A/01/36760dee/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/19/b9d2955a/Object.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/2a/0d72e35c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1FE7A3C0-284A-456B-9681-B7A93141C89A/25/bf93e060/AssetDatabase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/37/64c83ab0/String.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/9e/40bffb1f/Void.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/48/791df3b4/Array.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E5B75411-C8CD-4BFA-A9E7-60BE20206F29/28/d0e40241/Rect.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9577AC7A-62EF-4317-9789-031239BA8798/4a/76aa60a6/ArraySortHelper`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0467F5C0-E463-4B2C-ACC5-F718CB71F056/7b/be0c791d/ReadOnlyAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/19/15aae096/GeoAlgorithms.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EAE584CE-26BC-4022-9C1B-1AA476BFA589/eb/61bb72b5/Random.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/01/df395b1c/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07CFA953-D94B-44E4-BB3A-488BEF79100A/15/4b7a2d51/GUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/60/6446f6a1/Voronoi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/53/adad0534/IMGUIContainer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF151B6A-BB5D-474C-B2C1-CB8906A8B5A4/2c/1e97fec7/Socket.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/fd/1539f524/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E81851A0-DC73-4A79-AFA9-F5B7273162BE/b5/ff21947e/Random.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/a0/121cae76/EventDispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/e7/59a49be8/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/2e/6e7d0a29/LineIntersection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/7e/e5575c5e/Fortran.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/92/5da3afea/MeshFilter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/998F2491-CDE6-4F39-9B36-14F82C288B4F/7b/907bd5a4/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/FAA55637-FCC1-4BBF-B146-E6835A4641D9/c6/1681d94f/Collider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/db/654a394f/VoronoiResults.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/EditorMissionGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphGrammarComponentEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GrammarRule.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Editor/RectangularCAMapGeneratorEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/GraphEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/Editor/MissionGraphEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Editor/OrganicRectangularCAMapGeneratorEditor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/DistanceToBorderFitnessFunction.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/EnemyDistanceFitnessFunction.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyAlgorithmRunner2.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyIndividual.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/StandardFitnessFunction2.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/ShapeGrammarController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/ShapeGrammar/SubdivisionGrammarRuleComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/CACell.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceTree.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/RandomUtil.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNodeConnection.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector3Extensions.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/SpaceNode.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammar.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Poisson Disk Sampling/PoissonDiskSampling.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionVertex.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Steps/TrialCaCellRuleApplicationStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Miscellanous/TrialCellNetwork.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Rules/ScriptableObjects/BecomeBorderRule.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp/mesh_generators/TriangulatedPolygonGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/BackGroundAreaRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/Vector3Extensions.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PairedAreaRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPointInteractor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/PolygonWithHoleInteractions.cs" />
+      <option value="$PROJECT_DIR$/Assets/Submodules/geometry3Sharp/math/Vector2d.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/OutsideBorderRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/GameObjectCreation.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
+      <option value="$PROJECT_DIR$/Assets/ConnectedAreaTrigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PairedAreaFlowerRingRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/BrokenVector/LowPolyRockPack/Prefabs/Rock Type3 01.prefab" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Editor/ReadOnlyAttribute.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammarComponent.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/DrawableMissionVertex.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/VertexContainer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/Nsga2Algorithm.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/DistanceComparer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/Nsga2/AbstractNsga2Individual.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/CANetwork.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PDSGenerator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/StandardIndividual2.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/MyAlgorithmRunner.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestIndividual.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestFitnessFunctions.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Evolutionary/Forest/ForestBuilder.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/RectangularCAMapGenerator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Evolutionary/IEvolutionaryAlgorithm.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionGraphConnection.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/EditorData/SerializableMissionVertex.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCAState.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCANetwork.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCACell.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/Elliptical Cellular Automata/EllipticalCAMapGenerator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Poisson Disk Sampling/PdsGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PlayerAndCameraRecipe.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkAreaStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Editor/PipeLineManagerEditor.cs" />
+      <option value="$PROJECT_DIR$/Assets/LoadSceneOnTriggerEnter.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/GameManagerMono.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/TrialPipeline/TrialCellularAutomata/Steps/TrialCaCellInitialisationStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Legacy Contents/DebugPipelineStep.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/LoadScene.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/LoadSceneOnTriggerEnter.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManagerMono.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ConnectedAreaTrigger.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ScoreUpdater.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/GameManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PlayerCharacter/CatMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/ActivatorUponGameStart.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/ActivateAllChildrenUponGameManagerStart.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Standard/StandardPipelineManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/Interactors/PolygonPolygonInteractor.cs" />
+      <option value="$PROJECT_DIR$/Packages/ch.i4ds.organicawild/Framework/Util/Miscellanous/GameObjectCreation.cs" />
+      <option value="$PROJECT_DIR$/Packages/ch.i4ds.organicawild/Framework/Pipeline/Standard/Editor/StandardPipelineManagerEditor.cs" />
+      <option value="$PROJECT_DIR$/.gitignore" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.2826087" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13287154" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -150,7 +156,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -214,148 +220,383 @@
       <workItem from="1609266295333" duration="1902000" />
       <workItem from="1609321221912" duration="7025000" />
       <workItem from="1610740728801" duration="699000" />
+      <workItem from="1617267677010" duration="11209000" />
+      <workItem from="1617544409806" duration="4767000" />
+      <workItem from="1617618427827" duration="8349000" />
+      <workItem from="1618061535724" duration="8889000" />
+      <workItem from="1618226595057" duration="2535000" />
+      <workItem from="1618473188888" duration="12135000" />
+      <workItem from="1618817716545" duration="9000" />
+      <workItem from="1618857181441" duration="1974000" />
+      <workItem from="1618991980375" duration="16326000" />
+      <workItem from="1619017151191" duration="3000000" />
+      <workItem from="1619177608133" duration="11127000" />
+      <workItem from="1619258908480" duration="12377000" />
+      <workItem from="1619335934765" duration="21531000" />
+      <workItem from="1619599374355" duration="1016000" />
+      <workItem from="1619600416743" duration="19797000" />
+      <workItem from="1619622861984" duration="1330000" />
+      <workItem from="1619624223194" duration="10818000" />
+      <workItem from="1619763344458" duration="12563000" />
+      <workItem from="1619943680594" duration="31481000" />
+      <workItem from="1620024208583" duration="4342000" />
+      <workItem from="1620155183423" duration="1558000" />
+      <workItem from="1620202010911" duration="21950000" />
+      <workItem from="1620247926603" duration="1150000" />
+      <workItem from="1620289149460" duration="745000" />
+      <workItem from="1620316630892" duration="882000" />
+      <workItem from="1621258360154" duration="3686000" />
+      <workItem from="1622367261307" duration="2186000" />
+      <workItem from="1622376632910" duration="897000" />
+      <workItem from="1622439169535" duration="2535000" />
+      <workItem from="1623009820947" duration="1422000" />
+      <workItem from="1623018369933" duration="76000" />
+      <workItem from="1623094984806" duration="3763000" />
     </task>
-    <task id="LOCAL-00001" summary="restructre">
-      <created>1604263216246</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
+    <task id="LOCAL-00029" summary="edit some materials">
+      <created>1619605805960</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
       <option name="project" value="LOCAL" />
-      <updated>1604263216246</updated>
+      <updated>1619605805960</updated>
     </task>
-    <task id="LOCAL-00002" summary="add base graph and vertex class">
-      <created>1605874125378</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
+    <task id="LOCAL-00030" summary="comment area type assignment">
+      <created>1619605939755</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
       <option name="project" value="LOCAL" />
-      <updated>1605874125378</updated>
+      <updated>1619605939755</updated>
     </task>
-    <task id="LOCAL-00003" summary="add working version">
-      <created>1606043194133</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
+    <task id="LOCAL-00031" summary="indent ThemeApplicator.cs correctly">
+      <created>1619606134650</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
       <option name="project" value="LOCAL" />
-      <updated>1606043194133</updated>
+      <updated>1619606134650</updated>
     </task>
-    <task id="LOCAL-00004" summary="add simple demo with visualization">
-      <created>1606051561427</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
+    <task id="LOCAL-00032" summary="add Area Connection Placement">
+      <created>1619611754774</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
       <option name="project" value="LOCAL" />
-      <updated>1606051561428</updated>
+      <updated>1619611754774</updated>
     </task>
-    <task id="LOCAL-00005" summary="generify Vertex and Graph">
-      <created>1606053817282</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
+    <task id="LOCAL-00033" summary="add landmark placement">
+      <created>1619615095917</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
       <option name="project" value="LOCAL" />
-      <updated>1606053817282</updated>
+      <updated>1619615095917</updated>
     </task>
-    <task id="LOCAL-00006" summary="visualize graphs">
-      <created>1606069093042</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
+    <task id="LOCAL-00034" summary="change comment in LandmarkPlacementStep.cs">
+      <created>1619615516197</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
       <option name="project" value="LOCAL" />
-      <updated>1606069093042</updated>
+      <updated>1619615516197</updated>
     </task>
-    <task id="LOCAL-00007" summary="add editor">
-      <created>1606129698878</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
+    <task id="LOCAL-00035" summary="add MainPathPlacement and make PipelineStep to MonoBehaviour">
+      <created>1619621203946</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
       <option name="project" value="LOCAL" />
-      <updated>1606129698878</updated>
+      <updated>1619621203946</updated>
     </task>
-    <task id="LOCAL-00008" summary="safe point">
-      <created>1606208187891</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
+    <task id="LOCAL-00036" summary="add editor script to pipelineManager">
+      <created>1619622718195</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
       <option name="project" value="LOCAL" />
-      <updated>1606208187891</updated>
+      <updated>1619622718195</updated>
     </task>
-    <task id="LOCAL-00009" summary="reimplemented contains and add containedAt">
-      <created>1606216077398</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
+    <task id="LOCAL-00037" summary="add if pipeline has configuration error it cannot be started">
+      <created>1619622829170</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
       <option name="project" value="LOCAL" />
-      <updated>1606216077398</updated>
+      <updated>1619622829170</updated>
     </task>
-    <task id="LOCAL-00010" summary="change containedAt to ContainedSubGraph">
-      <created>1606225551265</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
+    <task id="LOCAL-00038" summary="remove bad scene">
+      <created>1619622986762</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
       <option name="project" value="LOCAL" />
-      <updated>1606225551265</updated>
+      <updated>1619622986762</updated>
     </task>
-    <task id="LOCAL-00011" summary="rework ApplyRule to use the new ContainedSubGraph">
-      <created>1606229143643</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
+    <task id="LOCAL-00039" summary="add straight path path shape definition step">
+      <created>1619623362600</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
       <option name="project" value="LOCAL" />
-      <updated>1606229143643</updated>
+      <updated>1619623362600</updated>
     </task>
-    <task id="LOCAL-00012" summary="add correct rules for dorman example">
-      <created>1606243029793</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
+    <task id="LOCAL-00040" summary="fix random seed assignment in pipelinerunner">
+      <created>1619624035922</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
       <option name="project" value="LOCAL" />
-      <updated>1606243029793</updated>
+      <updated>1619624035922</updated>
     </task>
-    <task id="LOCAL-00013" summary="add sphape grammar bas">
-      <created>1606319256946</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
+    <task id="LOCAL-00041" summary="add CA Init Step">
+      <created>1619629026592</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
       <option name="project" value="LOCAL" />
-      <updated>1606319256946</updated>
+      <updated>1619629026592</updated>
     </task>
-    <task id="LOCAL-00014" summary="add simple mapping from graph grmamar to shape grammar">
-      <created>1606382829410</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
+    <task id="LOCAL-00042" summary="change seed to nullable type">
+      <created>1619629486021</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
       <option name="project" value="LOCAL" />
-      <updated>1606382829410</updated>
+      <updated>1619629486021</updated>
     </task>
-    <task id="LOCAL-00015" summary="move graph grammar component to framework">
-      <created>1606387352786</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
+    <task id="LOCAL-00043" summary="add references to Area Connection">
+      <created>1619641493952</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1606387352786</updated>
+      <updated>1619641493952</updated>
     </task>
-    <task id="LOCAL-00016" summary="extract GetLocalRotation method">
-      <created>1606387923007</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
+    <task id="LOCAL-00044" summary="change Area Cell Implementations to type">
+      <created>1619905768539</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1606387923007</updated>
+      <updated>1619905768539</updated>
     </task>
-    <task id="LOCAL-00017" summary="organize assets">
-      <created>1606404465860</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
+    <task id="LOCAL-00045" summary="add landmark area placement step to test polygon clipping">
+      <created>1619945191269</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
       <option name="project" value="LOCAL" />
-      <updated>1606404465860</updated>
+      <updated>1619945191269</updated>
     </task>
-    <task id="LOCAL-00018" summary="rename graph to mission graph and vertex accordingly">
-      <created>1606404604103</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
+    <task id="LOCAL-00046" summary="adapt landmark area step">
+      <created>1619949939431</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1606404604103</updated>
+      <updated>1619949939431</updated>
     </task>
-    <task id="LOCAL-00019" summary="rename graph to mission graph and vertex accordingly">
-      <created>1606404621783</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
+    <task id="LOCAL-00047" summary="add drawDebug based on depth and type">
+      <created>1619950433738</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
       <option name="project" value="LOCAL" />
-      <updated>1606404621783</updated>
+      <updated>1619950433738</updated>
     </task>
-    <task id="LOCAL-00020" summary="add actual rooms to prefabs">
-      <created>1606461622021</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
+    <task id="LOCAL-00048" summary="make resulting landmark area be inside of other area most of the time">
+      <created>1619952169178</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
       <option name="project" value="LOCAL" />
-      <updated>1606461622021</updated>
+      <updated>1619952169178</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00049" summary="fix ThemeApplicator.cs">
+      <created>1619953931903</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1619953931903</updated>
+    </task>
+    <task id="LOCAL-00050" summary="add cell merging step and fix PolygonLineInteractor.cs">
+      <created>1619962391878</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1619962391878</updated>
+    </task>
+    <task id="LOCAL-00051" summary="remove old impl comments PolygonLineInteractor.cs">
+      <created>1619964042209</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1619964042209</updated>
+    </task>
+    <task id="LOCAL-00052" summary="finalise merge">
+      <created>1620033029380</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1620033029380</updated>
+    </task>
+    <task id="LOCAL-00053" summary="readd border rule to ca">
+      <created>1620034066579</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1620034066579</updated>
+    </task>
+    <task id="LOCAL-00054" summary="add noise to border and background">
+      <created>1620045030547</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1620045030547</updated>
+    </task>
+    <task id="LOCAL-00055" summary="merge organica-recipes into feature/organic-pipeline">
+      <created>1620047452579</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1620047452579</updated>
+    </task>
+    <task id="LOCAL-00056" summary="change Triangulation of Polygon to care about holes">
+      <created>1620207216996</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1620207216996</updated>
+    </task>
+    <task id="LOCAL-00057" summary="add outside border recipe">
+      <created>1620211446956</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1620211446956</updated>
+    </task>
+    <task id="LOCAL-00058" summary="add new paired area recipe">
+      <created>1620220485629</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1620220485629</updated>
+    </task>
+    <task id="LOCAL-00059" summary="add connected area trigger">
+      <created>1620227134644</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1620227134644</updated>
+    </task>
+    <task id="LOCAL-00060" summary="add pipeline runner prefab">
+      <created>1620227178287</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1620227178287</updated>
+    </task>
+    <task id="LOCAL-00061" summary="fix ConnectedAreaTrigger.cs">
+      <created>1620237007858</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1620237007858</updated>
+    </task>
+    <task id="LOCAL-00062" summary="add colliders to prefabs">
+      <created>1620238836893</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1620238836893</updated>
+    </task>
+    <task id="LOCAL-00063" summary="add colliders to prefabs">
+      <created>1620239008031</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1620239008031</updated>
+    </task>
+    <task id="LOCAL-00064" summary="add colliders and fix ConnectedAreaTrigger.cs">
+      <created>1620239782811</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1620239782811</updated>
+    </task>
+    <task id="LOCAL-00065" summary="add colliders and fix ConnectedAreaTrigger.cs">
+      <created>1620239864002</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1620239864002</updated>
+    </task>
+    <task id="LOCAL-00066" summary="add colliders and fix ConnectedAreaTrigger.cs">
+      <created>1620239882925</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1620239882925</updated>
+    </task>
+    <task id="LOCAL-00067" summary="move editor things into editor folder so the project can be built">
+      <created>1620246263098</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1620246263100</updated>
+    </task>
+    <task id="LOCAL-00068" summary="add generation flag">
+      <created>1620246456238</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1620246456238</updated>
+    </task>
+    <task id="LOCAL-00069" summary="merge newest character movement changes">
+      <created>1620292123090</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1620292123090</updated>
+    </task>
+    <task id="LOCAL-00070" summary="add prefab for pipeline manager">
+      <created>1620292211549</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1620292211549</updated>
+    </task>
+    <task id="LOCAL-00071" summary="add scoreboard">
+      <created>1620294243770</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1620294243770</updated>
+    </task>
+    <task id="LOCAL-00072" summary="add startscene and end loading new level with new seed">
+      <created>1620300228150</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1620300228150</updated>
+    </task>
+    <task id="LOCAL-00073" summary="fix issue, where you could only collect all spawns in first round of game">
+      <created>1620301561141</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1620301561141</updated>
+    </task>
+    <task id="LOCAL-00074" summary="fix aspect ratio because of text">
+      <created>1620302642692</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1620302642692</updated>
+    </task>
+    <task id="LOCAL-00075" summary="adjust hitboxes on tress">
+      <created>1621258386950</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1621258386951</updated>
+    </task>
+    <task id="LOCAL-00076" summary="add progress indicator">
+      <created>1621261549058</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1621261549058</updated>
+    </task>
+    <task id="LOCAL-00077" summary="fix score issue">
+      <created>1622377521926</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1622377521926</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,7 +609,44 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature/first-game" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="feature/organic-pipeline" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="feature/first-pipeline" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="pipeline-datastructure" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -377,26 +655,32 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="restructre" />
-    <MESSAGE value="add base graph and vertex class" />
-    <MESSAGE value="add working version" />
-    <MESSAGE value="add simple demo with visualization" />
-    <MESSAGE value="generify Vertex and Graph" />
-    <MESSAGE value="visualize graphs" />
-    <MESSAGE value="add editor" />
-    <MESSAGE value="safe point" />
-    <MESSAGE value="reimplemented contains and add containedAt" />
-    <MESSAGE value="change containedAt to ContainedSubGraph" />
-    <MESSAGE value="rework ApplyRule to use the new ContainedSubGraph" />
-    <MESSAGE value="add correct rules for dorman example" />
-    <MESSAGE value="add sphape grammar bas" />
-    <MESSAGE value="add simple mapping from graph grmamar to shape grammar" />
-    <MESSAGE value="move graph grammar component to framework" />
-    <MESSAGE value="extract GetLocalRotation method" />
-    <MESSAGE value="organize assets" />
-    <MESSAGE value="rename graph to mission graph and vertex accordingly" />
-    <MESSAGE value="add actual rooms to prefabs" />
-    <option name="LAST_COMMIT_MESSAGE" value="add actual rooms to prefabs" />
+    <MESSAGE value="remove old impl comments PolygonLineInteractor.cs" />
+    <MESSAGE value="finalise merge" />
+    <MESSAGE value="readd border rule to ca" />
+    <MESSAGE value="add noise to border and background" />
+    <MESSAGE value="merge organica-recipes into feature/organic-pipeline" />
+    <MESSAGE value="change Triangulation of Polygon to care about holes" />
+    <MESSAGE value="add outside border recipe" />
+    <MESSAGE value="add new paired area recipe" />
+    <MESSAGE value="add connected area trigger" />
+    <MESSAGE value="add pipeline runner prefab" />
+    <MESSAGE value="add cat into game" />
+    <MESSAGE value="fix ConnectedAreaTrigger.cs" />
+    <MESSAGE value="add colliders to prefabs" />
+    <MESSAGE value="add colliders and fix ConnectedAreaTrigger.cs" />
+    <MESSAGE value="move editor things into editor folder so the project can be built" />
+    <MESSAGE value="add generation flag" />
+    <MESSAGE value="merge newest character movement changes" />
+    <MESSAGE value="add prefab for pipeline manager" />
+    <MESSAGE value="add scoreboard" />
+    <MESSAGE value="add startscene and end loading new level with new seed" />
+    <MESSAGE value="fix issue, where you could only collect all spawns in first round of game" />
+    <MESSAGE value="fix aspect ratio because of text" />
+    <MESSAGE value="adjust hitboxes on tress" />
+    <MESSAGE value="add progress indicator" />
+    <MESSAGE value="fix score issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix score issue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -404,53 +688,25 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>
           <line>47</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="49" containingFunctionPresentation="method 'ApplyOneRule'">
-            <startOffsets>
-              <option value="1746" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1769" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="49" containingFunctionPresentation="method 'ApplyOneRule'" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>
           <line>54</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="56" containingFunctionPresentation="method 'ApplyOneRule'">
-            <startOffsets>
-              <option value="1977" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2024" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="56" containingFunctionPresentation="method 'ApplyOneRule'" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>
           <line>49</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="51" containingFunctionPresentation="method 'ApplyOneRule'">
-            <startOffsets>
-              <option value="1800" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1876" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\GraphGrammar.cs" initialLine="51" containingFunctionPresentation="method 'ApplyOneRule'" />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs</url>
           <line>211</line>
-          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\MissionGraph.cs" initialLine="213" containingFunctionPresentation="method 'Traverse'">
-            <startOffsets>
-              <option value="8522" />
-            </startOffsets>
-            <endOffsets>
-              <option value="8539" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\dev\OrganicaWild\Assets\Scripts\Framework\GraphGrammar\MissionGraph.cs" initialLine="213" containingFunctionPresentation="method 'Traverse'" />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>

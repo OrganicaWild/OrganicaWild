@@ -1,0 +1,1347 @@
+Index: Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Framework.Pipeline.GameWorldObjects;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.ThemeApplicator\r\n{\r\n    public class ThemeApplicator : IThemeApplicator\r\n    {\r\n        private GameObject root;\r\n\r\n        public GameObject Apply(GameWorld world)\r\n        {\r\n            root = new GameObject();\r\n            InterpretLayer(world.Root, 0);\r\n            return root;\r\n        }\r\n\r\n        private void InterpretLayer(IGameWorldObject parent, float depth)\r\n        {\r\n            int childrenWithNoRecipeCount = 0;\r\n            foreach (IGameWorldObject child in parent.GetChildren())\r\n            {\r\n                if (child.GetRecipe() == null)\r\n                {\r\n                    childrenWithNoRecipeCount++;\r\n                    continue;\r\n                }\r\n\r\n                GameObject cooked = child.GetRecipe().Cook(child);\r\n                cooked.transform.parent = root.transform;\r\n                cooked.transform.position += new Vector3(0, 0, -depth);\r\n\r\n                InterpretLayer(child, depth + 1);\r\n            }\r\n\r\n            Debug.LogWarning(\r\n                $\"Number: {childrenWithNoRecipeCount} IGameWorldObjects cannot be cooked since they have no recipe.\");\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs
+--- a/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs	(date 1619787637411)
+@@ -1,39 +1,122 @@
++using System;
++using System.Collections.Generic;
+ using Framework.Pipeline.GameWorldObjects;
++using Framework.Pipeline.ThemeApplicator.Recipe;
+ using UnityEngine;
+ 
+ namespace Framework.Pipeline.ThemeApplicator
+ {
+-    public class ThemeApplicator : IThemeApplicator
++    public class ThemeApplicator : MonoBehaviour, IThemeApplicator
+     {
+         private GameObject root;
+ 
++        public List<TypeRecipeCombination> recipes;
++
++        private Dictionary<string, GameWorldObjectRecipe> cookbook;
++
++        private string warningText;
++        private bool hasWarning = false;
++        public bool HasWarning => hasWarning;
++
+         public GameObject Apply(GameWorld world)
+         {
++            MakeCookBook();
+             root = new GameObject();
+-            InterpretLayer(world.Root, 0);
++            int childrenWithNoRecipeCount = InterpretLayer(world.Root, 0);
++            
++            if (childrenWithNoRecipeCount > 0)
++            {
++                hasWarning = true;
++                warningText =
++                    $"Number: {childrenWithNoRecipeCount} IGameWorldObjects with specified Type cannot be cooked since they have no recipe.";
++            }
++            else
++            {
++                hasWarning = false;
++            }
++            
+             return root;
+         }
+ 
+-        private void InterpretLayer(IGameWorldObject parent, float depth)
++        public void FindAllTypes()
++        {
++            PipelineManager manager = GetComponent<PipelineManager>();
++
++            if (manager != null)
++            {
++                //setup first time
++                if (recipes == null)
++                {
++                    recipes = new List<TypeRecipeCombination>();
++                }
++
++                GameWorld exampleGameWorld = manager.pipeLineRunner.Execute();
++                FindTypeInLayer(exampleGameWorld.Root);
++            }
++            else
++            {
++                throw new Exception("This Object also needs a PipelineManager");
++            }
++        }
++
++        private void FindTypeInLayer(IGameWorldObject parent)
++        {
++            foreach (IGameWorldObject child in parent.GetChildren())
++            {
++                if (child.Type != null)
++                {
++                    TypeRecipeCombination combination = new TypeRecipeCombination(child.Type);
++
++                    if (!recipes.Contains(combination))
++                    {
++                        recipes.Add(combination);
++                    }
++                }
++
++                FindTypeInLayer(child);
++            }
++        }
++
++        private void MakeCookBook()
++        {
++            cookbook = new Dictionary<string, GameWorldObjectRecipe>();
++
++            foreach (TypeRecipeCombination typeRecipeCombination in recipes)
++            {
++                cookbook.Add(typeRecipeCombination.name, typeRecipeCombination.recipe);
++            }
++        }
++
++        private int InterpretLayer(IGameWorldObject parent, float depth)
+         {
+             int childrenWithNoRecipeCount = 0;
+             foreach (IGameWorldObject child in parent.GetChildren())
+             {
+-                if (child.GetRecipe() == null)
++                //children that do not have a type are expected to not be drawn and do not show a warning
++                if (child.Type == null)
++                {
++                    continue;
++                }
++
++                if (cookbook[child.Type] == null)
+                 {
+                     childrenWithNoRecipeCount++;
+                     continue;
+                 }
+ 
+-                GameObject cooked = child.GetRecipe().Cook(child);
++                GameObject cooked = cookbook[child.Type].Cook(child);
+                 cooked.transform.parent = root.transform;
+                 cooked.transform.position += new Vector3(0, 0, -depth);
+ 
+-                InterpretLayer(child, depth + 1);
++                return childrenWithNoRecipeCount + InterpretLayer(child, depth + 1);
+             }
++
++            return childrenWithNoRecipeCount;
++        }
+ 
+-            Debug.LogWarning(
+-                $"Number: {childrenWithNoRecipeCount} IGameWorldObjects cannot be cooked since they have no recipe.");
++        public string GetWarning()
++        {
++            return warningText;
+         }
+     }
+ }
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Assets.Scripts.Framework.Pipeline.PipelineGuarantees;\r\nusing Framework.Pipeline;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing Framework.Util;\r\nusing UnityEngine;\r\nusing Random = System.Random;\r\n\r\nnamespace Assets.Scripts.Framework.Pipeline.PipeLineSteps\r\n{\r\n    [AreaTypeAssignedGuarantee]\r\n    public class AreaTypeAssignmentStep : PipelineStep\r\n    {\r\n        public int inBetweenAreaTypes;\r\n        public override Type[] RequiredGuarantees => new Type[] {typeof(AreasPlacedGuarantee)};\r\n\r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            //get all areas\r\n            IEnumerable<Area> areas = world.Root.GetAllChildrenOfType<Area>();\r\n            \r\n            Vector2Comparer comparer = new Vector2Comparer();\r\n            List<Area> areaList = areas.ToList();\r\n\r\n            //sort areas based on distance to origin of centroid\r\n            areaList.Sort((area1, area2) =>\r\n                comparer.Compare(area1.Shape.GetCentroid(), area2.Shape.GetCentroid()));\r\n\r\n            Area startArea = areaList.First();\r\n            Area endArea = areaList.Last();\r\n\r\n            //remove non typed areas\r\n            world.Root.RemoveChild(startArea);\r\n            world.Root.RemoveChild(endArea);\r\n\r\n            TypedArea startTypedArea = new TypedArea(startArea.Shape, null, -1);\r\n            TypedArea endTypedArea = new TypedArea(endArea.Shape, null, int.MaxValue);\r\n            \r\n            //landmarks used for debugging\r\n            //startTypedArea.AddChild(new Landmark(new OwPoint(startTypedArea.Shape.GetCentroid() + Vector2.one), null));\r\n            //endTypedArea.AddChild(new Landmark(new OwPoint(endTypedArea.Shape.GetCentroid()), null));\r\n\r\n            //add typed areas\r\n            world.Root.AddChild(startTypedArea);\r\n            world.Root.AddChild(endTypedArea);\r\n\r\n            //remove non typed areas from list, so that they are not handled as in-between areas\r\n            areaList.Remove(startArea);\r\n            areaList.Remove(endArea);\r\n\r\n            //assign type to in-between areas\r\n            foreach (Area area in areaList)\r\n            {\r\n                world.Root.RemoveChild(area);\r\n\r\n                int type = (int) Math.Floor(random.NextDouble() * (inBetweenAreaTypes));\r\n                TypedArea typedArea = new TypedArea(area.Shape, null, type);\r\n\r\n                world.Root.AddChild(typedArea);\r\n            }\r\n\r\n            return world;\r\n        }\r\n\r\n\r\n        public class TypedArea : Area\r\n        {\r\n            private int areaType;\r\n\r\n            public int AreaType\r\n            {\r\n                get => areaType;\r\n                set => this.areaType = value;\r\n            }\r\n\r\n            /// <summary>\r\n            /// Specifies a special area with a type specifier as an int.\r\n            /// </summary>\r\n            /// <param name=\"shape\"></param>\r\n            /// <param name=\"recipe\"></param>\r\n            /// <param name=\"type\"> -1 = start,\r\n            ///                     Int32.MaxValue = end.\r\n            ///                     0 = Type1,\r\n            ///                     1 = Type2,\r\n            ///                     etc..\r\n            /// </param>\r\n            public TypedArea(IGeometry shape, GameWorldObjectRecipe recipe, int areaType) : base(shape, recipe)\r\n            {\r\n                this.areaType = areaType;\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs b/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs
+--- a/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs	(date 1619785164343)
+@@ -37,8 +37,8 @@
+             world.Root.RemoveChild(startArea);
+             world.Root.RemoveChild(endArea);
+ 
+-            TypedArea startTypedArea = new TypedArea(startArea.Shape, null, -1);
+-            TypedArea endTypedArea = new TypedArea(endArea.Shape, null, int.MaxValue);
++            TypedArea startTypedArea = new TypedArea(startArea.Shape, "startArea", -1);
++            TypedArea endTypedArea = new TypedArea(endArea.Shape, "endArea", int.MaxValue);
+             
+             //landmarks used for debugging
+             //startTypedArea.AddChild(new Landmark(new OwPoint(startTypedArea.Shape.GetCentroid() + Vector2.one), null));
+@@ -58,7 +58,7 @@
+                 world.Root.RemoveChild(area);
+ 
+                 int type = (int) Math.Floor(random.NextDouble() * (inBetweenAreaTypes));
+-                TypedArea typedArea = new TypedArea(area.Shape, null, type);
++                TypedArea typedArea = new TypedArea(area.Shape, $"area{type}", type);
+ 
+                 world.Root.AddChild(typedArea);
+             }
+@@ -88,7 +88,7 @@
+             ///                     1 = Type2,
+             ///                     etc..
+             /// </param>
+-            public TypedArea(IGeometry shape, GameWorldObjectRecipe recipe, int areaType) : base(shape, recipe)
++            public TypedArea(IGeometry shape, string type, int areaType) : base(shape, type)
+             {
+                 this.areaType = areaType;
+             }
+Index: Assets/Scripts/Demo/Pipeline/PipelineManager.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing Assets.Scripts.Framework.Pipeline.PipeLineSteps;\r\nusing Framework.Pipeline;\r\nusing Framework.Pipeline.PipeLineSteps;\r\nusing Framework.Pipeline.ThemeApplicator;\r\nusing UnityEngine;\r\nusing Random = System.Random;\r\n\r\n[ExecuteInEditMode]\r\npublic class PipelineManager : MonoBehaviour\r\n{\r\n    private GameWorld GameWorld { get; set; }\r\n\r\n    public float minimalDebugColorBrightness = 0.3f;\r\n\r\n    public int randomSeed;\r\n\r\n    private PipeLineRunner pipeLineRunner;\r\n\r\n    public bool hasError;\r\n    public string errorText;\r\n\r\n    private void Start()\r\n    {\r\n        Setup();\r\n        Generate();\r\n    }\r\n\r\n    public void Generate()\r\n    {\r\n        if (hasError)\r\n        {\r\n            return;   \r\n        }\r\n        \r\n        List<GameObject> children = new List<GameObject>();\r\n        foreach (Transform child in transform)\r\n        {\r\n            children.Add(child.gameObject);\r\n        }\r\n        children.ForEach(DestroyImmediate);\r\n        \r\n        GameWorld = pipeLineRunner.Execute();\r\n        pipeLineRunner.SetThemeApplicator(new ThemeApplicator());\r\n        GameObject builtWorld = pipeLineRunner.ApplyTheme();\r\n        builtWorld.transform.parent = this.transform;\r\n    }\r\n\r\n    public void Setup()\r\n    {\r\n        pipeLineRunner = new PipeLineRunner(randomSeed);\r\n        randomSeed = pipeLineRunner.Seed;\r\n\r\n        PipelineStep[] allSteps = GetComponents<PipelineStep>();\r\n\r\n        try\r\n        {\r\n            foreach (PipelineStep step in allSteps)\r\n            {\r\n                pipeLineRunner.AddStep(step);\r\n            }\r\n\r\n            hasError = false;\r\n            errorText = \"\";\r\n        }\r\n        catch (IllegalExecutionOrderException e)\r\n        {\r\n            hasError = true;\r\n            errorText = e.Message;\r\n        }\r\n    }\r\n\r\n    private void Update()\r\n    {\r\n        Setup();\r\n    }\r\n\r\n    private void OnDrawGizmos()\r\n    {\r\n        if (GameWorld != null)\r\n        {\r\n            GameWorld.DrawDebug(minimalDebugColorBrightness);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Demo/Pipeline/PipelineManager.cs b/Assets/Scripts/Demo/Pipeline/PipelineManager.cs
+--- a/Assets/Scripts/Demo/Pipeline/PipelineManager.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Demo/Pipeline/PipelineManager.cs	(date 1619786608357)
+@@ -16,7 +16,7 @@
+ 
+     public int randomSeed;
+ 
+-    private PipeLineRunner pipeLineRunner;
++    public PipeLineRunner pipeLineRunner;
+ 
+     public bool hasError;
+     public string errorText;
+@@ -41,10 +41,18 @@
+         }
+         children.ForEach(DestroyImmediate);
+         
++        
+         GameWorld = pipeLineRunner.Execute();
+-        pipeLineRunner.SetThemeApplicator(new ThemeApplicator());
+-        GameObject builtWorld = pipeLineRunner.ApplyTheme();
+-        builtWorld.transform.parent = this.transform;
++        
++        //only apply theme if there is a ThemeApplicator as a Component
++        ThemeApplicator themeApplicator = GetComponent<ThemeApplicator>();
++        if (themeApplicator != null)
++        {
++            pipeLineRunner.SetThemeApplicator(themeApplicator);
++            GameObject builtWorld = pipeLineRunner.ApplyTheme();
++            builtWorld.transform.parent = this.transform;
++        }
++        
+     }
+ 
+     public void Setup()
+@@ -53,7 +61,6 @@
+         randomSeed = pipeLineRunner.Seed;
+ 
+         PipelineStep[] allSteps = GetComponents<PipelineStep>();
+-
+         try
+         {
+             foreach (PipelineStep step in allSteps)
+Index: Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Assets.Scripts.Framework.Pipeline.PipeLineSteps;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.Geometry.Interactors;\r\nusing Framework.Pipeline.PipelineGuarantees;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\nusing Random = System.Random;\r\n\r\nnamespace Framework.Pipeline.PipeLineSteps\r\n{\r\n    [LandmarksPlacedGuarantee]\r\n    public class LandmarkPlacementStep : PipelineStep\r\n    {\r\n        public GameWorldObjectRecipe landmarkRecipe;\r\n        public GameWorldObjectRecipe startLandmarkRecipe;\r\n        public GameWorldObjectRecipe endLandmarkRecipe;\r\n\r\n        [Range(0, 1)] public float hasLandmarksPercent;\r\n        public int minLandmarks;\r\n        public int maxLandmarks;\r\n\r\n        public int maxDistanceFromCenter;\r\n        public int minDistanceFromCenter;\r\n\r\n        public float freeSpaceInsideAtBorder;\r\n        public float minimumDistanceBetweenLandmarks;\r\n        public int maxTriesToGuaranteeConstraints;\r\n\r\n        public bool addDebugScaledInnerArea;\r\n\r\n        public override Type[] RequiredGuarantees => new Type[] {typeof(AreaConnectionsGuarantee)};\r\n\r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            List<AreaTypeAssignmentStep.TypedArea> areas =\r\n                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().ToList();\r\n\r\n            foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)\r\n            {\r\n                //start Area\r\n                if (typedArea.AreaType == -1)\r\n                {\r\n                    //add landmark at centroid\r\n                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), startLandmarkRecipe));\r\n                    continue;\r\n                }\r\n\r\n                //end area\r\n                if (typedArea.AreaType == int.MaxValue)\r\n                {\r\n                    //add landmark at centroid\r\n                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), endLandmarkRecipe));\r\n                    continue;\r\n                }\r\n\r\n                bool hasLandmark = random.NextDouble() <= hasLandmarksPercent;\r\n\r\n                if (hasLandmark)\r\n                {\r\n                    int numberOfLandmarks = (int) (random.NextDouble() * (maxLandmarks - minLandmarks) + minLandmarks);\r\n                    List<OwPoint> placedPoints = new List<OwPoint>();\r\n\r\n                    OwPolygon areaShape = typedArea.Shape as OwPolygon;\r\n                    OwPolygon scaledPolygon = new OwPolygon(areaShape.representation);\r\n                    scaledPolygon.ScaleFromCentroid(new Vector2(1 - freeSpaceInsideAtBorder,\r\n                        1 - freeSpaceInsideAtBorder));\r\n\r\n                    if (addDebugScaledInnerArea)\r\n                    {\r\n                        typedArea.AddChild(new Area(scaledPolygon, null));\r\n                    }\r\n\r\n                    for (int i = 0; i < numberOfLandmarks; i++)\r\n                    {\r\n                        OwPoint potentialLandMarkPoint;\r\n                        bool isTooClose;\r\n                        int tries = 0;\r\n                        bool isInside;\r\n\r\n                        // passing a function via constructor as we planned seems kinda hard . ngl\r\n                        do\r\n                        {\r\n                            potentialLandMarkPoint = CreatePotentialLandMarkPoint(typedArea);\r\n\r\n                            //if any of the already added points are too close, consider this points as too close\r\n                            isTooClose = placedPoints.Sum(point =>\r\n                                ((point.Position - potentialLandMarkPoint.Position).magnitude <\r\n                                 minimumDistanceBetweenLandmarks)\r\n                                    ? 1\r\n                                    : 0) > 0;\r\n\r\n                            tries++;\r\n\r\n                            \r\n                            isInside = PolygonPointInteractor.Use().Contains(scaledPolygon, potentialLandMarkPoint);\r\n                        } while ((!isInside || isTooClose) && tries < maxTriesToGuaranteeConstraints);\r\n\r\n                        // if we are here and the proposed point is still not good we have reached max tries limit\r\n                        if (!isInside || isTooClose)\r\n                        {\r\n                            // search for new point without the distance constraint\r\n                            do\r\n                            {\r\n                                potentialLandMarkPoint = CreatePotentialLandMarkPoint(typedArea);\r\n                                isInside = PolygonPointInteractor.Use().Contains(scaledPolygon, potentialLandMarkPoint);\r\n                            } while (!isInside);\r\n\r\n                        }\r\n                        \r\n                        //if tries are reached, show warning and still add point, since we want to guarantee that the point is placed\r\n                        if (tries == maxTriesToGuaranteeConstraints)\r\n                        {\r\n                            Debug.LogWarning(\"Could not place Landmark with number of allowed tries\");\r\n                        }\r\n\r\n                        //add landmark\r\n                        typedArea.AddChild(new Landmark(potentialLandMarkPoint, landmarkRecipe));\r\n                        placedPoints.Add(potentialLandMarkPoint);\r\n                    }\r\n                }\r\n            }\r\n\r\n            return world;\r\n        }\r\n\r\n        private OwPoint CreatePotentialLandMarkPoint(AreaTypeAssignmentStep.TypedArea typedArea)\r\n        {\r\n            OwPoint potentialLandMarkPoint;\r\n            //generate vector with specified length into random direction\r\n            Vector2 fromCentroidPos =\r\n                new Vector2((float) (random.NextDouble() * 2 - 1),\r\n                    (float) (random.NextDouble() * 2 - 1)).normalized;\r\n            //scale by specified length\r\n            float distanceFromCenter =\r\n                (float) (random.NextDouble() * (maxDistanceFromCenter - minDistanceFromCenter) +\r\n                         minDistanceFromCenter);\r\n            fromCentroidPos *= distanceFromCenter;\r\n\r\n            potentialLandMarkPoint = new OwPoint(typedArea.Shape.GetCentroid() + fromCentroidPos);\r\n            return potentialLandMarkPoint;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs b/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs
+--- a/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs	(date 1619786872347)
+@@ -15,10 +15,6 @@
+     [LandmarksPlacedGuarantee]
+     public class LandmarkPlacementStep : PipelineStep
+     {
+-        public GameWorldObjectRecipe landmarkRecipe;
+-        public GameWorldObjectRecipe startLandmarkRecipe;
+-        public GameWorldObjectRecipe endLandmarkRecipe;
+-
+         [Range(0, 1)] public float hasLandmarksPercent;
+         public int minLandmarks;
+         public int maxLandmarks;
+@@ -45,7 +41,7 @@
+                 if (typedArea.AreaType == -1)
+                 {
+                     //add landmark at centroid
+-                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), startLandmarkRecipe));
++                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid())));
+                     continue;
+                 }
+ 
+@@ -53,7 +49,7 @@
+                 if (typedArea.AreaType == int.MaxValue)
+                 {
+                     //add landmark at centroid
+-                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid()), endLandmarkRecipe));
++                    typedArea.AddChild(new Landmark(new OwPoint(typedArea.Shape.GetCentroid())));
+                     continue;
+                 }
+ 
+@@ -118,7 +114,7 @@
+                         }
+ 
+                         //add landmark
+-                        typedArea.AddChild(new Landmark(potentialLandMarkPoint, landmarkRecipe));
++                        typedArea.AddChild(new Landmark(potentialLandMarkPoint));
+                         placedPoints.Add(potentialLandMarkPoint);
+                     }
+                 }
+Index: Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor.meta b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor.meta
+new file mode 100644
+--- /dev/null	(date 1619782566261)
++++ b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor.meta	(date 1619782566261)
+@@ -0,0 +1,3 @@
++fileFormatVersion: 2
++guid: 85478de4494d447e98db77cb8ee16b80
++timeCreated: 1619782566
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Framework.Pipeline.ThemeApplicator.Recipe;\r\n\r\nnamespace Framework.Pipeline.GameWorldObjects\r\n{\r\n    public class Area : AbstractGameWorldObject\r\n    {\r\n      \r\n        public Area(IGeometry shape, GameWorldObjectRecipe recipe = null)\r\n        {\r\n            this.Shape = shape;\r\n            this.recipe = recipe;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs
+--- a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs	(date 1619782047725)
+@@ -5,10 +5,9 @@
+     public class Area : AbstractGameWorldObject
+     {
+       
+-        public Area(IGeometry shape, GameWorldObjectRecipe recipe = null)
++        public Area(IGeometry shape, string type = null) : base(shape, type)
+         {
+-            this.Shape = shape;
+-            this.recipe = recipe;
++         
+         }
+     }
+ }
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs.meta b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs.meta
+new file mode 100644
+--- /dev/null	(date 1619782560134)
++++ b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs.meta	(date 1619782560134)
+@@ -0,0 +1,3 @@
++fileFormatVersion: 2
++guid: 8020364377304020a0f74abeacead642
++timeCreated: 1619782560
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs
+new file mode 100644
+--- /dev/null	(date 1619787249963)
++++ b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs	(date 1619787249963)
+@@ -0,0 +1,32 @@
++using System;
++using System.Collections.Generic;
++using Framework.Pipeline.GameWorldObjects;
++using Framework.Pipeline.ThemeApplicator.Recipe;
++using UnityEditor;
++using UnityEngine;
++using Object = UnityEngine.Object;
++
++namespace Framework.Pipeline.ThemeApplicator.Editor
++{
++    [CustomEditor(typeof(ThemeApplicator))]
++    public class ThemeApplicatorEditor : UnityEditor.Editor
++    {
++        public override void OnInspectorGUI()
++        {
++
++            ThemeApplicator applicator = (ThemeApplicator) target;
++
++            if (applicator.HasWarning)
++            {
++                EditorGUILayout.HelpBox(applicator.GetWarning(), MessageType.Warning);
++            }
++            
++            if (GUILayout.Button("Find All Types"))
++            {
++                applicator.FindAllTypes();
++            }
++            
++            DrawDefaultInspector();
++        }
++    }
++}
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Collections.Generic;\r\nusing System.Linq;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.GameWorldObjects\r\n{\r\n    public abstract class AbstractLeafGameWorldObject : IGameWorldObject\r\n    {\r\n        public IGeometry Shape { get; set; }\r\n        private IGameWorldObject parent;\r\n        public GameWorldObjectRecipe recipe;\r\n        \r\n        public GameWorldObjectRecipe GetRecipe()\r\n        {\r\n            return recipe;\r\n        }\r\n\r\n        public void SetRecipe(GameWorldObjectRecipe recipe)\r\n        {\r\n            this.recipe = recipe;\r\n        }\r\n\r\n        public IGameWorldObject this[int index]\r\n        {\r\n            get => throw new NoChildPolicyException();\r\n            set => throw new NoChildPolicyException();\r\n        }\r\n\r\n        public void AddChild(IGameWorldObject child)\r\n        {\r\n            throw new NoChildPolicyException();\r\n        }\r\n\r\n        public void RemoveChild(IGameWorldObject child)\r\n        {\r\n            throw new NoChildPolicyException();\r\n        }\r\n\r\n        public IEnumerable<IGameWorldObject> GetChildren()\r\n        {\r\n            return Enumerable.Empty<IGameWorldObject>();\r\n        }\r\n\r\n        public IEnumerable<IGameWorldObject> GetChildrenInChildren()\r\n        {\r\n            return Enumerable.Empty<IGameWorldObject>();\r\n        }\r\n\r\n        public IEnumerable<T> GetAllChildrenOfType<T>()\r\n        {\r\n            return Enumerable.Empty<T>();\r\n        }\r\n\r\n        public void ClearChildren()\r\n        {\r\n            throw new NoChildPolicyException();\r\n        }\r\n\r\n        public int GetChildCount()\r\n        {\r\n            throw new NoChildPolicyException();\r\n        }\r\n\r\n        public void AddChildInChild(int childIndex, IGameWorldObject child)\r\n        {\r\n            throw new NoChildPolicyException();\r\n        }\r\n\r\n        public IGameWorldObject GetParent()\r\n        {\r\n            return parent;\r\n        }\r\n\r\n        public void SetParent(IGameWorldObject parent)\r\n        {\r\n            this.parent = parent;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs
+--- a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs	(date 1619781959300)
+@@ -7,20 +7,17 @@
+ {
+     public abstract class AbstractLeafGameWorldObject : IGameWorldObject
+     {
++        public string Type { get; set; }
+         public IGeometry Shape { get; set; }
++        
+         private IGameWorldObject parent;
+-        public GameWorldObjectRecipe recipe;
+         
+-        public GameWorldObjectRecipe GetRecipe()
+-        {
+-            return recipe;
+-        }
+-
+-        public void SetRecipe(GameWorldObjectRecipe recipe)
++        public AbstractLeafGameWorldObject(IGeometry shape, string type = null)
+         {
+-            this.recipe = recipe;
++            this.Shape = shape;
++            this.Type = type;
+         }
+-
++        
+         public IGameWorldObject this[int index]
+         {
+             get => throw new NoChildPolicyException();
+Index: Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Collections.Generic;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.GameWorldObjects\r\n{\r\n    public interface IGameWorldObject\r\n    {\r\n        IGeometry Shape { get; set; }\r\n        GameWorldObjectRecipe GetRecipe();\r\n\r\n        void SetRecipe(GameWorldObjectRecipe recipe);\r\n\r\n        IGameWorldObject this[int index] { get; set; }\r\n\r\n        void AddChild(IGameWorldObject child);\r\n\r\n        void RemoveChild(IGameWorldObject child);\r\n\r\n        IEnumerable<IGameWorldObject> GetChildren();\r\n\r\n        IEnumerable<IGameWorldObject> GetChildrenInChildren();\r\n\r\n        IEnumerable<T> GetAllChildrenOfType<T>();\r\n\r\n        void ClearChildren();\r\n\r\n        int GetChildCount();\r\n\r\n        /// <summary>\r\n        /// Adds a IGameWorldObject to the child specified in the index.\r\n        /// Implementations of the interface should implementing this function with a range check.\r\n        /// </summary>\r\n        /// <param name=\"childIndex\">index of child</param>\r\n        /// <param name=\"child\">child to add</param>\r\n        void AddChildInChild(int childIndex, IGameWorldObject child);\r\n\r\n        IGameWorldObject GetParent();\r\n\r\n        void SetParent(IGameWorldObject parent);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs
+--- a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs	(date 1619781900120)
+@@ -1,15 +1,22 @@
+ using System.Collections.Generic;
+ using Framework.Pipeline.ThemeApplicator.Recipe;
++using JetBrains.Annotations;
+ using UnityEngine;
+ 
+ namespace Framework.Pipeline.GameWorldObjects
+ {
+     public interface IGameWorldObject
+     {
++        /// <summary>
++        /// String identifier for what type of IGameWorldObject this is.
++        /// This is used in the ThemeApplicator to set a recipe for this Type.
++        /// </summary>
++        string Type { get; set; }
++
++        /// <summary>
++        /// IGeometry Instance defining the geometric shape of this IGameWorldObject.
++        /// </summary>
+         IGeometry Shape { get; set; }
+-        GameWorldObjectRecipe GetRecipe();
+-
+-        void SetRecipe(GameWorldObjectRecipe recipe);
+ 
+         IGameWorldObject this[int index] { get; set; }
+ 
+Index: Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing Assets.Scripts.Framework.Pipeline.Example;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.ThemeApplicator;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.Example\r\n{\r\n    [RootGameWorldObjectProvider]\r\n    public class LandmarkPlacer :  PipelineStep\r\n    {\r\n        public PointPrefabRecipe bigTreePrefabRecipe;\r\n\r\n        public override Type[] RequiredGuarantees => new Type[] {};\r\n\r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            foreach (IGameWorldObject child in world.Root.GetChildren())\r\n            {\r\n                child.AddChild(new Landmark(new OwPoint(child.Shape.GetCentroid()), bigTreePrefabRecipe));\r\n            }\r\n\r\n            return world;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs
+--- a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs	(date 1619782083195)
+@@ -19,7 +19,7 @@
+         {
+             foreach (IGameWorldObject child in world.Root.GetChildren())
+             {
+-                child.AddChild(new Landmark(new OwPoint(child.Shape.GetCentroid()), bigTreePrefabRecipe));
++                child.AddChild(new Landmark(new OwPoint(child.Shape.GetCentroid())));
+             }
+ 
+             return world;
+Index: Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing Assets.Scripts.Framework.Pipeline.Example;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.ThemeApplicator;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.Example\r\n{\r\n\r\n    [RootGameWorldObjectProvider]\r\n    public class EmptyStep : PipelineStep\r\n    {\r\n        public override Type[] RequiredGuarantees => new Type[] { };\r\n\r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            Area root = new Area(new OwSquare(Vector2.zero, 50f), ScriptableObject.CreateInstance<EmptyRecipe>());\r\n            return new GameWorld(root);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs
+--- a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs	(date 1619782083181)
+@@ -16,7 +16,7 @@
+ 
+         public override GameWorld Apply(GameWorld world)
+         {
+-            Area root = new Area(new OwSquare(Vector2.zero, 50f), ScriptableObject.CreateInstance<EmptyRecipe>());
++            Area root = new Area(new OwSquare(Vector2.zero, 50f));
+             return new GameWorld(root);
+         }
+     }
+Index: Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.ThemeApplicator;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.Example\r\n{\r\n    public class BorderStep : PipelineStep\r\n    {\r\n        public AreaMeshRecipe backGroundMeshRecipe;\r\n\r\n        public override Type[] RequiredGuarantees => new Type[] { };\r\n\r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            IEnumerable<Area> allAreas = world.Root.GetAllChildrenOfType<Area>().ToList();\r\n            Area bigArea = allAreas.First();\r\n\r\n            OwPolygon areaPolygon = bigArea.Shape as OwPolygon;\r\n            OwPolygon outerPolygon = new OwPolygon(areaPolygon.representation);\r\n            outerPolygon.ScaleFromCentroid(new Vector2(2f, 2f));\r\n\r\n            OwPolygon hullPolygon = outerPolygon.GetConvexHull();\r\n            Area outerArea = new Area(hullPolygon, backGroundMeshRecipe);\r\n            \r\n            foreach (Area area in allAreas.ToList())\r\n            {\r\n                world.Root.RemoveChild(area);\r\n                outerArea.AddChild(area);\r\n            }\r\n            \r\n            world.Root.AddChild(outerArea);\r\n\r\n            return world;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs
+--- a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs	(date 1619782083210)
+@@ -25,7 +25,7 @@
+             outerPolygon.ScaleFromCentroid(new Vector2(2f, 2f));
+ 
+             OwPolygon hullPolygon = outerPolygon.GetConvexHull();
+-            Area outerArea = new Area(hullPolygon, backGroundMeshRecipe);
++            Area outerArea = new Area(hullPolygon);
+             
+             foreach (Area area in allAreas.ToList())
+             {
+Index: .idea/.idea.OrganicaWild/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"BranchesTreeState\">\r\n    <expand>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:feature\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:feature\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </expand>\r\n    <select />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c7cb5465-cb34-45d3-9a58-d442414900ff\" name=\"Default Changelist\" comment=\"adjust search-based demo for performance measurement\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/MainPathStep.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/MainPathStep.cs\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"feature/organic-pipeline\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n    <option name=\"ROOT_SYNC\" value=\"DONT_SYNC\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EAE584CE-26BC-4022-9C1B-1AA476BFA589/eb/61bb72b5/Random.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorld.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/01/df395b1c/Vector2.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07CFA953-D94B-44E4-BB3A-488BEF79100A/15/4b7a2d51/GUIUtility.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/60/6446f6a1/Voronoi.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/53/adad0534/IMGUIContainer.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E81851A0-DC73-4A79-AFA9-F5B7273162BE/b5/ff21947e/Random.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF151B6A-BB5D-474C-B2C1-CB8906A8B5A4/2c/1e97fec7/Socket.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ScriptableConnections.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A30D64CF-1988-46A7-86F1-43DECB66F563/a0/121cae76/EventDispatcher.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/e7/59a49be8/ScriptableObject.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/db/654a394f/VoronoiResults.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/2e/6e7d0a29/LineIntersection.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/7e/e5575c5e/Fortran.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/92/5da3afea/MeshFilter.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/998F2491-CDE6-4F39-9B36-14F82C288B4F/7b/907bd5a4/Enumerable.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scenes/OrganicPipeline.unity\" root0=\"SKIP_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"IdeDocumentHistory\">\r\n    <changedPaths>\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreasPlacedGuarantee.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector2Extensions.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/AreaMeshRecipe.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/EmptyRecipe.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector2Comparer.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaTypeAssignedGuarantee.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionPlacement.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionsGuarenteed.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionsGuarentee.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionsGuarantee.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacement.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwLine.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/MainPathsInAreasGuaranteed.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPoint.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Util/UnionFind.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Util/Kruskal.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Util/MinimumSpanningTree.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Legacy Contents/DebugPipelineStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaPlacementStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Editor/PipeLineManagerEditor.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/PathShapeGuarantee.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/PathShapeDefinitionStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CAInitStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/CaInitiatedGuarantee.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaInitStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/MainPathStep.cs\" />\r\n      <option value=\"$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs\" />\r\n    </changedPaths>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1jgU9FIQ0joQAfi4rcUomRdmZsC\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"DebuggerViewTab_PTCS_FirstProportionKey\" value=\"0.1329849\" />\r\n    <property name=\"DebuggerViewTab_PTCS_LastProportionKey\" value=\"0.0\" />\r\n    <property name=\"Discover.Launch.Via.Unity\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"XThreadsFramesViewSplitterKey\" value=\"0.30525032\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\r\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"nodejs_interpreter_path.stuck_in_default_project\" value=\"undefined stuck path\" />\r\n    <property name=\"nodejs_npm_path_reset_for_default_project\" value=\"true\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.keymap\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Attach to Unity Editor.Attach to Unity Editor\">\r\n    <configuration name=\"Standalone Player\" type=\"RunUnityExe\" factoryName=\"Unity Executable\">\r\n      <option name=\"EXE_PATH\" value=\"$PROJECT_DIR$/../OrganicaWildBuild/OrganicaWild.exe\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"C:\\dev\\OrganicaWildBuild\" />\r\n      <option name=\"PASS_PARENT_ENVS\" value=\"1\" />\r\n      <option name=\"USE_EXTERNAL_CONSOLE\" value=\"0\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Attach to Unity Editor &amp; Play\" type=\"UNITY_DEBUG_RUN_CONFIGURATION\" factoryName=\"UNITY_ATTACH_AND_PLAY\" show_console_on_std_err=\"false\" show_console_on_std_out=\"false\" port=\"50000\" address=\"localhost\">\r\n      <option name=\"allowRunningInParallel\" value=\"false\" />\r\n      <option name=\"listenPortForConnections\" value=\"false\" />\r\n      <option name=\"pid\" />\r\n      <option name=\"selectedOptions\">\r\n        <list />\r\n      </option>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Attach to Unity Editor\" type=\"UNITY_DEBUG_RUN_CONFIGURATION\" factoryName=\"Unity Debug\" show_console_on_std_err=\"false\" show_console_on_std_out=\"false\" port=\"50000\" address=\"localhost\" ignored-value-for-modified-check=\"6652\">\r\n      <option name=\"allowRunningInParallel\" value=\"false\" />\r\n      <option name=\"listenPortForConnections\" value=\"false\" />\r\n      <option name=\"pid\" value=\"6652\" />\r\n      <option name=\"selectedOptions\">\r\n        <list />\r\n      </option>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c7cb5465-cb34-45d3-9a58-d442414900ff\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1604225076163</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1604225076163</updated>\r\n      <workItem from=\"1604225079487\" duration=\"26492000\" />\r\n      <workItem from=\"1604261479064\" duration=\"3360000\" />\r\n      <workItem from=\"1604338712458\" duration=\"2203000\" />\r\n      <workItem from=\"1604399383375\" duration=\"19561000\" />\r\n      <workItem from=\"1604681526908\" duration=\"3991000\" />\r\n      <workItem from=\"1604851673389\" duration=\"15544000\" />\r\n      <workItem from=\"1604919117822\" duration=\"3332000\" />\r\n      <workItem from=\"1605171268135\" duration=\"2171000\" />\r\n      <workItem from=\"1605864247167\" duration=\"4900000\" />\r\n      <workItem from=\"1605974434193\" duration=\"6408000\" />\r\n      <workItem from=\"1606039960866\" duration=\"22808000\" />\r\n      <workItem from=\"1606111691779\" duration=\"26910000\" />\r\n      <workItem from=\"1606205657648\" duration=\"27838000\" />\r\n      <workItem from=\"1606287177617\" duration=\"28173000\" />\r\n      <workItem from=\"1606374097075\" duration=\"8979000\" />\r\n      <workItem from=\"1606387394509\" duration=\"22808000\" />\r\n      <workItem from=\"1606461461005\" duration=\"24458000\" />\r\n      <workItem from=\"1606666073802\" duration=\"3459000\" />\r\n      <workItem from=\"1607690563454\" duration=\"1211000\" />\r\n      <workItem from=\"1608105030894\" duration=\"3207000\" />\r\n      <workItem from=\"1608979702849\" duration=\"34118000\" />\r\n      <workItem from=\"1609153548696\" duration=\"9877000\" />\r\n      <workItem from=\"1609266295333\" duration=\"1902000\" />\r\n      <workItem from=\"1609321221912\" duration=\"7025000\" />\r\n      <workItem from=\"1610740728801\" duration=\"699000\" />\r\n      <workItem from=\"1617267677010\" duration=\"11209000\" />\r\n      <workItem from=\"1617544409806\" duration=\"4767000\" />\r\n      <workItem from=\"1617618427827\" duration=\"8349000\" />\r\n      <workItem from=\"1618061535724\" duration=\"8889000\" />\r\n      <workItem from=\"1618226595057\" duration=\"2535000\" />\r\n      <workItem from=\"1618473188888\" duration=\"12135000\" />\r\n      <workItem from=\"1618817716545\" duration=\"9000\" />\r\n      <workItem from=\"1618857181441\" duration=\"1974000\" />\r\n      <workItem from=\"1618991980375\" duration=\"16326000\" />\r\n      <workItem from=\"1619017151191\" duration=\"3000000\" />\r\n      <workItem from=\"1619177608133\" duration=\"11127000\" />\r\n      <workItem from=\"1619258908480\" duration=\"12377000\" />\r\n      <workItem from=\"1619335934765\" duration=\"21531000\" />\r\n      <workItem from=\"1619599374355\" duration=\"1016000\" />\r\n      <workItem from=\"1619600416743\" duration=\"19797000\" />\r\n      <workItem from=\"1619622861984\" duration=\"1330000\" />\r\n      <workItem from=\"1619624223194\" duration=\"10818000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"restructre\">\r\n      <created>1604263216246</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1604263216246</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"add base graph and vertex class\">\r\n      <created>1605874125378</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1605874125378</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"add working version\">\r\n      <created>1606043194133</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606043194133</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"add simple demo with visualization\">\r\n      <created>1606051561427</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606051561428</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"generify Vertex and Graph\">\r\n      <created>1606053817282</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606053817282</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"visualize graphs\">\r\n      <created>1606069093042</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606069093042</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"add editor\">\r\n      <created>1606129698878</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606129698878</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"safe point\">\r\n      <created>1606208187891</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606208187891</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"reimplemented contains and add containedAt\">\r\n      <created>1606216077398</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606216077398</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"change containedAt to ContainedSubGraph\">\r\n      <created>1606225551265</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606225551265</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"rework ApplyRule to use the new ContainedSubGraph\">\r\n      <created>1606229143643</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606229143643</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"add correct rules for dorman example\">\r\n      <created>1606243029793</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606243029793</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"add sphape grammar bas\">\r\n      <created>1606319256946</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606319256946</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"add simple mapping from graph grmamar to shape grammar\">\r\n      <created>1606382829410</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606382829410</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"move graph grammar component to framework\">\r\n      <created>1606387352786</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606387352786</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"extract GetLocalRotation method\">\r\n      <created>1606387923007</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606387923007</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"organize assets\">\r\n      <created>1606404465860</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606404465860</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"rename graph to mission graph and vertex accordingly\">\r\n      <created>1606404604103</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606404604103</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"rename graph to mission graph and vertex accordingly\">\r\n      <created>1606404621783</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606404621783</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"add actual rooms to prefabs\">\r\n      <created>1606461622021</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606461622021</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"add PolygonPolygonInteractor.cs\">\r\n      <created>1618857692874</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618857692874</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"add PolygonPolygonInteractor.cs\">\r\n      <created>1618858065436</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618858065436</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00023\" summary=\"modify shortestPath to be faster\">\r\n      <created>1618858307529</created>\r\n      <option name=\"number\" value=\"00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618858307529</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00024\" summary=\"remove feature/adapted position in child, because the operations in the interactor cannot use this position\">\r\n      <created>1618993534448</created>\r\n      <option name=\"number\" value=\"00024\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1618993534448</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00025\" summary=\"add AreaRefinementStep.cs with CA and polygon Union to create big area\">\r\n      <created>1619003323962</created>\r\n      <option name=\"number\" value=\"00025\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00025\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619003323962</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00026\" summary=\"add get children by type method\">\r\n      <created>1619003923076</created>\r\n      <option name=\"number\" value=\"00026\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00026\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619003923076</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00027\" summary=\"add recipe structure for IGameWorldObjects\">\r\n      <created>1619375117204</created>\r\n      <option name=\"number\" value=\"00027\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00027\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619375117204</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00028\" summary=\"add Area Type Assignment\">\r\n      <created>1619605790082</created>\r\n      <option name=\"number\" value=\"00028\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00028\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619605790082</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00029\" summary=\"edit some materials\">\r\n      <created>1619605805960</created>\r\n      <option name=\"number\" value=\"00029\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00029\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619605805960</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00030\" summary=\"comment area type assignment\">\r\n      <created>1619605939755</created>\r\n      <option name=\"number\" value=\"00030\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00030\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619605939755</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00031\" summary=\"indent ThemeApplicator.cs correctly\">\r\n      <created>1619606134650</created>\r\n      <option name=\"number\" value=\"00031\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00031\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619606134650</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00032\" summary=\"add Area Connection Placement\">\r\n      <created>1619611754774</created>\r\n      <option name=\"number\" value=\"00032\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00032\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619611754774</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00033\" summary=\"add landmark placement\">\r\n      <created>1619615095917</created>\r\n      <option name=\"number\" value=\"00033\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00033\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619615095917</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00034\" summary=\"change comment in LandmarkPlacementStep.cs\">\r\n      <created>1619615516197</created>\r\n      <option name=\"number\" value=\"00034\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00034\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619615516197</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00035\" summary=\"add MainPathPlacement and make PipelineStep to MonoBehaviour\">\r\n      <created>1619621203946</created>\r\n      <option name=\"number\" value=\"00035\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00035\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619621203946</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00036\" summary=\"add editor script to pipelineManager\">\r\n      <created>1619622718195</created>\r\n      <option name=\"number\" value=\"00036\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00036\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619622718195</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00037\" summary=\"add if pipeline has configuration error it cannot be started\">\r\n      <created>1619622829170</created>\r\n      <option name=\"number\" value=\"00037\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00037\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619622829170</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00038\" summary=\"remove bad scene\">\r\n      <created>1619622986762</created>\r\n      <option name=\"number\" value=\"00038\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00038\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619622986762</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00039\" summary=\"add straight path path shape definition step\">\r\n      <created>1619623362600</created>\r\n      <option name=\"number\" value=\"00039\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00039\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619623362600</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00040\" summary=\"fix random seed assignment in pipelinerunner\">\r\n      <created>1619624035922</created>\r\n      <option name=\"number\" value=\"00040\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00040\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619624035922</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00041\" summary=\"add CA Init Step\">\r\n      <created>1619629026592</created>\r\n      <option name=\"number\" value=\"00041\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00041\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619629026592</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00042\" summary=\"change seed to nullable type\">\r\n      <created>1619629486021</created>\r\n      <option name=\"number\" value=\"00042\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00042\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619629486021</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00043\" summary=\"add references to Area Connection\">\r\n      <created>1619641493952</created>\r\n      <option name=\"number\" value=\"00043\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00043\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1619641493952</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"44\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"UnityProjectConfiguration\" hasMinimizedUI=\"true\" />\r\n  <component name=\"UnityUnitTestConfiguration\" currentTestLauncher=\"EditMode\" />\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"feature/first-pipeline\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_FILTERS\">\r\n      <map>\r\n        <entry key=\"Branch\">\r\n          <value>\r\n            <list>\r\n              <RecentGroup>\r\n                <option name=\"FILTER_VALUES\">\r\n                  <option value=\"feature/first-pipeline\" />\r\n                </option>\r\n              </RecentGroup>\r\n              <RecentGroup>\r\n                <option name=\"FILTER_VALUES\">\r\n                  <option value=\"pipeline-datastructure\" />\r\n                </option>\r\n              </RecentGroup>\r\n            </list>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"CLEAR_INITIAL_COMMIT_MESSAGE\" value=\"true\" />\r\n    <MESSAGE value=\"organize assets\" />\r\n    <MESSAGE value=\"rename graph to mission graph and vertex accordingly\" />\r\n    <MESSAGE value=\"add actual rooms to prefabs\" />\r\n    <MESSAGE value=\"add PolygonPolygonInteractor.cs\" />\r\n    <MESSAGE value=\"modify shortestPath to be faster\" />\r\n    <MESSAGE value=\"remove feature/adapted position in child, because the operations in the interactor cannot use this position\" />\r\n    <MESSAGE value=\"add AreaRefinementStep.cs with CA and polygon Union to create big area\" />\r\n    <MESSAGE value=\"add get children by type method\" />\r\n    <MESSAGE value=\"add recipe structure for IGameWorldObjects\" />\r\n    <MESSAGE value=\"add Area Type Assignment\" />\r\n    <MESSAGE value=\"edit some materials\" />\r\n    <MESSAGE value=\"comment area type assignment\" />\r\n    <MESSAGE value=\"indent ThemeApplicator.cs correctly\" />\r\n    <MESSAGE value=\"add Area Connection Placement\" />\r\n    <MESSAGE value=\"add landmark placement\" />\r\n    <MESSAGE value=\"change comment in LandmarkPlacementStep.cs\" />\r\n    <MESSAGE value=\"add MainPathPlacement and make PipelineStep to MonoBehaviour\" />\r\n    <MESSAGE value=\"add editor script to pipelineManager\" />\r\n    <MESSAGE value=\"add if pipeline has configuration error it cannot be started\" />\r\n    <MESSAGE value=\"remove bad scene\" />\r\n    <MESSAGE value=\"add straight path path shape definition step\" />\r\n    <MESSAGE value=\"fix random seed assignment in pipelinerunner\" />\r\n    <MESSAGE value=\"add CA Init Step\" />\r\n    <MESSAGE value=\"change seed to nullable type\" />\r\n    <MESSAGE value=\"add references to Area Connection\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"add references to Area Connection\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"DotNet Breakpoints\">\r\n          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>\r\n          <line>47</line>\r\n          <properties documentPath=\"C:\\dev\\OrganicaWild\\Assets\\Scripts\\Framework\\GraphGrammar\\GraphGrammar.cs\" initialLine=\"49\" containingFunctionPresentation=\"method 'ApplyOneRule'\" />\r\n          <option name=\"timeStamp\" value=\"2\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"DotNet Breakpoints\">\r\n          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>\r\n          <line>54</line>\r\n          <properties documentPath=\"C:\\dev\\OrganicaWild\\Assets\\Scripts\\Framework\\GraphGrammar\\GraphGrammar.cs\" initialLine=\"56\" containingFunctionPresentation=\"method 'ApplyOneRule'\" />\r\n          <option name=\"timeStamp\" value=\"3\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"DotNet Breakpoints\">\r\n          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/GraphGrammar.cs</url>\r\n          <line>49</line>\r\n          <properties documentPath=\"C:\\dev\\OrganicaWild\\Assets\\Scripts\\Framework\\GraphGrammar\\GraphGrammar.cs\" initialLine=\"51\" containingFunctionPresentation=\"method 'ApplyOneRule'\" />\r\n          <option name=\"timeStamp\" value=\"4\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"DotNet Breakpoints\">\r\n          <url>file://$PROJECT_DIR$/Assets/Scripts/Framework/GraphGrammar/MissionGraph.cs</url>\r\n          <line>211</line>\r\n          <properties documentPath=\"C:\\dev\\OrganicaWild\\Assets\\Scripts\\Framework\\GraphGrammar\\MissionGraph.cs\" initialLine=\"213\" containingFunctionPresentation=\"method 'Traverse'\" />\r\n          <option name=\"timeStamp\" value=\"21\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n      <default-breakpoints>\r\n        <breakpoint enabled=\"true\" type=\"DotNet Exception Breakpoints\">\r\n          <properties justMyCode=\"true\" />\r\n        </breakpoint>\r\n      </default-breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.OrganicaWild/.idea/workspace.xml b/.idea/.idea.OrganicaWild/.idea/workspace.xml
+--- a/.idea/.idea.OrganicaWild/.idea/workspace.xml	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/.idea/.idea.OrganicaWild/.idea/workspace.xml	(date 1619787675150)
+@@ -31,10 +31,36 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="c7cb5465-cb34-45d3-9a58-d442414900ff" name="Default Changelist" comment="adjust search-based demo for performance measurement">
++      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor.meta" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs.meta" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs.meta" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs.meta" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OrganicaWild/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OrganicPipeline.unity" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PipelineTest.unity" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/AreaCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/AreaCell.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/MainPathStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/MainPathStep.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -76,33 +102,21 @@
+     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/ShapeGrammar/ShapeGrammarRuleComponent.cs" root0="FORCE_HIGHLIGHTING" />
+     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" root0="FORCE_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/2e/6e7d0a29/LineIntersection.cs" root0="SKIP_HIGHLIGHTING" />
+-    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Util/Polygon Generators/RectangleGenerator.cs" root0="FORCE_HIGHLIGHTING" />
++    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Util/Polygon Generators/IPolygonGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/7e/e5575c5e/Fortran.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A1AC446D-F41C-4A67-BECF-2F8317DC1792/92/5da3afea/MeshFilter.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/998F2491-CDE6-4F39-9B36-14F82C288B4F/7b/907bd5a4/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/IThemeApplicator.cs" root0="FORCE_HIGHLIGHTING" />
+     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Demo/Cellular Automata/OrganicRectangularCAMapGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F440F928-B2FE-499E-B06E-C69C1A1A907F/73/bb16298e/PointI.cs" root0="SKIP_HIGHLIGHTING" />
+-    <setting file="mock://C:/Users/cvoegele/Development/OrganicaWild/Assets/Scenes/OrganicPipeline.unity" root0="SKIP_HIGHLIGHTING" />
+   </component>
+   <component name="IdeDocumentHistory">
+     <changedPaths>
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/DebugPipelineStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreasPlacedGuarantee.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector2Extensions.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/ThemeApplicator/Recipe/AreaMeshRecipe.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/AreaMeshRecipe.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/EmptyRecipe.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/PointPrefabRecipe.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Recipe/IGameWorldObjectRecipe.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Geometry/OwPolygon.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/GameObjectCreation.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Vector2Comparer.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaTypeAssignedGuarantee.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionPlacement.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/AreaConnectionsGuarenteed.cs" />
+@@ -118,14 +132,6 @@
+       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Legacy Contents/DebugPipelineStep.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineStep.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaPlacementStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/Editor/PipeLineManagerEditor.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/PathShapeGuarantee.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/PathShapeDefinitionStep.cs" />
+@@ -133,11 +139,31 @@
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipelineGuarantees/CaInitiatedGuarantee.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/CaInitStep.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineRunner.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
+-      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaConnectionPlacementStep.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/MainPathStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/IGameWorldObject.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractLeafGameWorldObject.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Area.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/EmptyStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/LandmarkPlacer.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BorderStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Cellular Automata/AreaCell.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/AreaTypeAssignmentStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Demo/Pipeline/PipelineManager.cs" />
+       <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/PipeLineSteps/LandmarkPlacementStep.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/Editor/ThemeApplicatorEditor.cs" />
++      <option value="$PROJECT_DIR$/Assets/Scripts/Framework/Pipeline/ThemeApplicator/ThemeApplicator.cs" />
+     </changedPaths>
+   </component>
+   <component name="ProjectId" id="1jgU9FIQ0joQAfi4rcUomRdmZsC" />
+@@ -147,7 +173,7 @@
+     <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent">
+-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.1329849" />
++    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.13282442" />
+     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
+     <property name="Discover.Launch.Via.Unity" value="true" />
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+@@ -182,10 +208,10 @@
+       </option>
+       <method v="2" />
+     </configuration>
+-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="6652">
++    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="10576">
+       <option name="allowRunningInParallel" value="false" />
+       <option name="listenPortForConnections" value="false" />
+-      <option name="pid" value="6652" />
++      <option name="pid" value="10576" />
+       <option name="selectedOptions">
+         <list />
+       </option>
+@@ -242,6 +268,7 @@
+       <workItem from="1619600416743" duration="19797000" />
+       <workItem from="1619622861984" duration="1330000" />
+       <workItem from="1619624223194" duration="10818000" />
++      <workItem from="1619763344458" duration="12563000" />
+     </task>
+     <task id="LOCAL-00001" summary="restructre">
+       <created>1604263216246</created>
+@@ -563,7 +590,7 @@
+                   <entry key="branch">
+                     <value>
+                       <list>
+-                        <option value="feature/first-pipeline" />
++                        <option value="origin/feature/organic-pipeline" />
+                       </list>
+                     </value>
+                   </entry>
+Index: Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.Geometry.Interactors;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing Framework.Poisson_Disk_Sampling;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.Example\r\n{\r\n    public class BackGroundNoiseStep : PipelineStep\r\n    {\r\n        public int resolution = 20;\r\n        public int maxSize = 2000;\r\n        public float threshHold = 0.2f;\r\n\r\n        public PointPrefabRecipe noiseRecipe;\r\n        public PointPrefabRecipe noiseRecipe0;\r\n\r\n        public override Type[] RequiredGuarantees => new Type[] { };\r\n\r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            if (world.Root[0] is Area backGround)\r\n            {\r\n                Area innerArea = world.Root[0][0] as Area;\r\n                \r\n                for (int x = -resolution; x < resolution; x++)\r\n                {\r\n                    for (int y = -resolution; y < resolution; y++)\r\n                    {\r\n                        float xPos = x / (float) resolution;\r\n                        float yPos = y / (float) resolution;\r\n\r\n                        float value = Mathf.PerlinNoise(xPos, yPos);\r\n                        if (value >= threshHold)\r\n                        {\r\n                            OwPoint noisePoint = new OwPoint(new Vector2(xPos, yPos) * maxSize);\r\n                            if (PolygonPointInteractor.Use().Contains(backGround.Shape as OwPolygon, noisePoint))\r\n                            {\r\n                                var points =  PoissonDiskSampling.GeneratePoints(0.8f, 10, 10, 1);\r\n                                foreach (Vector2 point in points)\r\n                                {\r\n                                    OwPoint noise = new OwPoint(noisePoint.Position + point);\r\n                                    if (!PolygonPointInteractor.Use().Contains(innerArea.Shape as OwPolygon, noise))\r\n                                    {\r\n                                        backGround.AddChild(new Subsidiary(noise, noiseRecipe));\r\n                                    }\r\n                                 \r\n                                }\r\n                                //backGround.AddChild(new Subsidiary(noisePoint, noiseRecipe));\r\n                            }\r\n                        }\r\n                        else\r\n                        {\r\n                            OwPoint noisePoint = new OwPoint(new Vector2(xPos, yPos) * maxSize);\r\n                            if (PolygonPointInteractor.Use().Contains(backGround.Shape as OwPolygon, noisePoint))\r\n                            {\r\n                                var points =  PoissonDiskSampling.GeneratePoints(0.8f, 10, 10, 1);\r\n                                foreach (Vector2 point in points)\r\n                                {\r\n                                    OwPoint noise = new OwPoint(noisePoint.Position + point);\r\n                                    if (!PolygonPointInteractor.Use().Contains(innerArea.Shape as OwPolygon, noise))\r\n                                    {\r\n                                        backGround.AddChild(new Subsidiary(noise, noiseRecipe0));\r\n                                    }\r\n                                 \r\n                                }\r\n                                //backGround.AddChild(new Subsidiary(noisePoint, noiseRecipe));\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n\r\n            return world;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs
+--- a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/BackGroundNoiseStep.cs	(date 1619782059592)
+@@ -44,7 +44,7 @@
+                                     OwPoint noise = new OwPoint(noisePoint.Position + point);
+                                     if (!PolygonPointInteractor.Use().Contains(innerArea.Shape as OwPolygon, noise))
+                                     {
+-                                        backGround.AddChild(new Subsidiary(noise, noiseRecipe));
++                                        backGround.AddChild(new Subsidiary(noise));
+                                     }
+                                  
+                                 }
+@@ -62,7 +62,7 @@
+                                     OwPoint noise = new OwPoint(noisePoint.Position + point);
+                                     if (!PolygonPointInteractor.Use().Contains(innerArea.Shape as OwPolygon, noise))
+                                     {
+-                                        backGround.AddChild(new Subsidiary(noise, noiseRecipe0));
++                                        backGround.AddChild(new Subsidiary(noise));
+                                     }
+                                  
+                                 }
+Index: Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Collections.Generic;\r\nusing System.Linq;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.GameWorldObjects\r\n{\r\n    public abstract class AbstractGameWorldObject : IGameWorldObject\r\n    {\r\n        public IGeometry Shape { get; set; }\r\n        private IGameWorldObject parent;\r\n        public GameWorldObjectRecipe recipe;\r\n        \r\n        public GameWorldObjectRecipe GetRecipe()\r\n        {\r\n            return recipe;\r\n        }\r\n\r\n        public void SetRecipe(GameWorldObjectRecipe recipe)\r\n        {\r\n            this.recipe = recipe;\r\n        }\r\n\r\n\r\n        public IGameWorldObject this[int index]\r\n        {\r\n            get => children[index];\r\n            set => children[index] = value;\r\n        }\r\n\r\n        private readonly IList<IGameWorldObject> children;\r\n\r\n        public AbstractGameWorldObject()\r\n        {\r\n            children = new List<IGameWorldObject>();\r\n        }\r\n\r\n        public void AddChild(IGameWorldObject child)\r\n        {\r\n            if (child != null && !children.Contains(child))\r\n            {\r\n                children.Add(child);\r\n                child.SetParent(this);\r\n            }\r\n        }\r\n\r\n        public void RemoveChild(IGameWorldObject child)\r\n        {\r\n            if (child != null)\r\n            {\r\n                children.Remove(child);\r\n                child.SetParent(null);\r\n            }\r\n        }\r\n\r\n        public IEnumerable<IGameWorldObject> GetChildren()\r\n        {\r\n            return children;\r\n        }\r\n\r\n        public IEnumerable<IGameWorldObject> GetChildrenInChildren()\r\n        {\r\n            return children.SelectMany(child => child.GetChildren());\r\n        }\r\n\r\n        public IEnumerable<T> GetAllChildrenOfType<T>()\r\n        {\r\n            return children.Where(child => child is T).Select(x => x is T ? (T) x : default);\r\n        }\r\n\r\n        public void ClearChildren()\r\n        {\r\n            children.Clear();\r\n        }\r\n\r\n        public int GetChildCount()\r\n        {\r\n            return children.Count;\r\n        }\r\n\r\n        public void AddChildInChild(int childIndex, IGameWorldObject child)\r\n        {\r\n            if (!(childIndex < 0 && childIndex > GetChildCount() - 1))\r\n            {\r\n                children[childIndex].AddChild(child);\r\n                child.SetParent(children[childIndex]);\r\n            }\r\n        }\r\n\r\n        public IGameWorldObject GetParent()\r\n        {\r\n            return parent;\r\n        }\r\n\r\n        public void SetParent(IGameWorldObject parent)\r\n        {\r\n            this.parent = parent;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs
+--- a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AbstractGameWorldObject.cs	(date 1619781900125)
+@@ -7,20 +7,17 @@
+ {
+     public abstract class AbstractGameWorldObject : IGameWorldObject
+     {
++        public string Type { get; set; }
+         public IGeometry Shape { get; set; }
++        
+         private IGameWorldObject parent;
+-        public GameWorldObjectRecipe recipe;
+-        
+-        public GameWorldObjectRecipe GetRecipe()
+-        {
+-            return recipe;
+-        }
+ 
+-        public void SetRecipe(GameWorldObjectRecipe recipe)
++        public AbstractGameWorldObject(IGeometry shape, string type = null)
+         {
+-            this.recipe = recipe;
++            this.Shape = shape;
++            this.Type = type; 
++            children = new List<IGameWorldObject>();
+         }
+-
+ 
+         public IGameWorldObject this[int index]
+         {
+@@ -29,12 +26,8 @@
+         }
+ 
+         private readonly IList<IGameWorldObject> children;
+-
+-        public AbstractGameWorldObject()
+-        {
+-            children = new List<IGameWorldObject>();
+-        }
+-
++        
++        
+         public void AddChild(IGameWorldObject child)
+         {
+             if (child != null && !children.Contains(child))
+Index: Assets/Scenes/OrganicPipeline.unity
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>%YAML 1.1\r\n%TAG !u! tag:unity3d.com,2011:\r\n--- !u!29 &1\r\nOcclusionCullingSettings:\r\n  m_ObjectHideFlags: 0\r\n  serializedVersion: 2\r\n  m_OcclusionBakeSettings:\r\n    smallestOccluder: 5\r\n    smallestHole: 0.25\r\n    backfaceThreshold: 100\r\n  m_SceneGUID: 00000000000000000000000000000000\r\n  m_OcclusionCullingData: {fileID: 0}\r\n--- !u!104 &2\r\nRenderSettings:\r\n  m_ObjectHideFlags: 0\r\n  serializedVersion: 9\r\n  m_Fog: 0\r\n  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}\r\n  m_FogMode: 3\r\n  m_FogDensity: 0.01\r\n  m_LinearFogStart: 0\r\n  m_LinearFogEnd: 300\r\n  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}\r\n  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}\r\n  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}\r\n  m_AmbientIntensity: 1\r\n  m_AmbientMode: 0\r\n  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}\r\n  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}\r\n  m_HaloStrength: 0.5\r\n  m_FlareStrength: 1\r\n  m_FlareFadeSpeed: 3\r\n  m_HaloTexture: {fileID: 0}\r\n  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}\r\n  m_DefaultReflectionMode: 0\r\n  m_DefaultReflectionResolution: 128\r\n  m_ReflectionBounces: 1\r\n  m_ReflectionIntensity: 1\r\n  m_CustomReflection: {fileID: 0}\r\n  m_Sun: {fileID: 0}\r\n  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}\r\n  m_UseRadianceAmbientProbe: 0\r\n--- !u!157 &3\r\nLightmapSettings:\r\n  m_ObjectHideFlags: 0\r\n  serializedVersion: 11\r\n  m_GIWorkflowMode: 1\r\n  m_GISettings:\r\n    serializedVersion: 2\r\n    m_BounceScale: 1\r\n    m_IndirectOutputScale: 1\r\n    m_AlbedoBoost: 1\r\n    m_EnvironmentLightingMode: 0\r\n    m_EnableBakedLightmaps: 1\r\n    m_EnableRealtimeLightmaps: 0\r\n  m_LightmapEditorSettings:\r\n    serializedVersion: 12\r\n    m_Resolution: 2\r\n    m_BakeResolution: 40\r\n    m_AtlasSize: 1024\r\n    m_AO: 0\r\n    m_AOMaxDistance: 1\r\n    m_CompAOExponent: 1\r\n    m_CompAOExponentDirect: 0\r\n    m_ExtractAmbientOcclusion: 0\r\n    m_Padding: 2\r\n    m_LightmapParameters: {fileID: 0}\r\n    m_LightmapsBakeMode: 1\r\n    m_TextureCompression: 1\r\n    m_FinalGather: 0\r\n    m_FinalGatherFiltering: 1\r\n    m_FinalGatherRayCount: 256\r\n    m_ReflectionCompression: 2\r\n    m_MixedBakeMode: 2\r\n    m_BakeBackend: 1\r\n    m_PVRSampling: 1\r\n    m_PVRDirectSampleCount: 32\r\n    m_PVRSampleCount: 512\r\n    m_PVRBounces: 2\r\n    m_PVREnvironmentSampleCount: 256\r\n    m_PVREnvironmentReferencePointCount: 2048\r\n    m_PVRFilteringMode: 1\r\n    m_PVRDenoiserTypeDirect: 1\r\n    m_PVRDenoiserTypeIndirect: 1\r\n    m_PVRDenoiserTypeAO: 1\r\n    m_PVRFilterTypeDirect: 0\r\n    m_PVRFilterTypeIndirect: 0\r\n    m_PVRFilterTypeAO: 0\r\n    m_PVREnvironmentMIS: 1\r\n    m_PVRCulling: 1\r\n    m_PVRFilteringGaussRadiusDirect: 1\r\n    m_PVRFilteringGaussRadiusIndirect: 5\r\n    m_PVRFilteringGaussRadiusAO: 2\r\n    m_PVRFilteringAtrousPositionSigmaDirect: 0.5\r\n    m_PVRFilteringAtrousPositionSigmaIndirect: 2\r\n    m_PVRFilteringAtrousPositionSigmaAO: 1\r\n    m_ExportTrainingData: 0\r\n    m_TrainingDataDestination: TrainingData\r\n    m_LightProbeSampleCountMultiplier: 4\r\n  m_LightingDataAsset: {fileID: 0}\r\n  m_UseShadowmask: 1\r\n--- !u!196 &4\r\nNavMeshSettings:\r\n  serializedVersion: 2\r\n  m_ObjectHideFlags: 0\r\n  m_BuildSettings:\r\n    serializedVersion: 2\r\n    agentTypeID: 0\r\n    agentRadius: 0.5\r\n    agentHeight: 2\r\n    agentSlope: 45\r\n    agentClimb: 0.4\r\n    ledgeDropHeight: 0\r\n    maxJumpAcrossDistance: 0\r\n    minRegionArea: 2\r\n    manualCellSize: 0\r\n    cellSize: 0.16666667\r\n    manualTileSize: 0\r\n    tileSize: 256\r\n    accuratePlacement: 0\r\n    debug:\r\n      m_Flags: 0\r\n  m_NavMeshData: {fileID: 0}\r\n--- !u!1 &380551637\r\nGameObject:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  serializedVersion: 6\r\n  m_Component:\r\n  - component: {fileID: 380551638}\r\n  m_Layer: 0\r\n  m_Name: New Game Object\r\n  m_TagString: Untagged\r\n  m_Icon: {fileID: 0}\r\n  m_NavMeshLayer: 0\r\n  m_StaticEditorFlags: 0\r\n  m_IsActive: 1\r\n--- !u!4 &380551638\r\nTransform:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 380551637}\r\n  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}\r\n  m_LocalPosition: {x: 1000, y: 0, z: 0}\r\n  m_LocalScale: {x: 1, y: 1, z: 1}\r\n  m_Children: []\r\n  m_Father: {fileID: 1028711116}\r\n  m_RootOrder: 0\r\n  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}\r\n--- !u!1 &989505673\r\nGameObject:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  serializedVersion: 6\r\n  m_Component:\r\n  - component: {fileID: 989505676}\r\n  - component: {fileID: 989505675}\r\n  - component: {fileID: 989505674}\r\n  m_Layer: 0\r\n  m_Name: Main Camera\r\n  m_TagString: MainCamera\r\n  m_Icon: {fileID: 0}\r\n  m_NavMeshLayer: 0\r\n  m_StaticEditorFlags: 0\r\n  m_IsActive: 1\r\n--- !u!81 &989505674\r\nAudioListener:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 989505673}\r\n  m_Enabled: 1\r\n--- !u!20 &989505675\r\nCamera:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 989505673}\r\n  m_Enabled: 1\r\n  serializedVersion: 2\r\n  m_ClearFlags: 1\r\n  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}\r\n  m_projectionMatrixMode: 1\r\n  m_GateFitMode: 2\r\n  m_FOVAxisMode: 0\r\n  m_SensorSize: {x: 36, y: 24}\r\n  m_LensShift: {x: 0, y: 0}\r\n  m_FocalLength: 50\r\n  m_NormalizedViewPortRect:\r\n    serializedVersion: 2\r\n    x: 0\r\n    y: 0\r\n    width: 1\r\n    height: 1\r\n  near clip plane: 0.3\r\n  far clip plane: 1000\r\n  field of view: 60\r\n  orthographic: 0\r\n  orthographic size: 5\r\n  m_Depth: -1\r\n  m_CullingMask:\r\n    serializedVersion: 2\r\n    m_Bits: 4294967295\r\n  m_RenderingPath: -1\r\n  m_TargetTexture: {fileID: 0}\r\n  m_TargetDisplay: 0\r\n  m_TargetEye: 3\r\n  m_HDR: 1\r\n  m_AllowMSAA: 1\r\n  m_AllowDynamicResolution: 0\r\n  m_ForceIntoRT: 0\r\n  m_OcclusionCulling: 1\r\n  m_StereoConvergence: 10\r\n  m_StereoSeparation: 0.022\r\n--- !u!4 &989505676\r\nTransform:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 989505673}\r\n  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}\r\n  m_LocalPosition: {x: 100, y: 100, z: 50}\r\n  m_LocalScale: {x: 1, y: 1, z: 1}\r\n  m_Children: []\r\n  m_Father: {fileID: 0}\r\n  m_RootOrder: 0\r\n  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}\r\n--- !u!1 &1028711114\r\nGameObject:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  serializedVersion: 6\r\n  m_Component:\r\n  - component: {fileID: 1028711116}\r\n  - component: {fileID: 1028711115}\r\n  - component: {fileID: 1028711122}\r\n  - component: {fileID: 1028711121}\r\n  - component: {fileID: 1028711117}\r\n  - component: {fileID: 1028711118}\r\n  - component: {fileID: 1028711119}\r\n  - component: {fileID: 1028711120}\r\n  - component: {fileID: 1028711123}\r\n  m_Layer: 0\r\n  m_Name: PipelineManagementObject\r\n  m_TagString: Untagged\r\n  m_Icon: {fileID: 0}\r\n  m_NavMeshLayer: 0\r\n  m_StaticEditorFlags: 0\r\n  m_IsActive: 1\r\n--- !u!114 &1028711115\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 8932d16f81da67046b7b5998efe9cf1c, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  randomSeed: 0\r\n  hasError: 0\r\n  errorText: \r\n--- !u!4 &1028711116\r\nTransform:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}\r\n  m_LocalPosition: {x: -1000, y: 0, z: 0}\r\n  m_LocalScale: {x: 1, y: 1, z: 1}\r\n  m_Children:\r\n  - {fileID: 380551638}\r\n  m_Father: {fileID: 0}\r\n  m_RootOrder: 2\r\n  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}\r\n--- !u!114 &1028711117\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: eaa3d9f31d2349efa169f1254095c0f7, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  inBetweenAreaTypes: 2\r\n--- !u!114 &1028711118\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 9a633f36aeaa4509a128430480b6a722, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  connectionClosenessToVoronoiVertex: 0.3\r\n  maxDimensions: {x: 99, y: 99}\r\n  minDimensions: {x: 1, y: 1}\r\n--- !u!114 &1028711119\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: a43be25cc3c843c3821322345532d22e, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  landmarkRecipe: {fileID: 0}\r\n  startLandmarkRecipe: {fileID: 0}\r\n  endLandmarkRecipe: {fileID: 0}\r\n  hasLandmarksPercent: 1\r\n  minLandmarks: 0\r\n  maxLandmarks: 2\r\n  maxDistanceFromCenter: 20\r\n  minDistanceFromCenter: 0\r\n  freeSpaceInsideAtBorder: 0.2\r\n  minimumDistanceBetweenLandmarks: 5\r\n  maxTriesToGuaranteeConstraints: 1000\r\n  addDebugScaledInnerArea: 0\r\n--- !u!114 &1028711120\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: c67d125fbfc24e7e97ddca23935b080c, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n--- !u!114 &1028711121\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 34563fbc767dea740a15962186190b7a, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  poissonDiskRadius: 20\r\n  samplesBeforeRejection: 30\r\n--- !u!114 &1028711122\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 35bd545b1b81862498b4a59586b356fe, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  dimensions: {x: 100, y: 100}\r\n  recipe: {fileID: 0}\r\n--- !u!114 &1028711123\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 06add7a9b1824013a64fa170b07090e7, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n--- !u!1 &1491131084\r\nGameObject:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  serializedVersion: 6\r\n  m_Component:\r\n  - component: {fileID: 1491131086}\r\n  - component: {fileID: 1491131085}\r\n  m_Layer: 0\r\n  m_Name: Directional Light\r\n  m_TagString: Untagged\r\n  m_Icon: {fileID: 0}\r\n  m_NavMeshLayer: 0\r\n  m_StaticEditorFlags: 0\r\n  m_IsActive: 1\r\n--- !u!108 &1491131085\r\nLight:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1491131084}\r\n  m_Enabled: 1\r\n  serializedVersion: 10\r\n  m_Type: 1\r\n  m_Shape: 0\r\n  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}\r\n  m_Intensity: 1\r\n  m_Range: 10\r\n  m_SpotAngle: 30\r\n  m_InnerSpotAngle: 21.80208\r\n  m_CookieSize: 10\r\n  m_Shadows:\r\n    m_Type: 2\r\n    m_Resolution: -1\r\n    m_CustomResolution: -1\r\n    m_Strength: 1\r\n    m_Bias: 0.05\r\n    m_NormalBias: 0.4\r\n    m_NearPlane: 0.2\r\n    m_CullingMatrixOverride:\r\n      e00: 1\r\n      e01: 0\r\n      e02: 0\r\n      e03: 0\r\n      e10: 0\r\n      e11: 1\r\n      e12: 0\r\n      e13: 0\r\n      e20: 0\r\n      e21: 0\r\n      e22: 1\r\n      e23: 0\r\n      e30: 0\r\n      e31: 0\r\n      e32: 0\r\n      e33: 1\r\n    m_UseCullingMatrixOverride: 0\r\n  m_Cookie: {fileID: 0}\r\n  m_DrawHalo: 0\r\n  m_Flare: {fileID: 0}\r\n  m_RenderMode: 0\r\n  m_CullingMask:\r\n    serializedVersion: 2\r\n    m_Bits: 4294967295\r\n  m_RenderingLayerMask: 1\r\n  m_Lightmapping: 4\r\n  m_LightShadowCasterMode: 0\r\n  m_AreaSize: {x: 1, y: 1}\r\n  m_BounceIntensity: 1\r\n  m_ColorTemperature: 6570\r\n  m_UseColorTemperature: 0\r\n  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}\r\n  m_UseBoundingSphereOverride: 0\r\n  m_ShadowRadius: 0\r\n  m_ShadowAngle: 0\r\n--- !u!4 &1491131086\r\nTransform:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1491131084}\r\n  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}\r\n  m_LocalPosition: {x: 0, y: 3, z: 0}\r\n  m_LocalScale: {x: 1, y: 1, z: 1}\r\n  m_Children: []\r\n  m_Father: {fileID: 0}\r\n  m_RootOrder: 1\r\n  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scenes/OrganicPipeline.unity b/Assets/Scenes/OrganicPipeline.unity
+--- a/Assets/Scenes/OrganicPipeline.unity	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scenes/OrganicPipeline.unity	(date 1619773803529)
+@@ -121,36 +121,6 @@
+     debug:
+       m_Flags: 0
+   m_NavMeshData: {fileID: 0}
+---- !u!1 &380551637
+-GameObject:
+-  m_ObjectHideFlags: 0
+-  m_CorrespondingSourceObject: {fileID: 0}
+-  m_PrefabInstance: {fileID: 0}
+-  m_PrefabAsset: {fileID: 0}
+-  serializedVersion: 6
+-  m_Component:
+-  - component: {fileID: 380551638}
+-  m_Layer: 0
+-  m_Name: New Game Object
+-  m_TagString: Untagged
+-  m_Icon: {fileID: 0}
+-  m_NavMeshLayer: 0
+-  m_StaticEditorFlags: 0
+-  m_IsActive: 1
+---- !u!4 &380551638
+-Transform:
+-  m_ObjectHideFlags: 0
+-  m_CorrespondingSourceObject: {fileID: 0}
+-  m_PrefabInstance: {fileID: 0}
+-  m_PrefabAsset: {fileID: 0}
+-  m_GameObject: {fileID: 380551637}
+-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+-  m_LocalPosition: {x: 1000, y: 0, z: 0}
+-  m_LocalScale: {x: 1, y: 1, z: 1}
+-  m_Children: []
+-  m_Father: {fileID: 1028711116}
+-  m_RootOrder: 0
+-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+ --- !u!1 &989505673
+ GameObject:
+   m_ObjectHideFlags: 0
+@@ -251,6 +221,7 @@
+   - component: {fileID: 1028711119}
+   - component: {fileID: 1028711120}
+   - component: {fileID: 1028711123}
++  - component: {fileID: 1028711124}
+   m_Layer: 0
+   m_Name: PipelineManagementObject
+   m_TagString: Untagged
+@@ -270,6 +241,7 @@
+   m_Script: {fileID: 11500000, guid: 8932d16f81da67046b7b5998efe9cf1c, type: 3}
+   m_Name: 
+   m_EditorClassIdentifier: 
++  minimalDebugColorBrightness: 0.3
+   randomSeed: 0
+   hasError: 0
+   errorText: 
+@@ -283,8 +255,7 @@
+   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+   m_LocalPosition: {x: -1000, y: 0, z: 0}
+   m_LocalScale: {x: 1, y: 1, z: 1}
+-  m_Children:
+-  - {fileID: 380551638}
++  m_Children: []
+   m_Father: {fileID: 0}
+   m_RootOrder: 2
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+@@ -392,6 +363,50 @@
+   m_Script: {fileID: 11500000, guid: 06add7a9b1824013a64fa170b07090e7, type: 3}
+   m_Name: 
+   m_EditorClassIdentifier: 
++--- !u!114 &1028711124
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1028711114}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 20a59b8aab219c047a28b2f905fc1dde, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: 
++  poissonDiskRadius: 1
++  samplesBeforeRejection: 3
++--- !u!1 &1132378809
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 1132378810}
++  m_Layer: 0
++  m_Name: New Game Object
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &1132378810
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1132378809}
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_Children: []
++  m_Father: {fileID: 0}
++  m_RootOrder: 3
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+ --- !u!1 &1491131084
+ GameObject:
+   m_ObjectHideFlags: 0
+Index: Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Framework.Cellular_Automata;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.Geometry.Interactors;\r\nusing Framework.Pipeline.ThemeApplicator;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing Framework.Poisson_Disk_Sampling;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.Example\r\n{\r\n    public class AreaRefinementStep : PipelineStep\r\n    {\r\n        public AreaMeshRecipe playAreaRecipe;\r\n\r\n        public override Type[] RequiredGuarantees => new Type[] {};\r\n\r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            const float radius = 4f;\r\n            \r\n            //CA\r\n            List<Vector2> caPoints = PoissonDiskSampling.GeneratePoints(radius, 50f, 50f).ToList();\r\n            NaturalCa naturalCa = new NaturalCa(caPoints.Count());\r\n\r\n            //add all points as cell with their index\r\n            for (int i = 0; i < caPoints.Count; i++)\r\n            {\r\n                naturalCa.AddCell(new NaturalCaCell(i, naturalCa, caPoints[i]));\r\n            }\r\n\r\n            for (int index0 = 0; index0 < caPoints.Count; index0++)\r\n            {\r\n                Vector2 caPoint0 = caPoints[index0];\r\n                for (int index1 = 0; index1 < caPoints.Count; index1++)\r\n                {\r\n                    Vector2 caPoint1 = caPoints[index1];\r\n                    if (caPoint0 != caPoint1)\r\n                    {\r\n                        float d = (caPoint0 - caPoint1).magnitude;\r\n                        if (d < radius * radius/2f)\r\n                        {\r\n                            (naturalCa.Cells[index0] as NaturalCaCell)?.AddNeighbour(index1);\r\n\r\n                            //world.Root.AddChild(new Subsidiary(new OwLine(caPoint0, caPoint1)));\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n\r\n            foreach (CaCell cell in naturalCa.Cells)\r\n            {\r\n                NaturalCaCell naCell = (cell as NaturalCaCell);\r\n                foreach (IGameWorldObject potentialArea in world.Root.GetChildren())\r\n                {\r\n                    if (potentialArea is Area area)\r\n                    {\r\n                        OwPoint owPoint = new OwPoint(naCell.Position);\r\n                        if (PolygonPointInteractor.Use().Contains(area.Shape as OwPolygon, owPoint))\r\n                        {\r\n                            naCell.State = true;\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n\r\n            naturalCa.Run(1);\r\n  \r\n            List<Vector2> activeCellPositions = new List<Vector2>();\r\n            OwPolygon areaPolygon = world.Root.GetChildren().First(x => (x as Area).Shape is OwPolygon).Shape as OwPolygon;\r\n\r\n            for (int index = 1; index < naturalCa.Cells.Length; index++)\r\n            {\r\n                CaCell caCell = naturalCa.Cells[index];\r\n                NaturalCaCell naturalCaCell = (NaturalCaCell) caCell;\r\n                if (naturalCaCell.State)\r\n                {\r\n                    activeCellPositions.Add(naturalCaCell.Position);\r\n\r\n                    OwCircle partArea = new OwCircle(naturalCaCell.Position, radius, 8);\r\n                    //segments.Add(partArea.representation);\r\n                    areaPolygon = PolygonPolygonInteractor.Use().Union(areaPolygon, partArea);\r\n\r\n                    //world.Root.AddChild(new Subsidiary(new OwPoint(naturalCaCell.Position)));\r\n                }\r\n            }\r\n            \r\n            \r\n            Area newGround = new Area(areaPolygon, playAreaRecipe);\r\n            \r\n            foreach (IGameWorldObject children in world.Root.GetChildren().ToArray())\r\n            {\r\n                if (children is Area area)\r\n                {\r\n                    //transfer children if any\r\n                    if (area.GetChildCount() > 0)\r\n                    {\r\n                        IEnumerable<IGameWorldObject> areaChildren = area.GetChildren();\r\n                        foreach (IGameWorldObject areaChild in areaChildren)\r\n                        {\r\n                            newGround.AddChild(areaChild);\r\n                        }\r\n                    }\r\n                    \r\n                    world.Root.RemoveChild(area);\r\n\r\n                    areaPolygon = PolygonPolygonInteractor.Use().Union(areaPolygon, area.Shape as OwPolygon);\r\n                }\r\n            }\r\n\r\n            newGround.Shape = areaPolygon;\r\n            \r\n            world.Root.AddChild(newGround);\r\n\r\n\r\n            return world;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs
+--- a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaRefinementStep.cs	(date 1619782047731)
+@@ -89,7 +89,7 @@
+             }
+             
+             
+-            Area newGround = new Area(areaPolygon, playAreaRecipe);
++            Area newGround = new Area(areaPolygon);
+             
+             foreach (IGameWorldObject children in world.Root.GetChildren().ToArray())
+             {
+Index: Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing Assets.Scripts.Framework.Pipeline.Example;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.Geometry.Interactors;\r\nusing Framework.Pipeline.ThemeApplicator;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing Framework.Poisson_Disk_Sampling;\r\nusing UnityEngine;\r\nusing Random = UnityEngine.Random;\r\n\r\n\r\nnamespace Framework.Pipeline.Example\r\n{\r\n\r\n    [RootGameWorldObjectProvider]\r\n    public class AreaPlacementStep : PipelineStep\r\n    {\r\n        public AreaMeshRecipe playAreaRecipe;\r\n        \r\n        public override Type[] RequiredGuarantees => new[] {typeof(RootGameWorldObjectProvider)};\r\n\r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(15, 50, 50);\r\n\r\n            Area bigArea = world.Root as Area;\r\n\r\n            foreach (Vector2 vector2 in points)\r\n            {\r\n                Area smallArea = new Area(new OwCircle(vector2, 5, Random.Range(5, 20)), playAreaRecipe);\r\n                if (PolygonPolygonInteractor.Use().Contains(bigArea.Shape as OwPolygon, smallArea.Shape as OwPolygon))\r\n                {\r\n                    world.Root.AddChild(smallArea);\r\n                }\r\n            }\r\n\r\n            return world;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs
+--- a/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/Legacy Contents/Example/AreaPlacementStep.cs	(date 1619782047743)
+@@ -30,7 +30,7 @@
+ 
+             foreach (Vector2 vector2 in points)
+             {
+-                Area smallArea = new Area(new OwCircle(vector2, 5, Random.Range(5, 20)), playAreaRecipe);
++                Area smallArea = new Area(new OwCircle(vector2, 5, Random.Range(5, 20)));
+                 if (PolygonPolygonInteractor.Use().Contains(bigArea.Shape as OwPolygon, smallArea.Shape as OwPolygon))
+                 {
+                     world.Root.AddChild(smallArea);
+Index: Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Framework.Pipeline.ThemeApplicator.Recipe;\r\n\r\nnamespace Framework.Pipeline.GameWorldObjects\r\n{\r\n    public class Subsidiary : AbstractLeafGameWorldObject\r\n    {\r\n        public Subsidiary(IGeometry shape, GameWorldObjectRecipe recipe)\r\n        {\r\n            this.Shape = shape;\r\n            this.recipe = recipe;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs
+--- a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Subsidiary.cs	(date 1619782047751)
+@@ -4,10 +4,8 @@
+ {
+     public class Subsidiary : AbstractLeafGameWorldObject
+     {
+-        public Subsidiary(IGeometry shape, GameWorldObjectRecipe recipe)
++        public Subsidiary(IGeometry shape, string type = null) : base(shape, type)
+         {
+-            this.Shape = shape;
+-            this.recipe = recipe;
+         }
+     }
+ }
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\n\r\nnamespace Framework.Pipeline.GameWorldObjects\r\n{\r\n    public class Landmark : AbstractLeafGameWorldObject\r\n    {\r\n        \r\n        public Landmark(IGeometry shape, GameWorldObjectRecipe landmarkPrefabRecipe)\r\n        {\r\n            this.Shape = shape;\r\n            this.recipe = landmarkPrefabRecipe;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs
+--- a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/Landmark.cs	(date 1619781959311)
+@@ -5,11 +5,8 @@
+ {
+     public class Landmark : AbstractLeafGameWorldObject
+     {
+-        
+-        public Landmark(IGeometry shape, GameWorldObjectRecipe landmarkPrefabRecipe)
++        public Landmark(IGeometry shape, string type = null) : base(shape, type)
+         {
+-            this.Shape = shape;
+-            this.recipe = landmarkPrefabRecipe;
+         }
+     }
+ }
+\ No newline at end of file
+Index: Assets/Scenes/PipelineTest.unity
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>%YAML 1.1\r\n%TAG !u! tag:unity3d.com,2011:\r\n--- !u!29 &1\r\nOcclusionCullingSettings:\r\n  m_ObjectHideFlags: 0\r\n  serializedVersion: 2\r\n  m_OcclusionBakeSettings:\r\n    smallestOccluder: 5\r\n    smallestHole: 0.25\r\n    backfaceThreshold: 100\r\n  m_SceneGUID: 00000000000000000000000000000000\r\n  m_OcclusionCullingData: {fileID: 0}\r\n--- !u!104 &2\r\nRenderSettings:\r\n  m_ObjectHideFlags: 0\r\n  serializedVersion: 9\r\n  m_Fog: 0\r\n  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}\r\n  m_FogMode: 3\r\n  m_FogDensity: 0.01\r\n  m_LinearFogStart: 0\r\n  m_LinearFogEnd: 300\r\n  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}\r\n  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}\r\n  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}\r\n  m_AmbientIntensity: 1\r\n  m_AmbientMode: 0\r\n  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}\r\n  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}\r\n  m_HaloStrength: 0.5\r\n  m_FlareStrength: 1\r\n  m_FlareFadeSpeed: 3\r\n  m_HaloTexture: {fileID: 0}\r\n  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}\r\n  m_DefaultReflectionMode: 0\r\n  m_DefaultReflectionResolution: 128\r\n  m_ReflectionBounces: 1\r\n  m_ReflectionIntensity: 1\r\n  m_CustomReflection: {fileID: 0}\r\n  m_Sun: {fileID: 0}\r\n  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}\r\n  m_UseRadianceAmbientProbe: 0\r\n--- !u!157 &3\r\nLightmapSettings:\r\n  m_ObjectHideFlags: 0\r\n  serializedVersion: 11\r\n  m_GIWorkflowMode: 1\r\n  m_GISettings:\r\n    serializedVersion: 2\r\n    m_BounceScale: 1\r\n    m_IndirectOutputScale: 1\r\n    m_AlbedoBoost: 1\r\n    m_EnvironmentLightingMode: 0\r\n    m_EnableBakedLightmaps: 1\r\n    m_EnableRealtimeLightmaps: 0\r\n  m_LightmapEditorSettings:\r\n    serializedVersion: 12\r\n    m_Resolution: 2\r\n    m_BakeResolution: 40\r\n    m_AtlasSize: 1024\r\n    m_AO: 0\r\n    m_AOMaxDistance: 1\r\n    m_CompAOExponent: 1\r\n    m_CompAOExponentDirect: 0\r\n    m_ExtractAmbientOcclusion: 0\r\n    m_Padding: 2\r\n    m_LightmapParameters: {fileID: 0}\r\n    m_LightmapsBakeMode: 1\r\n    m_TextureCompression: 1\r\n    m_FinalGather: 0\r\n    m_FinalGatherFiltering: 1\r\n    m_FinalGatherRayCount: 256\r\n    m_ReflectionCompression: 2\r\n    m_MixedBakeMode: 2\r\n    m_BakeBackend: 1\r\n    m_PVRSampling: 1\r\n    m_PVRDirectSampleCount: 32\r\n    m_PVRSampleCount: 512\r\n    m_PVRBounces: 2\r\n    m_PVREnvironmentSampleCount: 256\r\n    m_PVREnvironmentReferencePointCount: 2048\r\n    m_PVRFilteringMode: 1\r\n    m_PVRDenoiserTypeDirect: 1\r\n    m_PVRDenoiserTypeIndirect: 1\r\n    m_PVRDenoiserTypeAO: 1\r\n    m_PVRFilterTypeDirect: 0\r\n    m_PVRFilterTypeIndirect: 0\r\n    m_PVRFilterTypeAO: 0\r\n    m_PVREnvironmentMIS: 1\r\n    m_PVRCulling: 1\r\n    m_PVRFilteringGaussRadiusDirect: 1\r\n    m_PVRFilteringGaussRadiusIndirect: 5\r\n    m_PVRFilteringGaussRadiusAO: 2\r\n    m_PVRFilteringAtrousPositionSigmaDirect: 0.5\r\n    m_PVRFilteringAtrousPositionSigmaIndirect: 2\r\n    m_PVRFilteringAtrousPositionSigmaAO: 1\r\n    m_ExportTrainingData: 0\r\n    m_TrainingDataDestination: TrainingData\r\n    m_LightProbeSampleCountMultiplier: 4\r\n  m_LightingDataAsset: {fileID: 0}\r\n  m_UseShadowmask: 1\r\n--- !u!196 &4\r\nNavMeshSettings:\r\n  serializedVersion: 2\r\n  m_ObjectHideFlags: 0\r\n  m_BuildSettings:\r\n    serializedVersion: 2\r\n    agentTypeID: 0\r\n    agentRadius: 0.5\r\n    agentHeight: 2\r\n    agentSlope: 45\r\n    agentClimb: 0.4\r\n    ledgeDropHeight: 0\r\n    maxJumpAcrossDistance: 0\r\n    minRegionArea: 2\r\n    manualCellSize: 0\r\n    cellSize: 0.16666667\r\n    manualTileSize: 0\r\n    tileSize: 256\r\n    accuratePlacement: 0\r\n    debug:\r\n      m_Flags: 0\r\n  m_NavMeshData: {fileID: 0}\r\n--- !u!1 &643545479\r\nGameObject:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  serializedVersion: 6\r\n  m_Component:\r\n  - component: {fileID: 643545480}\r\n  m_Layer: 0\r\n  m_Name: New Game Object\r\n  m_TagString: Untagged\r\n  m_Icon: {fileID: 0}\r\n  m_NavMeshLayer: 0\r\n  m_StaticEditorFlags: 0\r\n  m_IsActive: 1\r\n--- !u!4 &643545480\r\nTransform:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 643545479}\r\n  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}\r\n  m_LocalPosition: {x: 1000, y: 0, z: 0}\r\n  m_LocalScale: {x: 1, y: 1, z: 1}\r\n  m_Children: []\r\n  m_Father: {fileID: 1028711116}\r\n  m_RootOrder: 0\r\n  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}\r\n--- !u!1 &989505673\r\nGameObject:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  serializedVersion: 6\r\n  m_Component:\r\n  - component: {fileID: 989505676}\r\n  - component: {fileID: 989505675}\r\n  - component: {fileID: 989505674}\r\n  m_Layer: 0\r\n  m_Name: Main Camera\r\n  m_TagString: MainCamera\r\n  m_Icon: {fileID: 0}\r\n  m_NavMeshLayer: 0\r\n  m_StaticEditorFlags: 0\r\n  m_IsActive: 1\r\n--- !u!81 &989505674\r\nAudioListener:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 989505673}\r\n  m_Enabled: 1\r\n--- !u!20 &989505675\r\nCamera:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 989505673}\r\n  m_Enabled: 1\r\n  serializedVersion: 2\r\n  m_ClearFlags: 1\r\n  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}\r\n  m_projectionMatrixMode: 1\r\n  m_GateFitMode: 2\r\n  m_FOVAxisMode: 0\r\n  m_SensorSize: {x: 36, y: 24}\r\n  m_LensShift: {x: 0, y: 0}\r\n  m_FocalLength: 50\r\n  m_NormalizedViewPortRect:\r\n    serializedVersion: 2\r\n    x: 0\r\n    y: 0\r\n    width: 1\r\n    height: 1\r\n  near clip plane: 0.3\r\n  far clip plane: 1000\r\n  field of view: 60\r\n  orthographic: 0\r\n  orthographic size: 5\r\n  m_Depth: -1\r\n  m_CullingMask:\r\n    serializedVersion: 2\r\n    m_Bits: 4294967295\r\n  m_RenderingPath: -1\r\n  m_TargetTexture: {fileID: 0}\r\n  m_TargetDisplay: 0\r\n  m_TargetEye: 3\r\n  m_HDR: 1\r\n  m_AllowMSAA: 1\r\n  m_AllowDynamicResolution: 0\r\n  m_ForceIntoRT: 0\r\n  m_OcclusionCulling: 1\r\n  m_StereoConvergence: 10\r\n  m_StereoSeparation: 0.022\r\n--- !u!4 &989505676\r\nTransform:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 989505673}\r\n  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}\r\n  m_LocalPosition: {x: 100, y: 100, z: 50}\r\n  m_LocalScale: {x: 1, y: 1, z: 1}\r\n  m_Children: []\r\n  m_Father: {fileID: 0}\r\n  m_RootOrder: 0\r\n  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}\r\n--- !u!1 &1028711114\r\nGameObject:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  serializedVersion: 6\r\n  m_Component:\r\n  - component: {fileID: 1028711116}\r\n  - component: {fileID: 1028711115}\r\n  - component: {fileID: 1028711118}\r\n  - component: {fileID: 1028711117}\r\n  - component: {fileID: 1028711119}\r\n  - component: {fileID: 1028711122}\r\n  - component: {fileID: 1028711121}\r\n  - component: {fileID: 1028711120}\r\n  - component: {fileID: 1028711124}\r\n  - component: {fileID: 1028711123}\r\n  m_Layer: 0\r\n  m_Name: PipelineManagementObject\r\n  m_TagString: Untagged\r\n  m_Icon: {fileID: 0}\r\n  m_NavMeshLayer: 0\r\n  m_StaticEditorFlags: 0\r\n  m_IsActive: 1\r\n--- !u!114 &1028711115\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 8932d16f81da67046b7b5998efe9cf1c, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  minimalDebugColorBrightness: 0.7\r\n  randomSeed: 1\r\n  hasError: 0\r\n  errorText: \r\n--- !u!4 &1028711116\r\nTransform:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}\r\n  m_LocalPosition: {x: -1000, y: 0, z: 0}\r\n  m_LocalScale: {x: 1, y: 1, z: 1}\r\n  m_Children:\r\n  - {fileID: 643545480}\r\n  m_Father: {fileID: 0}\r\n  m_RootOrder: 2\r\n  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}\r\n--- !u!114 &1028711117\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 34563fbc767dea740a15962186190b7a, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  poissonDiskRadius: 30\r\n  samplesBeforeRejection: 30\r\n--- !u!114 &1028711118\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 35bd545b1b81862498b4a59586b356fe, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  dimensions: {x: 200, y: 100}\r\n  recipe: {fileID: 0}\r\n--- !u!114 &1028711119\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: eaa3d9f31d2349efa169f1254095c0f7, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  inBetweenAreaTypes: 2\r\n--- !u!114 &1028711120\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: c67d125fbfc24e7e97ddca23935b080c, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n--- !u!114 &1028711121\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: a43be25cc3c843c3821322345532d22e, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  landmarkRecipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}\r\n  startLandmarkRecipe: {fileID: 11400000, guid: 13bcc454f57c7824fab560befc5d9494,\r\n    type: 2}\r\n  endLandmarkRecipe: {fileID: 11400000, guid: 684b3354facd3cc4396c74d38944241a, type: 2}\r\n  hasLandmarksPercent: 1\r\n  minLandmarks: 1\r\n  maxLandmarks: 10\r\n  maxDistanceFromCenter: 15\r\n  minDistanceFromCenter: 1\r\n  freeSpaceInsideAtBorder: 0\r\n  minimumDistanceBetweenLandmarks: 4\r\n  maxTriesToGuaranteeConstraints: 40\r\n  addDebugScaledInnerArea: 0\r\n--- !u!114 &1028711122\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 9a633f36aeaa4509a128430480b6a722, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  connectionClosenessToVoronoiVertex: 1\r\n  maxDimensions: {x: 199, y: 99}\r\n  minDimensions: {x: 1, y: 1}\r\n--- !u!114 &1028711123\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 20a59b8aab219c047a28b2f905fc1dde, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n  poissonDiskRadius: 3\r\n  samplesBeforeRejection: 3\r\n--- !u!114 &1028711124\r\nMonoBehaviour:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1028711114}\r\n  m_Enabled: 1\r\n  m_EditorHideFlags: 0\r\n  m_Script: {fileID: 11500000, guid: 06add7a9b1824013a64fa170b07090e7, type: 3}\r\n  m_Name: \r\n  m_EditorClassIdentifier: \r\n--- !u!1 &1491131084\r\nGameObject:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  serializedVersion: 6\r\n  m_Component:\r\n  - component: {fileID: 1491131086}\r\n  - component: {fileID: 1491131085}\r\n  m_Layer: 0\r\n  m_Name: Directional Light\r\n  m_TagString: Untagged\r\n  m_Icon: {fileID: 0}\r\n  m_NavMeshLayer: 0\r\n  m_StaticEditorFlags: 0\r\n  m_IsActive: 1\r\n--- !u!108 &1491131085\r\nLight:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1491131084}\r\n  m_Enabled: 1\r\n  serializedVersion: 10\r\n  m_Type: 1\r\n  m_Shape: 0\r\n  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}\r\n  m_Intensity: 1\r\n  m_Range: 10\r\n  m_SpotAngle: 30\r\n  m_InnerSpotAngle: 21.80208\r\n  m_CookieSize: 10\r\n  m_Shadows:\r\n    m_Type: 2\r\n    m_Resolution: -1\r\n    m_CustomResolution: -1\r\n    m_Strength: 1\r\n    m_Bias: 0.05\r\n    m_NormalBias: 0.4\r\n    m_NearPlane: 0.2\r\n    m_CullingMatrixOverride:\r\n      e00: 1\r\n      e01: 0\r\n      e02: 0\r\n      e03: 0\r\n      e10: 0\r\n      e11: 1\r\n      e12: 0\r\n      e13: 0\r\n      e20: 0\r\n      e21: 0\r\n      e22: 1\r\n      e23: 0\r\n      e30: 0\r\n      e31: 0\r\n      e32: 0\r\n      e33: 1\r\n    m_UseCullingMatrixOverride: 0\r\n  m_Cookie: {fileID: 0}\r\n  m_DrawHalo: 0\r\n  m_Flare: {fileID: 0}\r\n  m_RenderMode: 0\r\n  m_CullingMask:\r\n    serializedVersion: 2\r\n    m_Bits: 4294967295\r\n  m_RenderingLayerMask: 1\r\n  m_Lightmapping: 4\r\n  m_LightShadowCasterMode: 0\r\n  m_AreaSize: {x: 1, y: 1}\r\n  m_BounceIntensity: 1\r\n  m_ColorTemperature: 6570\r\n  m_UseColorTemperature: 0\r\n  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}\r\n  m_UseBoundingSphereOverride: 0\r\n  m_ShadowRadius: 0\r\n  m_ShadowAngle: 0\r\n--- !u!4 &1491131086\r\nTransform:\r\n  m_ObjectHideFlags: 0\r\n  m_CorrespondingSourceObject: {fileID: 0}\r\n  m_PrefabInstance: {fileID: 0}\r\n  m_PrefabAsset: {fileID: 0}\r\n  m_GameObject: {fileID: 1491131084}\r\n  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}\r\n  m_LocalPosition: {x: 0, y: 3, z: 0}\r\n  m_LocalScale: {x: 1, y: 1, z: 1}\r\n  m_Children: []\r\n  m_Father: {fileID: 0}\r\n  m_RootOrder: 1\r\n  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scenes/PipelineTest.unity b/Assets/Scenes/PipelineTest.unity
+--- a/Assets/Scenes/PipelineTest.unity	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scenes/PipelineTest.unity	(date 1619787373307)
+@@ -38,7 +38,7 @@
+   m_ReflectionIntensity: 1
+   m_CustomReflection: {fileID: 0}
+   m_Sun: {fileID: 0}
+-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
++  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+   m_UseRadianceAmbientProbe: 0
+ --- !u!157 &3
+ LightmapSettings:
+@@ -121,36 +121,6 @@
+     debug:
+       m_Flags: 0
+   m_NavMeshData: {fileID: 0}
+---- !u!1 &643545479
+-GameObject:
+-  m_ObjectHideFlags: 0
+-  m_CorrespondingSourceObject: {fileID: 0}
+-  m_PrefabInstance: {fileID: 0}
+-  m_PrefabAsset: {fileID: 0}
+-  serializedVersion: 6
+-  m_Component:
+-  - component: {fileID: 643545480}
+-  m_Layer: 0
+-  m_Name: New Game Object
+-  m_TagString: Untagged
+-  m_Icon: {fileID: 0}
+-  m_NavMeshLayer: 0
+-  m_StaticEditorFlags: 0
+-  m_IsActive: 1
+---- !u!4 &643545480
+-Transform:
+-  m_ObjectHideFlags: 0
+-  m_CorrespondingSourceObject: {fileID: 0}
+-  m_PrefabInstance: {fileID: 0}
+-  m_PrefabAsset: {fileID: 0}
+-  m_GameObject: {fileID: 643545479}
+-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+-  m_LocalPosition: {x: 1000, y: 0, z: 0}
+-  m_LocalScale: {x: 1, y: 1, z: 1}
+-  m_Children: []
+-  m_Father: {fileID: 1028711116}
+-  m_RootOrder: 0
+-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+ --- !u!1 &989505673
+ GameObject:
+   m_ObjectHideFlags: 0
+@@ -252,6 +222,7 @@
+   - component: {fileID: 1028711120}
+   - component: {fileID: 1028711124}
+   - component: {fileID: 1028711123}
++  - component: {fileID: 1028711125}
+   m_Layer: 0
+   m_Name: PipelineManagementObject
+   m_TagString: Untagged
+@@ -286,7 +257,7 @@
+   m_LocalPosition: {x: -1000, y: 0, z: 0}
+   m_LocalScale: {x: 1, y: 1, z: 1}
+   m_Children:
+-  - {fileID: 643545480}
++  - {fileID: 1235481264}
+   m_Father: {fileID: 0}
+   m_RootOrder: 2
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+@@ -317,7 +288,6 @@
+   m_Name: 
+   m_EditorClassIdentifier: 
+   dimensions: {x: 200, y: 100}
+-  recipe: {fileID: 0}
+ --- !u!114 &1028711119
+ MonoBehaviour:
+   m_ObjectHideFlags: 0
+@@ -355,10 +325,6 @@
+   m_Script: {fileID: 11500000, guid: a43be25cc3c843c3821322345532d22e, type: 3}
+   m_Name: 
+   m_EditorClassIdentifier: 
+-  landmarkRecipe: {fileID: 11400000, guid: 21dea2c82e074574a63871214ae909ea, type: 2}
+-  startLandmarkRecipe: {fileID: 11400000, guid: 13bcc454f57c7824fab560befc5d9494,
+-    type: 2}
+-  endLandmarkRecipe: {fileID: 11400000, guid: 684b3354facd3cc4396c74d38944241a, type: 2}
+   hasLandmarksPercent: 1
+   minLandmarks: 1
+   maxLandmarks: 10
+@@ -392,7 +358,7 @@
+   m_GameObject: {fileID: 1028711114}
+   m_Enabled: 1
+   m_EditorHideFlags: 0
+-  m_Script: {fileID: 11500000, guid: 20a59b8aab219c047a28b2f905fc1dde, type: 3}
++  m_Script: {fileID: 11500000, guid: 920f6c1d36b5c7d4a93d779898fa7ce9, type: 3}
+   m_Name: 
+   m_EditorClassIdentifier: 
+   poissonDiskRadius: 3
+@@ -409,6 +375,57 @@
+   m_Script: {fileID: 11500000, guid: 06add7a9b1824013a64fa170b07090e7, type: 3}
+   m_Name: 
+   m_EditorClassIdentifier: 
++--- !u!114 &1028711125
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1028711114}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: f16809d27e804320bb778a083fa34c22, type: 3}
++  m_Name: 
++  m_EditorClassIdentifier: 
++  recipes:
++  - name: startArea
++    recipe: {fileID: 0}
++  - name: endArea
++    recipe: {fileID: 0}
++  - name: area0
++    recipe: {fileID: 0}
++  - name: area1
++    recipe: {fileID: 0}
++--- !u!1 &1235481263
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 1235481264}
++  m_Layer: 0
++  m_Name: New Game Object
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!4 &1235481264
++Transform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 1235481263}
++  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
++  m_LocalPosition: {x: 1000, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_Children: []
++  m_Father: {fileID: 1028711116}
++  m_RootOrder: 0
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+ --- !u!1 &1491131084
+ GameObject:
+   m_ObjectHideFlags: 0
+Index: Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs.meta b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs.meta
+new file mode 100644
+--- /dev/null	(date 1619783224688)
++++ b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs.meta	(date 1619783224688)
+@@ -0,0 +1,3 @@
++fileFormatVersion: 2
++guid: 2e4dc6966d12446d9b70c3ba2db8fe1b
++timeCreated: 1619783224
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs
+new file mode 100644
+--- /dev/null	(date 1619786524040)
++++ b/Assets/Scripts/Framework/Pipeline/ThemeApplicator/TypeRecipeCombination.cs	(date 1619786524040)
+@@ -0,0 +1,49 @@
++using System;
++using Framework.Pipeline.ThemeApplicator.Recipe;
++using Framework.Util;
++
++namespace Framework.Pipeline.ThemeApplicator 
++{
++    [Serializable]
++    public class TypeRecipeCombination 
++    {
++        [ReadOnly]
++        public string name;
++        public GameWorldObjectRecipe recipe;
++
++        public TypeRecipeCombination(string name)
++        {
++            this.name = name;
++        }
++
++        protected bool Equals(TypeRecipeCombination other)
++        {
++            return name == other.name;
++        }
++
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj))
++            {
++                return false;
++            }
++
++            if (ReferenceEquals(this, obj))
++            {
++                return true;
++            }
++
++            if (obj.GetType() != this.GetType())
++            {
++                return false;
++            }
++
++            return Equals((TypeRecipeCombination) obj);
++        }
++
++        public override int GetHashCode()
++        {
++            return (name != null ? name.GetHashCode() : 0);
++        }
++    }
++}
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs b/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs
+new file mode 100644
+--- /dev/null	(date 1619786467434)
++++ b/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs	(date 1619786467434)
+@@ -0,0 +1,28 @@
++using UnityEditor;
++using UnityEngine;
++
++namespace Framework.Util
++{
++    public class ReadOnlyAttribute : PropertyAttribute
++    {
++    }
++
++    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
++    public class ReadOnlyDrawer : PropertyDrawer
++    {
++        public override float GetPropertyHeight(SerializedProperty property,
++            GUIContent label)
++        {
++            return EditorGUI.GetPropertyHeight(property, label, true);
++        }
++
++        public override void OnGUI(Rect position,
++            SerializedProperty property,
++            GUIContent label)
++        {
++            GUI.enabled = false;
++            EditorGUI.PropertyField(position, property, label, true);
++            GUI.enabled = true;
++        }
++    }
++}
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Framework.Pipeline.ThemeApplicator.Recipe;\r\n\r\nnamespace Framework.Pipeline.GameWorldObjects\r\n{\r\n    public class AreaConnection : AbstractGameWorldObject\r\n    {\r\n\r\n        public AreaConnection Twin { get; set; }\r\n        public Area Target { get; set; }\r\n        \r\n        public AreaConnection(IGeometry shape, GameWorldObjectRecipe recipe)\r\n        {\r\n            this.Shape = shape;\r\n            this.recipe = recipe;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs
+--- a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/AreaConnection.cs	(date 1619781900116)
+@@ -1,4 +1,5 @@
+ using Framework.Pipeline.ThemeApplicator.Recipe;
++using JetBrains.Annotations;
+ 
+ namespace Framework.Pipeline.GameWorldObjects
+ {
+@@ -8,10 +9,9 @@
+         public AreaConnection Twin { get; set; }
+         public Area Target { get; set; }
+         
+-        public AreaConnection(IGeometry shape, GameWorldObjectRecipe recipe)
++        public AreaConnection(IGeometry shape, string type = null) : base(shape, type)
+         {
+-            this.Shape = shape;
+-            this.recipe = recipe;
++            
+         }
+     }
+ }
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing Assets.Scripts.Framework.Pipeline.PipelineGuarantees;\r\nusing Framework.Pipeline;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.Geometry;\r\nusing Framework.Pipeline.Geometry.Interactors;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\nusing UnityEngine;\r\nusing Object = System.Object;\r\n\r\nnamespace Assets.Scripts.Framework.Pipeline.PipeLineSteps\r\n{\r\n    [GameWorldPlacedGuarantee]\r\n    [GameWorldRectangularGuarantee]\r\n    public class GameWorldPlacementStep : PipelineStep\r\n    {\r\n        public Vector2 dimensions;\r\n        public GameWorldObjectRecipe recipe;\r\n\r\n        public override Type[] RequiredGuarantees => new Type[0];\r\n        \r\n        public override GameWorld Apply(GameWorld world)\r\n        {\r\n            return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions), recipe));\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs b/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs
+--- a/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/PipeLineSteps/GameWorldPlacementStep.cs	(date 1619782148513)
+@@ -19,13 +19,12 @@
+     public class GameWorldPlacementStep : PipelineStep
+     {
+         public Vector2 dimensions;
+-        public GameWorldObjectRecipe recipe;
+ 
+         public override Type[] RequiredGuarantees => new Type[0];
+         
+         public override GameWorld Apply(GameWorld world)
+         {
+-            return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions), recipe));
++            return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions)));
+         }
+     }
+ }
+Index: Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Framework.Pipeline.ThemeApplicator.Recipe;\r\n\r\nnamespace Framework.Pipeline.GameWorldObjects\r\n{\r\n    public class MainPath : AbstractGameWorldObject\r\n    {\r\n        public MainPath(IGeometry shape, GameWorldObjectRecipe recipe = null)\r\n        {\r\n            this.Shape = shape;\r\n            this.recipe = recipe;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs
+--- a/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Pipeline/GameWorldObjects/MainPath.cs	(date 1619782047739)
+@@ -4,10 +4,8 @@
+ {
+     public class MainPath : AbstractGameWorldObject
+     {
+-        public MainPath(IGeometry shape, GameWorldObjectRecipe recipe = null)
++        public MainPath(IGeometry shape, string type = null) : base(shape, type)
+         {
+-            this.Shape = shape;
+-            this.recipe = recipe;
+         }
+     }
+ }
+\ No newline at end of file
+Index: Assets/Scripts/Framework/Cellular Automata/AreaCell.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Framework.Pipeline;\r\nusing Framework.Pipeline.GameWorldObjects;\r\nusing Framework.Pipeline.ThemeApplicator.Recipe;\r\n\r\npublic class AreaCell<CellState> : Area\r\n{\r\n    public Cell<CellState> Cell { get; set; }\r\n\r\n    public AreaCell(IGeometry shape, Cell<CellState> cell, GameWorldObjectRecipe recipe = null) : base(shape, recipe)\r\n    {\r\n        Cell = cell;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Cellular Automata/AreaCell.cs b/Assets/Scripts/Framework/Cellular Automata/AreaCell.cs
+--- a/Assets/Scripts/Framework/Cellular Automata/AreaCell.cs	(revision 9cfa5fece57da4421521086b64ed805ce62dca51)
++++ b/Assets/Scripts/Framework/Cellular Automata/AreaCell.cs	(date 1619782200944)
+@@ -6,7 +6,7 @@
+ {
+     public Cell<CellState> Cell { get; set; }
+ 
+-    public AreaCell(IGeometry shape, Cell<CellState> cell, GameWorldObjectRecipe recipe = null) : base(shape, recipe)
++    public AreaCell(IGeometry shape, Cell<CellState> cell, string type = null) : base(shape, type)
+     {
+         Cell = cell;
+     }
+Index: Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs.meta b/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs.meta
+new file mode 100644
+--- /dev/null	(date 1619786437761)
++++ b/Assets/Scripts/Framework/Util/Miscellanous/ReadOnlyAttribute.cs.meta	(date 1619786437761)
+@@ -0,0 +1,3 @@
++fileFormatVersion: 2
++guid: b93b7682de0d46c1907c6dec69ad0b2b
++timeCreated: 1619786437
+\ No newline at end of file

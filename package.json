@@ -1,0 +1,66 @@
+{
+  "name": "ch.i4ds.organicawild",
+  "version": "0.0.1",
+  "displayName": "Organica Wild",
+  "description": "Organica Wild as a Package\n\nCreate beatiful organica generated terrain with this amazing Unity Package.\nTo use any of demo's select the correct Samples.",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "keywords": [
+    "keyword1",
+    "keyword2",
+    "keyword3"
+  ],
+  "author": {
+    "name": "Unity",
+    "email": "unity@example.com",
+    "url": "https://www.unity3d.com"
+  },
+  "dependencies": {
+    "com.unity.inputsystem": "1.0.2",
+    "com.unity.cinemachine": "2.6.4"
+  },
+  "type": "library",
+  "files": [
+		"*.md",
+		"*.meta",
+		"*.asmdef",
+		"Samples~",
+		"External",
+		"Framework"
+	],
+  "samples": [
+        {
+            "displayName": "CellularAutomataSamples",
+            "description": "Contains Samples for how to use the Cellular Automata Interface",
+            "path": "Samples~/SampleCA"
+        },
+        {
+            "displayName": "PoissonDiskSamples",
+            "description": "Contains Samples for how to use the Poisson Disk Sampling Interface",
+            "path": "Samples~/SamplesPoissonDiskSampling"
+        },
+	{
+            "displayName": "PipelineSamples",
+            "description": "Contains Samples for how to use the Pipeline Interface",
+            "path": "Samples~/SamplesPipeline"
+        },
+	{
+            "displayName": "GrammarSamples",
+            "description": "Contains Samples for how to use the Graph Grammar and Shape Grammar Interface",
+            "path": "Samples~/SamplesGrammars"
+        },
+	{
+            "displayName": "SampleAssets",
+            "description": "Contains Samples Assets that also need to be imported to use other samples",
+            "path": "Samples~/SampleAssets"
+        },
+	{
+            "displayName": "EvolutionarySamples",
+            "description": "Contains Samples for how to use the Evolutionary Algorithm Interface",
+            "path": "Samples~/SamplesEvolutionary"
+        }
+   ]
+}

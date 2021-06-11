@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6dc7f4c6f83f44a81bcc4d6a70436c, type: 3}
+  m_Name: SnowyWorldBorderRecipe
+  m_EditorClassIdentifier: 
+  borderScale: {x: 2, y: 2}
+  borderMaterial: {fileID: 2100000, guid: c94ce1f5da03c524f95f242b1a055e5c, type: 2}
+  backGroundObjectsPrefab:
+  - {fileID: 1000011914158716, guid: 78af3a7aad589fa49b8fb946c9e57362, type: 3}
+  - {fileID: 1000011147454354, guid: 01d2dd5255c308a4db25dbb77d9f65ea, type: 3}
+  - {fileID: 1000012936420096, guid: a6dbabfd6d3c8cb47b7243b0b8723af2, type: 3}
+  - {fileID: 1000011937025076, guid: 0b94787e83d06de44ab9db821c2c0142, type: 3}
+  - {fileID: 1000011750255288, guid: af9ebdc546d59e04fa5f4cf6805cc187, type: 3}
+  - {fileID: 1000013472076366, guid: 3f9bc1a85199f7440a7dc65376e90332, type: 3}
+  prefabRadius: 2.5
