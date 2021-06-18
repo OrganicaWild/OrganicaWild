@@ -15,6 +15,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
     {
         public override Type[] RequiredGuarantees => new Type[] {typeof(LandmarksPlacedGuarantee)};
 
+        [Range(0,1)]
+        public float isConnected = 1;
+
         public override GameWorld Apply(GameWorld world)
         {
             List<AreaTypeAssignmentStep.TypedArea> areas =
@@ -43,6 +46,12 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     //add connections to spanning tree
                     foreach (OwPoint connection in connections.ToList())
                     {
+                        //only connect if it is actually 
+                        if (random.NextDouble() > isConnected)
+                        {
+                            continue;
+                        }
+                        
                         OwLine shortest = new OwLine(new Vector2(0, 0),
                             new Vector2(1000000, 1000000));
 
