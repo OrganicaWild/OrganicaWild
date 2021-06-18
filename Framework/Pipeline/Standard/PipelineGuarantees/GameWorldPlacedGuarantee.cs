@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Framework.Pipeline.PipelineGuarantees
 {
-    class GameWorldPlacedGuarantee : Attribute { }
+    public class GameWorldPlacedGuarantee : Attribute { }
 }
