@@ -1,9 +1,13 @@
 {
-    "name": "ch.i4ds.Framework",
+    "name": "Unity.OrganicaWild.Editor",
     "references": [
-        "GUID:daca5a0d082af5f45a9040a90e9e7dc7"
+        "GUID:9eecc1942b19526489dfedd091280404",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+        "GUID:0acc523941302664db1f4e527237feb3"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
