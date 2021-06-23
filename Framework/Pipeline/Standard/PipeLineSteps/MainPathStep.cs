@@ -15,8 +15,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
     {
         public override Type[] RequiredGuarantees => new Type[] {typeof(LandmarksPlacedGuarantee)};
 
-        [Range(0,1)]
-        public float isConnected = 1;
+        [Range(0, 1)] public float isConnected = 1;
 
         public override GameWorld Apply(GameWorld world)
         {
@@ -25,10 +24,17 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
             foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
             {
-                List<OwPoint> landmarks = typedArea.GetAllChildrenOfType<Landmark>().Select(x => new OwPoint(x.Shape.GetCentroid()))
+                bool isStartOrEnd = typedArea.Type == "start" || typedArea.Type == "end";
+                if (isStartOrEnd)
+                {
+                    Debug.Log("VAR");
+                }
+                
+                List<OwPoint> landmarks = typedArea.GetAllChildrenOfType<Landmark>()
+                    .Select(x => new OwPoint(x.Shape.GetCentroid()))
                     .ToList();
-                IEnumerable<OwPoint> connections =
-                    typedArea.GetAllChildrenOfType<AreaConnection>().Select(x => new OwPoint(x.Shape.GetCentroid()));
+                IEnumerable<AreaConnection> connections =
+                    typedArea.GetAllChildrenOfType<AreaConnection>();
 
                 if (landmarks.Any())
                 {
@@ -42,37 +48,40 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     {
                         typedArea.AddChild(new MainPath(mainPathLine, null));
                     }
-                    
+
                     //add connections to spanning tree
-                    foreach (OwPoint connection in connections.ToList())
+                    foreach (AreaConnection areaConnection in connections.ToList())
                     {
+                        Vector2 connection = areaConnection.Shape.GetCentroid();
                         //only connect if it is actually 
-                        if (random.NextDouble() > isConnected)
+                        if (random.NextDouble() > isConnected && !isStartOrEnd)
                         {
                             continue;
                         }
-                        
-                        OwLine shortest = new OwLine(new Vector2(0, 0),
-                            new Vector2(1000000, 1000000));
 
-                        foreach (OwPoint point in landmarks)
-                        {
-                            OwLine potentiallyNewShortes = new OwLine(connection.Position, point.Position);
-                            if (potentiallyNewShortes.Length() < shortest.Length())
-                            {
-                                shortest = potentiallyNewShortes;
-                            }
-                        }
+                        OwLine shortest = GetClosestLandmark(landmarks, connection);
 
-                        typedArea.AddChild(new MainPath(shortest, null));
+                        typedArea.AddChild(new MainPath(shortest));
+
+                        //add twin connection
+                        AreaConnection twinConnection = areaConnection.Twin;
+
+                        List<OwPoint> twinLandmarks = twinConnection.GetParent().GetAllChildrenOfType<Landmark>()
+                            .Select(landmark => new OwPoint(landmark.Shape.GetCentroid())).ToList();
+
+                        OwLine shortestTwin = GetClosestLandmark(twinLandmarks, twinConnection.Shape.GetCentroid());
+
+                        IGameWorldObject twinArea = twinConnection.GetParent();
+                        twinArea.AddChild(new MainPath(shortestTwin));
+
                     }
                 }
                 else
                 {
                     // if no landmarks simply create mst with only the connection points
                     List<OwPoint> points = new List<OwPoint>();
-                    points.AddRange(connections);
-                    
+                    points.AddRange(connections.Select(x => x.Shape as OwPoint));
+
                     List<OwLine> mainPathLines = MinimumSpanningTree.ByDistance(points);
 
                     //connect all connections by minimum spanning tree
@@ -80,11 +89,27 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     {
                         typedArea.AddChild(new MainPath(mainPathLine, null));
                     }
-                    
                 }
             }
 
             return world;
+        }
+
+        private static OwLine GetClosestLandmark(List<OwPoint> landmarks, Vector2 connection)
+        {
+            OwLine shortest = new OwLine(new Vector2(0, 0),
+                new Vector2(1000000, 1000000));
+
+            foreach (OwPoint point in landmarks)
+            {
+                OwLine potentiallyNewShortes = new OwLine(connection, point.Position);
+                if (potentiallyNewShortes.Length() < shortest.Length())
+                {
+                    shortest = potentiallyNewShortes;
+                }
+            }
+
+            return shortest;
         }
     }
 }

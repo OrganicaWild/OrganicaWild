@@ -94,7 +94,7 @@ namespace Framework.Pipeline.Geometry.Interactors
                 return new [] { new OwPoint(Vector2Extensions.Convert((PointD) intersection.Shared)) };
             }
 
-            return new [] { new OwInvalidGeometry() };
+            return Enumerable.Empty<IGeometry>();
         }
 
         public float CalculateDistance(OwLine first, OwLine second)
