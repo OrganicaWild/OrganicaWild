@@ -41,11 +41,12 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
 
         private void DistributeStates(Area parentArea)
         {
+            PolygonPolygonInteractor polygonInteractor = PolygonPolygonInteractor.Use();
             PolygonLineInteractor lineInteractor = PolygonLineInteractor.Use();
             PolygonPointInteractor pointInteractor = PolygonPointInteractor.Use();
 
             IEnumerable<TrialAreaCell> areaCells = parentArea.GetAllChildrenOfType<TrialAreaCell>();
-            IEnumerable<OwLine> mainPaths = parentArea.GetAllChildrenOfType<MainPath>().Select(path => (OwLine)path.Shape);
+            IEnumerable<OwPolygon> mainPaths = parentArea.GetAllChildrenOfType<MainPath>().Select(path => (OwPolygon)path.Shape);
             IEnumerable<OwPoint> landmarks = parentArea.GetAllChildrenOfType<Landmark>().Select(landmark => (OwPoint)landmark.Shape);
 
             foreach (TrialAreaCell areaCell in areaCells)
@@ -60,7 +61,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
                     .Where(area =>
                     {
                         OwPolygon polygon = (OwPolygon)area.Shape;
-                        return mainPaths.Any(path => lineInteractor.PartiallyContains(polygon, path));
+                        return mainPaths.Any(path => polygonInteractor.PartiallyContains(polygon, path));
                     });
 
                 foreach (TrialAreaCell pathArea in pathAreas) pathArea.Cell.CurrentState = initialPathAreaCellState;

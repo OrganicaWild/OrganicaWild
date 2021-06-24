@@ -18,6 +18,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
         public Material backgroundFloorMaterial;
 
         public float prefabRadius;
+        public float borderWidth = 0f;
     
         public override GameObject Cook(IGameWorldObject individual)
         {
@@ -39,7 +40,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
 
             foreach (Vector2 point in points)
             {
-                if (PolygonPointInteractor.Use().Contains(areaShape, new OwPoint(point)) && PolygonPointInteractor.Use().CalculateDistance(areaShape, new OwPoint(point)) > 0.25f)
+                if (PolygonPointInteractor.Use().Contains(areaShape, new OwPoint(point)) && PolygonPointInteractor.Use().CalculateDistance(areaShape, new OwPoint(point)) > borderWidth)
                 {
                     GameObject prefab =
                         backGroundObjectsPrefab[(int) (random.NextDouble() * (backGroundObjectsPrefab.Count()))];
