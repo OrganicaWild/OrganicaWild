@@ -64,7 +64,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                         typedArea.AddChild(new MainPath(shortest));
 
                         //add twin connection
-                        AreaConnection twinConnection = areaConnection.Twin;
+                        /*AreaConnection twinConnection = areaConnection.Twin;
 
                         List<OwPoint> twinLandmarks = twinConnection.GetParent().GetAllChildrenOfType<Landmark>()
                             .Select(landmark => new OwPoint(landmark.Shape.GetCentroid())).ToList();
@@ -72,7 +72,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                         OwLine shortestTwin = GetClosestLandmark(twinLandmarks, twinConnection.Shape.GetCentroid());
 
                         IGameWorldObject twinArea = twinConnection.GetParent();
-                        twinArea.AddChild(new MainPath(shortestTwin));
+                        twinArea.AddChild(new MainPath(shortestTwin));*/
 
                     }
                 }

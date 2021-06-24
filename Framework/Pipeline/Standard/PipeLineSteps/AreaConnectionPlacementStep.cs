@@ -22,20 +22,22 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         [Range(0, 1f)] public float secondaryPercentage = 1;
         public override Type[] RequiredGuarantees => new Type[] {typeof(AreaTypeAssignedGuarantee)};
 
-        HashSet<OwLine> allEdges = new HashSet<OwLine>();
-        Dictionary<OwLine, AreaConnection> placedConnection = new Dictionary<OwLine, AreaConnection>();
+        private Dictionary<OwLine, AreaConnection> placedConnection = new Dictionary<OwLine, AreaConnection>();
+        private List<Area> areas;
+        private List<Tuple<int, int>> connectionEdges;
 
         public override GameWorld Apply(GameWorld world)
         {
-            List<AreaTypeAssignmentStep.TypedArea> areas =
-                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().ToList();
-
+            areas =
+                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().Select(area => area as Area)
+                    .ToList();
+            connectionEdges = new List<Tuple<int, int>>();
 
             //add basic mst for connecting the areas
             List<OwPoint> centers = new List<OwPoint>();
-            foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
+            foreach (Area area in areas)
             {
-                Vector2 center = typedArea.Shape.GetCentroid();
+                Vector2 center = area.Shape.GetCentroid();
                 centers.Add(new OwPoint(center));
             }
 
@@ -43,9 +45,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
             foreach (OwLine mstLine in mstLines)
             {
-                foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
+                foreach (Area area in areas)
                 {
-                    OwPolygon shape = typedArea.Shape as OwPolygon;
+                    OwPolygon shape = area.Shape as OwPolygon;
                     List<OwLine> edges = shape.GetLines();
                     foreach (OwLine edge in edges)
                     {
@@ -53,74 +55,118 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                         //edge found
                         if (intersects.Any())
                         {
-                            AddConnection(edge, typedArea);
+                            if (!placedConnection.ContainsKey(edge))
+                            {
+                                AddBothConnections(edge, area);
+                            }
                         }
                     }
                 }
             }
 
-            if (!addSecondaryConnections) return world;
-            
-            //Add some more connection to create cycles
-            foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
+            if (addSecondaryConnections)
             {
-                OwPolygon shape = typedArea.Shape as OwPolygon;
-                List<OwLine> lines = shape.GetLines();
-                foreach (OwLine edge in lines)
+                //Add some more connection to create cycles
+                foreach (Area area in areas)
                 {
-                    AddConnection(edge, typedArea);
+                    OwPolygon shape = area.Shape as OwPolygon;
+                    List<OwLine> lines = shape.GetLines();
+
+                    foreach (OwLine edge in lines)
+                    {
+                        //if the mst has not already added this a connection on this edge --> potentially add one here
+                        if (!placedConnection.ContainsKey(edge))
+                        {
+                            //probability check
+                            if (random.NextDouble() < secondaryPercentage)
+                            {
+                                AddBothConnections(edge, area);
+                            }
+                        }
+                    }
                 }
             }
+
+            UnionFind uf = new UnionFind(areas.Count);
+            int cycles = 0;
+
+            foreach ((int index0, int index1) in connectionEdges)
+            {
+                if (uf.Connected(index0, index1))
+                {
+                    cycles++;
+                }
+
+                uf.Union(index0, index1);
+            }
+
+            Debug.Log($"Cycles: {cycles}");
 
             return world;
         }
 
-        private void AddConnection(OwLine edge, AreaTypeAssignmentStep.TypedArea typedArea, bool secondary = false)
+        private void AddBothConnections(OwLine edge, Area areaOfEdge)
         {
-            //search if we have already added a connection in this line
-            OwLine edgeWithConnection = allEdges.FirstOrDefault(line =>
-                line.Equals(edge) || line.Equals(new OwLine(edge.End, edge.Start)));
-            //if so we do not add a new one but add the reference to this area aswell
-            if (edgeWithConnection != null)
+            Vector2 a = edge.Start;
+            Vector2 b = edge.End;
+
+            //connection function based on both vertices
+            Vector2 connectionPoint = Vector2.Lerp(a, b,
+                (float) random.NextDouble() * (1f - 2 * connectionClosenessToVoronoiVertex) +
+                connectionClosenessToVoronoiVertex);
+
+            if (connectionPoint.x < minDimensions.x || connectionPoint.y < minDimensions.y ||
+                connectionPoint.x > maxDimensions.x || connectionPoint.y > maxDimensions.y)
             {
-                AreaConnection prevPlacedConnection = placedConnection[edgeWithConnection];
-                AreaConnection twinConnection = new AreaConnection(prevPlacedConnection.Shape, null);
-                prevPlacedConnection.Twin = twinConnection;
-                prevPlacedConnection.Target = typedArea;
-                twinConnection.Target = prevPlacedConnection.GetParent() as Area;
-                twinConnection.Twin = prevPlacedConnection;
-                typedArea.AddChild(twinConnection);
+                return;
             }
-            else
-            {
-                //if the connection is secondary and is not already placed in the other region, only add if above the percentage
-                if (secondary && random.NextDouble() < secondaryPercentage)
-                {
-                    return;
-                }
-                //if this edge does not have a connection, we make a new one and place it
-                Vector2 a = edge.Start;
-                Vector2 b = edge.End;
 
-                //connection function based on both vertices
-                Vector2 connectionPoint = Vector2.Lerp(a, b,
-                    (float) random.NextDouble() * (1f - 2 * connectionClosenessToVoronoiVertex) +
-                    connectionClosenessToVoronoiVertex);
+            AreaConnection connection = new AreaConnection(new OwPoint(connectionPoint));
+            areaOfEdge.AddChild(connection);
 
-                //min and max Dimensions specify at what dimensions of the board we do not add any connections anymore.
-                //Mainly used to handle the borders of the map
-                if (connectionPoint.x < minDimensions.x || connectionPoint.y < minDimensions.y ||
-                    connectionPoint.x > maxDimensions.x || connectionPoint.y > maxDimensions.y)
-                {
-                    return;
-                }
+            //AddTwin
+            (OwLine twinEdge, Area twinArea) = SearchForTwinEdge(areas, edge, areaOfEdge);
 
-                AreaConnection connection = new AreaConnection(new OwPoint(connectionPoint), null);
-                typedArea.AddChild(connection);
+            AreaConnection twinConnection = new AreaConnection(new OwPoint(connectionPoint));
+            twinConnection.Twin = connection;
+            connection.Twin = twinConnection;
+            twinConnection.Target = areaOfEdge;
+            connection.Target = twinArea;
+            twinArea.AddChild(twinConnection);
 
-                allEdges.Add(edge);
+            int indexArea0 = areas.IndexOf(areaOfEdge);
+            int indexArea1 = areas.IndexOf(twinArea);
+
+            connectionEdges.Add(new Tuple<int, int>(indexArea0, indexArea1));
+
+            if (!placedConnection.ContainsKey(edge))
                 placedConnection.Add(edge, connection);
+            if (!placedConnection.ContainsKey(twinEdge))
+                placedConnection.Add(twinEdge, twinConnection);
+        }
+
+        private Tuple<OwLine, Area> SearchForTwinEdge(List<Area> areas, OwLine edge, Area areaOfEdge)
+        {
+            foreach (Area area in areas)
+            {
+                //if edge where to be found in same area it is not the twin but the edge itself
+                if (areaOfEdge == area)
+                {
+                    continue;
+                }
+
+                foreach (OwLine potentialTwinEdge in (area.Shape as OwPolygon).GetLines())
+                {
+                    //if reference not the same, check if the coordinates fit for twin
+                    if (edge.Equals(new OwLine(potentialTwinEdge.End, potentialTwinEdge.Start)) ||
+                        edge.Equals(potentialTwinEdge))
+                    {
+                        return new Tuple<OwLine, Area>(potentialTwinEdge, area);
+                    }
+                }
             }
+
+            return null;
         }
     }
 }
