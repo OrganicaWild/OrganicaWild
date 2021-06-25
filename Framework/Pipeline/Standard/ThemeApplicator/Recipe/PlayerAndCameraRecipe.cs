@@ -32,7 +32,6 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
                
                 Vector2 pos2d = poly.GetCentroid();
                 //move camera to position;
-                Vector3 pos3d = new Vector3(pos2d.x,  pos2d.y);
                 GameObject instantiated = GameObjectCreation.InstantiatePrefab (cameraAndPlayerRig, pos2d);
                 instantiated.transform.position += basePosition;
                 instantiated.transform.parent = mesh.transform;
