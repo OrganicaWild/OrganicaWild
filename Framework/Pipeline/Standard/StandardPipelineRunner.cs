@@ -27,7 +27,7 @@ namespace Framework.Pipeline.Standard
             else
             {
                 Random = new Random(seed.Value);
-                Seed = seed.Value;
+                Seed = (int) seed;
             }
         }
         

@@ -13,7 +13,7 @@ namespace Framework.Pipeline.Standard
         private float minimalDebugColorBrightness = 0.3f;
     
         public StandardPipelineRunner standardPipelineRunner;
-        public int Seed { get; set; }
+        public int Seed;
         public bool HasError { get; private set; }
         public string ErrorText { get; private set; }
     
