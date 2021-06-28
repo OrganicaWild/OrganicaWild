@@ -70,6 +70,7 @@ namespace Framework.Pipeline.Standard
             }
 
             callback(world);
+            EncounteredError = false;
         }
 
         public GameWorld ExecuteBlocking()
