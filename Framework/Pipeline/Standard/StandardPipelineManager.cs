@@ -43,6 +43,10 @@ namespace Framework.Pipeline.Standard
             if (Application.isPlaying)
             {
                 yield return StartCoroutine(standardPipelineRunner.Execute(gameWorld => GameWorld = gameWorld));
+                if (StandardPipelineRunner.EncounteredError)
+                {
+                    yield break;
+                }
             }
             else
             {

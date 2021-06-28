@@ -12,9 +12,11 @@ namespace Framework.Pipeline.Standard
     {
         public Random Random { get; }
         public int Seed { get; }
-        
+
+        public static bool EncounteredError { get; private set; }
+
         private readonly IList<PipelineStep> executionPipeline;
-        
+
         public StandardPipelineRunner(int? seed = null)
         {
             executionPipeline = new List<PipelineStep>();
@@ -30,7 +32,7 @@ namespace Framework.Pipeline.Standard
                 Seed = (int) seed;
             }
         }
-        
+
         public void AddStep(PipelineStep step)
         {
             PipelineStep previous = executionPipeline.LastOrDefault();
@@ -47,15 +49,24 @@ namespace Framework.Pipeline.Standard
                 throw new IllegalExecutionOrderException();
             }
         }
-        
+
         public IEnumerator Execute(Action<GameWorld> callback)
         {
             GameWorld world = null;
-            
+
             foreach (PipelineStep step in executionPipeline)
             {
                 yield return null;
-                world = step.Apply(world);
+                try
+                {
+                    world = step.Apply(world);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                    EncounteredError = true;
+                    yield break;
+                }
             }
 
             callback(world);
@@ -64,7 +75,7 @@ namespace Framework.Pipeline.Standard
         public GameWorld ExecuteBlocking()
         {
             GameWorld world = null;
-            
+
             foreach (PipelineStep step in executionPipeline)
             {
                 world = step.Apply(world);
