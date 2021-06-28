@@ -179,7 +179,7 @@ namespace Framework.Pipeline.Geometry
                     catch (Exception e)
                     {
                         //if it is is not a hole reverse back the polygon
-                        Console.WriteLine(e);
+                        //Console.WriteLine(e);
                         possibleHole.Outer.Reverse();
                     }
                 }

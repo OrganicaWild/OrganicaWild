@@ -33,7 +33,7 @@ namespace Polybool.Net.Logic
 
             foreach(var s in union)
             {
-                Console.WriteLine("{0},{1} -> {2},{3}", s.Start.X, s.Start.Y, s.End.X, s.End.Y);
+                //Console.WriteLine("{0},{1} -> {2},{3}", s.Start.X, s.Start.Y, s.End.X, s.End.Y);
             }
 
             return new Polygon(PolyBool.SegmentChainer(union), first.Inverted || second.Inverted);
@@ -63,7 +63,7 @@ namespace Polybool.Net.Logic
 
             foreach (var s in intersection)
             {
-                Console.WriteLine("{0},{1} -> {2},{3}", s.Start.X, s.Start.Y, s.End.X, s.End.Y);
+                //Console.WriteLine("{0},{1} -> {2},{3}", s.Start.X, s.Start.Y, s.End.X, s.End.Y);
             }
             return new Polygon(PolyBool.SegmentChainer(intersection), first.Inverted && second.Inverted);
         }
