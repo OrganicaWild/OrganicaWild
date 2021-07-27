@@ -22,12 +22,13 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         [Range(0, 1f)] public float secondaryPercentage = 1;
         public override Type[] RequiredGuarantees => new Type[] {typeof(AreaTypeAssignedGuarantee)};
 
-        private Dictionary<OwLine, AreaConnection> placedConnection = new Dictionary<OwLine, AreaConnection>();
+        private Dictionary<OwLine, AreaConnection> placedConnection;
         private List<Area> areas;
         private List<Tuple<int, int>> connectionEdges;
 
         public override GameWorld Apply(GameWorld world)
         {
+            placedConnection = new Dictionary<OwLine, AreaConnection>();
             areas =
                 world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().Select(area => area as Area)
                     .ToList();

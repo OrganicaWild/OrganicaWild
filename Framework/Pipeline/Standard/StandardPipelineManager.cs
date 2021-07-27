@@ -9,14 +9,14 @@ namespace Framework.Pipeline.Standard
     public class StandardPipelineManager : MonoBehaviour
     {
         private GameWorld GameWorld { get; set; }
-    
+
         private float minimalDebugColorBrightness = 0.3f;
-    
+
         public StandardPipelineRunner standardPipelineRunner;
         public int Seed;
         public bool HasError { get; private set; }
         public string ErrorText { get; private set; }
-    
+
         private GameObject builtWorld;
         private StandardThemeApplicator standardThemeApplicator;
 
@@ -26,20 +26,9 @@ namespace Framework.Pipeline.Standard
             {
                 yield break;
             }
-            
-            //clean up old level
-            List<GameObject> children = new List<GameObject>();
-            foreach (Transform child in transform)
-            {
-                children.Add(child.gameObject);
-            }
 
-            foreach (GameObject child in children)
-            {
-                DestroyImmediate(child);
-                yield return null;
-            }
-            
+            ClearOldLevel();
+
             if (Application.isPlaying)
             {
                 yield return StartCoroutine(standardPipelineRunner.Execute(gameWorld => GameWorld = gameWorld));
@@ -52,51 +41,41 @@ namespace Framework.Pipeline.Standard
             {
                 GameWorld = standardPipelineRunner.ExecuteBlocking();
             }
-            
+
             //only apply theme if there is a ThemeApplicator as a Component
             standardThemeApplicator = GetComponent<StandardThemeApplicator>();
             if (standardThemeApplicator == null)
             {
                 yield break;
             }
-        
+
             //apply theme
             yield return StartCoroutine(standardThemeApplicator.ApplyTheme(GameWorld));
-        } 
-        
+        }
+
         public void GenerateBlocking()
         {
             if (HasError)
             {
                 return;
             }
-            
-            //clean up old level
-            List<GameObject> children = new List<GameObject>();
-            foreach (Transform child in transform)
-            {
-                children.Add(child.gameObject);
-            }
 
-            foreach (GameObject child in children)
-            {
-                DestroyImmediate(child);
-            }
-            
+            ClearOldLevelEditor();
+
             GameWorld = standardPipelineRunner.ExecuteBlocking();
-            
+
             //only apply theme if there is a ThemeApplicator as a Component
             standardThemeApplicator = GetComponent<StandardThemeApplicator>();
             if (standardThemeApplicator == null)
             {
-              return;
+                return;
             }
-        
+
             //apply theme
             standardThemeApplicator.manager = this;
             standardThemeApplicator.ApplyThemeBlocking(GameWorld);
-        } 
-        
+        }
+
         public void Setup()
         {
             standardPipelineRunner = new StandardPipelineRunner(Seed);
@@ -120,9 +99,51 @@ namespace Framework.Pipeline.Standard
             }
         }
 
+        public void CheckIfAllStepsValid()
+        {
+            StandardPipelineRunner somePipelineRunner = new StandardPipelineRunner(Seed);
+
+            PipelineStep[] allSteps = GetComponents<PipelineStep>();
+            try
+            {
+                foreach (PipelineStep step in allSteps)
+                {
+                    somePipelineRunner.AddStep(step);
+                }
+
+                HasError = false;
+                ErrorText = "";
+            }
+            catch (IllegalExecutionOrderException e)
+            {
+                HasError = true;
+                ErrorText = e.Message;
+            }
+        }
+
+        private void ClearOldLevelEditor()
+        {
+            foreach (Transform child in transform)
+            {
+                DestroyImmediate(child.gameObject);
+            }
+
+            GameWorld = null;
+        }
+
+        public void ClearOldLevel()
+        {
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            GameWorld = null;
+        }
+
         private void Update()
         {
-            Setup();
+           CheckIfAllStepsValid();
         }
 
         private void OnDrawGizmos()
