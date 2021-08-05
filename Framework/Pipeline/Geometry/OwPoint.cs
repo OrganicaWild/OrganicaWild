@@ -30,7 +30,7 @@ namespace Framework.Pipeline.Geometry
 
         public void DrawDebug(Color debugColor)
         {
-            const float offset = 0.5f;
+            const float offset = 1f;
    
             Gizmos.color = debugColor;
             Vector3 coord = new Vector3(Position.x, 0, Position.y);
