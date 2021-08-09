@@ -12,11 +12,13 @@ namespace Framework.Pipeline.GameWorldObjects
         /// This is used in the ThemeApplicator to set a recipe for this Type.
         /// </summary>
         string Type { get; set; }
-
+        
         /// <summary>
         /// IGeometry Instance defining the geometric shape of this IGameWorldObject.
         /// </summary>
-        IGeometry Shape { get; set; }
+        IGeometry GetShape();
+
+        void SetShape(IGeometry geometry);
 
         IGameWorldObject this[int index] { get; set; }
 
@@ -30,7 +32,7 @@ namespace Framework.Pipeline.GameWorldObjects
 
         IEnumerable<T> GetAllChildrenOfType<T>();
 
-        bool HasAnyChildrenOfType<T>();
+        bool HasAnyChildrenOfType<TX>();
 
         void ClearChildren();
 
@@ -48,6 +50,6 @@ namespace Framework.Pipeline.GameWorldObjects
 
         void SetParent(IGameWorldObject parent);
 
-        IGameWorldObject Copy(Dictionary<int,IGameWorldObject> identityDictionary);
+        IGameWorldObject Copy(Dictionary<int, object> identityDictionary);
     }
 }

@@ -46,8 +46,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             PolygonPointInteractor pointInteractor = PolygonPointInteractor.Use();
 
             IEnumerable<TrialAreaCell> areaCells = parentArea.GetAllChildrenOfType<TrialAreaCell>();
-            IEnumerable<OwPolygon> mainPaths = parentArea.GetAllChildrenOfType<MainPath>().Select(path => (OwPolygon)path.Shape);
-            IEnumerable<OwPoint> landmarks = parentArea.GetAllChildrenOfType<Landmark>().Select(landmark => (OwPoint)landmark.Shape);
+            IEnumerable<OwPolygon> mainPaths = parentArea.GetAllChildrenOfType<MainPath>().Select(path => (OwPolygon)path.GetShape());
+            IEnumerable<OwPoint> landmarks = parentArea.GetAllChildrenOfType<Landmark>().Select(landmark => (OwPoint)landmark.GetShape());
 
             foreach (TrialAreaCell areaCell in areaCells)
             {
@@ -60,7 +60,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
                 IEnumerable<TrialAreaCell> pathAreas = areaCells
                     .Where(area =>
                     {
-                        OwPolygon polygon = (OwPolygon)area.Shape;
+                        OwPolygon polygon = area.GetShape();
                         return mainPaths.Any(path => polygonInteractor.PartiallyContains(polygon, path));
                     });
 
@@ -72,7 +72,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
                 IEnumerable<TrialAreaCell> landmarkAreas = areaCells
                     .Where(area =>
                     {
-                        OwPolygon polygon = (OwPolygon)area.Shape;
+                        OwPolygon polygon = area.GetShape();
                         return landmarks.Any(landmark => pointInteractor.PartiallyContains(polygon, landmark));
                     });
                 foreach (TrialAreaCell landmarkArea in landmarkAreas)

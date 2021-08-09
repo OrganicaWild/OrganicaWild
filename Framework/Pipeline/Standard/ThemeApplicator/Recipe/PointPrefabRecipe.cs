@@ -13,7 +13,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
 
         public override GameObject Cook(IGameWorldObject individual)
         {
-            Vector2 point = individual.Shape.GetCentroid();
+            Vector2 point = individual.GetShape().GetCentroid();
             GameObject landmarkPrefab = landmarkPrefabs[(int) (random.NextDouble() * (landmarkPrefabs.Length))];
             GameObject instantiate = GameObjectCreation.InstantiatePrefab(landmarkPrefab, point);
             instantiate.transform.rotation = landmarkPrefab.transform.rotation ;

@@ -176,7 +176,7 @@ namespace Framework.Pipeline.Geometry
                         //if it is a hole remove it from the rest of polygons to be meshed
                         polysToMesh.Remove(possibleHole);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         //if it is is not a hole reverse back the polygon
                         //Console.WriteLine(e);

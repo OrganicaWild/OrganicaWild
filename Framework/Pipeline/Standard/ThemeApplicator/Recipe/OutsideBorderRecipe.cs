@@ -22,7 +22,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
 
         public override GameObject Cook(IGameWorldObject individual)
         {
-            OwPolygon worldBorder = individual.Shape as OwPolygon;
+            OwPolygon worldBorder = individual.GetShape() as OwPolygon;
             OwPolygon outerWorldPerimeter = new OwPolygon(worldBorder.representation);
             outerWorldPerimeter.ScaleFromCentroid(borderScale);
             outerWorldPerimeter = PolygonPolygonInteractor.Use().Difference(outerWorldPerimeter, worldBorder);

@@ -13,8 +13,10 @@ namespace Framework.Pipeline.GameWorldFunctions
         /// The Connection is placed on the edge based on a specified positionFunction.
         ///
         /// example of a position Function:
+        /// desired result: connection in the middle 
         /// a              b
         /// *------X-------*
+        /// function code:
         /// positionFunction = (a,b) => Vector2.Lerp(a,b,0.5f);
         ///
         /// If areas are provided the function adds a twin if in any of the provided areas a twin edge can be found.
@@ -57,9 +59,18 @@ namespace Framework.Pipeline.GameWorldFunctions
             
             if (areas != null)
             {
-                //AddTwin
-                (OwLine twinEdge, Area twinArea) = SearchForTwinEdge(areas, edge, areaOfEdge);
+                //search for twin edge
+                Tuple<OwLine, Area> result = SearchForTwinEdge(areas, edge, areaOfEdge);
 
+                OwLine twinEdge = result.Item1;
+                Area twinArea = result.Item2;
+                
+                //if no
+                if (twinEdge == null)
+                {
+                    return;
+                }
+                
                 AreaConnection twinConnection = new AreaConnection(new OwPoint(connectionPoint));
                 twinConnection.Twin = connection;
                 connection.Twin = twinConnection;
@@ -96,7 +107,7 @@ namespace Framework.Pipeline.GameWorldFunctions
                     continue;
                 }
 
-                foreach (OwLine potentialTwinEdge in (area.Shape as OwPolygon).GetLines())
+                foreach (OwLine potentialTwinEdge in area.GetShape().GetLines())
                 {
                     //if reference not the same, check if the coordinates fit for twin
                     if (edge.Equals(new OwLine(potentialTwinEdge.End, potentialTwinEdge.Start)) ||
@@ -107,7 +118,7 @@ namespace Framework.Pipeline.GameWorldFunctions
                 }
             }
 
-            return null;
+            return new Tuple<OwLine, Area>(null, null);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
         
         public override GameObject Cook(IGameWorldObject individual)
         {
-            OwPolygon areaShape = individual.Shape as OwPolygon;
+            OwPolygon areaShape = individual.GetShape() as OwPolygon;
             GameObject mesh;
             try
             {

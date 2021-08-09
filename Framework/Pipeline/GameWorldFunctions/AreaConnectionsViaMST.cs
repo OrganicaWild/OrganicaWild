@@ -31,7 +31,7 @@ namespace Framework.Pipeline.GameWorldFunctions
             List<OwPoint> centers = new List<OwPoint>();
             foreach (Area area in areas)
             {
-                Vector2 center = area.Shape.GetCentroid();
+                Vector2 center = area.GetShape().GetCentroid();
                 centers.Add(new OwPoint(center));
             }
 
@@ -41,7 +41,7 @@ namespace Framework.Pipeline.GameWorldFunctions
             {
                 foreach (Area area in areas)
                 {
-                    OwPolygon shape = area.Shape as OwPolygon;
+                    OwPolygon shape = area.GetShape();
                     List<OwLine> edges = shape.GetLines();
                     foreach (OwLine edge in edges)
                     {

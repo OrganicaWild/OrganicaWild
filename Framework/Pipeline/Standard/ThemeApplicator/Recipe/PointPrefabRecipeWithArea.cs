@@ -18,7 +18,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
         public override GameObject Cook(IGameWorldObject individual)
         {
             
-            OwPolygon areaShape = individual.Shape as OwPolygon;
+            OwPolygon areaShape = individual.GetShape() as OwPolygon;
             GameObject mesh;
             try
             {
@@ -30,7 +30,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
                 mesh = new GameObject();
             }
            
-            Vector2 point = individual.Shape.GetCentroid();
+            Vector2 point = individual.GetShape().GetCentroid();
             GameObject landmarkPrefab = landmarkPrefabs[(int) (random.NextDouble() * (landmarkPrefabs.Length))];
             GameObject instantiate = GameObjectCreation.InstantiatePrefab(landmarkPrefab, point);
             instantiate.transform.rotation = landmarkPrefab.transform.rotation ;

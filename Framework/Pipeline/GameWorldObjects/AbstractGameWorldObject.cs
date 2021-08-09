@@ -1,21 +1,40 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
-    public abstract class AbstractGameWorldObject : IGameWorldObject
+    public abstract class AbstractGameWorldObject<TGeometry> : IGameWorldObject where TGeometry : IGeometry
     {
-        public string Type { get; set; }
-        public IGeometry Shape { get; set; }
+        private TGeometry shape;
 
+        public string Type { get; set; }
+        
         private IGameWorldObject parent;
 
-        public AbstractGameWorldObject(IGeometry shape, string type = null)
+        public AbstractGameWorldObject(TGeometry shape, string type = null)
         {
-            this.Shape = shape;
-            this.Type = type;
+            this.shape = shape;
+            Type = type;
             children = new List<IGameWorldObject>();
+        }
+
+        public TGeometry GetShape()
+        {
+            return shape;
+        }
+
+        IGeometry IGameWorldObject.GetShape()
+        {
+            return shape;
+        }
+
+        public void SetShape(IGeometry geometry)
+        {
+            if (geometry is TGeometry castGeometry)
+            {
+                shape = castGeometry;
+            }
         }
 
         public IGameWorldObject this[int index]
@@ -54,7 +73,7 @@ namespace Framework.Pipeline.GameWorldObjects
         {
             return children.SelectMany(child => child.GetChildren());
         }
-
+        
         public IEnumerable<T> GetAllChildrenOfType<T>()
         {
             return children.Where(child => child is T).Select(x => x is T ? (T) x : default);
@@ -94,9 +113,9 @@ namespace Framework.Pipeline.GameWorldObjects
             this.parent = parent;
         }
 
-        public abstract IGameWorldObject Copy(Dictionary<int, IGameWorldObject> identityDictionary);
+        public abstract IGameWorldObject Copy(Dictionary<int, object> identityDictionary);
 
-        protected void CopyChildren(ref IGameWorldObject copy, Dictionary<int, IGameWorldObject> identityDictionary)
+        protected void CopyChildren(ref IGameWorldObject copy, Dictionary<int, object> identityDictionary)
         {
             //copy children
             foreach (IGameWorldObject child in GetChildren())

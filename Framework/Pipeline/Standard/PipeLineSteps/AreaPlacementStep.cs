@@ -30,7 +30,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         public override GameWorld Apply(GameWorld world)
         {
             // Generate voronoi cells
-            List<Vector2> outermostNodes = (world.Root.Shape as OwPolygon)?.GetPoints();
+            List<Vector2> outermostNodes = (world.Root.GetShape() as OwPolygon)?.GetPoints();
             RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
             IEnumerable<Vector2> points = PoissonDiskSampling
                 .GeneratePoints(poissonDiskRadius, (float) rect.Width, (float) rect.Height, samplesBeforeRejection, random)
@@ -46,7 +46,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                             new Vector2((float) point.X, (float) point.Y))
                         .ToArray()));
             
-            IEnumerable<OwPolygon> areaPolygons = voronoiPolygons.Select(voronoiPolygon => PolygonPolygonInteractor.Use().Intersection(voronoiPolygon, world.Root.Shape as OwPolygon));
+            IEnumerable<OwPolygon> areaPolygons = voronoiPolygons.Select(voronoiPolygon => PolygonPolygonInteractor.Use().Intersection(voronoiPolygon, world.Root.GetShape() as OwPolygon));
             IEnumerable<Area> areas = areaPolygons.Select(polygon => new Area(polygon, null));
 
 

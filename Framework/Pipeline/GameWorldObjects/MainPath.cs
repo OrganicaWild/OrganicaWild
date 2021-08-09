@@ -2,19 +2,19 @@ using System.Collections.Generic;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
-    public class MainPath : AbstractGameWorldObject
+    public class MainPath : AbstractGameWorldObject<IGeometry>
     {
         public MainPath(IGeometry shape, string type = null) : base(shape, type)
         {
         }
 
-        public override IGameWorldObject Copy(Dictionary<int, IGameWorldObject> identityDictionary)
+        public override IGameWorldObject Copy(Dictionary<int, object> identityDictionary)
         {
             if (identityDictionary.ContainsKey(GetHashCode()))
             {
-                return identityDictionary[GetHashCode()];
+                return (IGameWorldObject) identityDictionary[GetHashCode()];
             }
-            IGameWorldObject copy = new MainPath(Shape.Copy(), Type);
+            IGameWorldObject copy = new MainPath(GetShape().Copy(), Type);
             CopyChildren(ref copy, identityDictionary);
             identityDictionary.Add(GetHashCode(), copy);
             return (MainPath) copy;

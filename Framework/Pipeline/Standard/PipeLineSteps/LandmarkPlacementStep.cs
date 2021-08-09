@@ -33,29 +33,29 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
         public override GameWorld Apply(GameWorld world)
         {
-            List<AreaTypeAssignmentStep.TypedArea> areas =
-                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().ToList();
+            List<Area> areas =
+                world.Root.GetAllChildrenOfType<Area>().ToList();
 
-            foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
+            foreach (Area area in areas)
             {
                 Vector2 rectangleSize = new Vector2(5, 5);
-                OwCircle circle0 = new OwCircle(typedArea.Shape.GetCentroid(), 5f, 8);
-                OwCircle circle1 = new OwCircle(typedArea.Shape.GetCentroid()+ new Vector2(2,2), 5f, 8);
+                OwCircle circle0 = new OwCircle(area.GetShape().GetCentroid(), 5f, 8);
+                OwCircle circle1 = new OwCircle(area.GetShape().GetCentroid()+ new Vector2(2,2), 5f, 8);
                 OwPolygon result = PolygonPolygonInteractor.Use().Union(circle0, circle1);
                 
                 //start Area
-                if (typedArea.AreaType == -1)
+                if (area.Type == "startArea")
                 {
                     //add landmark at centroid
-                    typedArea.AddChild(new Landmark(result, "Spawn"));
+                    area.AddChild(new Landmark(result, "Spawn"));
                     continue;
                 }
 
                 //end area
-                if (typedArea.AreaType == int.MaxValue)
+                if (area.Type == "endArea")
                 {
                     //add landmark at centroid
-                    typedArea.AddChild(new Landmark(result, "Goal"));
+                    area.AddChild(new Landmark(result, "Goal"));
                     continue;
                 }
 
@@ -66,14 +66,14 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     int numberOfLandmarks = (int) (random.NextDouble() * (maxLandmarks - minLandmarks) + minLandmarks);
                     List<OwPoint> placedPoints = new List<OwPoint>();
 
-                    OwPolygon areaShape = typedArea.Shape as OwPolygon;
+                    OwPolygon areaShape = area.GetShape();
                     OwPolygon scaledPolygon = new OwPolygon(areaShape.representation);
                     scaledPolygon.ScaleFromCentroid(new Vector2(1 - freeSpaceInsideAtBorder,
                         1 - freeSpaceInsideAtBorder));
 
                     if (addDebugScaledInnerArea)
                     {
-                        typedArea.AddChild(new Area(scaledPolygon, null));
+                        area.AddChild(new Area(scaledPolygon, null));
                     }
 
                     for (int i = 0; i < numberOfLandmarks; i++)
@@ -86,7 +86,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                         // passing a function via constructor as we planned seems kinda hard . ngl
                         do
                         {
-                            potentialLandMarkPoint = CreatePotentialLandMarkPoint(typedArea);
+                            potentialLandMarkPoint = CreatePotentialLandMarkPoint(area);
 
                             //if any of the already added points are too close, consider this points as too close
                             isTooClose = placedPoints.Sum(point =>
@@ -107,7 +107,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                             // search for new point without the distance constraint
                             do
                             {
-                                potentialLandMarkPoint = CreatePotentialLandMarkPoint(typedArea);
+                                potentialLandMarkPoint = CreatePotentialLandMarkPoint(area);
                                 isInside = PolygonPointInteractor.Use().Contains(scaledPolygon, potentialLandMarkPoint);
                             } while (!isInside);
 
@@ -120,7 +120,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                         }
 
                         //add landmark
-                        typedArea.AddChild(new Landmark(potentialLandMarkPoint, "genericLandmark"));
+                        area.AddChild(new Landmark(potentialLandMarkPoint, "genericLandmark"));
                         placedPoints.Add(potentialLandMarkPoint);
                     }
                 }
@@ -129,7 +129,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             return world;
         }
 
-        private OwPoint CreatePotentialLandMarkPoint(AreaTypeAssignmentStep.TypedArea typedArea)
+        private OwPoint CreatePotentialLandMarkPoint(Area area)
         {
             OwPoint potentialLandMarkPoint;
             //generate vector with specified length into random direction
@@ -142,7 +142,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                          minDistanceFromCenter);
             fromCentroidPos *= distanceFromCenter;
 
-            potentialLandMarkPoint = new OwPoint(typedArea.Shape.GetCentroid() + fromCentroidPos);
+            potentialLandMarkPoint = new OwPoint(area.GetShape().GetCentroid() + fromCentroidPos);
             return potentialLandMarkPoint;
         }
     }

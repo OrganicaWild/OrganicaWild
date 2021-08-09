@@ -23,16 +23,16 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
         public override GameWorld Apply(GameWorld world)
         {
-            List<AreaTypeAssignmentStep.TypedArea> areas = world.Root
-                .GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>()
+            List<Area> areas = world.Root
+                .GetAllChildrenOfType<Area>()
                 .ToList();
 
             // foreach (AreaTypeAssignmentStep.TypedArea area in areas)
             // {
 
-            AreaTypeAssignmentStep.TypedArea area = areas.First();
+            Area area = areas.First();
 
-            List<Vector2> outermostNodes = (area.Shape as OwPolygon)?.GetPoints();
+            List<Vector2> outermostNodes = area.GetShape().GetPoints();
             OwPolygon outerRim = new OwPolygon(outermostNodes);
             outerRim.ScaleFromCentroid(Vector2.one * (1 + overlap)); 
             

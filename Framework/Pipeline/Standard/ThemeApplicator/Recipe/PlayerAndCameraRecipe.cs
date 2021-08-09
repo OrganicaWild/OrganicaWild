@@ -16,13 +16,12 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
 
         public override GameObject Cook(IGameWorldObject individual)
         {
-            if (individual.Shape is OwPolygon poly)
+            if (individual.GetShape() is OwPolygon poly)
             {
-                OwPolygon areaShape = individual.Shape as OwPolygon;
                 GameObject mesh;
                 try
                 {
-                    mesh = GameObjectCreation.CombineMeshesFromPolygon(areaShape, meshMaterial);
+                    mesh = GameObjectCreation.CombineMeshesFromPolygon(poly, meshMaterial);
                 }
                 catch (Exception e)
                 {

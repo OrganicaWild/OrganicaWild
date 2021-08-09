@@ -21,15 +21,15 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         
         public override GameWorld Apply(GameWorld world)
         {
-            List<AreaTypeAssignmentStep.TypedArea> areas =
-                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().ToList();
+            List<Area> areas =
+                world.Root.GetAllChildrenOfType<Area>().ToList();
 
-            foreach (AreaTypeAssignmentStep.TypedArea typedArea in areas)
+            foreach (Area typedArea in areas)
             {
                 bool isStartOrEnd = typedArea.Type == "start" || typedArea.Type == "end";
 
                 List<OwPoint> landmarks = typedArea.GetAllChildrenOfType<Landmark>()
-                    .Select(x => new OwPoint(x.Shape.GetCentroid()))
+                    .Select(x => new OwPoint(x.GetShape().GetCentroid()))
                     .ToList();
                 IEnumerable<AreaConnection> connections =
                     typedArea.GetAllChildrenOfType<AreaConnection>();
@@ -50,7 +50,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     //add connections to spanning tree
                     foreach (AreaConnection areaConnection in connections.ToList())
                     {
-                        Vector2 connection = areaConnection.Shape.GetCentroid();
+                        Vector2 connection = areaConnection.GetShape().GetCentroid();
                         //only connect if it is actually 
                         if (random.NextDouble() > isConnected && !isStartOrEnd)
                         {
@@ -78,7 +78,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 {
                     // if no landmarks simply create mst with only the connection points
                     List<OwPoint> points = new List<OwPoint>();
-                    points.AddRange(connections.Select(x => x.Shape as OwPoint));
+                    points.AddRange(connections.Select(x => x.GetShape() as OwPoint));
 
                     List<OwLine> mainPathLines = MinimumSpanningTree.ByDistance(points);
 

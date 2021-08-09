@@ -58,9 +58,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
 
             Area parentArea = dto.area;
             Random localRandom = dto.random;
-            OwPolygon areaPolygon = (OwPolygon) parentArea.Shape;
+            OwPolygon areaPolygon = parentArea.GetShape();
 
-            IEnumerable<OwPolygon> allPolygonAreas = parentArea.GetAllChildrenOfType<Landmark>().Where(x => x.Shape is OwPolygon).Select(area => area.Shape as OwPolygon);
+            IEnumerable<OwPolygon> allPolygonAreas = parentArea.GetAllChildrenOfType<Landmark>().Where(x => x.GetShape() is OwPolygon).Select(area => area.GetShape() as OwPolygon);
            
             //polygons, where the voronoi should be inside of 
             List<OwPolygon> clippingPolygons = new List<OwPolygon>() {areaPolygon};
@@ -70,7 +70,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             cuttingPolygons.AddRange(allPolygonAreas);
 
             // Generate voronoi results
-            OwPolygon surroundingPolygon = parentArea.Shape as OwPolygon;
+            OwPolygon surroundingPolygon = parentArea.GetShape();
             List<Vector2> outermostNodes = surroundingPolygon?.GetPoints();
             RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
             Vector2[] points = PoissonDiskSampling
@@ -99,14 +99,14 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             }
 
             // Map neighboring nodes to each other
-            VoronoiResults delaunyResults = Voronoi.FindAll(areas.Keys.Select(key => new PointD(key.x, key.y)).ToArray());
-            Subdivision delaunySubdivision = delaunyResults.ToDelaunySubdivision();
+            VoronoiResults delaunayResults = Voronoi.FindAll(areas.Keys.Select(key => new PointD(key.x, key.y)).ToArray());
+            Subdivision delaunaySubdivision = delaunayResults.ToDelaunySubdivision();
         
-            Dictionary<Vector2, IEnumerable<Vector2>> neighborhoods = new Dictionary<Vector2, IEnumerable<Vector2>>(delaunySubdivision.NodeCount);
+            Dictionary<Vector2, IEnumerable<Vector2>> neighborhoods = new Dictionary<Vector2, IEnumerable<Vector2>>(delaunaySubdivision.NodeCount);
             foreach (KeyValuePair<Vector2, Area> area in areas)
             {
                 PointD point = new PointD(area.Key.x, area.Key.y);
-                IList<PointD> suspectedNeighbors = delaunySubdivision.GetNeighbors(point);
+                IList<PointD> suspectedNeighbors = delaunaySubdivision.GetNeighbors(point);
                 IList<PointD> actualNeighbors = new List<PointD>(suspectedNeighbors.Count);
                 foreach (PointD suspectedNeighbor in suspectedNeighbors)
                 {
@@ -119,7 +119,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             Dictionary<Vector2, TrialAreaCell> cells = new Dictionary<Vector2, TrialAreaCell>(areas.Count);
             foreach (KeyValuePair<Vector2, Area> area in areas)
             {
-                TrialAreaCell areaCell = new TrialAreaCell(area.Value.Shape, new TrialCell());
+                TrialAreaCell areaCell = new TrialAreaCell(area.Value.GetShape(), new TrialCell());
                 cells.Add(area.Key, areaCell);
                 parentArea.AddChild(areaCell);
             }

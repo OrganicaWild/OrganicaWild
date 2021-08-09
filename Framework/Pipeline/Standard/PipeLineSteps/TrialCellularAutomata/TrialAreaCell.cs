@@ -1,4 +1,5 @@
 ﻿using Framework.Pipeline.GameWorldObjects;
+using Framework.Pipeline.Geometry;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata
 {
@@ -6,7 +7,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata
     {
         public TrialCell Cell { get; set; }
 
-        public TrialAreaCell(IGeometry shape, TrialCell cell, string type = null) : base(shape, type)
+        public TrialAreaCell(OwPolygon shape, TrialCell cell, string type = null) : base(shape, type)
         {
             Cell = cell;
         }

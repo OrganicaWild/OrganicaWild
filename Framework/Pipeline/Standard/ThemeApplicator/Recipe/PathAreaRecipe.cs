@@ -19,7 +19,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
 
         public override GameObject Cook(IGameWorldObject individual)
         {
-            OwPolygon areaShape = individual.Shape as OwPolygon;
+            OwPolygon areaShape = individual.GetShape() as OwPolygon;
             GameObject mesh;
             try
             {
@@ -33,7 +33,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
 
             float[,] noiseMap =
                 PerlinNoise.GenerateNoiseMap(random, size.x, size.y, 20, 6, 2, 1, Vector2.zero);
-            Vector2 center = individual.Shape.GetCentroid();
+            Vector2 center = individual.GetShape().GetCentroid();
 
             Vector2 start = center - size / 2;
             Vector2 xStep = new Vector2(distance.x, 0);

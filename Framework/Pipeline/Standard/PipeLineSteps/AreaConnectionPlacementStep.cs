@@ -18,7 +18,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         [Range(0, 0.5f)] public float connectionClosenessToVoronoiVertex;
         public bool addSecondaryConnections = true;
         [Range(0, 1f)] public float secondaryPercentage = 1;
-        public override Type[] RequiredGuarantees => new Type[] {typeof(AreaTypeAssignedGuarantee)};
+        public override Type[] RequiredGuarantees => new Type[] {typeof(StartAndEndAssignedGuarantee)};
         public override bool AddToDebugStackedView => true;
 
         private Vector2 ConnectionPositionFunc(Vector2 a, Vector2 b)
@@ -32,11 +32,11 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         {
             //search areas
             List<Area> areas =
-                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>()
+                world.Root.GetAllChildrenOfType<Area>()
                     .Select(area => area as Area)
                     .ToList();
 
-            Rect boundaries = (world.Root.Shape as OwPolygon)?.GetBoundingBox() ?? Rect.zero;
+            Rect boundaries = (world.Root.GetShape() as OwPolygon)?.GetBoundingBox() ?? Rect.zero;
             if (boundaries == Rect.zero)
             {
                 throw new Exception("GameWorld needs a Polygon as Root.");
@@ -55,7 +55,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 //Add some more connection to create cycles
                 foreach (Area area in areas)
                 {
-                    OwPolygon shape = area.Shape as OwPolygon;
+                    OwPolygon shape = area.GetShape();
                     List<OwLine> lines = shape.GetLines();
 
                     foreach (OwLine edge in lines)

@@ -1,5 +1,6 @@
 ﻿using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
+using Framework.Pipeline.Geometry;
 
 namespace Framework.Cellular_Automata.Byte
 {
@@ -7,7 +8,7 @@ namespace Framework.Cellular_Automata.Byte
     {
         public ByteCell Cell { get; set; }
 
-        public AreaByteCell(IGeometry shape, ByteCell cell, string type = null) : base(shape, type)
+        public AreaByteCell(OwPolygon shape, ByteCell cell, string type = null) : base(shape, type)
         {
             Cell = cell;
         }

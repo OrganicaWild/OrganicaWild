@@ -18,14 +18,14 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
         public override GameWorld Apply(GameWorld world)
         {
-            List<AreaTypeAssignmentStep.TypedArea> areas =
-                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>().ToList();
+            List<Area> areas =
+                world.Root.GetAllChildrenOfType<Area>().ToList();
             
             IEnumerable<MainPath> mainPaths = world.Root.GetChildrenInChildren().OfType<MainPath>();
             
             foreach (MainPath mainPath in mainPaths)
             {
-                OwLine line = (OwLine) mainPath.Shape;
+                OwLine line = (OwLine) mainPath.GetShape();
                 Vector2 start = line.Start;
                 Vector2 end = line.End;
 
@@ -36,7 +36,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
                 OwPolygon newPath = new OwPolygon(pathRect);
 
-                mainPath.Shape = newPath;
+                mainPath.SetShape(newPath);
             }
 
             return world;

@@ -20,8 +20,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         {
             Epsilon.Eps = 0.000000000001m;
 
-            IEnumerable<AreaTypeAssignmentStep.TypedArea> typedAreas =
-                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>();
+            IEnumerable<Area> typedAreas =
+                world.Root.GetAllChildrenOfType<Area>();
 
             Parallel.ForEach(typedAreas, typedArea =>
             {
@@ -35,11 +35,11 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     if (polygons.ContainsKey(state))
                     {
                         polygons[state] = PolygonPolygonInteractor.Use()
-                            .Union(polygons[state], trialAreaCell.Shape as OwPolygon);
+                            .Union(polygons[state], trialAreaCell.GetShape() as OwPolygon);
                     }
                     else
                     {
-                        polygons.Add(state, trialAreaCell.Shape as OwPolygon);
+                        polygons.Add(state, trialAreaCell.GetShape() as OwPolygon);
                     }
 
                     typedArea.RemoveChild(trialAreaCell);

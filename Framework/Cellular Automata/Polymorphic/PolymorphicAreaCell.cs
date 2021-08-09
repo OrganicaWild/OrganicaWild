@@ -1,5 +1,6 @@
 ﻿using Framework.Pipeline;
 using Framework.Pipeline.GameWorldObjects;
+using Framework.Pipeline.Geometry;
 
 namespace Framework.Cellular_Automata.Polymorphic
 {
@@ -7,7 +8,7 @@ namespace Framework.Cellular_Automata.Polymorphic
     {
         public PolymorphicCell Cell { get; set; }
 
-        public PolymorphicAreaCell(IGeometry shape, PolymorphicCell cell, string type = null) : base(shape, type)
+        public PolymorphicAreaCell(OwPolygon shape, PolymorphicCell cell, string type = null) : base(shape, type)
         {
             Cell = cell;
         }
