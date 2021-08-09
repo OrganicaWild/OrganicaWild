@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Framework.Pipeline.Standard.ThemeApplicator;
 using UnityEngine;
 
@@ -16,6 +19,7 @@ namespace Framework.Pipeline.Standard
         public int Seed;
         public bool HasError { get; private set; }
         public string ErrorText { get; private set; }
+        public string FixHelpText { get; private set; }
 
         private GameObject builtWorld;
         private StandardThemeApplicator standardThemeApplicator;
@@ -104,10 +108,12 @@ namespace Framework.Pipeline.Standard
             StandardPipelineRunner somePipelineRunner = new StandardPipelineRunner(Seed);
 
             PipelineStep[] allSteps = GetComponents<PipelineStep>();
+            var index = 0;
             try
             {
-                foreach (PipelineStep step in allSteps)
+                for (; index < allSteps.Length; index++)
                 {
+                    PipelineStep step = allSteps[index];
                     somePipelineRunner.AddStep(step);
                 }
 
@@ -118,7 +124,53 @@ namespace Framework.Pipeline.Standard
             {
                 HasError = true;
                 ErrorText = e.Message;
+                FixHelpText = "Info: \n \n";
+                bool missingGuaranteesFound = false;
+
+                foreach (Type eMissingGuarantee in e.missingGuarantees)
+                {
+                    for (int i = 0; i < allSteps.Length; i++)
+                    {
+                        if (i == index)
+                        {
+                            continue;
+                        }
+                        
+                        PipelineStep potentiallyHasMissingGuaranteesStep = allSteps[i];
+                        List<Type> providedGuarantees = potentiallyHasMissingGuaranteesStep?.GetType()
+                            .GetCustomAttributes().Select(attribute => attribute.GetType()).ToList();
+                        if (providedGuarantees.Contains(eMissingGuarantee))
+                        {
+                            missingGuaranteesFound = true;
+                            var indexDifference = i - index;
+
+                            var fixingStep =
+                                RemoveNamespaceFromType(potentiallyHasMissingGuaranteesStep.GetType().Name);
+                            var missingGuarantee = RemoveNamespaceFromType($"{eMissingGuarantee}");
+                            var issueStep = RemoveNamespaceFromType(allSteps[index].GetType().Name);
+
+                            FixHelpText +=
+                                $"The step {fixingStep} provides guarantee {missingGuarantee} and is {Math.Abs(indexDifference)} {IndexDifferenceToString(indexDifference)} the step {issueStep}. \n \n ";
+                        }
+                    }
+                }
+
+                if (!missingGuaranteesFound)
+                {
+                    FixHelpText +=
+                        "The missing guarantees cannot be found in any of the other steps. Did you miss to add a step?";
+                }
             }
+        }
+
+        private string IndexDifferenceToString(int indexDifference)
+        {
+            return indexDifference < 0 ? "above" : "below";
+        }
+
+        private string RemoveNamespaceFromType(string fullTypeName)
+        {
+            return fullTypeName.Split('.').Last();
         }
 
         private void ClearOldLevelEditor()
@@ -156,7 +208,8 @@ namespace Framework.Pipeline.Standard
                 for (var i = standardPipelineRunner.gameWorldInEachStep.Count - 1; i >= 0; i--)
                 {
                     GameWorld gameWorld = standardPipelineRunner.gameWorldInEachStep[i];
-                    gameWorld.DrawDebug(minimalDebugColorBrightness, (standardPipelineRunner.gameWorldInEachStep.Count - i) * layerDistance + new Vector3(0,50,0));
+                    gameWorld.DrawDebug(minimalDebugColorBrightness,
+                        (standardPipelineRunner.gameWorldInEachStep.Count - i) * layerDistance + new Vector3(0, 50, 0));
                 }
             }
         }

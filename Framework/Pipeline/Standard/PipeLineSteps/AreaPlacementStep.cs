@@ -11,6 +11,9 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
+    /// <summary>
+    /// Generates Areas based on a Voronoi Diagram, which uses a PDS Sampling as an Input.
+    /// </summary>
     [AreasPlacedGuarantee]
     public class AreaPlacementStep :  PipelineStep
     {

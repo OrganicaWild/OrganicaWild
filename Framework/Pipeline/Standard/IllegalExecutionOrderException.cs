@@ -1,11 +1,19 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Framework.Pipeline.Standard
 {
     public class IllegalExecutionOrderException : Exception
     {
-        public IllegalExecutionOrderException() : base ($"Execution Order of PipelineSteps is not allowed")
+        public readonly IEnumerable<Type> missingGuarantees;
+        public readonly Type step;
+        
+        public IllegalExecutionOrderException(Type step, IEnumerable<Type> missingGuarantees) : base(
+            $"{step} is missing the guarantees: \n {missingGuarantees.Select(x => x.Name).Aggregate(((type, type1) => type + ", " + type1))}")
         {
+            this.step = step;
+            this.missingGuarantees = missingGuarantees;
         }
     }
 }

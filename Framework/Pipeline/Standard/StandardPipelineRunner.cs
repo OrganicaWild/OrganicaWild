@@ -39,17 +39,39 @@ namespace Framework.Pipeline.Standard
         {
             PipelineStep previous = executionPipeline.LastOrDefault();
             Type[] requiredGuarantees = step.RequiredGuarantees;
-            if (requiredGuarantees.All(requiredAttribute =>
-                previous?.GetType().GetCustomAttributes().Any(attribute => attribute.GetType() == requiredAttribute) ??
-                true))
+            List<Attribute> providedGuarantees = previous?.GetType().GetCustomAttributes().ToList();
+            List<Type> notMetRequiredGuarantees = new List<Type>();
+
+            foreach (Type requiredGuarantee in requiredGuarantees)
+            {
+                var found = false;
+                if (providedGuarantees != null)
+                    foreach (Attribute providedGuarantee in providedGuarantees)
+                    {
+                        //if required guarantee can be found in provided guarantee, remove it from required list
+                        if (requiredGuarantee == providedGuarantee.GetType())
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                if (!found)
+                {
+                    notMetRequiredGuarantees.Add(requiredGuarantee);
+                }
+            }
+
+            if (!notMetRequiredGuarantees.Any())
             {
                 executionPipeline.Add(step);
                 step.random = Random;
             }
             else
             {
-                throw new IllegalExecutionOrderException();
+                throw new IllegalExecutionOrderException(step.GetType(), notMetRequiredGuarantees);
             }
+            
         }
 
         public IEnumerator Execute(Action<GameWorld> callback)

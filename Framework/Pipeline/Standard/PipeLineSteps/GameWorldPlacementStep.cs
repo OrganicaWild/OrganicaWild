@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
+    /// <summary>
+    /// PipelineStep to initialize a new GameWorld with a rectangle as root area.
+    /// </summary>
     [GameWorldPlacedGuarantee]
     [GameWorldRectangularGuarantee]
     public class GameWorldPlacementStep : PipelineStep

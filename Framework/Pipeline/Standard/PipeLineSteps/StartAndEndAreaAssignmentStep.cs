@@ -13,23 +13,20 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
     [StartAndEndAssignedGuarantee]
     public class StartAndEndAreaAssignmentStep : PipelineStep
     {
-        public int inBetweenAreaTypes;
         public override Type[] RequiredGuarantees => new Type[] {typeof(AreasPlacedGuarantee)};
 
         public override GameWorld Apply(GameWorld world)
         {
             //get all areas
-            IEnumerable<Area> areas = world.Root.GetAllChildrenOfType<Area>();
-            
-            Vector2Comparer comparer = new Vector2Comparer();
-            List<Area> areaList = areas.ToList();
+            List<Area> areas = world.Root.GetAllChildrenOfType<Area>().ToList();
 
             //sort areas based on distance to origin of centroid
-            areaList.Sort((area1, area2) =>
+            Vector2Comparer comparer = new Vector2Comparer();
+            areas.Sort((area1, area2) =>
                 comparer.Compare(area1.GetShape().GetCentroid(), area2.GetShape().GetCentroid()));
 
-            Area startArea = areaList.First();
-            Area endArea = areaList.Last();
+            Area startArea = areas.First();
+            Area endArea = areas.Last();
 
             //define types of areas for
             startArea.Type = "startArea";

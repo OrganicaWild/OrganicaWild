@@ -14,6 +14,7 @@ namespace Framework.Pipeline.Standard.Editor
             if (manager.HasError)
             {
                 EditorGUILayout.HelpBox(manager.ErrorText, MessageType.Error);
+                EditorGUILayout.HelpBox(manager.FixHelpText, MessageType.Info);
             }
 
             if (GUILayout.Button("Generate with new seed"))
