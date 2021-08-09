@@ -28,6 +28,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         public bool addDebugScaledInnerArea;
 
         public override Type[] RequiredGuarantees => new Type[] {typeof(AreaConnectionsGuarantee)};
+        
+        public override bool AddToDebugStackedView => true;
 
         public override GameWorld Apply(GameWorld world)
         {

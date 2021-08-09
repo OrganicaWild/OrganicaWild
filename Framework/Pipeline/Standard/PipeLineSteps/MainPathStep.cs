@@ -17,6 +17,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
         [Range(0, 1)] public float isConnected = 1;
 
+        public override bool AddToDebugStackedView => true;
+        
         public override GameWorld Apply(GameWorld world)
         {
             List<AreaTypeAssignmentStep.TypedArea> areas =

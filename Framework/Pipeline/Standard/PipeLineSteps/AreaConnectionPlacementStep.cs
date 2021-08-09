@@ -26,6 +26,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         private List<Area> areas;
         private List<Tuple<int, int>> connectionEdges;
 
+        public override bool AddToDebugStackedView => true;
+        
         public override GameWorld Apply(GameWorld world)
         {
             placedConnection = new Dictionary<OwLine, AreaConnection>();

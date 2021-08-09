@@ -143,14 +143,21 @@ namespace Framework.Pipeline.Standard
 
         private void Update()
         {
-           CheckIfAllStepsValid();
+            CheckIfAllStepsValid();
         }
 
         private void OnDrawGizmos()
         {
-            if (GameWorld != null)
+            //GameWorld?.DrawDebug(minimalDebugColorBrightness);
+
+            if (standardPipelineRunner?.gameWorldInEachStep != null)
             {
-                GameWorld.DrawDebug(minimalDebugColorBrightness);
+                Vector3 layerDistance = new Vector3(0, 50f, 0);
+                for (var i = standardPipelineRunner.gameWorldInEachStep.Count - 1; i >= 0; i--)
+                {
+                    GameWorld gameWorld = standardPipelineRunner.gameWorldInEachStep[i];
+                    gameWorld.DrawDebug(minimalDebugColorBrightness, (standardPipelineRunner.gameWorldInEachStep.Count - i) * layerDistance + new Vector3(0,50,0));
+                }
             }
         }
     }

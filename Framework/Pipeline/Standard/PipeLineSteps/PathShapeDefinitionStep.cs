@@ -14,6 +14,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         public float pathWidth;
         public override Type[] RequiredGuarantees => new[] {typeof(MainPathsInAreasGuaranteed)};
 
+        public override bool AddToDebugStackedView => true;
+
         public override GameWorld Apply(GameWorld world)
         {
             List<AreaTypeAssignmentStep.TypedArea> areas =

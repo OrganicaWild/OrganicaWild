@@ -17,6 +17,8 @@ namespace Framework.Pipeline.Standard
 
         private readonly IList<PipelineStep> executionPipeline;
 
+        public List<GameWorld> gameWorldInEachStep;
+
         public StandardPipelineRunner(int? seed = null)
         {
             executionPipeline = new List<PipelineStep>();
@@ -53,6 +55,7 @@ namespace Framework.Pipeline.Standard
         public IEnumerator Execute(Action<GameWorld> callback)
         {
             GameWorld world = null;
+            gameWorldInEachStep = new List<GameWorld>();
 
             foreach (PipelineStep step in executionPipeline)
             {
@@ -60,6 +63,7 @@ namespace Framework.Pipeline.Standard
                 try
                 {
                     world = step.Apply(world);
+                    gameWorldInEachStep.Add(world.Copy());
                 }
                 catch (Exception e)
                 {
@@ -76,10 +80,15 @@ namespace Framework.Pipeline.Standard
         public GameWorld ExecuteBlocking()
         {
             GameWorld world = null;
+            gameWorldInEachStep = new List<GameWorld>();
 
             foreach (PipelineStep step in executionPipeline)
             {
                 world = step.Apply(world);
+                if (step.AddToDebugStackedView)
+                {
+                    gameWorldInEachStep.Add(world.Copy());
+                }
             }
 
             return world;

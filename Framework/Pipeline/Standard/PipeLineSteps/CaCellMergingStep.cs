@@ -13,12 +13,16 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
     public class CaCellMergingStep : PipelineStep
     {
         public override Type[] RequiredGuarantees => new Type[0];
+
+        public override bool AddToDebugStackedView => true;
+
         public override GameWorld Apply(GameWorld world)
         {
             Epsilon.Eps = 0.000000000001m;
-        
-            IEnumerable<AreaTypeAssignmentStep.TypedArea> typedAreas = world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>();
-     
+
+            IEnumerable<AreaTypeAssignmentStep.TypedArea> typedAreas =
+                world.Root.GetAllChildrenOfType<AreaTypeAssignmentStep.TypedArea>();
+
             Parallel.ForEach(typedAreas, typedArea =>
             {
                 Dictionary<uint, OwPolygon> polygons = new Dictionary<uint, OwPolygon>();
@@ -26,7 +30,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
                 foreach (TrialAreaCell trialAreaCell in cellAreas.ToList())
                 {
-                    uint state = (uint)trialAreaCell.Cell.CurrentState;
+                    uint state = (uint) trialAreaCell.Cell.CurrentState;
 
                     if (polygons.ContainsKey(state))
                     {

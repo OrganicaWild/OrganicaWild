@@ -8,6 +8,10 @@ namespace Framework.Pipeline
     {
         public Random random;
         public abstract Type[] RequiredGuarantees { get; }
+        
+        public virtual bool AddToDebugStackedView => false;
+
         public abstract GameWorld Apply(GameWorld world);
+        
     }
 }
