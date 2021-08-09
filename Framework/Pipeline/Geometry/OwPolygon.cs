@@ -192,7 +192,7 @@ namespace Framework.Pipeline.Geometry
             return result;
         }
 
-        public void DrawDebug(Color debugColor)
+        public void DrawDebug(Color debugColor, Vector3 offset = default)
         {
             Gizmos.color = debugColor;
             foreach (Region representationRegion in representation.Regions)
@@ -210,16 +210,21 @@ namespace Framework.Pipeline.Geometry
                     {
                         Vector2 prevVec2 = prev;
                         Vector2 currentVec2 = representationRegionPoint;
-                        Gizmos.DrawLine(new Vector3(prevVec2.x, 0, prevVec2.y),
-                            new Vector3(currentVec2.x, 0, currentVec2.y));
+                        Gizmos.DrawLine(new Vector3(prevVec2.x, 0, prevVec2.y) + offset,
+                            new Vector3(currentVec2.x, 0, currentVec2.y) + offset);
                         prev = representationRegionPoint;
                     }
                 }
 
                 Vector2 lastVec2 = prev;
                 Vector2 firstVec2 = first;
-                Gizmos.DrawLine(new Vector3(lastVec2.x, 0, lastVec2.y), new Vector3(firstVec2.x, 0, firstVec2.y));
+                Gizmos.DrawLine(new Vector3(lastVec2.x, 0, lastVec2.y) + offset, new Vector3(firstVec2.x, 0, firstVec2.y) + offset);
             }
+        }
+
+        public IGeometry Copy()
+        {
+            return new OwPolygon(representation);
         }
     }
 }

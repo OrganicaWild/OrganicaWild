@@ -14,9 +14,14 @@ namespace Framework.Pipeline.Geometry
            
         }
 
-        public void DrawDebug(Color debugColor)
+        public void DrawDebug(Color debugColor, Vector3 offset = default)
         {
             Debug.LogError("Tried drawing Invalid Geometry.");
+        }
+
+        public IGeometry Copy()
+        {
+            return new OwInvalidGeometry();
         }
     }
 }

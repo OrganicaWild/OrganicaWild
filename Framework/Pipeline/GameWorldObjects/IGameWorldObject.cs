@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Framework.Util;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -46,5 +47,7 @@ namespace Framework.Pipeline.GameWorldObjects
         IGameWorldObject GetParent();
 
         void SetParent(IGameWorldObject parent);
+
+        IGameWorldObject Copy(Dictionary<int,IGameWorldObject> identityDictionary);
     }
 }

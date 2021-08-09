@@ -8,6 +8,8 @@ namespace Framework.Pipeline
 
         void ScaleFromCentroid(Vector2 axis);
 
-        void DrawDebug(Color debugColor);
+        void DrawDebug(Color debugColor, Vector3 offset = default);
+
+        IGeometry Copy();
     }
 }

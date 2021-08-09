@@ -78,5 +78,7 @@ namespace Framework.Pipeline.GameWorldObjects
         {
             this.parent = parent;
         }
+
+        public abstract IGameWorldObject Copy(Dictionary<int, IGameWorldObject> identityDictionary);
     }
 }

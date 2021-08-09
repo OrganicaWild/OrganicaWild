@@ -33,11 +33,16 @@ namespace Framework.Pipeline.Geometry
             End += centroid;
         }
 
-        public void DrawDebug(Color debugColor)
+        public void DrawDebug(Color debugColor, Vector3 offset = default)
         {
             Gizmos.color = debugColor;
          
-            Gizmos.DrawLine(new Vector3(Start.x, 0, Start.y), new Vector3(End.x, 0, End.y));
+            Gizmos.DrawLine(new Vector3(Start.x, 0, Start.y) + offset, new Vector3(End.x, 0, End.y) + offset);
+        }
+
+        public IGeometry Copy()
+        {
+            return new OwLine(Start, End);
         }
 
         public float Length()

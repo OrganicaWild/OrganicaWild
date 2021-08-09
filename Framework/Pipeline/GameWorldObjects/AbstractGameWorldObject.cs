@@ -8,13 +8,13 @@ namespace Framework.Pipeline.GameWorldObjects
     {
         public string Type { get; set; }
         public IGeometry Shape { get; set; }
-        
+
         private IGameWorldObject parent;
 
         public AbstractGameWorldObject(IGeometry shape, string type = null)
         {
             this.Shape = shape;
-            this.Type = type; 
+            this.Type = type;
             children = new List<IGameWorldObject>();
         }
 
@@ -25,8 +25,8 @@ namespace Framework.Pipeline.GameWorldObjects
         }
 
         private readonly IList<IGameWorldObject> children;
-        
-        
+
+
         public void AddChild(IGameWorldObject child)
         {
             if (child != null && !children.Contains(child))
@@ -92,6 +92,18 @@ namespace Framework.Pipeline.GameWorldObjects
         public void SetParent(IGameWorldObject parent)
         {
             this.parent = parent;
+        }
+
+        public abstract IGameWorldObject Copy(Dictionary<int, IGameWorldObject> identityDictionary);
+
+        protected void CopyChildren(ref IGameWorldObject copy, Dictionary<int, IGameWorldObject> identityDictionary)
+        {
+            //copy children
+            foreach (IGameWorldObject child in GetChildren())
+            {
+                IGameWorldObject childCopy = child.Copy(identityDictionary);
+                copy.AddChild(childCopy);
+            }
         }
     }
 }

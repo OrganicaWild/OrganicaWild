@@ -28,19 +28,24 @@ namespace Framework.Pipeline.Geometry
             return $"{Position}";
         }
 
-        public void DrawDebug(Color debugColor)
+        public void DrawDebug(Color debugColor, Vector3 offset = default)
         {
-            const float offset = 1f;
+            const float sizeOfStar = 1f;
    
             Gizmos.color = debugColor;
-            Vector3 coord = new Vector3(Position.x, 0, Position.y);
-            Gizmos.DrawLine(coord + new Vector3(-offset, 0, -offset).normalized * offset,
-                coord + new Vector3(offset, 0, offset).normalized * offset);
-            Gizmos.DrawLine(coord + new Vector3(offset, 0, -offset).normalized * offset,
-                coord + new Vector3(-offset, 0, offset).normalized * offset);
+            Vector3 coord = new Vector3(Position.x, 0, Position.y) + offset;
+            Gizmos.DrawLine(coord + new Vector3(-sizeOfStar, 0, -sizeOfStar).normalized * sizeOfStar,
+                coord + new Vector3(sizeOfStar, 0, sizeOfStar).normalized * sizeOfStar);
+            Gizmos.DrawLine(coord + new Vector3(sizeOfStar, 0, -sizeOfStar).normalized * sizeOfStar,
+                coord + new Vector3(-sizeOfStar, 0, sizeOfStar).normalized * sizeOfStar);
 
-            Gizmos.DrawLine(coord + new Vector3(0, 0, -offset), coord + new Vector3(0, 0, offset));
-            Gizmos.DrawLine(coord + new Vector3(offset, 0, 0), coord + new Vector3(-offset, 0, 0));
+            Gizmos.DrawLine(coord + new Vector3(0, 0, -sizeOfStar), coord + new Vector3(0, 0, sizeOfStar));
+            Gizmos.DrawLine(coord + new Vector3(sizeOfStar, 0, 0), coord + new Vector3(-sizeOfStar, 0, 0));
+        }
+
+        public IGeometry Copy()
+        {
+            return new OwPoint(Position);
         }
 
         public static implicit operator OwPoint(PointD pointD)
