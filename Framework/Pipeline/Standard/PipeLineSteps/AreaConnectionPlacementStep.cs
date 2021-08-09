@@ -66,8 +66,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                             //probability check
                             if (random.NextDouble() < secondaryPercentage)
                             {
-                                AreaConnectionsViaMst.AddConnectionAndTwin(ConnectionPositionFunc, edge, area, areas,
-                                    boundaries, ref placedConnections);
+                                AreaConnectionFunctions.AddConnectionAndTwin(ConnectionPositionFunc, edge, area, areas,
+                                    boundaries, placedConnections);
                             }
                         }
                     }
