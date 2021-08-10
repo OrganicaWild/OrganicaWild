@@ -90,6 +90,7 @@ namespace Framework.GraphGrammar.Editor
                 }
             }
 
+            EditorGUILayout.LabelField(missionGraph.DeserializeAndConvert().ToString());
             MissionGraphNodeArea();
         }
 

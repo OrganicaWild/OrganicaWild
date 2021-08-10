@@ -14,7 +14,7 @@ namespace Framework.ShapeGrammar
         /// a Rigidbody set to kinematic and a collider encompassing the full rule.
         /// </summary>
         public GameObject[] rules;
-        
+
         private MissionGraph levelMissionGraph;
         private SpaceTree tree;
 
@@ -64,12 +64,13 @@ namespace Framework.ShapeGrammar
             {
                 List<GameObject> rulesForThisType = GetRulesForThisType(missionVertex);
 
-                GameObject ruleRep = rulesForThisType[Random.Range(0, rulesForThisType.Count)];
+                GameObject ruleRep = rulesForThisType[Random.Range(0, rulesForThisType.Count - 1)];
 
                 if (tree.Root == null)
                 {
                     tree.Root = new SpaceNode(
-                        new SpaceNodeConnection {connectionPoint = transform.position, connectionDirection = Vector3.zero},
+                        new SpaceNodeConnection
+                            {connectionPoint = transform.position, connectionDirection = Vector3.zero},
                         ruleRep,
                         ruleRep.GetComponent<ShapeGrammarRuleComponent>(), missionVertex, new SpaceNode(gameObject));
                     tree.Root.InstantiatedReference = DrawNode(tree.Root);
@@ -93,7 +94,8 @@ namespace Framework.ShapeGrammar
 
                         newNode.InstantiatedReference = DrawNode(newNode);
 
-                        ShapeGrammarRuleComponent b = newNode.InstantiatedReference.GetComponent<ShapeGrammarRuleComponent>();
+                        ShapeGrammarRuleComponent b = newNode.InstantiatedReference
+                            .GetComponent<ShapeGrammarRuleComponent>();
                         b.Modify();
 
                         bool hitSomething = false;

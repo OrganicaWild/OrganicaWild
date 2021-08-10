@@ -27,7 +27,7 @@ namespace Framework.GraphGrammar
         /// The End vertex of the mission graph
         /// </summary>
         public MissionVertex End { get; set; }
-        
+
         public MissionGraph()
         {
             Vertices = new List<MissionVertex>();
@@ -109,7 +109,8 @@ namespace Framework.GraphGrammar
             {
                 MissionGraph subMissionGraph = new MissionGraph {Start = potentialPosition.Item1};
                 potentialSubGraphs.Add(subMissionGraph);
-                List<Tuple<MissionVertex, MissionVertex>> pairs = new List<Tuple<MissionVertex, MissionVertex>> {new Tuple<MissionVertex, MissionVertex>(missionGraph.Start, potentialPosition.Item1)};
+                List<Tuple<MissionVertex, MissionVertex>> pairs = new List<Tuple<MissionVertex, MissionVertex>>
+                    {new Tuple<MissionVertex, MissionVertex>(missionGraph.Start, potentialPosition.Item1)};
 
                 while (pairs.Any())
                 {
@@ -208,13 +209,38 @@ namespace Framework.GraphGrammar
 
             //bug! sometimes adding a new subgraph does not remove the old vertex, has to be fixed.
             //Debug.Assert(Vertices.Count == traversal.Count);
-            
+
             return traversal;
         }
 
         public override string ToString()
         {
-            return $"({string.Join(", ", Vertices)})";
+            //return $"({string.Join(", ", Vertices)})";
+            return next(Start);
+        }
+
+        private string next(MissionVertex vertex)
+        {
+            string result = "";
+            string concat = "";
+
+            if (!vertex.ForwardNeighbours.Any())
+            {
+                return $"[{vertex.Type}]";
+            }
+            
+            foreach (MissionVertex forwardNeighbour in vertex.ForwardNeighbours)
+            {
+                result += $"[{vertex.Type} --> ";
+                result += $"{forwardNeighbour.Type}]";
+                concat += next(forwardNeighbour);
+                result += ", ";
+            }
+
+            //result.Remove(result.Length - 2, result.Length - 1);
+            result += concat;
+
+            return result;
         }
     }
 }
