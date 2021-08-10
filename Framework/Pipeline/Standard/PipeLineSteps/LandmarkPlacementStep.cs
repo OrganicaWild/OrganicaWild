@@ -116,7 +116,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                         //if tries are reached, show warning and still add point, since we want to guarantee that the point is placed
                         if (tries == maxTriesToGuaranteeConstraints)
                         {
-                            Debug.LogWarning("Could not place Landmark with number of allowed tries");
+                            //Debug.LogWarning("Could not place Landmark with number of allowed tries");
                         }
 
                         //add landmark

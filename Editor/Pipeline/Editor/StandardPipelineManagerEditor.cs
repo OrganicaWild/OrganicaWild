@@ -27,8 +27,7 @@ namespace Framework.Pipeline.Standard.Editor
             {
                 Generate(manager);
             }
-
-            //manager.Seed = EditorGUILayout.IntField("Seed", manager.Seed);
+            
             DrawDefaultInspector();
         }
 

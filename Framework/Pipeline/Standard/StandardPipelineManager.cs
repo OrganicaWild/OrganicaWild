@@ -17,6 +17,7 @@ namespace Framework.Pipeline.Standard
 
         public StandardPipelineRunner standardPipelineRunner;
         public int Seed;
+        public bool drawStackedDebugView = false;
         public bool HasError { get; private set; }
         public string ErrorText { get; private set; }
         public string FixHelpText { get; private set; }
@@ -200,9 +201,9 @@ namespace Framework.Pipeline.Standard
 
         private void OnDrawGizmos()
         {
-            //GameWorld?.DrawDebug(minimalDebugColorBrightness);
-
-            if (standardPipelineRunner?.gameWorldInEachStep != null)
+            GameWorld?.DrawDebug(minimalDebugColorBrightness);
+            
+            if (drawStackedDebugView && standardPipelineRunner?.gameWorldInEachStep != null)
             {
                 Vector3 layerDistance = new Vector3(0, 50f, 0);
                 for (var i = standardPipelineRunner.gameWorldInEachStep.Count - 1; i >= 0; i--)

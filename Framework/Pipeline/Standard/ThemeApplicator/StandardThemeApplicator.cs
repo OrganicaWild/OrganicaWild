@@ -150,10 +150,10 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
 
         public void StartFindAllTypes()
         {
-            StartCoroutine(FindAllTypes());
+            FindAllTypes();
         }
 
-        private IEnumerator FindAllTypes()
+        private void FindAllTypes()
         {
             manager = GetComponent<StandardPipelineManager>();
 
@@ -165,13 +165,17 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
                     recipes = new List<TypeRecipeCombination>();
                 }
 
-                GameWorld exampleGameWorld = null;
-                yield return StartCoroutine(manager.standardPipelineRunner.Execute(gameWorld => exampleGameWorld = gameWorld));
+                if (manager.standardPipelineRunner == null)
+                {
+                    manager.Setup();
+                }
+                
+                GameWorld exampleGameWorld = manager.standardPipelineRunner.ExecuteBlocking();
 
                 //stop if root is null
                 if (exampleGameWorld.Root == null)
                 {
-                    yield break;
+                    Debug.LogError("The generated Game World is null. Check on the Pipeline Steps");
                 }
 
                 //BFS through tree to find all types
@@ -193,13 +197,12 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
                     {
                         childrenToTest.Push(child);
                     }
-
-                    yield return null;
+                    
                 }
             }
             else
             {
-                throw new Exception("This Object also needs a PipelineManager");
+                Debug.LogError("This Object also needs a PipelineManager");
             }
         }
 
