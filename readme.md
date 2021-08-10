@@ -4,6 +4,14 @@ A fully open PCG (procedural content generation) framework for Unity to create o
 
 ![image](Images~/image_introduction.png)
 
+
+---
+
+## Install in your project
+
+Organica Wild is a Unity Package. To use it add it add it via the [Unity Package Manager](https://docs.unity3d.com/Manual/upm-ui-giturl.html).
+Import the samples from the Unity Package Manager to get started.
+
 ---
 
 ## Features
@@ -47,12 +55,6 @@ Instructions are in [Poisson Disk Sampling Manual](Framework/Poisson%20Disk%20Sa
 
 ---
 
-## [Install](#install)  
-
-### Use in a project
-
-Organica Wild is a Unity Package. To use it add it add it via the [Unity Package Manager](https://docs.unity3d.com/Manual/upm-ui-giturl.html).
-Import the samples from the Unity Package Manager to get started.
 
 ## Contribute
 
@@ -92,7 +94,7 @@ The Samples~ folder is not visible inside of unity, because it ends with a Tilde
 ---
 **NOTE**
 
-This is only needed if you wish to change the samples and push the changes to the Organica Wild repository. If you want to use the samples in your own project and develop on top them, follow along like [Install](#install)
+This is only needed if you wish to change the samples and push the changes to the Organica Wild repository. If you want to use the samples in your own project and develop on top them, follow along like [Install](#install-in-your-project)
 
 ---
 
