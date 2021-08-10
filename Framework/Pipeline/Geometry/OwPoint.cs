@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Geometry
 {
+    /// <summary>
+    /// Implements an single point as an IGeometry
+    /// </summary>
     public class OwPoint : IGeometry
     {
         public Vector2 Position { get; }
@@ -18,7 +21,7 @@ namespace Framework.Pipeline.Geometry
             return Position;
         }
 
-        public void ScaleFromCentroid(Vector2 axis)
+        public void ScaleFromCentroid(Vector2 scaleFactorPerAxis)
         {
             //do nothing
         }

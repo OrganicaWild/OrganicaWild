@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Geometry
 {
+    /// <summary>
+    /// Implementes a line consisting of two points as a IGeometry
+    /// </summary>
     public class OwLine : IGeometry
     {
         public Vector2 Start { get; private set; }
@@ -20,14 +23,14 @@ namespace Framework.Pipeline.Geometry
             return End - Start / 2f;
         }
 
-        public void ScaleFromCentroid(Vector2 axis)
+        public void ScaleFromCentroid(Vector2 scaleFactorPerAxis)
         {
             Vector2 centroid = GetCentroid();
             Start -= centroid;
             End -= centroid;
 
-            Start *= axis;
-            End *= axis;
+            Start *= scaleFactorPerAxis;
+            End *= scaleFactorPerAxis;
 
             Start += centroid;
             End += centroid;

@@ -28,11 +28,11 @@ namespace Framework.Pipeline.Geometry.Interactors
             }
 
             //if concave polygon check that the line is not intersecting with any edges
-            List<OwLine> polyLines = first.GetLines();
+            List<OwLine> polyLines = first.GetEdges();
             bool isIntersecting = false;
             foreach (OwLine edge in polyLines)
             {
-                isIntersecting |= LineLineInteractor.Use().Intersect(edge, second).Any(i => !(i is OwInvalidGeometry));
+                isIntersecting |= LineLineInteractor.Use().Intersect(edge, second).Any();
                 if (isIntersecting)
                 {
                     return false;
@@ -51,12 +51,12 @@ namespace Framework.Pipeline.Geometry.Interactors
                 return true;
             }
 
-            List<OwLine> polyLines = first.GetLines();
+            List<OwLine> polyLines = first.GetEdges();
             int intersections = 0;
             foreach (OwLine edge in polyLines)
             {
                 bool isIntersecting =
-                    LineLineInteractor.Use().Intersect(edge, second).Any(i => !(i is OwInvalidGeometry));
+                    LineLineInteractor.Use().Intersect(edge, second).Any();
                 if (isIntersecting)
                 {
                     intersections++;
@@ -71,7 +71,7 @@ namespace Framework.Pipeline.Geometry.Interactors
             OwLine shortest = new OwLine(new Vector2(float.MinValue, float.MinValue),
                 new Vector2(float.MaxValue, float.MaxValue));
 
-            foreach (OwLine polygonLine in first.GetLines())
+            foreach (OwLine polygonLine in first.GetEdges())
             {
                 OwLine potentiallyShortest = LineLineInteractor.Use().CalculateShortestPath(polygonLine, second);
                 if (shortest.Length() > potentiallyShortest.Length())
@@ -88,12 +88,12 @@ namespace Framework.Pipeline.Geometry.Interactors
             OwPolygon extrudedSecond = new OwPolygon(new[] {second.Start, second.End, second.End + Vector2.one});
             OwPolygon intersectionPolygon = PolygonPolygonInteractor.Use().Intersection(first, extrudedSecond);
 
-            if (intersectionPolygon.representation.IsEmpty()) return new[] {new OwInvalidGeometry()};
+            if (intersectionPolygon.Representation.IsEmpty()) return Enumerable.Empty<IGeometry>();
 
             IEnumerable<OwLine> intersectingLines = CalculateIntersectingLines(second, intersectionPolygon);
 
             if (intersectingLines.Any()) return intersectingLines;
-            return new[] {new OwInvalidGeometry()};
+            return Enumerable.Empty<IGeometry>();
         }
 
         public float CalculateDistance(OwPolygon first, OwLine second)
@@ -106,7 +106,7 @@ namespace Framework.Pipeline.Geometry.Interactors
             IEnumerable<OwLine> result = new List<OwLine>();
             LineLineInteractor interactor = LineLineInteractor.Use();
 
-            foreach (Region representationRegion in intersectionPolygon.representation.Regions)
+            foreach (Region representationRegion in intersectionPolygon.Representation.Regions)
             {
                 Point[] points = representationRegion.Points.ToArray();
                 Vector2 previousPoint = points.First();

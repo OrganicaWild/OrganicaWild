@@ -1,28 +1,42 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using Framework.Pipeline.GameWorldObjects;
-using Framework.Pipeline.Geometry;
-using Framework.Pipeline.Standard.PipeLineSteps;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Framework.Pipeline
 {
+    /// <summary>
+    /// Implementes a GameWorld out of a tree data structure of IGameWorldObjects as nodes.
+    /// The structure starts with the Root node.
+    /// </summary>
     public class GameWorld
     {
         public IGameWorldObject Root { get; }
-
-        private static int maxDepth;
 
         public GameWorld(IGameWorldObject root)
         {
             Root = root;
         }
 
+        /// <summary>
+        /// Get all IGameWorldObject nodes in tree of certain type T.
+        /// T must be implementing IGameWorldObject.
+        /// </summary>
+        /// <typeparam name="T">type to search in tree for</typeparam>
+        /// <returns>list with all nodes of given type T in tree</returns>
+        public List<T> GetAllNodesOfType<T>() where T : IGameWorldObject
+        {
+            return Root.GetAllChildrenOfTypeRecursive<T>().ToList();
+        }
+
+        /// <summary>
+        /// Draw the GameWorld in a debug view.
+        /// Use this method inside the OnDrawGizmos() method of a MonoBehaviour.
+        /// </summary>
+        /// <param name="minBrightness">minimum brightness of random color</param>
+        /// <param name="offset">optional offset for drawing the GameWorld. Can be used if there are occlusion issues.</param>
         public void DrawDebug(float minBrightness, Vector3 offset = default)
         {
             Color green = new Color(0.074f, 0.462f, 0.125f);
@@ -81,7 +95,7 @@ namespace Framework.Pipeline
                 return;
             }
 
-            //RemoveTooDarkColors(colors, minBrightness);
+            RemoveTooDarkColors(colors, minBrightness);
             if (!colors.ContainsKey(depth))
             {
                 colors.Add(depth, new Dictionary<Type, Color>());
@@ -98,20 +112,6 @@ namespace Framework.Pipeline
             }
 
             gameWorldObject.GetShape().DrawDebug(colors[depth][gameWorldObject.GetType()], offset);
-        }
-
-        private static void DrawDebugGameWorldElementNoDraw(int depth, IGameWorldObject gameWorldObject)
-        {
-            if (depth > maxDepth)
-            {
-                maxDepth = depth;
-            }
-            //gameWorldObject.Shape.DrawDebug(colors[depth][gameWorldObject.GetType()]);
-
-            foreach (IGameWorldObject child in gameWorldObject.GetChildren())
-            {
-                DrawDebugGameWorldElementNoDraw(depth + 1, child);
-            }
         }
 
         private static Color GenerateColor(float minBrightness)

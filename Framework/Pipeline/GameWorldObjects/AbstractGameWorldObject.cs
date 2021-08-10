@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Framework.Pipeline.Geometry;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
@@ -8,14 +9,14 @@ namespace Framework.Pipeline.GameWorldObjects
     {
         private TGeometry shape;
 
-        public string Type { get; set; }
-        
+        public string Identifier { get; set; }
+
         private IGameWorldObject parent;
 
         public AbstractGameWorldObject(TGeometry shape, string type = null)
         {
             this.shape = shape;
-            Type = type;
+            Identifier = type;
             children = new List<IGameWorldObject>();
         }
 
@@ -73,10 +74,21 @@ namespace Framework.Pipeline.GameWorldObjects
         {
             return children.SelectMany(child => child.GetChildren());
         }
-        
-        public IEnumerable<T> GetAllChildrenOfType<T>()
+
+        public IEnumerable<T> GetAllChildrenOfType<T>() where T : IGameWorldObject
         {
             return children.Where(child => child is T).Select(x => x is T ? (T) x : default);
+        }
+
+        public IEnumerable<T> GetAllChildrenOfTypeRecursive<T>() where T : IGameWorldObject
+        {
+            List<T> children = GetAllChildrenOfType<T>().ToList();
+            foreach (T child in children)
+            {
+                children.AddRange(child.GetAllChildrenOfTypeRecursive<T>().ToList());
+            }
+
+            return children;
         }
 
         public bool HasAnyChildrenOfType<T>()

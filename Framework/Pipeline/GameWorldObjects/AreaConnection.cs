@@ -3,6 +3,12 @@ using Framework.Pipeline.Geometry;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
+    /// <summary>
+    /// Implements an AreaConnection as an IGameWorldObject
+    /// The shape is fixed as an OwPoint.
+    ///
+    /// This AreaConnection is a point that can be put in the GameWorld to mark, that here is a connection between two (or more) areas.
+    /// </summary>
     public class AreaConnection : AbstractGameWorldObject<OwPoint>
     {
         public AreaConnection Twin { get; set; }
@@ -19,7 +25,7 @@ namespace Framework.Pipeline.GameWorldObjects
                 return (IGameWorldObject) identityDictionary[GetHashCode()];
             }
 
-            IGameWorldObject copy = new AreaConnection((OwPoint) GetShape().Copy(), Type);
+            IGameWorldObject copy = new AreaConnection((OwPoint) GetShape().Copy(), Identifier);
             CopyChildren(ref copy, identityDictionary);
             identityDictionary.Add(GetHashCode(), copy);
             return (AreaConnection) copy;

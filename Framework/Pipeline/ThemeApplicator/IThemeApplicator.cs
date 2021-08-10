@@ -10,7 +10,7 @@ namespace Framework.Pipeline.ThemeApplicator
         /// This allows the creation of the GameWorld to stretch across several frames and therefore not blocking the rest of the engine.
         /// </summary>
         /// <param name="world">GameWorld to apply theme on</param>
-        /// <returns>yield return null</returns>
+        /// <returns>Empty Iterator</returns>
         IEnumerator ApplyTheme(GameWorld world);
     }
 }

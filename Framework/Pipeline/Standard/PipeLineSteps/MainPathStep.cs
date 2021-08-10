@@ -26,7 +26,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
             foreach (Area typedArea in areas)
             {
-                bool isStartOrEnd = typedArea.Type == "start" || typedArea.Type == "end";
+                bool isStartOrEnd = typedArea.Identifier == "start" || typedArea.Identifier == "end";
 
                 List<OwPoint> landmarks = typedArea.GetAllChildrenOfType<Landmark>()
                     .Select(x => new OwPoint(x.GetShape().GetCentroid()))

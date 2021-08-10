@@ -44,7 +44,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 OwPolygon result = PolygonPolygonInteractor.Use().Union(circle0, circle1);
                 
                 //start Area
-                if (area.Type == "startArea")
+                if (area.Identifier == "startArea")
                 {
                     //add landmark at centroid
                     area.AddChild(new Landmark(result, "Spawn"));
@@ -52,7 +52,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 }
 
                 //end area
-                if (area.Type == "endArea")
+                if (area.Identifier == "endArea")
                 {
                     //add landmark at centroid
                     area.AddChild(new Landmark(result, "Goal"));
@@ -67,7 +67,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     List<OwPoint> placedPoints = new List<OwPoint>();
 
                     OwPolygon areaShape = area.GetShape();
-                    OwPolygon scaledPolygon = new OwPolygon(areaShape.representation);
+                    OwPolygon scaledPolygon = new OwPolygon(areaShape.Representation);
                     scaledPolygon.ScaleFromCentroid(new Vector2(1 - freeSpaceInsideAtBorder,
                         1 - freeSpaceInsideAtBorder));
 

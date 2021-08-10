@@ -56,7 +56,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
                 // }
 
                 // int seed = bytes.Sum(byt => byt);
-                Random lRandom = new Random(individual.Type.Sum(c => c));
+                Random lRandom = new Random(individual.Identifier.Sum(c => c));
 
                 // GameObject instantiated =
                 //     Instantiate(mainThingsPrefabs[(int) (lRandom.NextDouble() * mainThingsPrefabs.Length)],

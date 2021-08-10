@@ -91,7 +91,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
                 OwPolygon subAreaPolygon = new OwPolygon(polygonVertices);
                 OwPolygon clippedPolygon = Clip(subAreaPolygon, clippingPolygons);
                 clippedPolygon = Cut(clippedPolygon, cuttingPolygons);
-                if (clippedPolygon.representation.Regions.Count == 0) continue;
+                if (clippedPolygon.Representation.Regions.Count == 0) continue;
                 Area subArea = new Area(clippedPolygon);
                 Vector2 center = clippedPolygon.GetCentroid();
                 areas.Add(center, subArea);
@@ -139,7 +139,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             foreach (OwPolygon clippingPolygon in clippingPolygons)
             {
                 polygon = PolygonPolygonInteractor.Use().Intersection(polygon, clippingPolygon);
-                if (polygon.representation.Regions.Count == 0) return polygon;
+                if (polygon.Representation.Regions.Count == 0) return polygon;
             }
 
             return polygon;
@@ -150,7 +150,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             foreach (OwPolygon cuttingPolygon in cuttingPolygons)
             {
                 polygon = PolygonPolygonInteractor.Use().Difference(polygon, cuttingPolygon);
-                if (polygon.representation.Regions.Count == 0) return polygon;
+                if (polygon.Representation.Regions.Count == 0) return polygon;
             }
 
             return polygon;

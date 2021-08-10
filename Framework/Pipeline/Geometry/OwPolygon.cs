@@ -8,13 +8,16 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Geometry
 {
+    /// <summary>
+    /// Implements an arbitrary polygon as an IGeometry
+    /// </summary>
     public class OwPolygon : IGeometry
     {
-        public Polygon representation { get; private set; }
+        internal Polygon Representation { get; private set; }
 
         public OwPolygon(IEnumerable<Vector2> points)
         {
-            representation =
+            Representation =
                 new Polygon(new List<Region>(new[]
                 {
                     new Region()
@@ -26,7 +29,7 @@ namespace Framework.Pipeline.Geometry
 
         public OwPolygon(Polygon polygon)
         {
-            representation = new Polygon() {Regions = new List<Region>()};
+            Representation = new Polygon() {Regions = new List<Region>()};
 
             foreach (Region polygonRegion in polygon.Regions)
             {
@@ -38,19 +41,19 @@ namespace Framework.Pipeline.Geometry
                     region.Points.Add(point);
                 }
 
-                representation.Regions.Add(region);
+                Representation.Regions.Add(region);
             }
         }
 
+        /// <summary>
+        /// Get the Centroid of this polygon.
+        /// </summary>
+        /// <returns>point in the centroid of this polygon</returns>
         public Vector2 GetCentroid()
         {
-            //TODO: This center is not weighted since our vertices do not have weights.
-            //according to this : https://stackoverflow.com/questions/2832771/find-the-centroid-of-a-polygon-with-weighted-vertices
-            //if we leave it like this its just called the Centroid : https://en.wikipedia.org/wiki/Centroid
-
             Vector2 sum = Vector2.zero;
             int n = 0;
-            foreach (Region representationRegion in representation.Regions)
+            foreach (Region representationRegion in Representation.Regions)
             {
                 foreach (Point representationRegionPoint in representationRegion.Points)
                 {
@@ -67,40 +70,58 @@ namespace Framework.Pipeline.Geometry
             return sum / n;
         }
 
-        public void ScaleFromCentroid(Vector2 axis)
+        /// <summary>
+        /// Scale this polygon from its centroid.
+        /// This method may not behave as expected when used with concave polygons.
+        /// </summary>
+        /// <param name="scaleFactorPerAxis">scale factor on each axis</param>
+        public void ScaleFromCentroid(Vector2 scaleFactorPerAxis)
         {
             Vector2 centroid = GetCentroid();
 
-            representation.Regions.ForEach(region => region.Points = region.Points.Select(point =>
+            Representation.Regions.ForEach(region => region.Points = region.Points.Select(point =>
             {
                 point -= centroid;
-                point *= axis;
+                point *= scaleFactorPerAxis;
                 point += centroid;
                 return point;
             }).ToList());
         }
 
+        /// <summary>
+        /// Move this polygon to a specified position, so that the centroid of this polygon is on the specified position.
+        /// </summary>
+        /// <param name="moveTo">position to move to</param>
         public void MovePolygon(Vector2 moveTo)
         {
             Vector2 translate = moveTo - GetCentroid();
             
-            representation.Regions.ForEach(region => region.Points = region.Points.Select(point =>
+            Representation.Regions.ForEach(region => region.Points = region.Points.Select(point =>
             {
                 point += translate;
                 return point;
             }).ToList());
         }
 
+        /// <summary>
+        /// Get all points of this polygon.
+        /// The order of the points can be arbitrary.
+        /// </summary>
+        /// <returns>list with all points of polygon</returns>
         public List<Vector2> GetPoints()
         {
-            return representation.Regions.SelectMany(region => region.Points).Select(point => (Vector2) point).ToList();
+            return Representation.Regions.SelectMany(region => region.Points).Select(point => (Vector2) point).ToList();
         }
 
-        public List<OwLine> GetLines()
+        /// <summary>
+        /// Get all edges of polygon as lines.
+        /// </summary>
+        /// <returns>list of edge as lines</returns>
+        public List<OwLine> GetEdges()
         {
             List<OwLine> lines = new List<OwLine>();
 
-            foreach (Region representationRegion in representation.Regions)
+            foreach (Region representationRegion in Representation.Regions)
             {
                 Point first = null;
                 Point prev = null;
@@ -124,8 +145,13 @@ namespace Framework.Pipeline.Geometry
             return lines;
         }
 
+        /// <summary>
+        /// Get axis aligned bounding box of this polygon
+        /// </summary>
+        /// <returns>bounding box</returns>
         public Rect GetBoundingBox()
         {
+            //TODO: change return type to OwRectangle
             float minX = Single.MaxValue;
             float maxX = Single.MinValue;
             float minY = Single.MaxValue;
@@ -141,21 +167,25 @@ namespace Framework.Pipeline.Geometry
 
             return new Rect(new Vector2(minX, minY), new Vector2(maxX - minX, maxY - minY));
         }
-     
-
+        
+        
+        /// <summary>
+        /// Get convex hull of this polygon
+        /// </summary>
+        /// <returns>convex hull of polygon</returns>
         public OwPolygon GetConvexHull()
         {
             PointD[] hullPoints = GeoAlgorithms.ConvexHull(GetPoints().Select(x => new PointD(x.x, x.y)).ToArray());
-            //convex hull algorithm revereses the resulting points, so they have to be revered before creating the new polygon
+            //convex hull algorithm reverses the resulting points, so they have to be reversed before creating the new polygon
             OwPolygon hullPolygon = new OwPolygon(hullPoints.Select(x => new Vector2((float) x.X, (float) x.Y)).Reverse());
             return hullPolygon;
         }
-
-        public List<GeneralPolygon2d> Getg3Polygon()
+        
+        internal List<GeneralPolygon2d> Getg3Polygon()
         {
             List<GeneralPolygon2d> result = new List<GeneralPolygon2d>();
             
-            List<GeneralPolygon2d> polysToMesh = representation.Regions.Select(region =>
+            List<GeneralPolygon2d> polysToMesh = Representation.Regions.Select(region =>
                 new GeneralPolygon2d(new Polygon2d(region.Points.Select(x => new Vector2d((float) x.X, (float) x.Y))))).ToList();
             
             //sort descending area
@@ -195,7 +225,7 @@ namespace Framework.Pipeline.Geometry
         public void DrawDebug(Color debugColor, Vector3 offset = default)
         {
             Gizmos.color = debugColor;
-            foreach (Region representationRegion in representation.Regions)
+            foreach (Region representationRegion in Representation.Regions)
             {
                 Point first = null;
                 Point prev = null;
@@ -224,7 +254,7 @@ namespace Framework.Pipeline.Geometry
 
         public IGeometry Copy()
         {
-            return new OwPolygon(representation);
+            return new OwPolygon(Representation);
         }
     }
 }

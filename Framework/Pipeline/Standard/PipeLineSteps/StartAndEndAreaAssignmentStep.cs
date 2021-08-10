@@ -29,8 +29,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             Area endArea = areas.Last();
 
             //define types of areas for
-            startArea.Type = "startArea";
-            endArea.Type = "endArea";
+            startArea.Identifier = "startArea";
+            endArea.Identifier = "endArea";
             
             return world;
         }

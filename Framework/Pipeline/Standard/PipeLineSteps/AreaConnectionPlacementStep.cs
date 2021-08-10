@@ -56,7 +56,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                 foreach (Area area in areas)
                 {
                     OwPolygon shape = area.GetShape();
-                    List<OwLine> lines = shape.GetLines();
+                    List<OwLine> lines = shape.GetEdges();
 
                     foreach (OwLine edge in lines)
                     {

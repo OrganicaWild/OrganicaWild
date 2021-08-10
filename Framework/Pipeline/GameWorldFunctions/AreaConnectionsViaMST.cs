@@ -42,7 +42,7 @@ namespace Framework.Pipeline.GameWorldFunctions
                 foreach (Area area in areas)
                 {
                     OwPolygon shape = area.GetShape();
-                    List<OwLine> edges = shape.GetLines();
+                    List<OwLine> edges = shape.GetEdges();
                     foreach (OwLine edge in edges)
                     {
                         IEnumerable<IGeometry> intersects = LineLineInteractor.Use().Intersect(edge, mstLine);

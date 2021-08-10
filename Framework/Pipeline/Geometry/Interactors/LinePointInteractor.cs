@@ -20,8 +20,13 @@ namespace Framework.Pipeline.Geometry.Interactors
 
         public bool Contains(OwLine first, OwPoint second)
         {
-            IGeometry intersect = Intersect(first, second).First();
-            return intersect is OwPoint;
+            IEnumerable<IGeometry> intersect = Intersect(first, second);
+            if (intersect.Any())
+            {
+                return intersect.First() is OwPoint;
+            }
+
+            return false;
         }
 
         [Obsolete("Use Contains() instead")]
@@ -73,7 +78,7 @@ namespace Framework.Pipeline.Geometry.Interactors
                 return new []{ new OwPoint(C) };
             }
 
-            return new[] { new OwInvalidGeometry() };
+            return Enumerable.Empty<IGeometry>();
         }
 
         public float CalculateDistance(OwLine first, OwPoint second)

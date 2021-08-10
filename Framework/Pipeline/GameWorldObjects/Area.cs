@@ -3,6 +3,12 @@ using Framework.Pipeline.Geometry;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
+    /// <summary>
+    /// Implements an Area as an IGameWorldObject.
+    /// The shape of the area is fixed as an OwPolygon.
+    /// Areas are used to define areas inside of the GameWorld.
+    /// Areas can be children of areas and so turn into subareas.
+    /// </summary>
     public class Area : AbstractGameWorldObject<OwPolygon>
     {
         
@@ -17,7 +23,7 @@ namespace Framework.Pipeline.GameWorldObjects
                 return (IGameWorldObject) identityDictionary[GetHashCode()];
             }
 
-            IGameWorldObject copy = new Area((OwPolygon) GetShape().Copy(), Type);
+            IGameWorldObject copy = new Area((OwPolygon) GetShape().Copy(), Identifier);
             CopyChildren(ref copy, identityDictionary);
             identityDictionary.Add(GetHashCode(), copy);
             return (Area) copy;

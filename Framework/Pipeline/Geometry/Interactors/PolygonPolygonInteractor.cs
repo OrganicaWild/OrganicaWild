@@ -22,14 +22,14 @@ namespace Framework.Pipeline.Geometry.Interactors
         
         public bool Contains(OwPolygon first, OwPolygon second)
         {
-            Polygon result = SegmentSelector.Union(first.representation, second.representation);
+            Polygon result = SegmentSelector.Union(first.Representation, second.Representation);
             // if the result equals this polygon if the other polygon is not present in the union result and this polygon is not changed
-            return result.Equals(first.representation);
+            return result.Equals(first.Representation);
         }
 
         public bool PartiallyContains(OwPolygon first, OwPolygon second)
         {
-            Polygon intersection = SegmentSelector.Intersect(first.representation, second.representation);
+            Polygon intersection = SegmentSelector.Intersect(first.Representation, second.Representation);
             //if the intersection of the two polygons is not empty the second polygon is partially contained in the first
             return !intersection.IsEmpty();
         }
@@ -38,7 +38,7 @@ namespace Framework.Pipeline.Geometry.Interactors
         {
             OwLine shortest = new OwLine(Vector2.zero, new Vector2(float.MaxValue, float.MaxValue));
             
-            foreach (OwLine linesFirst in first.GetLines())
+            foreach (OwLine linesFirst in first.GetEdges())
             {
                OwLine potentiallyShortest = PolygonLineInteractor.Use().CalculateShortestPath(second, linesFirst);
                if (shortest.Length() > potentiallyShortest.Length())
@@ -73,32 +73,32 @@ namespace Framework.Pipeline.Geometry.Interactors
             //
             // return new OwPolygon(new Polygon(x));
 
-            Polygon union = SegmentSelector.Union(first.representation, second.representation);
+            Polygon union = SegmentSelector.Union(first.Representation, second.Representation);
             
             return new OwPolygon(union);
         }
 
         public OwPolygon Intersection(OwPolygon first, OwPolygon second)
         {
-            Polygon intersection = SegmentSelector.Intersect(first.representation, second.representation);
+            Polygon intersection = SegmentSelector.Intersect(first.Representation, second.Representation);
             return new OwPolygon(intersection);
         }
 
         public OwPolygon Xor(OwPolygon first, OwPolygon second)
         {
-            Polygon xor = SegmentSelector.Xor(first.representation, second.representation);
+            Polygon xor = SegmentSelector.Xor(first.Representation, second.Representation);
             return new OwPolygon(xor);
         }
 
         public OwPolygon Difference(OwPolygon first, OwPolygon second)
         {
-            Polygon difference = SegmentSelector.Difference(first.representation, second.representation);
+            Polygon difference = SegmentSelector.Difference(first.Representation, second.Representation);
             return new OwPolygon(difference);
         }
 
         public OwPolygon DifferenceReversed(OwPolygon first, OwPolygon second)
         {
-            Polygon difference = SegmentSelector.DifferenceRev(first.representation, second.representation);
+            Polygon difference = SegmentSelector.DifferenceRev(first.Representation, second.Representation);
             return new OwPolygon(difference);
         }
     }

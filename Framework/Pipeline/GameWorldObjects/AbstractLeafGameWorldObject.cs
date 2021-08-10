@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Standard;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Framework.Pipeline.GameWorldObjects
 {
 public abstract class AbstractLeafGameWorldObject<TGeometry> : IGameWorldObject where TGeometry : IGeometry
     {
-        public string Type { get; set; }
+        public string Identifier { get; set; }
 
         private TGeometry shape;
 
@@ -16,7 +17,7 @@ public abstract class AbstractLeafGameWorldObject<TGeometry> : IGameWorldObject 
         public AbstractLeafGameWorldObject(TGeometry shape, string type = null)
         {
             this.shape = shape;
-            this.Type = type;
+            this.Identifier = type;
         }
 
         public TGeometry GetShape()
@@ -64,7 +65,12 @@ public abstract class AbstractLeafGameWorldObject<TGeometry> : IGameWorldObject 
             return Enumerable.Empty<IGameWorldObject>();
         }
 
-        public IEnumerable<T> GetAllChildrenOfType<T>()
+        public IEnumerable<T> GetAllChildrenOfType<T>() where T : IGameWorldObject
+        {
+            return Enumerable.Empty<T>();
+        }
+
+        public IEnumerable<T> GetAllChildrenOfTypeRecursive<T>() where T : IGameWorldObject
         {
             return Enumerable.Empty<T>();
         }

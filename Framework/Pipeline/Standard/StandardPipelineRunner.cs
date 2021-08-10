@@ -8,9 +8,20 @@ using Random = System.Random;
 
 namespace Framework.Pipeline.Standard
 {
+    /// <summary>
+    /// Standard Implementation of PipelineRunner.
+    /// Generally used inside of StandardPipelineManager but can also be used standalone.
+    /// </summary>
     public class StandardPipelineRunner : IPipelineRunner
     {
+        /// <summary>
+        /// Random instance, that is passed to each step
+        /// </summary>
         public Random Random { get; }
+        
+        /// <summary>
+        /// Seed to instantiate random instance at the start of generation.
+        /// </summary>
         public int Seed { get; }
 
         public static bool EncounteredError { get; private set; }
@@ -35,6 +46,12 @@ namespace Framework.Pipeline.Standard
             }
         }
 
+        /// <summary>
+        /// Add a step to the PipelineRunner.
+        /// This method checks if the newly added step could be executed according to the required and supplied guarantees.
+        /// </summary>
+        /// <param name="step">step to add</param>
+        /// <exception cref="IllegalExecutionOrderException">throws if previous step does not provide the required guarantees</exception>
         public void AddStep(PipelineStep step)
         {
             PipelineStep previous = executionPipeline.LastOrDefault();

@@ -53,12 +53,12 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
                 yield return null;
                 (IGameWorldObject next, Transform parentTransform) = cookingQueue.Dequeue();
 
-                if (next.Type != null)
+                if (next.Identifier != null)
                 {
-                    if (!cookbook.ContainsKey(next.Type) || cookbook[next.Type] == null)
+                    if (!cookbook.ContainsKey(next.Identifier) || cookbook[next.Identifier] == null)
                     {
                         childrenWithNoRecipeCount++;
-                        Debug.LogWarning($"The cook book does not contain a recipe for {next.Type}.");
+                        Debug.LogWarning($"The cook book does not contain a recipe for {next.Identifier}.");
                     }
                     else
                     {
@@ -112,12 +112,12 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
             {
                 (IGameWorldObject next, Transform parentTransform) = cookingQueue.Dequeue();
 
-                if (next.Type != null)
+                if (next.Identifier != null)
                 {
-                    if (!cookbook.ContainsKey(next.Type) || cookbook[next.Type] == null)
+                    if (!cookbook.ContainsKey(next.Identifier) || cookbook[next.Identifier] == null)
                     {
                         childrenWithNoRecipeCount++;
-                        Debug.LogWarning($"The cook book does not contain a recipe for {next.Type}.");
+                        Debug.LogWarning($"The cook book does not contain a recipe for {next.Identifier}.");
                     }
                     else
                     {
@@ -185,7 +185,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
                 while (childrenToTest.Any())
                 {
                     IGameWorldObject top = childrenToTest.Pop();
-                    TypeRecipeCombination combination = new TypeRecipeCombination(top.Type);
+                    TypeRecipeCombination combination = new TypeRecipeCombination(top.Identifier);
 
                     if (!recipes.Contains(combination))
                     {
@@ -218,8 +218,8 @@ namespace Framework.Pipeline.Standard.ThemeApplicator
 
         private GameObject CookGameWorldObject(IGameWorldObject child)
         {
-            cookbook[child.Type].random = manager.standardPipelineRunner.Random;
-            GameObject cooked = cookbook[child.Type].Cook(child);
+            cookbook[child.Identifier].random = manager.standardPipelineRunner.Random;
+            GameObject cooked = cookbook[child.Identifier].Cook(child);
             cooked.transform.parent = root.transform;
             cooked.transform.position += alreadyCooked * layerDistance;
             alreadyCooked++;

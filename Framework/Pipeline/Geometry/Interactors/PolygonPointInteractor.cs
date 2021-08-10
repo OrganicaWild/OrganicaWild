@@ -33,7 +33,7 @@ namespace Framework.Pipeline.Geometry.Interactors
         {
             List<OwLine> paths = new List<OwLine>();
 
-            foreach (OwLine owLine in first.GetLines())
+            foreach (OwLine owLine in first.GetEdges())
             {
                 paths.Add(LinePointInteractor.Use().CalculateShortestPath(owLine, second));
             }
@@ -45,7 +45,7 @@ namespace Framework.Pipeline.Geometry.Interactors
         public IEnumerable<IGeometry> Intersect(OwPolygon first, OwPoint second)
         {
             List<IGeometry> result = new List<IGeometry>();
-            foreach (Region region in first.representation.Regions)
+            foreach (Region region in first.Representation.Regions)
             {
                 PolygonLocation singleResult = GeoAlgorithms.PointInPolygon(second,
                     region.Points.Select(point => (PointD) point).ToArray());

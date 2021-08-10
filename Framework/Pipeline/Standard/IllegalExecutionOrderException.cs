@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Framework.Pipeline.Standard
 {
+    /// <summary>
+    /// Represents an error that can occur during creation of the Pipeline out of the supplied pipeline steps.
+    /// </summary>
     public class IllegalExecutionOrderException : Exception
     {
         public readonly IEnumerable<Type> missingGuarantees;

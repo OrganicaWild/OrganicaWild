@@ -1,7 +1,11 @@
 using System.Collections.Generic;
+using Framework.Pipeline.Geometry;
 
 namespace Framework.Pipeline.GameWorldObjects
 {
+    /// <summary>
+    /// Implements a Landmark as an IGameWorldObject
+    /// </summary>
     public class Landmark : AbstractLeafGameWorldObject<IGeometry>
     {
         public Landmark(IGeometry shape, string type = null) : base(shape, type)
@@ -15,7 +19,7 @@ namespace Framework.Pipeline.GameWorldObjects
                 return (IGameWorldObject) identityDictionary[GetHashCode()];
             }
             
-            Landmark copy = new Landmark(GetShape().Copy(), Type);
+            Landmark copy = new Landmark(GetShape().Copy(), Identifier);
             identityDictionary.Add(GetHashCode(), copy);
             return copy;
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Polybool.Net.Objects;
@@ -6,6 +5,9 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Geometry
 {
+    /// <summary>
+    /// Implements a discredited circle as an IGeometry
+    /// </summary>
     public class OwCircle : OwPolygon
     {
         public OwCircle(Vector2 center, float radius, int resolution) : base(new List<Vector2>())
@@ -26,7 +28,7 @@ namespace Framework.Pipeline.Geometry
                 up = rotated;
             }
 
-            representation.Regions[0].Points.AddRange(pointList.Select(vec2 => (Point) vec2));
+            Representation.Regions[0].Points.AddRange(pointList.Select(vec2 => (Point) vec2));
         }
     }
 }

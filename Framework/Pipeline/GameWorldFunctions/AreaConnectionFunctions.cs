@@ -107,7 +107,7 @@ namespace Framework.Pipeline.GameWorldFunctions
                     continue;
                 }
 
-                foreach (OwLine potentialTwinEdge in area.GetShape().GetLines())
+                foreach (OwLine potentialTwinEdge in area.GetShape().GetEdges())
                 {
                     //if reference not the same, check if the coordinates fit for twin
                     if (edge.Equals(new OwLine(potentialTwinEdge.End, potentialTwinEdge.Start)) ||

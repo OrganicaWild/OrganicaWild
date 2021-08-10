@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Framework.Pipeline.Geometry
 {
+    /// <summary>
+    /// Implements an axis aligned rectangle as an IGeometry
+    /// </summary>
     public class OwRectangle : OwPolygon
     {
         public OwRectangle(Vector2 start, Vector2 end) : base(new List<Vector2>())
@@ -13,7 +16,7 @@ namespace Framework.Pipeline.Geometry
             Vector2 d = start + end;
             
             //first region is created in base constructor
-            representation.Regions[0].Points.AddRange(new Point[] {start, b, d, c});
+            Representation.Regions[0].Points.AddRange(new Point[] {start, b, d, c});
         }
     }
 }
