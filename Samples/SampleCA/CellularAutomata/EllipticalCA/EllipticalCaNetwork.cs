@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Demo.CellularAutomata;
-using Framework.Cellular_Automata;
 using Framework.Cellular_Automata.Legacy;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Demo.Cellular_Automata.Elliptical_Cellular_Automata
+namespace Samples.SampleCA.CellularAutomata.EllipticalCA
 {
     public class EllipticalCaNetwork : CaNetwork
     {

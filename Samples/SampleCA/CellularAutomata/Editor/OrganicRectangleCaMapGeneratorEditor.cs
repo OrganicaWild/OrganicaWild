@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Demo.Cellular_Automata.Editor
+namespace Samples.SampleCA.CellularAutomata.Editor
 {
     [CustomEditor(typeof(OrganicRectangularCaMapGenerator))]
     public class OrganicRectangleCaMapGeneratorEditor : UnityEditor.Editor

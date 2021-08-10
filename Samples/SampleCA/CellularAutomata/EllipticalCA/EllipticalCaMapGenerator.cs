@@ -1,7 +1,6 @@
-﻿using Demo.CellularAutomata;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Demo.Cellular_Automata.Elliptical_Cellular_Automata
+namespace Samples.SampleCA.CellularAutomata.EllipticalCA
 {
     public class EllipticalCaMapGenerator : MonoBehaviour
     {
