@@ -32,7 +32,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
             }
 
             float[,] noiseMap =
-                PerlinNoise.GenerateNoiseMap(random, size.x, size.y, 20, 6, 2, 1, Vector2.zero);
+                PerlinNoise.PerlinNoise.GenerateNoiseMap(random, size.x, size.y, 20, 6, 2, 1, Vector2.zero);
             Vector2 center = individual.GetShape().GetCentroid();
 
             Vector2 start = center - size / 2;

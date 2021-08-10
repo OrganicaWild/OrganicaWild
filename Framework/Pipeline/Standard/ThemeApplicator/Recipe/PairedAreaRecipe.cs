@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
-using Framework.Poisson_Disk_Sampling;
 using Framework.Util;
 using UnityEngine;
 using Random = System.Random;
@@ -64,7 +63,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
                 //         worldPos, Quaternion.identity);
 
 
-                List<Vector2> points = PoissonDiskSampling.GeneratePoints(radius, size, size, 2, lRandom)
+                List<Vector2> points = PoissonDiskSampling.PoissonDiskSampling.GeneratePoints(radius, size, size, 2, lRandom)
                     .Select(p => p + centroid - new Vector2(size / 2f, size / 2f)).ToList();
 
                 for (int i = 0; i < points.Count() - 1; i++)
@@ -99,7 +98,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
                             //flower patch
                             Vector2 vector2 = points[i];
 
-                            List<Vector2> flowerPatchPoints = PoissonDiskSampling
+                            List<Vector2> flowerPatchPoints = PoissonDiskSampling.PoissonDiskSampling
                                 .GeneratePoints(flowerSize, flowerPatchSize, flowerPatchSize, 2, lRandom)
                                 .Select(p => p + vector2 - new Vector2(flowerPatchSize / 2f, flowerPatchSize / 2f))
                                 .ToList();

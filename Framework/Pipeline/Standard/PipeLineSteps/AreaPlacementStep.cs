@@ -5,7 +5,6 @@ using Assets.Scripts.Framework.Pipeline.PipelineGuarantees;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
-using Framework.Poisson_Disk_Sampling;
 using Tektosyne.Geometry;
 using UnityEngine;
 
@@ -35,7 +34,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             // Generate voronoi cells
             List<Vector2> outermostNodes = (world.Root.GetShape() as OwPolygon)?.GetPoints();
             RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
-            IEnumerable<Vector2> points = PoissonDiskSampling
+            IEnumerable<Vector2> points = PoissonDiskSampling.PoissonDiskSampling
                 .GeneratePoints(poissonDiskRadius, (float) rect.Width, (float) rect.Height, samplesBeforeRejection, random)
                 .Select(point => new Vector2(point.x, point.y));
             VoronoiResults results = Voronoi.FindAll(points.Select(point => new PointD(point.x, point.y)).ToArray(), rect);

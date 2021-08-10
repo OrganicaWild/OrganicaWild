@@ -4,7 +4,6 @@ using System.Linq;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
-using Framework.Poisson_Disk_Sampling;
 using Framework.Util;
 using Framework.Util.Miscellanous;
 using g3;
@@ -47,7 +46,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
             Vector2 half = (Vector2) size;
             half /= 2;
 
-            IEnumerable<Vector2> points = PoissonDiskSampling
+            IEnumerable<Vector2> points = PoissonDiskSampling.PoissonDiskSampling
                 .GeneratePoints(prefabRadius, (float) size.x, (float) size.y, 30, random)
                 .Select(p => (p + middle) - half);
 

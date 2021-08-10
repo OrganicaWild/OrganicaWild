@@ -4,7 +4,6 @@ using System.Linq;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.PipelineGuarantees;
-using Framework.Poisson_Disk_Sampling;
 using Tektosyne.Geometry;
 using UnityEngine;
 
@@ -38,7 +37,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             
             RectD rect = RectD.Circumscribe(outerRim.GetPoints().Select(node => new PointD(node.x, node.y)).ToArray());
             float correctionValue = poissonDiskRadius;
-            IEnumerable<Vector2> points = PoissonDiskSampling
+            IEnumerable<Vector2> points = PoissonDiskSampling.PoissonDiskSampling
                 .GeneratePoints(poissonDiskRadius, (float) rect.Width - correctionValue,
                     (float) rect.Height - correctionValue, samplesBeforeRejection)
                 .Select(point => new Vector2(point.x + correctionValue / 2, point.y + correctionValue / 2));

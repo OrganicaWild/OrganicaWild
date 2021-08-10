@@ -4,7 +4,6 @@ using System.Linq;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
-using Framework.Poisson_Disk_Sampling;
 using Framework.Util;
 using UnityEngine;
 
@@ -36,7 +35,7 @@ namespace Framework.Pipeline.Standard.ThemeApplicator.Recipe
 
             Vector2 middle = areaShape.GetCentroid();
 
-            IEnumerable<Vector2> points = PoissonDiskSampling.GeneratePoints(prefabRadius, 100, 100, 30, random).Select(p => (p + middle) - new Vector2(50,50));
+            IEnumerable<Vector2> points = PoissonDiskSampling.PoissonDiskSampling.GeneratePoints(prefabRadius, 100, 100, 30, random).Select(p => (p + middle) - new Vector2(50,50));
 
             foreach (Vector2 point in points)
             {

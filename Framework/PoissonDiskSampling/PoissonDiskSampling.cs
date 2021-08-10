@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Framework.Poisson_Disk_Sampling
+namespace Framework.PoissonDiskSampling
 {
     public static class PoissonDiskSampling
     {

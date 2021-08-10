@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 1404447995}
   - component: {fileID: 1404447994}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Perlin Noise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

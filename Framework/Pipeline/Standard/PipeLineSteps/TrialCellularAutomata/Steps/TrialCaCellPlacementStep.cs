@@ -6,7 +6,6 @@ using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.Geometry.Interactors;
 using Framework.Pipeline.PipelineGuarantees;
-using Framework.Poisson_Disk_Sampling;
 using Polybool.Net.Objects;
 using Tektosyne.Geometry;
 using UnityEngine;
@@ -73,7 +72,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             OwPolygon surroundingPolygon = parentArea.GetShape();
             List<Vector2> outermostNodes = surroundingPolygon?.GetPoints();
             RectD rect = RectD.Circumscribe(outermostNodes?.Select(node => new PointD(node.x, node.y)).ToArray());
-            Vector2[] points = PoissonDiskSampling
+            Vector2[] points = PoissonDiskSampling.PoissonDiskSampling
                 .GeneratePoints(poissonDiskRadius, (float)rect.Width, (float)rect.Height, samplesBeforeRejection, localRandom)
                 .Select(point => new Vector2(point.x + (float)rect.X, point.y + (float)rect.Y))
                 .ToArray();

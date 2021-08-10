@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Framework.PerlinNoise;
 using UnityEngine;
 
 public class PerlinNoiseGenerator : MonoBehaviour
