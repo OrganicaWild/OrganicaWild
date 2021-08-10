@@ -83,7 +83,7 @@ Wait for the clone and Unity upon opening the project unity will import the code
 Viola, you have a editable copy of the code.
 
 Make your changes and commit.
-To have your changes in the main repo, create a pull request.
+To have your changes in the main repository, create a pull request.
 
 
 ### Contribute in the samples
@@ -107,7 +107,7 @@ In terminal, navigate to package folder.
 ```
 cd <project folder>/Packages/OrganicaWild
 ```
-Rename folder to any name without a ~ at the end for it to appear inside of Unity.
+Rename folder to any name without a tilde (~) at the end for it to appear inside of Unity.
 ```
 mv Samples~ Samples
 ```
@@ -116,4 +116,4 @@ Before commiting change the folder name back.
 mv Samples Samples~
 ```
 
-Viola, now you can change the samples and provide 
+Viola, now you can change the samples and provide the improved samples to everyone. 
