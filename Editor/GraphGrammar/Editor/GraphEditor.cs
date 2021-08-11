@@ -25,11 +25,11 @@ namespace Framework.GraphGrammar.Editor
 
         private static int MaximumNumberOfNodes = 112;
 
-        [MenuItem("Organica Wild/Create/Graph Grammar Rule")]
+        [MenuItem("Organica Wild/Create/Mission Graph")]
         private static void ShowWindow()
         {
             GraphEditor window = GetWindow<GraphEditor>();
-            window.titleContent = new GUIContent("Missiongraph Editor");
+            window.titleContent = new GUIContent("Mission Graph Editor");
             window.Show();
         }
 
@@ -78,7 +78,7 @@ namespace Framework.GraphGrammar.Editor
                 Save();
             }
 
-            if (GUILayout.Button("Save Rule"))
+            if (GUILayout.Button("Save Graph"))
             {
                 if (graph.Start == null || graph.End == null)
                 {

@@ -215,8 +215,12 @@ namespace Framework.GraphGrammar
 
         public override string ToString()
         {
-            //return $"({string.Join(", ", Vertices)})";
-            return next(Start);
+            if (Start != null)
+            {
+                return next(Start);
+            }
+           
+            return "";
         }
 
         private string next(MissionVertex vertex)

@@ -80,9 +80,16 @@ namespace Framework.GraphGrammar.EditorData
                 from.AddNextNeighbour(to);
             }
 
-            result.Start = missionVertices[start];
-            result.End = missionVertices[end];
+            if (missionVertices.ContainsKey(start))
+            {
+                result.Start = missionVertices[start];
+            }
 
+            if (missionVertices.ContainsKey(end))
+            {
+                result.End = missionVertices[end];
+            }
+            
             return result;
         }
 
