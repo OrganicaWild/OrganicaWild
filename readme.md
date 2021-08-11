@@ -39,19 +39,16 @@ Instructions are in [Search based Manual](Framework/Evolutionary).
 ### Perlin Noise
 
 Profit from an improved perlin noise implementation with layered scaled noise to create more interesting patterns.
-Instructions are in [Perlin Noise Manual](Framework/Perlin%20Noise).
 
 
 ### Cellular Automata
 
 Use Cellular Automata to generate things like caves and much more.
-Instructions are in [Cellular Automata Manual](Framework/Cellular%20Automata).
 
 
 ### Poisson Disk Sampling
 
 Generate points with a minimum distance. A technique often used in rendering, can produce beautiful arrangements of objects in a scene.
-Instructions are in [Poisson Disk Sampling Manual](Framework/Poisson%20Disk%20Sampling).
 
 ---
 

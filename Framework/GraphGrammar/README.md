@@ -10,11 +10,11 @@ For more ideas on how to use it, we strongly recommend to read his work.
 
 ### How to make your own mission graphs
 
-Add the graph grammar component to a Unity GameObject.
+Add the `GraphGrammarComponent` to a Unity GameObject.
 
 ![graph grammar component](../../Images~/graph_grammar_component.png)
 
-In the graph grammar component you can define rules and a mother.
+In the `GraphGrammarComponent` you can define rules and a mother.
 The rules define how the graph is being manipulated. 
 The mother is starting graph.
 A rule consists out of two graphs. A left hand side and a right hand side. In application of the rule the left hand side is being replaced by the right hand side in the mother graph.
@@ -30,12 +30,13 @@ Now simply drag the created assets onto the component to make your graph grammar
 
 ![graph grammar component](../../Images~/shape_grammar.png)
 
-To use the shape grammar and convert a mission graph to a 3D level. Also add a Shape Grammar Component to the previous GameObject that already has the Graph Grammar Component.
+To use the `ShapeGrammar` and convert a mission graph to a 3D level. Also add a `ShapeGrammar` to the previous GameObject that already has the `GraphGrammarComponent`.
 A Shape Grammar also needs rules, however the rules have mission graph node types on the left side and a prefab on the right.
-You can use any prefab, that you attach a Shape Grammar Rule Component onto.
-The shape grammar rule component must then be equipped, with what types of mission graph nodes it should replace and where other nodes are attached to it.
+You can use any prefab, that you attach a `ShapeGrammarRuleComponent` onto.
+The `ShapeGrammarRuleComponent` must then be equipped, with what types of mission graph nodes it should replace and where other nodes are attached to it.
 The first you do directly inside of the Component.
-The second are ScriptableConnections. 
+The second are `ScriptableConnections`. 
+Create a ScriptableConnection when right clicking inside of the Project Window and select Create > `ScriptableConnections`.
 You can edit these in the inspector while having the prefab open to see your changes in the debug view.
 
 ![graph grammar component](../../Images~/shape_grammar_rule.png)
