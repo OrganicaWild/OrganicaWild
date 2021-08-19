@@ -22,7 +22,8 @@
     "*.asmdef",
     "Samples~",
     "External",
-    "Framework"
+    "Framework",
+    "Editor"
   ],
   "samples": [
     {
