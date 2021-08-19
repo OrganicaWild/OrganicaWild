@@ -19,7 +19,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
         public override Type[] RequiredGuarantees => new Type[0];
         
-        public override bool AddToDebugStackedView => true;
+        public override bool AddToDebugStackedView => false;
         
         public override GameWorld Apply(GameWorld world)
         {

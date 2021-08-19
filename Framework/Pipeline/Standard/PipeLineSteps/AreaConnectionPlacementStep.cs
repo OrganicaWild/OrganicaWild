@@ -44,7 +44,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
             //reduce by one to remove connections at the edge of the map
             boundaries.min -= new Vector2(-1, -1);
-            boundaries.max -= new Vector2(-1, -1);
+            boundaries.max -= new Vector2(+1, +1);
 
             //call MST Area Connector on 
             Dictionary<OwLine, AreaConnection> placedConnections = AreaConnectionsViaMst.AddAreaConnectionsViaMst(

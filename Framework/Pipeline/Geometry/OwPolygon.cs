@@ -29,7 +29,17 @@ namespace Framework.Pipeline.Geometry
 
         public OwPolygon(Polygon polygon)
         {
-            Representation = new Polygon() {Regions = new List<Region>()};
+            Representation = InnerCopy(polygon);
+        }
+
+        public OwPolygon(OwPolygon owPolygon)
+        {
+            Representation = InnerCopy(owPolygon.Representation);
+        }
+
+        private Polygon InnerCopy(Polygon polygon)
+        {
+            Polygon representation = new Polygon() {Regions = new List<Region>()};
 
             foreach (Region polygonRegion in polygon.Regions)
             {
@@ -41,10 +51,12 @@ namespace Framework.Pipeline.Geometry
                     region.Points.Add(point);
                 }
 
-                Representation.Regions.Add(region);
+                representation.Regions.Add(region);
             }
-        }
 
+            return representation;
+        }
+        
         /// <summary>
         /// Get the Centroid of this polygon.
         /// </summary>
@@ -222,6 +234,19 @@ namespace Framework.Pipeline.Geometry
             return result;
         }
 
+        public double GetArea()
+        {
+            double sum = 0;
+            List<GeneralPolygon2d> polygons = Getg3Polygon();
+            foreach (GeneralPolygon2d generalPolygon2d in polygons)
+            {
+                double size = generalPolygon2d.Area;
+                sum += size;
+            }
+
+            return sum;
+        }
+
         public void DrawDebug(Color debugColor, Vector3 offset = default)
         {
             Gizmos.color = debugColor;
@@ -240,15 +265,15 @@ namespace Framework.Pipeline.Geometry
                     {
                         Vector2 prevVec2 = prev;
                         Vector2 currentVec2 = representationRegionPoint;
-                        Gizmos.DrawLine(new Vector3(prevVec2.x, 0, prevVec2.y) + offset,
-                            new Vector3(currentVec2.x, 0, currentVec2.y) + offset);
+                        GameWorld.DrawThickLines(new Vector3(prevVec2.x, 0, prevVec2.y) + offset,
+                            new Vector3(currentVec2.x, 0, currentVec2.y) + offset, debugColor);
                         prev = representationRegionPoint;
                     }
                 }
 
                 Vector2 lastVec2 = prev;
                 Vector2 firstVec2 = first;
-                Gizmos.DrawLine(new Vector3(lastVec2.x, 0, lastVec2.y) + offset, new Vector3(firstVec2.x, 0, firstVec2.y) + offset);
+                GameWorld.DrawThickLines(new Vector3(lastVec2.x, 0, lastVec2.y) + offset, new Vector3(firstVec2.x, 0, firstVec2.y) + offset, debugColor);
             }
         }
 

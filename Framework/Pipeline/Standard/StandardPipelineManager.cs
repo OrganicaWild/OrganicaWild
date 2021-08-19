@@ -30,6 +30,8 @@ namespace Framework.Pipeline.Standard
         /// If set to true a debug view with the GameWorld after each step is drawn in debug view.
         /// </summary>
         public bool drawStackedDebugView = false;
+        
+        public bool drawDebugOverlay = false;
 
         public bool HasError { get; private set; }
         public string ErrorText { get; private set; }
@@ -227,21 +229,24 @@ namespace Framework.Pipeline.Standard
         private void Update()
         {
             //checks upon every new frame in editor, if the pipeline is still valid.
-            CheckIfAllStepsValid();
+            //CheckIfAllStepsValid();
         }
 
         private void OnDrawGizmos()
         {
-            GameWorld?.DrawDebug(minimalDebugColorBrightness);
-
+            if (drawDebugOverlay)
+            {
+                GameWorld?.DrawDebug(minimalDebugColorBrightness);
+            }
+            
             if (drawStackedDebugView && standardPipelineRunner?.gameWorldInEachStep != null)
             {
-                Vector3 layerDistance = new Vector3(0, 50f, 0);
+                Vector3 layerDistance = new Vector3(150f, 0f, 0);
                 for (var i = standardPipelineRunner.gameWorldInEachStep.Count - 1; i >= 0; i--)
                 {
                     GameWorld gameWorld = standardPipelineRunner.gameWorldInEachStep[i];
                     gameWorld.DrawDebug(minimalDebugColorBrightness,
-                        (standardPipelineRunner.gameWorldInEachStep.Count - i) * layerDistance + new Vector3(0, 50, 0));
+                        (standardPipelineRunner.gameWorldInEachStep.Count - i) * layerDistance + new Vector3(150f, 0f, 0));
                 }
             }
         }

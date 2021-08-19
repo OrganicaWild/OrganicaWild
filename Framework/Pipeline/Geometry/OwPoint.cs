@@ -33,17 +33,17 @@ namespace Framework.Pipeline.Geometry
 
         public void DrawDebug(Color debugColor, Vector3 offset = default)
         {
-            const float sizeOfStar = 1f;
+            const float sizeOfStar = 2f;
    
             Gizmos.color = debugColor;
             Vector3 coord = new Vector3(Position.x, 0, Position.y) + offset;
-            Gizmos.DrawLine(coord + new Vector3(-sizeOfStar, 0, -sizeOfStar).normalized * sizeOfStar,
-                coord + new Vector3(sizeOfStar, 0, sizeOfStar).normalized * sizeOfStar);
-            Gizmos.DrawLine(coord + new Vector3(sizeOfStar, 0, -sizeOfStar).normalized * sizeOfStar,
-                coord + new Vector3(-sizeOfStar, 0, sizeOfStar).normalized * sizeOfStar);
+            GameWorld.DrawThickLines(coord + new Vector3(-sizeOfStar, 0, -sizeOfStar).normalized * sizeOfStar,
+                coord + new Vector3(sizeOfStar, 0, sizeOfStar).normalized * sizeOfStar, debugColor);
+            GameWorld.DrawThickLines(coord + new Vector3(sizeOfStar, 0, -sizeOfStar).normalized * sizeOfStar,
+                coord + new Vector3(-sizeOfStar, 0, sizeOfStar).normalized * sizeOfStar, debugColor);
 
-            Gizmos.DrawLine(coord + new Vector3(0, 0, -sizeOfStar), coord + new Vector3(0, 0, sizeOfStar));
-            Gizmos.DrawLine(coord + new Vector3(sizeOfStar, 0, 0), coord + new Vector3(-sizeOfStar, 0, 0));
+            GameWorld.DrawThickLines(coord + new Vector3(0, 0, -sizeOfStar), coord + new Vector3(0, 0, sizeOfStar), debugColor);
+            GameWorld.DrawThickLines(coord + new Vector3(sizeOfStar, 0, 0), coord + new Vector3(-sizeOfStar, 0, 0), debugColor);
         }
 
         public IGeometry Copy()

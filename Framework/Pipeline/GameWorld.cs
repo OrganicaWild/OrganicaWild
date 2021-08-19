@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Framework.Pipeline.GameWorldObjects;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,7 +40,7 @@ namespace Framework.Pipeline
         /// <param name="offset">optional offset for drawing the GameWorld. Can be used if there are occlusion issues.</param>
         public void DrawDebug(float minBrightness, Vector3 offset = default)
         {
-            Color green = new Color(0.074f, 0.462f, 0.125f);
+            Color green = new Color(0.1f, 0.6f, 0.1f);
             Color magenta = new Color(0.690f, 0.027f, 0.454f);
             Color yellow = new Color(0.756f, 0.372f, 0.2f);
 
@@ -95,7 +96,7 @@ namespace Framework.Pipeline
                 return;
             }
 
-            RemoveTooDarkColors(colors, minBrightness);
+            //RemoveTooDarkColors(colors, minBrightness);
             if (!colors.ContainsKey(depth))
             {
                 colors.Add(depth, new Dictionary<Type, Color>());
@@ -136,6 +137,16 @@ namespace Framework.Pipeline
                 }
             }
         }
+
+        public static void DrawThickLines(Vector3 startPosition, Vector3 endPosition, Color color)
+        {
+            var p1 = startPosition;
+            var p2 = endPosition;
+            Handles.DrawBezier(p1,p2,p1,p2, color,null,thickness);
+        }
+
+        public static int thickness = 3;
+        
 
         public GameWorld Copy()
         {
