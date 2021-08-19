@@ -265,15 +265,15 @@ namespace Framework.Pipeline.Geometry
                     {
                         Vector2 prevVec2 = prev;
                         Vector2 currentVec2 = representationRegionPoint;
-                        Gizmos.DrawLine(new Vector3(prevVec2.x, 0, prevVec2.y) + offset,
-                            new Vector3(currentVec2.x, 0, currentVec2.y) + offset);
+                        GameWorld.DrawThickLines(new Vector3(prevVec2.x, 0, prevVec2.y) + offset,
+                            new Vector3(currentVec2.x, 0, currentVec2.y) + offset, debugColor);
                         prev = representationRegionPoint;
                     }
                 }
 
                 Vector2 lastVec2 = prev;
                 Vector2 firstVec2 = first;
-                Gizmos.DrawLine(new Vector3(lastVec2.x, 0, lastVec2.y) + offset, new Vector3(firstVec2.x, 0, firstVec2.y) + offset);
+                GameWorld.DrawThickLines(new Vector3(lastVec2.x, 0, lastVec2.y) + offset, new Vector3(firstVec2.x, 0, firstVec2.y) + offset, debugColor);
             }
         }
 

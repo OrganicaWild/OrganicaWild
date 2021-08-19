@@ -17,6 +17,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
         private List<TrialStateRangeMapping> Mappings { get; set; }
         public override Type[] RequiredGuarantees => new Type[0];
 
+        public override bool AddToDebugStackedView => true;
+
         public override GameWorld Apply(GameWorld world)
         {
             SetMappings();
