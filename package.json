@@ -2,7 +2,7 @@
   "name": "ch.i4ds.organicawild",
   "version": "0.0.2",
   "displayName": "Organica Wild",
-  "description": "Organica Wild as a Package\n\nGenerate beautiful organic and natural feeling terrain with this Unity Package.\nTo get started faster import some of the Samples.",
+  "description": "Organica Wild as a Package\n\nGenerate beautiful organic and natural feeling terrain with this Unity Package.\nTo. Get started faster by importing some of the samples.",
   "unity": "2019.1",
   "unityRelease": "0b5",
   "documentationUrl": "https://github.com/OrganicaWild/OrganicaWild",
@@ -13,51 +13,47 @@
     "keyword3"
   ],
   "author": {
-    "name": "Christoph Vögele, Gian David Miller"
-  },
-  "dependencies": {
-    "com.unity.inputsystem": "1.0.2",
-    "com.unity.cinemachine": "2.6.4"
+    "name": "Christoph V\u00f6gele, Gian David Miller"
   },
   "type": "library",
   "files": [
-		"*.md",
-		"*.meta",
-		"*.asmdef",
-		"Samples~",
-		"External",
-		"Framework"
-	],
+    "*.md",
+    "*.meta",
+    "*.asmdef",
+    "Samples~",
+    "External",
+    "Framework"
+  ],
   "samples": [
-        {
-            "displayName": "CellularAutomataSamples",
-            "description": "Contains Samples for how to use the Cellular Automata Interface",
-            "path": "Samples~/SampleCA"
-        },
-        {
-            "displayName": "PoissonDiskSamples",
-            "description": "Contains Samples for how to use the Poisson Disk Sampling Interface",
-            "path": "Samples~/SamplesPoissonDiskSampling"
-        },
-	{
-            "displayName": "PipelineSamples",
-            "description": "Contains Samples for how to use the Pipeline Interface",
-            "path": "Samples~/SamplesPipeline"
-        },
-	{
-            "displayName": "GrammarSamples",
-            "description": "Contains Samples for how to use the Graph Grammar and Shape Grammar Interface",
-            "path": "Samples~/SamplesGrammars"
-        },
-	{
-            "displayName": "SampleAssets",
-            "description": "Contains Samples Assets that also need to be imported to use other samples",
-            "path": "Samples~/SampleAssets"
-        },
-	{
-            "displayName": "EvolutionarySamples",
-            "description": "Contains Samples for how to use the Evolutionary Algorithm Interface",
-            "path": "Samples~/SamplesEvolutionary"
-        }
-   ]
+    {
+      "displayName": "CellularAutomataSamples",
+      "description": "Contains Samples for how to use the Cellular Automata Interface",
+      "path": "Samples~/SampleCA"
+    },
+    {
+      "displayName": "PoissonDiskSamples",
+      "description": "Contains Samples for how to use the Poisson Disk Sampling Interface",
+      "path": "Samples~/SamplesPoissonDiskSampling"
+    },
+    {
+      "displayName": "PipelineSamples",
+      "description": "Contains Samples for how to use the Pipeline Interface",
+      "path": "Samples~/SamplesPipeline"
+    },
+    {
+      "displayName": "GrammarSamples",
+      "description": "Contains Samples for how to use the Graph Grammar and Shape Grammar Interface",
+      "path": "Samples~/SamplesGrammars"
+    },
+    {
+      "displayName": "SampleAssets",
+      "description": "Contains Samples Assets that also need to be imported to use other samples",
+      "path": "Samples~/SampleAssets"
+    },
+    {
+      "displayName": "EvolutionarySamples",
+      "description": "Contains Samples for how to use the Evolutionary Algorithm Interface",
+      "path": "Samples~/SamplesEvolutionary"
+    }
+  ]
 }
