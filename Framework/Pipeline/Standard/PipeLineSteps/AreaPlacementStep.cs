@@ -22,6 +22,12 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         public override Type[] RequiredGuarantees => new[] {typeof(GameWorldPlacedGuarantee), typeof(GameWorldRectangularGuarantee)};
 
         public override bool AddToDebugStackedView => true;
+
+        public AreaPlacementStep()
+        {
+            this.poissonDiskRadius = 0;
+            this.samplesBeforeRejection = 0;
+        }
         
         public AreaPlacementStep(float poissonDiskRadius, int samplesBeforeRejection = 30)
         {

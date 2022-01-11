@@ -8,8 +8,13 @@ namespace Framework.Pipeline
     /// Defines the PipelineStep interface.
     /// This is an abstract class because it should inherit from MonoBehaviour, which is a class.
     /// </summary>
-    public abstract class PipelineStep : MonoBehaviour
+    public abstract class PipelineStep
     {
+
+        public PipelineStep()
+        {
+        }
+
         /// <summary>
         /// Random instance that is being instantiated by the PipelineRunner.
         /// Used to seed the whole generation process.
