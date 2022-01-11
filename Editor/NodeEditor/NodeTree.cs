@@ -6,10 +6,10 @@ namespace Editor.NodeEditor
 {
     public class NodeTree
     {
-        private List<Node> nodes;
+        private List<GraphNode> nodes;
         private List<Connection> connections;
 
-        public List<Node> Nodes
+        public List<GraphNode> Nodes
         {
             get => nodes;
             set => nodes = value;
@@ -23,13 +23,13 @@ namespace Editor.NodeEditor
 
         public NodeTree()
         {
-            nodes = new List<Node>();
+            nodes = new List<GraphNode>();
             connections = new List<Connection>();
         }
 
         public string ToJson()
         {
-            var result = "Pipeline: {";
+            var result = "Pipeline: { Nodes: [";
 
             for (var i = 0; i < nodes.Count; i++)
             {
@@ -40,6 +40,8 @@ namespace Editor.NodeEditor
                 }
             }
 
+            result += "], Connections: [";
+            
             for (int i = 0; i < connections.Count; i++)
             {
                 var connection = connections[i];
@@ -51,7 +53,7 @@ namespace Editor.NodeEditor
                 }
             }
 
-            result += "}";
+            result += "]}";
 
             return result;
         }

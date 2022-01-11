@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using Framework.Pipeline;
 using UnityEditor;
 using UnityEngine;
 
 namespace Editor.NodeEditor
 {
- 
-
     public class NodeBasedEditor : EditorWindow
     {
         private GUIStyle nodeStyle;
@@ -20,9 +20,9 @@ namespace Editor.NodeEditor
         private Vector2 offset;
         private Vector2 drag;
 
-        private Node selected;
+        private GraphNode selected;
         private NodeTree tree;
-        
+
         [MenuItem("Window/Node Based Editor")]
         private static void OpenWindow()
         {
@@ -63,10 +63,20 @@ namespace Editor.NodeEditor
             {
                 if (tree != null)
                 {
-                    Debug.Log(tree.ToJson());                    
+                    var json = tree.ToJson();
+                    
+                    NodeEditorGraphScriptableObject asset = ScriptableObject.CreateInstance<NodeEditorGraphScriptableObject>();
+                    asset.Json = json;
+
+                    AssetDatabase.CreateAsset(asset, "Assets/tree.asset");
+                    AssetDatabase.SaveAssets();
+
+                    EditorUtility.FocusProjectWindow();
+
+                    Selection.activeObject = asset;
                 }
             }
-            
+
             DrawGrid(20, 0.2f, Color.gray);
             DrawGrid(100, 0.4f, Color.gray);
 
@@ -89,7 +99,7 @@ namespace Editor.NodeEditor
             Handles.BeginGUI();
             Handles.color = new Color(gridColor.r, gridColor.g, gridColor.b, gridOpacity);
 
-            offset += drag  / 2;
+            offset += drag / 2;
             Vector3 newOffset = new Vector3(offset.x % gridSpacing, offset.y % gridSpacing, 0);
 
             for (int i = 0; i < widthDivs; i++)
@@ -118,6 +128,7 @@ namespace Editor.NodeEditor
                     node.Draw();
                 }
             }
+
             EndWindows();
         }
 
@@ -190,7 +201,6 @@ namespace Editor.NodeEditor
                         {
                             OnDrag(e.delta);
                         }
-                        
                     }
 
                     break;
@@ -212,6 +222,7 @@ namespace Editor.NodeEditor
                 }
             }
         }
+
         private void OnDrag(Vector2 delta)
         {
             drag = delta;
@@ -238,10 +249,10 @@ namespace Editor.NodeEditor
         {
             if (tree.Nodes == null)
             {
-                tree.Nodes = new List<Node>();
+                tree.Nodes = new List<GraphNode>();
             }
 
-            tree.Nodes.Add(new StepNode(mousePosition, 200, 50, nodeStyle, inPointStyle, outPointStyle, OnClickInPoint,
+            tree.Nodes.Add(new StepGraphNode(mousePosition, 200, 50, nodeStyle, inPointStyle, outPointStyle, OnClickInPoint,
                 OnClickOutPoint, selectedNodeStyle, OnClickRemoveNode));
         }
 
@@ -251,7 +262,7 @@ namespace Editor.NodeEditor
 
             if (selectedOutPoint != null)
             {
-                if (selectedOutPoint.node != selectedInPoint.node)
+                if (selectedOutPoint.GraphNode != selectedInPoint.GraphNode)
                 {
                     CreateConnection();
                     ClearConnectionSelection();
@@ -269,7 +280,7 @@ namespace Editor.NodeEditor
 
             if (selectedInPoint != null)
             {
-                if (selectedOutPoint.node != selectedInPoint.node)
+                if (selectedOutPoint.GraphNode != selectedInPoint.GraphNode)
                 {
                     CreateConnection();
                     ClearConnectionSelection();
@@ -302,7 +313,7 @@ namespace Editor.NodeEditor
             selectedOutPoint = null;
         }
 
-        private void OnClickRemoveNode(Node node)
+        private void OnClickRemoveNode(GraphNode graphNode)
         {
             if (tree.Connections != null)
             {
@@ -310,7 +321,7 @@ namespace Editor.NodeEditor
 
                 for (int i = 0; i < tree.Connections.Count; i++)
                 {
-                    if (tree.Connections[i].inPoint == node.InPoint ||tree.Connections[i].outPoint == node.OutPoint)
+                    if (tree.Connections[i].inPoint == graphNode.InPoint || tree.Connections[i].outPoint == graphNode.OutPoint)
                     {
                         connectionsToRemove.Add(tree.Connections[i]);
                     }
@@ -324,7 +335,7 @@ namespace Editor.NodeEditor
                 connectionsToRemove = null;
             }
 
-            tree.Nodes.Remove(node);
+            tree.Nodes.Remove(graphNode);
         }
     }
 }

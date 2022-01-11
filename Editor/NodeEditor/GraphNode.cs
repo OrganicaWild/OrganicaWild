@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Editor.NodeEditor
 {
     [Serializable]
-    public abstract class Node
+    public abstract class GraphNode
     {
         public static int idCounter;
 
@@ -42,14 +42,14 @@ namespace Editor.NodeEditor
         private GUIStyle defaultNodeStyle;
         private GUIStyle selectedNodeStyle;
 
-        private Action<Node> OnRemoveNode;
+        private Action<GraphNode> OnRemoveNode;
 
         public bool Explored { get; set; }
 
 
-        public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle inPointStyle,
+        public GraphNode(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle inPointStyle,
             GUIStyle outPointStyle, Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint,
-            GUIStyle selectedStyle, Action<Node> OnClickRemoveNode)
+            GUIStyle selectedStyle, Action<GraphNode> OnClickRemoveNode)
         {
             rect = new Rect(position.x, position.y, width, height);
             style = nodeStyle;

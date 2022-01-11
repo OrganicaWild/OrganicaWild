@@ -6,13 +6,13 @@ using UnityEngine;
 namespace Editor.NodeEditor
 {
     [Serializable]
-    public class StepNode : Node
+    public class StepGraphNode : GraphNode
     {
         private MonoScript srScript;
         private object[] values;
         [SerializeField] private object instance;
 
-        public StepNode(Vector2 position,
+        public StepGraphNode(Vector2 position,
             float width,
             float height,
             GUIStyle nodeStyle,
@@ -21,7 +21,7 @@ namespace Editor.NodeEditor
             Action<ConnectionPoint> OnClickInPoint,
             Action<ConnectionPoint> OnClickOutPoint,
             GUIStyle selectedStyle,
-            Action<Node> OnClickRemoveNode) :
+            Action<GraphNode> OnClickRemoveNode) :
             base(position, width, height, nodeStyle, inPointStyle, outPointStyle,
                 OnClickInPoint, OnClickOutPoint, selectedStyle, OnClickRemoveNode)
         {

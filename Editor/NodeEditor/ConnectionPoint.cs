@@ -10,15 +10,15 @@ public class ConnectionPoint
 
     public ConnectionPointType type;
 
-    public Node node;
+    public GraphNode GraphNode;
 
     public GUIStyle style;
 
     public Action<ConnectionPoint> OnClickConnectionPoint;
     
-    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style, Action<ConnectionPoint> OnClickConnectionPoint)
+    public ConnectionPoint(GraphNode graphNode, ConnectionPointType type, GUIStyle style, Action<ConnectionPoint> OnClickConnectionPoint)
     {
-        this.node = node;
+        this.GraphNode = graphNode;
         this.type = type;
         this.style = style;
         this.OnClickConnectionPoint = OnClickConnectionPoint;
@@ -27,16 +27,16 @@ public class ConnectionPoint
 
     public void Draw()
     {
-        rect.y = node.Rect.y + (node.Rect.height * 0.5f) - rect.height * 0.5f;
+        rect.y = GraphNode.Rect.y + (GraphNode.Rect.height * 0.5f) - rect.height * 0.5f;
 
         switch (type)
         {
             case ConnectionPointType.In:
-                rect.x = node.Rect.x - rect.width + 8f;
+                rect.x = GraphNode.Rect.x - rect.width + 8f;
                 break;
 
             case ConnectionPointType.Out:
-                rect.x = node.Rect.x + node.Rect.width - 8f;
+                rect.x = GraphNode.Rect.x + GraphNode.Rect.width - 8f;
                 break;
         }
         

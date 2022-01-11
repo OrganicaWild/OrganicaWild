@@ -38,7 +38,7 @@ public class Connection
 
     public string ToJson()
     {
-        var connection = $" Connection : {{ inPoint : { inPoint.node.id } , outPoint : { outPoint.node.id } }}";
+        var connection = $" Connection : {{ inPoint : { inPoint.GraphNode.id } , outPoint : { outPoint.GraphNode.id } }}";
         return connection;
     }
 }
