@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Framework.Pipeline.PipelineGraph;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Editor.NodeEditor
     {
         private MonoScript srScript;
         private object[] values;
-        [SerializeField] private object instance;
+        internal Node dataStorage;
 
         public StepGraphNode(Vector2 position,
             float width,
@@ -25,6 +26,7 @@ namespace Editor.NodeEditor
             base(position, width, height, nodeStyle, inPointStyle, outPointStyle,
                 OnClickInPoint, OnClickOutPoint, selectedStyle, OnClickRemoveNode)
         {
+            dataStorage = new Node();
             title = "New Node";
         }
 
@@ -37,51 +39,14 @@ namespace Editor.NodeEditor
             if (srScript != null)
             {
                 title = srScript.name;
+                dataStorage.Name = title;
                 var scriptClass = srScript.GetClass();
                 var fields = scriptClass.GetFields();
                 values = new object[fields.Length];
-                instance = Activator.CreateInstance(scriptClass);
+                dataStorage.Instance = Activator.CreateInstance(scriptClass);
             }
         }
-
-        public override string ToJson()
-        {
-          
-            var nodeJson = $"{title} : {{";
-
-            nodeJson += $" id : {id}";
-            
-            if (instance != null && srScript != null)
-            {
-                nodeJson += $", script : {srScript.GetClass()}";
-                var type = instance.GetType();
-                var fields = type.GetFields();
-                
-                if (fields.Length == 0)
-                {
-                    return nodeJson + "}";
-                }
-
-                // add comma for more fields
-                nodeJson += ",";
-
-                for (var index = 0; index < fields.Length; index++)
-                {
-                    var field = fields[index];
-                    var fieldJson = $" {field.Name} : {field.GetValue(instance) ?? "null"}";
-                    nodeJson += fieldJson;
-
-                    if (index != fields.Length - 1)
-                    {
-                        nodeJson += ",";
-                    }
-                }
-            }
-
-            nodeJson += "}";
-            return nodeJson;
-        }
-
+        
         private bool DrawFields()
         {
             if (srScript != null && values != null)
@@ -103,7 +68,6 @@ namespace Editor.NodeEditor
         private void DrawField(int id, FieldInfo fieldInfo)
         {
             var t = fieldInfo.FieldType;
-            var instanceField = instance;
             if (t == typeof(Single))
             {
                 values[id] = EditorGUILayout.FloatField(new GUIContent(fieldInfo.Name),
@@ -127,9 +91,8 @@ namespace Editor.NodeEditor
                 values[id] = EditorGUILayout.Vector3Field(new GUIContent(fieldInfo.Name),
                     values[id] is Vector3 ? (Vector3) values[id] : Vector3.zero);
             }
-
-
-            fieldInfo.SetValue(instance, values[id]);
+            
+            fieldInfo.SetValue(dataStorage.Instance, values[id]);
         }
     }
 }

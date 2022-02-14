@@ -42,22 +42,22 @@ namespace Editor.NodeEditor
         private GUIStyle defaultNodeStyle;
         private GUIStyle selectedNodeStyle;
 
-        private Action<GraphNode> OnRemoveNode;
+        private Action<GraphNode> onRemoveNode;
 
         public bool Explored { get; set; }
 
 
         public GraphNode(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle inPointStyle,
-            GUIStyle outPointStyle, Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint,
-            GUIStyle selectedStyle, Action<GraphNode> OnClickRemoveNode)
+            GUIStyle outPointStyle, Action<ConnectionPoint> onClickInPoint, Action<ConnectionPoint> onClickOutPoint,
+            GUIStyle selectedStyle, Action<GraphNode> onClickRemoveNode)
         {
             rect = new Rect(position.x, position.y, width, height);
             style = nodeStyle;
-            InPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, OnClickInPoint);
-            OutPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, OnClickOutPoint);
+            InPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, onClickInPoint);
+            OutPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, onClickOutPoint);
             defaultNodeStyle = nodeStyle;
             selectedNodeStyle = selectedStyle;
-            OnRemoveNode = OnClickRemoveNode;
+            onRemoveNode = onClickRemoveNode;
             id = idCounter++; //get unique id
         }
 
@@ -134,12 +134,10 @@ namespace Editor.NodeEditor
 
         private void OnClickRemoveNode()
         {
-            if (OnRemoveNode != null)
+            if (onRemoveNode != null)
             {
-                OnRemoveNode(this);
+                onRemoveNode(this);
             }
         }
-
-        public abstract string ToJson();
     }
 }

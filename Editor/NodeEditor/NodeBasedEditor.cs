@@ -1,72 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Framework.Pipeline;
 using UnityEditor;
 using UnityEngine;
 
 namespace Editor.NodeEditor
 {
-    public class NodeBasedEditor : EditorWindow
+    public abstract class NodeBasedEditor : EditorWindow
     {
-        private GUIStyle nodeStyle;
-        private GUIStyle inPointStyle;
-        private GUIStyle outPointStyle;
+        protected GUIStyle defaultNodeStyle;
+        protected GUIStyle defaultInPointStyle;
+        protected GUIStyle defaultOutPointStyle;
 
-        private GUIStyle selectedNodeStyle;
-        private ConnectionPoint selectedInPoint;
-        private ConnectionPoint selectedOutPoint;
+        protected GUIStyle defaultSelectedNodeStyle;
+        protected ConnectionPoint selectedInPoint;
+        protected ConnectionPoint selectedOutPoint;
 
         private Vector2 offset;
         private Vector2 drag;
 
         private GraphNode selected;
-        private NodeTree tree;
+        protected NodeTree tree;
 
-        [MenuItem("Window/Node Based Editor")]
-        private static void OpenWindow()
-        {
-            NodeBasedEditor window = GetWindow<NodeBasedEditor>();
-            window.titleContent = new GUIContent("Node Based Editor");
-        }
-
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             tree = new NodeTree();
-            nodeStyle = new GUIStyle();
-            nodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
-            nodeStyle.border = new RectOffset(12, 12, 12, 12);
+            defaultNodeStyle = new GUIStyle();
+            defaultNodeStyle.normal.background =
+                EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
+            defaultNodeStyle.border = new RectOffset(12, 12, 12, 12);
 
-            selectedNodeStyle = new GUIStyle();
-            selectedNodeStyle.normal.background =
+            defaultSelectedNodeStyle = new GUIStyle();
+            defaultSelectedNodeStyle.normal.background =
                 EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
-            selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
+            defaultSelectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
 
-            inPointStyle = new GUIStyle();
-            inPointStyle.normal.background =
+            defaultInPointStyle = new GUIStyle();
+            defaultInPointStyle.normal.background =
                 EditorGUIUtility.Load("builtin skins/darkskin/images/btn left.png") as Texture2D;
-            inPointStyle.active.background =
+            defaultInPointStyle.active.background =
                 EditorGUIUtility.Load("builtin skins/darkskin/images/btn left on.png") as Texture2D;
-            inPointStyle.border = new RectOffset(4, 4, 12, 12);
+            defaultInPointStyle.border = new RectOffset(4, 4, 12, 12);
 
-            outPointStyle = new GUIStyle();
-            outPointStyle.normal.background =
+            defaultOutPointStyle = new GUIStyle();
+            defaultOutPointStyle.normal.background =
                 EditorGUIUtility.Load("builtin skins/darkskin/images/btn right.png") as Texture2D;
-            outPointStyle.active.background =
+            defaultOutPointStyle.active.background =
                 EditorGUIUtility.Load("builtin skins/darkskin/images/btn right on.png") as Texture2D;
-            outPointStyle.border = new RectOffset(4, 4, 12, 12);
+            defaultOutPointStyle.border = new RectOffset(4, 4, 12, 12);
         }
 
-        private void OnGUI()
+        protected virtual void OnGUI()
         {
             if (GUI.Button(new Rect(0, 0, 100, 25), "save"))
             {
                 if (tree != null)
                 {
-                    var json = tree.ToJson();
-                    
-                    NodeEditorGraphScriptableObject asset = ScriptableObject.CreateInstance<NodeEditorGraphScriptableObject>();
-                    asset.Json = json;
+                    NodeEditorGraphScriptableObject asset =
+                        ScriptableObject.CreateInstance<NodeEditorGraphScriptableObject>();
 
                     AssetDatabase.CreateAsset(asset, "Assets/tree.asset");
                     AssetDatabase.SaveAssets();
@@ -245,18 +235,21 @@ namespace Editor.NodeEditor
             genericMenu.ShowAsContext();
         }
 
-        private void OnClickAddNode(Vector2 mousePosition)
+        protected virtual void OnClickAddNode(Vector2 mousePosition)
         {
             if (tree.Nodes == null)
             {
                 tree.Nodes = new List<GraphNode>();
             }
-
-            tree.Nodes.Add(new StepGraphNode(mousePosition, 200, 50, nodeStyle, inPointStyle, outPointStyle, OnClickInPoint,
-                OnClickOutPoint, selectedNodeStyle, OnClickRemoveNode));
         }
 
-        private void OnClickInPoint(ConnectionPoint inPoint)
+        private void ClearConnectionSelection()
+        {
+            selectedInPoint = null;
+            selectedOutPoint = null;
+        }
+
+        protected void OnClickInPoint(ConnectionPoint inPoint)
         {
             selectedInPoint = inPoint;
 
@@ -274,7 +267,7 @@ namespace Editor.NodeEditor
             }
         }
 
-        private void OnClickOutPoint(ConnectionPoint outPoint)
+        protected void OnClickOutPoint(ConnectionPoint outPoint)
         {
             selectedOutPoint = outPoint;
 
@@ -290,14 +283,15 @@ namespace Editor.NodeEditor
                     ClearConnectionSelection();
                 }
             }
+
         }
 
-        private void OnClickRemoveConnection(Connection connection)
+        protected virtual void OnClickRemoveConnection(Connection connection)
         {
             tree.Connections.Remove(connection);
         }
 
-        private void CreateConnection()
+        protected virtual void CreateConnection()
         {
             if (tree.Connections == null)
             {
@@ -306,14 +300,8 @@ namespace Editor.NodeEditor
 
             tree.Connections.Add(new Connection(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
         }
-
-        private void ClearConnectionSelection()
-        {
-            selectedInPoint = null;
-            selectedOutPoint = null;
-        }
-
-        private void OnClickRemoveNode(GraphNode graphNode)
+        
+        protected virtual void OnClickRemoveNode(GraphNode graphNode)
         {
             if (tree.Connections != null)
             {
@@ -321,7 +309,8 @@ namespace Editor.NodeEditor
 
                 for (int i = 0; i < tree.Connections.Count; i++)
                 {
-                    if (tree.Connections[i].inPoint == graphNode.InPoint || tree.Connections[i].outPoint == graphNode.OutPoint)
+                    if (tree.Connections[i].inPoint == graphNode.InPoint ||
+                        tree.Connections[i].outPoint == graphNode.OutPoint)
                     {
                         connectionsToRemove.Add(tree.Connections[i]);
                     }
