@@ -1,11 +1,12 @@
 ﻿using System;
+using Framework.Pipeline.PipelineGraph;
 using UnityEditor;
 using UnityEngine;
 
 namespace Editor.NodeEditor
 {
     [Serializable]
-    public abstract class GraphNode
+    public abstract class EditorGraphNode : GraphNode
     {
         public static int idCounter;
 
@@ -22,17 +23,17 @@ namespace Editor.NodeEditor
         private bool isDragged;
         private bool isSelected;
 
-        private ConnectionPoint inPoint;
+        private EditorConnectionPoint inPoint;
 
-        public ConnectionPoint InPoint
+        public EditorConnectionPoint InPoint
         {
             get => inPoint;
             set => inPoint = value;
         }
 
-        private ConnectionPoint outPoint;
+        private EditorConnectionPoint outPoint;
 
-        public ConnectionPoint OutPoint
+        public EditorConnectionPoint OutPoint
         {
             get => outPoint;
             set => outPoint = value;
@@ -42,19 +43,19 @@ namespace Editor.NodeEditor
         private GUIStyle defaultNodeStyle;
         private GUIStyle selectedNodeStyle;
 
-        private Action<GraphNode> onRemoveNode;
+        private Action<EditorGraphNode> onRemoveNode;
 
         public bool Explored { get; set; }
 
 
-        public GraphNode(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle inPointStyle,
+        public EditorGraphNode(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle inPointStyle,
             GUIStyle outPointStyle, Action<ConnectionPoint> onClickInPoint, Action<ConnectionPoint> onClickOutPoint,
-            GUIStyle selectedStyle, Action<GraphNode> onClickRemoveNode)
+            GUIStyle selectedStyle, Action<EditorGraphNode> onClickRemoveNode)
         {
             rect = new Rect(position.x, position.y, width, height);
             style = nodeStyle;
-            InPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, onClickInPoint);
-            OutPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, onClickOutPoint);
+            InPoint = new EditorConnectionPoint(this, ConnectionPointType.In, inPointStyle, onClickInPoint);
+            OutPoint = new EditorConnectionPoint(this, ConnectionPointType.Out, outPointStyle, onClickOutPoint);
             defaultNodeStyle = nodeStyle;
             selectedNodeStyle = selectedStyle;
             onRemoveNode = onClickRemoveNode;

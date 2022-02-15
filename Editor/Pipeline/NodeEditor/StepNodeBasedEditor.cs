@@ -1,7 +1,9 @@
+using Editor.NodeEditor;
+using Framework.Pipeline.PipelineGraph;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editor.NodeEditor
+namespace Editor.Pipeline.NodeEditor
 {
     public class StepNodeBasedEditor : NodeBasedEditor
     {
@@ -20,7 +22,7 @@ namespace Editor.NodeEditor
         {
             base.OnClickAddNode(mousePosition);
             
-            tree.Nodes.Add(new StepGraphNode(mousePosition,
+            tree.Nodes.Add(new StepEditorGraphNode(mousePosition,
                 baseWidth,
                 baseHeight,
                 defaultNodeStyle,
@@ -35,8 +37,8 @@ namespace Editor.NodeEditor
         protected override void OnClickRemoveConnection(Connection connection)
         {
             base.OnClickRemoveConnection(connection);
-            var inNode = connection.inPoint.GraphNode as StepGraphNode;
-            var outNode = connection.outPoint.GraphNode as StepGraphNode;
+            var inNode = connection.inPoint.GraphNode as StepEditorGraphNode;
+            var outNode = connection.outPoint.GraphNode as StepEditorGraphNode;
 
             if (inNode == null || outNode == null)
             {
@@ -50,9 +52,8 @@ namespace Editor.NodeEditor
         protected override void CreateConnection()
         {
             base.CreateConnection();
-            Debug.Log("Connection Created");
-            var prev = selectedInPoint.GraphNode as StepGraphNode;
-            var next = selectedOutPoint.GraphNode as StepGraphNode;
+            var prev = selectedInPoint.GraphNode as StepEditorGraphNode;
+            var next = selectedOutPoint.GraphNode as StepEditorGraphNode;
 
             if (prev == null || next == null)
             {
@@ -64,9 +65,9 @@ namespace Editor.NodeEditor
             next.dataStorage.Previous.Add(prev.dataStorage);
         }
 
-        protected override void OnClickRemoveNode(GraphNode graphNode)
+        protected override void OnClickRemoveNode(EditorGraphNode editorGraphNode)
         {
-            base.OnClickRemoveNode(graphNode);
+            base.OnClickRemoveNode(editorGraphNode);
         }
     }
 }

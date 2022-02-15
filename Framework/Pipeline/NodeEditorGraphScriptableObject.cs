@@ -7,6 +7,6 @@ namespace Framework.Pipeline
     public class NodeEditorGraphScriptableObject : ScriptableObject
     {
         public string Json { get; set; }
-        public List<Node> nodes;
+        public List<GraphNode> nodes;
     }
 }

@@ -1,20 +1,25 @@
+using System;
 using System.Collections.Generic;
-using UnityEditor;
+using UnityEngine;
 
 namespace Framework.Pipeline.PipelineGraph
 {
-    public class Node
+    [Serializable]
+    public class GraphNode
     {
+        [SerializeField]
         private string name;
+        [SerializeField]
         private object instance;
-        private MonoScript script;
-        private List<Node> previous;
-        private List<Node> next;
+        [SerializeField]
+        private List<GraphNode> previous;
+        [SerializeField]
+        private List<GraphNode> next;
 
-        public Node()
+        public GraphNode()
         {
-            previous = new List<Node>();
-            next = new List<Node>();
+            previous = new List<GraphNode>();
+            next = new List<GraphNode>();
         }
 
         public string Name
@@ -29,19 +34,13 @@ namespace Framework.Pipeline.PipelineGraph
             set => instance = value;
         }
 
-        public MonoScript Script
-        {
-            get => script;
-            set => script = value;
-        }
-
-        public List<Node> Previous
+        public List<GraphNode> Previous
         {
             get => previous;
             set => previous = value;
         }
 
-        public List<Node> Next
+        public List<GraphNode> Next
         {
             get => next;
             set => next = value;

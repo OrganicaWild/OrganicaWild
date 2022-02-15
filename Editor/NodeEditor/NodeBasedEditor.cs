@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework.Pipeline;
+using Framework.Pipeline.PipelineGraph;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,18 +13,18 @@ namespace Editor.NodeEditor
         protected GUIStyle defaultOutPointStyle;
 
         protected GUIStyle defaultSelectedNodeStyle;
-        protected ConnectionPoint selectedInPoint;
-        protected ConnectionPoint selectedOutPoint;
+        protected EditorConnectionPoint selectedInPoint;
+        protected EditorConnectionPoint selectedOutPoint;
 
         private Vector2 offset;
         private Vector2 drag;
 
-        private GraphNode selected;
+        private EditorGraphNode selected;
         protected NodeTree tree;
 
         protected virtual void OnEnable()
         {
-            tree = new NodeTree();
+            tree = CreateInstance<NodeTree>();
             defaultNodeStyle = new GUIStyle();
             defaultNodeStyle.normal.background =
                 EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
@@ -115,10 +116,13 @@ namespace Editor.NodeEditor
             {
                 foreach (var node in tree.Nodes)
                 {
-                    node.Draw();
+                    if (node is EditorGraphNode graphNode)
+                    {
+                        graphNode.Draw();
+                    }
                 }
             }
-
+            
             EndWindows();
         }
 
@@ -126,9 +130,12 @@ namespace Editor.NodeEditor
         {
             if (tree.Connections != null)
             {
-                for (int i = 0; i < tree.Connections.Count; i++)
+                foreach (var connection in tree.Connections)
                 {
-                    tree.Connections[i].Draw();
+                    if (connection is EditorConnection editorConnection)
+                    {
+                        editorConnection.Draw();
+                    }
                 }
             }
         }
@@ -203,12 +210,17 @@ namespace Editor.NodeEditor
             {
                 for (int i = tree.Nodes.Count - 1; i >= 0; i--)
                 {
-                    bool guiChanged = tree.Nodes[i].ProcessEvents(e);
-
-                    if (guiChanged)
+                    var node = tree.Nodes[i];
+                    if (node is EditorGraphNode graphNode)
                     {
-                        GUI.changed = true;
+                        var guiChanged = graphNode.ProcessEvents(e);
+
+                        if (guiChanged)
+                        {
+                            GUI.changed = true;
+                        }
                     }
+                   
                 }
             }
         }
@@ -219,9 +231,12 @@ namespace Editor.NodeEditor
 
             if (tree.Nodes != null)
             {
-                for (int i = 0; i < tree.Nodes.Count; i++)
+                foreach (var graphNode in tree.Nodes)
                 {
-                    tree.Nodes[i].Drag(delta);
+                    if (graphNode is EditorGraphNode editorGraphNode)
+                    {
+                        editorGraphNode.Drag(delta);
+                    }
                 }
             }
 
@@ -251,7 +266,7 @@ namespace Editor.NodeEditor
 
         protected void OnClickInPoint(ConnectionPoint inPoint)
         {
-            selectedInPoint = inPoint;
+            selectedInPoint = inPoint as EditorConnectionPoint;
 
             if (selectedOutPoint != null)
             {
@@ -269,7 +284,7 @@ namespace Editor.NodeEditor
 
         protected void OnClickOutPoint(ConnectionPoint outPoint)
         {
-            selectedOutPoint = outPoint;
+            selectedOutPoint = outPoint as EditorConnectionPoint;
 
             if (selectedInPoint != null)
             {
@@ -283,7 +298,6 @@ namespace Editor.NodeEditor
                     ClearConnectionSelection();
                 }
             }
-
         }
 
         protected virtual void OnClickRemoveConnection(Connection connection)
@@ -298,10 +312,10 @@ namespace Editor.NodeEditor
                 tree.Connections = new List<Connection>();
             }
 
-            tree.Connections.Add(new Connection(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
+            tree.Connections.Add(new EditorConnection(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
         }
-        
-        protected virtual void OnClickRemoveNode(GraphNode graphNode)
+
+        protected virtual void OnClickRemoveNode(EditorGraphNode editorGraphNode)
         {
             if (tree.Connections != null)
             {
@@ -309,8 +323,8 @@ namespace Editor.NodeEditor
 
                 for (int i = 0; i < tree.Connections.Count; i++)
                 {
-                    if (tree.Connections[i].inPoint == graphNode.InPoint ||
-                        tree.Connections[i].outPoint == graphNode.OutPoint)
+                    if (tree.Connections[i].inPoint == editorGraphNode.InPoint ||
+                        tree.Connections[i].outPoint == editorGraphNode.OutPoint)
                     {
                         connectionsToRemove.Add(tree.Connections[i]);
                     }
@@ -324,7 +338,7 @@ namespace Editor.NodeEditor
                 connectionsToRemove = null;
             }
 
-            tree.Nodes.Remove(graphNode);
+            tree.Nodes.Remove(editorGraphNode);
         }
     }
 }
