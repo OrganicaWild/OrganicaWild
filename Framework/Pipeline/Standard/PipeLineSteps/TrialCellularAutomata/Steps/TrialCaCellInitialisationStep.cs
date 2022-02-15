@@ -7,7 +7,7 @@ using Framework.Pipeline.Geometry.Interactors;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
 {
-    public class TrialCaCellInitialisationStep : PipelineStep
+    public class TrialCaCellInitialisationStep : IPipelineStep
     {
         public TrialCellState initialLandmarkAreaCellState;
         public TrialCellState initialPathAreaCellState;
@@ -15,11 +15,12 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
         // TODO: Replace with lookup in a serializable range tree
         public InitialTrialStateWeighting[] weightings;
         private List<TrialStateRangeMapping> Mappings { get; set; }
-        public override Type[] RequiredGuarantees => new Type[0];
+        public Random Rmg { get; set; }
+        public Type[] RequiredGuarantees => new Type[0];
 
-        public override bool AddToDebugStackedView => true;
+        public bool AddToDebugStackedView => true;
 
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             SetMappings();
             IEnumerable<Area> areas = world.Root.GetAllChildrenOfType<Area>();
@@ -84,7 +85,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
 
         private void SetRandomState(TrialAreaCell areaCell)
         {
-            float r = (float) random.NextDouble();
+            float r = (float) Rmg.NextDouble();
             foreach (TrialStateRangeMapping mapping in Mappings.Where(mapping => mapping.Minimum <= r && r <= mapping.Maximum))
             {
                 areaCell.Cell.CurrentState = mapping.State;

@@ -7,14 +7,15 @@ using Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Rules.Scri
 
 namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
 {
-    public class TrialCaCellRuleApplicationStep : PipelineStep
+    public class TrialCaCellRuleApplicationStep : IPipelineStep
     {
         public int iterations = 0;
         public UpdateRuleMapping[] mapping;
-        
-        public override Type[] RequiredGuarantees => new Type[0];
 
-        public override GameWorld Apply(GameWorld world)
+        public Random Rmg { get; set; }
+        public  Type[] RequiredGuarantees => new Type[0];
+        
+        public GameWorld Apply(GameWorld world)
         {
             IEnumerable<Area> areas = world.Root.GetAllChildrenOfType<Area>();
             IEnumerable<TrialCellNetwork> networks = GetNetworks(areas);

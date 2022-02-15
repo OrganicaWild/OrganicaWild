@@ -11,11 +11,12 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
     /// PipelineStep to assign the <see cref="Type"/> "startArea" to lower most left area and "endArea" to the upper most right area in the GameWorld.
     /// </summary>
     [StartAndEndAssignedGuarantee]
-    public class StartAndEndAreaAssignmentStep : PipelineStep
+    public class StartAndEndAreaAssignmentStep : IPipelineStep
     {
-        public override Type[] RequiredGuarantees => new Type[] {typeof(AreasPlacedGuarantee)};
+        public Random Rmg { get; set; }
+        public Type[] RequiredGuarantees => new Type[] {typeof(AreasPlacedGuarantee)};
 
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             //get all areas
             List<Area> areas = world.Root.GetAllChildrenOfType<Area>().ToList();

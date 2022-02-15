@@ -13,16 +13,17 @@ using Random = System.Random;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
 {
-    public class TrialCaCellPlacementStep : PipelineStep
+    public class TrialCaCellPlacementStep : IPipelineStep
     {
         [Range(float.Epsilon, 99999f)]
         public float poissonDiskRadius = 3;
         public int samplesBeforeRejection = 3;
         public decimal epsilon = 0.0000000000000001m;
 
-        public override Type[] RequiredGuarantees => new[] { typeof(PathShapeGuarantee) };
+        public Random Rmg { get; set; }
+        public  Type[] RequiredGuarantees => new[] { typeof(PathShapeGuarantee) };
 
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             Epsilon.Eps = epsilon;
 
@@ -34,7 +35,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             for (var i = 0; i < areas.Length; i++)
             {
                 parameters[i].area = areas[i];
-                parameters[i].random = new Random(random.Next());
+                parameters[i].random = new Random(Rmg.Next());
             }
 
             Parallel.For(0, areas.Length, i =>

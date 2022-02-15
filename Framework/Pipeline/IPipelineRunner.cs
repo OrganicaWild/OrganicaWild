@@ -9,7 +9,7 @@ namespace Framework.Pipeline
         /// Adds a step to the pipeline.
         /// </summary>
         /// <param name="step">Pipeline Step to add</param>
-        void AddStep(PipelineStep step);
+        void AddStep(IPipelineStep step);
         
         /// <summary>
         /// Execute all previously added Pipeline Steps.

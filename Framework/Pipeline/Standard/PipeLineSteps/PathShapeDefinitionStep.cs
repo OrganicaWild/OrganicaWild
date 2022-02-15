@@ -5,18 +5,20 @@ using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
 using Framework.Pipeline.PipelineGuarantees;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
     [PathShapeGuarantee]
-    public class PathShapeDefinitionStep : PipelineStep
+    public class PathShapeDefinitionStep : IPipelineStep
     {
         public float pathWidth;
-        public override Type[] RequiredGuarantees => new[] {typeof(MainPathsInAreasGuaranteed)};
+        public Random Rmg { get; set; }
+        public Type[] RequiredGuarantees => new[] {typeof(MainPathsInAreasGuaranteed)};
 
-        public override bool AddToDebugStackedView => true;
+        public bool AddToDebugStackedView => true;
 
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             List<Area> areas =
                 world.Root.GetAllChildrenOfType<Area>().ToList();

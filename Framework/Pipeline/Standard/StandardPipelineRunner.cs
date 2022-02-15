@@ -26,13 +26,13 @@ namespace Framework.Pipeline.Standard
 
         public static bool EncounteredError { get; private set; }
 
-        private readonly IList<PipelineStep> executionPipeline;
+        private readonly IList<IPipelineStep> executionPipeline;
 
         public List<GameWorld> gameWorldInEachStep;
 
         public StandardPipelineRunner(int? seed = null)
         {
-            executionPipeline = new List<PipelineStep>();
+            executionPipeline = new List<IPipelineStep>();
             if (seed == null)
             {
                 int tick = Environment.TickCount;
@@ -52,9 +52,9 @@ namespace Framework.Pipeline.Standard
         /// </summary>
         /// <param name="step">step to add</param>
         /// <exception cref="IllegalExecutionOrderException">throws if previous step does not provide the required guarantees</exception>
-        public void AddStep(PipelineStep step)
+        public void AddStep(IPipelineStep step)
         {
-            PipelineStep previous = executionPipeline.LastOrDefault();
+            IPipelineStep previous = executionPipeline.LastOrDefault();
             Type[] requiredGuarantees = step.RequiredGuarantees;
             List<Attribute> providedGuarantees = previous?.GetType().GetCustomAttributes().ToList();
             List<Type> notMetRequiredGuarantees = new List<Type>();
@@ -82,7 +82,7 @@ namespace Framework.Pipeline.Standard
             if (!notMetRequiredGuarantees.Any())
             {
                 executionPipeline.Add(step);
-                step.random = Random;
+                step.Rmg = Random;
             }
             else
             {
@@ -96,7 +96,7 @@ namespace Framework.Pipeline.Standard
             GameWorld world = null;
             gameWorldInEachStep = new List<GameWorld>();
 
-            foreach (PipelineStep step in executionPipeline)
+            foreach (IPipelineStep step in executionPipeline)
             {
                 yield return null;
                 try
@@ -121,7 +121,7 @@ namespace Framework.Pipeline.Standard
             GameWorld world = null;
             gameWorldInEachStep = new List<GameWorld>();
 
-            foreach (PipelineStep step in executionPipeline)
+            foreach (IPipelineStep step in executionPipeline)
             {
                 world = step.Apply(world);
                 if (step.AddToDebugStackedView)

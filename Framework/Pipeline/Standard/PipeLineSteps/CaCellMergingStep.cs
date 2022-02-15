@@ -10,13 +10,14 @@ using Polybool.Net.Objects;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
-    public class CaCellMergingStep : PipelineStep
+    public class CaCellMergingStep : IPipelineStep
     {
-        public override Type[] RequiredGuarantees => new Type[0];
+        public Random Rmg { get; set; }
+        public Type[] RequiredGuarantees => new Type[0];
 
-        public override bool AddToDebugStackedView => true;
+        public bool AddToDebugStackedView => true;
 
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             Epsilon.Eps = 0.000000000001m;
 

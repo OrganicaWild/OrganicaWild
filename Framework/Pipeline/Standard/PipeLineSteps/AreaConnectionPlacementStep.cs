@@ -9,26 +9,28 @@ using Framework.Pipeline.Geometry.Interactors;
 using Framework.Pipeline.PipelineGuarantees;
 using Framework.Util;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
     [AreaConnectionsGuarantee]
-    public class AreaConnectionPlacementStep : PipelineStep
+    public class AreaConnectionPlacementStep : IPipelineStep
     {
         [Range(0, 0.5f)] public float connectionClosenessToVoronoiVertex;
         public bool addSecondaryConnections = true;
         [Range(0, 1f)] public float secondaryPercentage = 1;
-        public override Type[] RequiredGuarantees => new Type[] {typeof(StartAndEndAssignedGuarantee)};
-        public override bool AddToDebugStackedView => true;
+        public Random Rmg { get; set; }
+        public Type[] RequiredGuarantees => new Type[] {typeof(StartAndEndAssignedGuarantee)};
+        public bool AddToDebugStackedView => true;
 
         private Vector2 ConnectionPositionFunc(Vector2 a, Vector2 b)
         {
             return Vector2.Lerp(a, b,
-                (float) random.NextDouble() * (1f - 2 * connectionClosenessToVoronoiVertex) +
+                (float) Rmg.NextDouble() * (1f - 2 * connectionClosenessToVoronoiVertex) +
                 connectionClosenessToVoronoiVertex);
         }
 
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             //search areas
             List<Area> areas =
@@ -64,7 +66,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                         if (!placedConnections.ContainsKey(edge))
                         {
                             //probability check
-                            if (random.NextDouble() < secondaryPercentage)
+                            if (Rmg.NextDouble() < secondaryPercentage)
                             {
                                 AreaConnectionFunctions.AddConnectionAndTwin(ConnectionPositionFunc, edge, area, areas,
                                     boundaries, placedConnections);

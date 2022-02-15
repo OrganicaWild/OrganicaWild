@@ -6,11 +6,12 @@ using Framework.Pipeline.Geometry;
 using Framework.Pipeline.PipelineGuarantees;
 using Tektosyne.Geometry;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
     [CaInitiatedGuarantee]
-    public class CaInitStep : PipelineStep
+    public class CaInitStep : IPipelineStep
     {
         public int poissonDiskRadius;
         public int samplesBeforeRejection;
@@ -18,9 +19,10 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         [Range(0,1)]
         public float overlap;
 
-        public override Type[] RequiredGuarantees => new[] {typeof(PathShapeGuarantee)};
+        public Random Rmg { get; set; }
+        public Type[] RequiredGuarantees => new[] {typeof(PathShapeGuarantee)};
 
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             List<Area> areas = world.Root
                 .GetAllChildrenOfType<Area>()

@@ -7,19 +7,21 @@ using Framework.Pipeline.PipelineGuarantees;
 using Framework.Pipeline.PipeLineSteps;
 using Framework.Util;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
     [MainPathsInAreasGuaranteed]
-    public class MainPathStep : PipelineStep
+    public class MainPathStep : IPipelineStep
     {
-        public override Type[] RequiredGuarantees => new Type[] {typeof(LandmarksPlacedGuarantee)};
+        public Random Rmg { get; set; }
+        public Type[] RequiredGuarantees => new Type[] {typeof(LandmarksPlacedGuarantee)};
 
         [Range(0, 1)] public float isConnected = 1;
 
-        public override bool AddToDebugStackedView => true;
+        public bool AddToDebugStackedView => true;
         
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             List<Area> areas =
                 world.Root.GetAllChildrenOfType<Area>().ToList();
@@ -52,7 +54,7 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     {
                         Vector2 connection = areaConnection.GetShape().GetCentroid();
                         //only connect if it is actually 
-                        if (random.NextDouble() > isConnected && !isStartOrEnd)
+                        if (Rmg.NextDouble() > isConnected && !isStartOrEnd)
                         {
                             continue;
                         }

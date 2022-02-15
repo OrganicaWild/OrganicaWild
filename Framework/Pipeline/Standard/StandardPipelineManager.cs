@@ -123,9 +123,9 @@ namespace Framework.Pipeline.Standard
             standardPipelineRunner = new StandardPipelineRunner(Seed);
             Seed = standardPipelineRunner.Seed;
 
-            PipelineStep[] allSteps = GetComponents<PipelineStep>();
+            IPipelineStep[] allSteps = GetComponents<IPipelineStep>();
 
-            foreach (PipelineStep step in allSteps)
+            foreach (IPipelineStep step in allSteps)
             {
                 standardPipelineRunner.AddStep(step);
             }
@@ -135,13 +135,13 @@ namespace Framework.Pipeline.Standard
         {
             StandardPipelineRunner somePipelineRunner = new StandardPipelineRunner(Seed);
 
-            PipelineStep[] allSteps = GetComponents<PipelineStep>();
+            IPipelineStep[] allSteps = GetComponents<IPipelineStep>();
             var index = 0;
             try
             {
                 for (; index < allSteps.Length; index++)
                 {
-                    PipelineStep step = allSteps[index];
+                    IPipelineStep step = allSteps[index];
                     somePipelineRunner.AddStep(step);
                 }
 
@@ -166,7 +166,7 @@ namespace Framework.Pipeline.Standard
                             continue;
                         }
 
-                        PipelineStep potentiallyHasMissingGuaranteesStep = allSteps[i];
+                        IPipelineStep potentiallyHasMissingGuaranteesStep = allSteps[i];
                         List<Type> providedGuarantees = potentiallyHasMissingGuaranteesStep?.GetType()
                             .GetCustomAttributes().Select(attribute => attribute.GetType()).ToList();
                         if (providedGuarantees.Contains(eMissingGuarantee))

@@ -7,11 +7,12 @@ using Framework.Pipeline.Geometry.Interactors;
 using Framework.Pipeline.PipelineGuarantees;
 using Framework.Pipeline.PipeLineSteps;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
     [LandmarksPlacedGuarantee]
-    public class LandmarkPlacementStep : PipelineStep
+    public class LandmarkPlacementStep : IPipelineStep
     {
         [Range(0, 1)] public float hasLandmarksPercent;
         public int minLandmarks;
@@ -27,11 +28,12 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
         public bool addDebugScaledInnerArea;
 
-        public override Type[] RequiredGuarantees => new Type[] {typeof(AreaConnectionsGuarantee)};
+        public Random Rmg { get; set; }
+        public Type[] RequiredGuarantees => new Type[] {typeof(AreaConnectionsGuarantee)};
         
-        public override bool AddToDebugStackedView => true;
+        public bool AddToDebugStackedView => true;
 
-        public override GameWorld Apply(GameWorld world)
+        public GameWorld Apply(GameWorld world)
         {
             List<Area> areas =
                 world.Root.GetAllChildrenOfType<Area>().ToList();
@@ -59,11 +61,11 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
                     continue;
                 }
 
-                bool hasLandmark = random.NextDouble() <= hasLandmarksPercent;
+                bool hasLandmark = Rmg.NextDouble() <= hasLandmarksPercent;
 
                 if (hasLandmark)
                 {
-                    int numberOfLandmarks = (int) (random.NextDouble() * (maxLandmarks - minLandmarks) + minLandmarks);
+                    int numberOfLandmarks = (int) (Rmg.NextDouble() * (maxLandmarks - minLandmarks) + minLandmarks);
                     List<OwPoint> placedPoints = new List<OwPoint>();
 
                     OwPolygon areaShape = area.GetShape();
@@ -134,11 +136,11 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             OwPoint potentialLandMarkPoint;
             //generate vector with specified length into random direction
             Vector2 fromCentroidPos =
-                new Vector2((float) (random.NextDouble() * 2 - 1),
-                    (float) (random.NextDouble() * 2 - 1)).normalized;
+                new Vector2((float) (Rmg.NextDouble() * 2 - 1),
+                    (float) (Rmg.NextDouble() * 2 - 1)).normalized;
             //scale by specified length
             float distanceFromCenter =
-                (float) (random.NextDouble() * (maxDistanceFromCenter - minDistanceFromCenter) +
+                (float) (Rmg.NextDouble() * (maxDistanceFromCenter - minDistanceFromCenter) +
                          minDistanceFromCenter);
             fromCentroidPos *= distanceFromCenter;
 
