@@ -29,6 +29,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             return world;
         }
 
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
+
         private void SetMappings()
         {
             Mappings = new List<TrialStateRangeMapping>(weightings.Length);

@@ -95,6 +95,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             return world;
         }
 
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
+
         private static OwLine GetClosestLandmark(List<OwPoint> landmarks, Vector2 connection)
         {
             OwLine shortest = new OwLine(new Vector2(0, 0),

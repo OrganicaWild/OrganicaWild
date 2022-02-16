@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Random = System.Random;
 
 namespace Framework.Pipeline
@@ -19,18 +20,23 @@ namespace Framework.Pipeline
         /// Defines what guarantees this Pipeline step expects from the previous Pipeline step
         /// </summary>
         public Type[] RequiredGuarantees { get; }
-        
+
         /// <summary>
         /// defines, if this step will be included in the stacked debug view
         /// </summary>
         public virtual bool AddToDebugStackedView => false;
 
+                
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
+        
         /// <summary>
         /// Defines how the Pipeline step changes the GameWorld.
         /// </summary>
         /// <param name="world">GameWorld to change</param>
         /// <returns>changed GameWorld</returns>
         public GameWorld Apply(GameWorld world);
-        
+
     }
 }

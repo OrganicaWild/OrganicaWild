@@ -46,6 +46,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             return world;
         }
 
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
+
         struct RunParameterDTO
         {
             public Area area;

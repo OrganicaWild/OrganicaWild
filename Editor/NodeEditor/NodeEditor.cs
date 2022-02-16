@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Editor.NodeEditor
 {
-    public abstract class NodeBasedEditor : EditorWindow
+    public abstract class NodeEditor : EditorWindow
     {
         protected GUIStyle defaultNodeStyle;
         protected GUIStyle defaultInPointStyle;

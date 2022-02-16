@@ -43,8 +43,11 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
             return world;
         }
-        
-        
+
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
+
+
         private static Vector2 Rotate(Vector2 v, float degrees) {
             float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
             float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);

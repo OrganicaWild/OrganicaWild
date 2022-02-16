@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.Framework.Pipeline.PipelineGuarantees;
 using Framework.Pipeline.GameWorldObjects;
 using Framework.Pipeline.Geometry;
@@ -27,5 +28,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
         {
             return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions), "world"));
         }
+
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
     }
 }

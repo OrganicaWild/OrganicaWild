@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Editor.NodeEditor;
+using Framework.Pipeline;
 using Framework.Pipeline.PipelineGraph;
 using UnityEditor;
 using UnityEngine;
@@ -8,13 +11,17 @@ using UnityEngine;
 namespace Editor.Pipeline.NodeEditor
 {
     [Serializable]
-    public class StepEditorGraphNode : EditorGraphNode
+    public class PipelineEditorGraphNode : EditorGraphNode
     {
-        private MonoScript srScript;
         private object[] values;
         internal GraphNode dataStorage;
 
-        public StepEditorGraphNode(Vector2 position,
+        private List<Type> pipelineSteps;
+        private string[] pipelineStepsNames;
+        private Type selectedPipelineStep;
+        private int selectedPipelineStepIndex;
+
+        public PipelineEditorGraphNode(Vector2 position,
             float width,
             float height,
             GUIStyle nodeStyle,
@@ -29,41 +36,53 @@ namespace Editor.Pipeline.NodeEditor
         {
             dataStorage = new GraphNode();
             title = "New Node";
+            pipelineSteps = FindPipelineScripts();
+            pipelineStepsNames = pipelineSteps.Select(step => step.Name).ToArray();
+            selectedPipelineStepIndex = 0;
+        }
+
+        private List<Type> FindPipelineScripts()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(ass => ass.GetTypes())
+                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IPipelineStep))).ToList();
         }
 
         protected override void WindowFunction(int windowId)
         {
-            srScript = EditorGUILayout.ObjectField(srScript, typeof(MonoScript), false) as MonoScript;
+            //script dropdown
+            var selectedStepIndex =
+                EditorGUILayout.Popup("PipelineSteps", selectedPipelineStepIndex, pipelineStepsNames);
 
-            if (DrawFields()) return;
-
-            if (srScript != null)
+            DrawFields();
+            
+            //changed script
+            if (selectedStepIndex != selectedPipelineStepIndex)
             {
-                title = srScript.name;
-                dataStorage.Name = title;
-                var scriptClass = srScript.GetClass();
-                var fields = scriptClass.GetFields();
+                //update index
+                selectedPipelineStepIndex = selectedStepIndex;
+                //set new values and new instance variable
+                selectedPipelineStep = pipelineSteps[selectedPipelineStepIndex];
+                title = selectedPipelineStep.Name;
+                var fields = selectedPipelineStep.GetFields();
                 values = new object[fields.Length];
-                dataStorage.Instance = Activator.CreateInstance(scriptClass);
+                var assembly = selectedPipelineStep.Assembly;
+                var instance = assembly.CreateInstance(selectedPipelineStep.FullName);
+                dataStorage.Instance = instance;
             }
         }
 
-        private bool DrawFields()
+        private void DrawFields()
         {
-            if (srScript != null && values != null)
+            if (selectedPipelineStep != null && values != null)
             {
-                var scriptClass = srScript.GetClass();
+                var scriptClass = selectedPipelineStep;
                 var fields = scriptClass.GetFields();
 
                 for (var i = 0; i < fields.Length; i++)
                 {
                     DrawField(i, fields[i]);
                 }
-
-                return true;
             }
-
-            return false;
         }
 
         private void DrawField(int id, FieldInfo fieldInfo)

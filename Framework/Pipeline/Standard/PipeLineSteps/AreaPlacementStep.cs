@@ -63,5 +63,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             foreach (Area area in areas) world.Root.AddChild(area);
             return world;
         }
+
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
     }
 }

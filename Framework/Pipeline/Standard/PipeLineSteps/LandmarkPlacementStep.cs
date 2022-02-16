@@ -131,6 +131,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             return world;
         }
 
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
+
         private OwPoint CreatePotentialLandMarkPoint(Area area)
         {
             OwPoint potentialLandMarkPoint;

@@ -33,6 +33,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.TrialCellularAutomata.Steps
             return world;
         }
 
+        public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
+        public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
+
         private IEnumerable<TrialCellNetwork> GetNetworks(IEnumerable<Area> areas)
         {
             foreach (Area area in areas)
