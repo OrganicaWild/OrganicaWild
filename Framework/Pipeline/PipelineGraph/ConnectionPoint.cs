@@ -1,6 +1,6 @@
 ﻿namespace Framework.Pipeline.PipelineGraph
 {
-    public enum ConnectionPointType { In, Out }
+    public enum ConnectionPointType { In, Out, Input, Output }
 
     public class ConnectionPoint
     {

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Framework.Pipeline;
 using Framework.Pipeline.PipelineGraph;
+using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
 namespace Editor.NodeEditor
 {
@@ -29,7 +31,7 @@ namespace Editor.NodeEditor
             defaultNodeStyle.normal.background =
                 EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
             defaultNodeStyle.border = new RectOffset(12, 12, 12, 12);
-
+            
             defaultSelectedNodeStyle = new GUIStyle();
             defaultSelectedNodeStyle.normal.background =
                 EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;

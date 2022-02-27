@@ -7,6 +7,7 @@ using Framework.Pipeline;
 using Framework.Pipeline.PipelineGraph;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
 namespace Editor.Pipeline.NodeEditor
 {
@@ -21,6 +22,9 @@ namespace Editor.Pipeline.NodeEditor
         private Type selectedPipelineStep;
         private int selectedPipelineStepIndex;
 
+        private EditorConnectionPoint[] inputConnections;
+        private EditorConnectionPoint[] outputConnections;
+
         public PipelineEditorGraphNode(Vector2 position,
             float width,
             float height,
@@ -34,17 +38,49 @@ namespace Editor.Pipeline.NodeEditor
             base(position, width, height, nodeStyle, inPointStyle, outPointStyle,
                 onClickInPoint, onClickOutPoint, selectedStyle, onClickRemoveNode)
         {
+            var style = new GUIStyle();
+            style.normal.background =
+                EditorGUIUtility.Load("builtin skins/darkskin/images/btn.png") as Texture2D;
+            // style.border = new RectOffset(12, 12, 12, 12);
+            // style.normal.background = new Texture2D(1, 1, DefaultFormat.LDR, TextureCreationFlags.None);
+            // style.normal.background.SetPixelData(new [] {255},0);
+
             dataStorage = new GraphNode();
             title = "New Node";
             pipelineSteps = FindPipelineScripts();
             pipelineStepsNames = pipelineSteps.Select(step => step.Name).ToArray();
             selectedPipelineStepIndex = 0;
+            inputConnections = new[]
+            {
+                new EditorConnectionPoint(this,
+                    ConnectionPointType.Input,
+                    Color.cyan,
+                    point => { },
+                    Position.Right,
+                    0, "realdlkfjsalkdfjasklfjlsa"),
+                new EditorConnectionPoint(this,
+                    ConnectionPointType.Input,
+                    Color.cyan,
+                    point => { },
+                    Position.Left,
+                    1, "ass"),
+                new EditorConnectionPoint(this,
+                    ConnectionPointType.Input,
+                    Color.cyan,
+                    point => { },
+                    Position.Right,
+                    3, "adofkasofs"),
+            };
+            outputConnections = Array.Empty<EditorConnectionPoint>();
         }
+
 
         private List<Type> FindPipelineScripts()
         {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(ass => ass.GetTypes())
-                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IPipelineStep))).ToList();
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(ass => ass.GetTypes())
+                .Where(mytype => mytype.GetInterfaces()
+                    .Contains(typeof(IPipelineStep))).ToList();
         }
 
         protected override void WindowFunction(int windowId)
@@ -54,7 +90,7 @@ namespace Editor.Pipeline.NodeEditor
                 EditorGUILayout.Popup("PipelineSteps", selectedPipelineStepIndex, pipelineStepsNames);
 
             DrawFields();
-            
+
             //changed script
             if (selectedStepIndex != selectedPipelineStepIndex)
             {
@@ -67,7 +103,15 @@ namespace Editor.Pipeline.NodeEditor
                 values = new object[fields.Length];
                 var assembly = selectedPipelineStep.Assembly;
                 var instance = assembly.CreateInstance(selectedPipelineStep.FullName);
-                dataStorage.Instance = instance;
+                dataStorage.Instance = (IPipelineStep)instance;
+            }
+        }
+
+        private void DrawInputConnections()
+        {
+            if (selectedPipelineStep != null)
+            {
+                var inputs = dataStorage.Instance.NeededInputGameWorldObjects;
             }
         }
 
@@ -113,6 +157,20 @@ namespace Editor.Pipeline.NodeEditor
             }
 
             fieldInfo.SetValue(dataStorage.Instance, values[id]);
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
+            foreach (var editorConnectionPoint in inputConnections)
+            {
+                editorConnectionPoint.Draw();
+            }
+
+            foreach (var editorConnectionPoint in outputConnections)
+            {
+                editorConnectionPoint.Draw();
+            }
         }
     }
 }

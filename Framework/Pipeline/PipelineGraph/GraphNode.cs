@@ -10,7 +10,7 @@ namespace Framework.Pipeline.PipelineGraph
         [SerializeField]
         private string name;
         [SerializeField]
-        private object instance;
+        private IPipelineStep instance;
         [SerializeField]
         private List<GraphNode> previous;
         [SerializeField]
@@ -28,7 +28,7 @@ namespace Framework.Pipeline.PipelineGraph
             set => name = value;
         }
 
-        public object Instance
+        public IPipelineStep Instance
         {
             get => instance;
             set => instance = value;

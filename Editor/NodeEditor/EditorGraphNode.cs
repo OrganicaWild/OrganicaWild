@@ -44,18 +44,17 @@ namespace Editor.NodeEditor
         private GUIStyle selectedNodeStyle;
 
         private Action<EditorGraphNode> onRemoveNode;
-
-        public bool Explored { get; set; }
-
-
+        
         public EditorGraphNode(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle inPointStyle,
             GUIStyle outPointStyle, Action<ConnectionPoint> onClickInPoint, Action<ConnectionPoint> onClickOutPoint,
             GUIStyle selectedStyle, Action<EditorGraphNode> onClickRemoveNode)
         {
             rect = new Rect(position.x, position.y, width, height);
             style = nodeStyle;
-            InPoint = new EditorConnectionPoint(this, ConnectionPointType.In, inPointStyle, onClickInPoint);
-            OutPoint = new EditorConnectionPoint(this, ConnectionPointType.Out, outPointStyle, onClickOutPoint);
+            InPoint = new EditorConnectionPoint(this, ConnectionPointType.In, Color.yellow, onClickInPoint,
+                Position.Left, 0);
+            OutPoint = new EditorConnectionPoint(this, ConnectionPointType.Out, Color.green, onClickOutPoint,
+                Position.Right, 1);
             defaultNodeStyle = nodeStyle;
             selectedNodeStyle = selectedStyle;
             onRemoveNode = onClickRemoveNode;
@@ -67,11 +66,11 @@ namespace Editor.NodeEditor
             rect.position += delta;
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             InPoint.Draw();
             OutPoint.Draw();
-            // GUI.Box(rect, title, style)
+            GUI.Box(rect, title, style);
 
             Rect = GUILayout.Window(id, Rect, WindowFunction, title);
         }
