@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using UnityEngine;
 using Random = System.Random;
 
 namespace Framework.Pipeline
@@ -25,8 +27,7 @@ namespace Framework.Pipeline
         /// defines, if this step will be included in the stacked debug view
         /// </summary>
         public virtual bool AddToDebugStackedView => false;
-
-                
+        
         public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
 
         public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
@@ -37,6 +38,41 @@ namespace Framework.Pipeline
         /// <param name="world">GameWorld to change</param>
         /// <returns>changed GameWorld</returns>
         public GameWorld Apply(GameWorld world);
+        
+        public IPipelineStep[] ConnectedNextSteps { get; set; }
+        public IPipelineStep[] ConnectedPreviousSteps { get; set; }
+
+        public void Construct()
+        {
+            ConnectedNextSteps = new IPipelineStep[ProvidedOutputGameWorldObjects.Count];
+            ConnectedPreviousSteps = new IPipelineStep[NeededInputGameWorldObjects.Count];
+        }
+
+        public IPipelineStep GetNextPipelineStep(int indexOfProvidedOutput)
+        {
+            if (indexOfProvidedOutput < 0 || indexOfProvidedOutput > ConnectedNextSteps.Length)
+            {
+                Debug.LogWarning($"Access index {indexOfProvidedOutput} when only index 0 to {ConnectedNextSteps.Length} exist.");
+                return null;
+            }
+
+            return ConnectedNextSteps[indexOfProvidedOutput];
+        }
+
+        public void ConnectToNextPipelineStep(int indexOfProvidedOutput, IPipelineStep step)
+        {
+            ConnectedNextSteps[indexOfProvidedOutput] = step;
+        }
+
+        public void ConnectedToPreviousPipelineStep(int indexOfNeededInput, IPipelineStep step)
+        {
+            ConnectedPreviousSteps[indexOfNeededInput] = step;
+        }
+
+        public IPipelineStep GetPreviousPipelineStep(int indexOfNeededInput)
+        {
+            return ConnectedPreviousSteps[indexOfNeededInput];
+        }
 
     }
 }

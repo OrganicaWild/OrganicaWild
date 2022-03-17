@@ -10,7 +10,7 @@ using Random = System.Random;
 namespace Framework.Pipeline.Standard.PipeLineSteps
 {
     [PathShapeGuarantee]
-    public class PathShapeDefinitionStep : IPipelineStep
+    public class PathShapeStep : IPipelineStep
     {
         public float pathWidth;
         public Random Rmg { get; set; }
@@ -43,6 +43,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
 
             return world;
         }
+
+        public IPipelineStep[] ConnectedNextSteps { get; set; }
+        public IPipelineStep[] ConnectedPreviousSteps { get; set; }
 
         public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
         public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }

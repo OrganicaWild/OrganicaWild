@@ -29,6 +29,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             return new GameWorld(new Area(new OwRectangle(Vector2.zero, dimensions), "world"));
         }
 
+        public IPipelineStep[] ConnectedNextSteps { get; set; }
+        public IPipelineStep[] ConnectedPreviousSteps { get; set; }
+
         public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
         public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
     }

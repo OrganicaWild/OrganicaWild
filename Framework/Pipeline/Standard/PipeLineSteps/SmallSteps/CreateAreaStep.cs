@@ -41,5 +41,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.SmallSteps
             ProvidedOutputGameWorldObjects[0].InjectedInstance = area;
             return world;
         }
+
+        public IPipelineStep[] ConnectedNextSteps { get; set; }
+        public IPipelineStep[] ConnectedPreviousSteps { get; set; }
     }
 }

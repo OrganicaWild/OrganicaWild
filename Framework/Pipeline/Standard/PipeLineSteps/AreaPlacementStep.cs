@@ -64,6 +64,9 @@ namespace Framework.Pipeline.Standard.PipeLineSteps
             return world;
         }
 
+        public IPipelineStep[] ConnectedNextSteps { get; set; }
+        public IPipelineStep[] ConnectedPreviousSteps { get; set; }
+
         public List<GameWorldTypeSpecifier> NeededInputGameWorldObjects { get; }
         public List<GameWorldTypeSpecifier> ProvidedOutputGameWorldObjects { get; }
     }

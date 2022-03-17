@@ -24,5 +24,8 @@ namespace Framework.Pipeline.Standard.PipeLineSteps.SmallSteps
             world = new GameWorld(new Landmark(new OwPoint(Vector2.zero)));
             return world;
         }
+
+        public IPipelineStep[] ConnectedNextSteps { get; set; }
+        public IPipelineStep[] ConnectedPreviousSteps { get; set; }
     }
 }
